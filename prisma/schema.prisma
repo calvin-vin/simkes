@@ -7,3 +7,110 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Reservation {
+  id                String            @id @default(uuid())
+  patientId         String
+  patient           Patient           @relation(fields: [patientId], references: [id])
+  medicalCategoryId String
+  medicalCategory   MedicalCategory   @relation(fields: [medicalCategoryId], references: [id])
+  doctorId          String
+  doctor            Doctor            @relation(fields: [doctorId], references: [id])
+  reservationDate   DateTime
+  queueNumber       Int
+  qrCodeUrl         String
+  status            ReservationStatus @default(WAITING)
+  referralFileId    String?           @unique
+  referralFile      ReferralFile?     @relation(fields: [referralFileId], references: [id])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+model Patient {
+  id           String        @id @default(uuid())
+  externalId   String        @unique
+  name         String
+  nik          String?
+  bpjsNumber   String?
+  phone        String?
+  reservations Reservation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MedicalCategory {
+  id           String                  @id @default(uuid())
+  externalId   String                  @unique
+  name         String
+  reservations Reservation[]
+  doctors      DoctorMedicalCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Doctor {
+  id                String                  @id @default(uuid())
+  externalId        String                  @unique
+  name              String
+  reservations      Reservation[]
+  schedules         DoctorSchedule[]
+  medicalCategories DoctorMedicalCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DoctorMedicalCategory {
+  id                String @id @default(uuid())
+  doctorId          String
+  medicalCategoryId String
+
+  doctor          Doctor          @relation(fields: [doctorId], references: [id])
+  medicalCategory MedicalCategory @relation(fields: [medicalCategoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([doctorId, medicalCategoryId])
+}
+
+model DoctorSchedule {
+  id             String   @id @default(uuid())
+  externalId     String   @unique
+  doctorId       String
+  doctor         Doctor   @relation(fields: [doctorId], references: [id])
+  specialization String
+  day            String
+  startTime      String
+  endTime        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ReferralFile {
+  id        String   @id @default(uuid())
+  filename  String
+  filepath  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reservation Reservation?
+}
+
+enum Days {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  FRIDAY
+  SATURDAY
+}
+
+enum ReservationStatus {
+  WAITING
+  CALLED
+  DONE
+  CANCELLED
+}

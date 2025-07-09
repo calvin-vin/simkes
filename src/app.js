@@ -14,6 +14,8 @@ import errorHandler from "./middlewares/error.js";
 import loggingMiddleware from "./middlewares/logging.js";
 import notFoundHandler from "./middlewares/notFoundHandler.js";
 
+import patientRoute from "./routes/patient.route.js";
+
 dayjs.extend(isSameOrBefore);
 dayjs.locale("id");
 dayjs.extend(utc);
@@ -34,6 +36,7 @@ app.use(loggingMiddleware);
 app.get("/", (req, res) => {
   res.send("API SIM PELAYANAN KESEHATAN MALINAU");
 });
+app.use("/api/v1/patients", patientRoute);
 
 // 3.) ERROR HANDLING
 app.use(notFoundHandler);
