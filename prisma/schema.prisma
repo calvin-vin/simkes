@@ -17,11 +17,10 @@ model Reservation {
   doctorId          String
   doctor            Doctor            @relation(fields: [doctorId], references: [id])
   reservationDate   DateTime
-  queueNumber       Int
+  queueNumber       String
   qrCodeUrl         String
   status            ReservationStatus @default(WAITING)
-  referralFileId    String?           @unique
-  referralFile      ReferralFile?     @relation(fields: [referralFileId], references: [id])
+  referralFile      String?           @unique
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
 }
@@ -54,6 +53,7 @@ model Doctor {
   id                String                  @id @default(uuid())
   externalId        String                  @unique
   name              String
+  code              String
   reservations      Reservation[]
   schedules         DoctorSchedule[]
   medicalCategories DoctorMedicalCategory[]
@@ -89,28 +89,18 @@ model DoctorSchedule {
   updatedAt      DateTime @updatedAt
 }
 
-model ReferralFile {
-  id        String   @id @default(uuid())
-  filename  String
-  filepath  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  reservation Reservation?
-}
-
 enum Days {
-  SUNDAY
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  FRIDAY
-  SATURDAY
+  MINGGU
+  SENIN
+  SELASA
+  RABU
+  KAMIS
+  JUMAT
+  SABTU
 }
 
 enum ReservationStatus {
   WAITING
   CALLED
   DONE
-  CANCELLED
 }

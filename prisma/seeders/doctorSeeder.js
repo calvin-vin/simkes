@@ -19,8 +19,10 @@ export default async function doctorSeeder(prisma) {
     where: { externalId: "simrs-doctor-001" },
     update: {},
     create: {
+      id: "12e153fb-0afd-4954-9bf0-8e72e41b2c27",
       externalId: "simrs-doctor-001",
       name: "dr. Calvin",
+      code: "C",
     },
   });
 
@@ -28,8 +30,10 @@ export default async function doctorSeeder(prisma) {
     where: { externalId: "simrs-doctor-002" },
     update: {},
     create: {
+      id: "bb2a13f3-ac87-4d5d-af3f-21f47aa59a1a",
       externalId: "simrs-doctor-002",
       name: "dr. Julian",
+      code: "J",
     },
   });
 
@@ -74,7 +78,7 @@ export default async function doctorSeeder(prisma) {
       externalId: "simrs-schedule-001",
       doctorId: doctorCalvin.id,
       specialization: "Umum",
-      day: "Monday",
+      day: "SENIN",
       startTime: "09:00",
       endTime: "12:00",
     },
@@ -87,7 +91,7 @@ export default async function doctorSeeder(prisma) {
       externalId: "simrs-schedule-002",
       doctorId: doctorCalvin.id,
       specialization: "Jantung",
-      day: "Tuesday",
+      day: "SELASA",
       startTime: "13:00",
       endTime: "16:00",
     },

@@ -1,6 +1,7 @@
 import { ZodError } from "zod";
 import ApiError from "../utils/apiError.js";
 import { Prisma } from "@prisma/client";
+import multer from "multer";
 
 const handleZodError = (err) => {
   const formattedErrors = err.errors.map((e) => ({
@@ -59,6 +60,13 @@ const errorHandler = (err, req, res, next) => {
         message,
       });
     }
+  }
+
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({
+      status: "error",
+      message: err.message,
+    });
   }
 
   err.statusCode = err.statusCode || 500;

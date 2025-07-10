@@ -9,3 +9,4 @@ post-receive
 grafana.json
 NOTES.md
 /src/generated/prisma
+public/
