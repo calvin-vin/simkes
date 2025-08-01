@@ -1,84 +1,68 @@
 import { verifyToken } from "../config/jwt.js";
-import prisma from "../config/db.js";
 import ApiError from "../utils/apiError.js";
 
 const protect = async (req, res, next) => {
   try {
-    // 1) Get token from header
-    let token;
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-    ) {
-      token = req.headers.authorization.split(" ")[1];
-    }
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : null;
 
     if (!token) {
-      return next(
-        new ApiError("You are not logged in! Please log in to get access.", 401)
-      );
+      return next(new ApiError("Unauthorized: No token provided.", 401));
     }
 
-    // 2) Verify token
-    const decoded = await verifyToken(token, process.env.JWT_SECRET);
+    const { user } = await verifyToken(token, process.env.JWT_SECRET);
 
-    if (!decoded?.user?.id) {
-      return next(new ApiError("Token payload is invalid.", 400));
+    if (!user?.id) {
+      return next(new ApiError("Invalid token payload.", 400));
     }
 
-    // GRANT ACCESS TO PROTECTED ROUTE
-    req.user = decoded.user;
+    const app = user.applications?.find(
+      (a) => a.applicationKey === process.env.APPLICATION_KEY
+    );
+
+    if (!app) {
+      return next(new ApiError("Forbidden: Application access denied.", 403));
+    }
+
+    req.user = user;
+    req.userRole = app.role;
+    req.userSubrole = app.subrole;
     next();
   } catch (err) {
-    console.log("Error in protect middleware:", err);
-    console.log(err);
+    console.error("protect error:", err);
     next(err);
   }
 };
 
-// Middleware to check role and subrole
-const restrictToRolesAndSubroles = (
-  requiredRoles = [],
-  requiredSubroles = []
-) => {
-  return async (req, res, next) => {
-    try {
-      const userId = req.user.id;
+/**
+ * allowedCombinations: array of objects containing role & subrole to match
+ * Example: [{ role: 'DOCTOR', subrole: 'GENERAL' }, { role: 'PATIENT', subrole: 'PATIENT' }]
+ */
+const restrictToRoleSubrole = (allowedCombinations = []) => {
+  return (req, res, next) => {
+    const { userRole, userSubrole } = req;
 
-      // Get all user access
-      const userAccesses = await prisma.roleAccessApplication.findMany({
-        where: { userId },
-        include: {
-          mainRole: true,
-          subRole: true,
-          application: true,
-        },
-      });
-
-      // Check if user has minimum one access that allowed
-      const hasAccess = userAccesses.some((access) => {
-        const roleMatch =
-          requiredRoles.length === 0 ||
-          requiredRoles.includes(access.mainRole.roleName);
-
-        const subroleMatch =
-          requiredSubroles.length === 0 ||
-          requiredSubroles.includes(access.subRole.subRoleName);
-
-        return roleMatch && subroleMatch;
-      });
-
-      if (!hasAccess) {
-        return next(
-          new ApiError("You do not have permission to perform this action", 403)
-        );
-      }
-
-      next();
-    } catch (error) {
-      next(error);
+    if (!userRole || !userSubrole) {
+      return next(new ApiError("Role or subrole not found.", 403));
     }
+
+    const isAllowed = allowedCombinations.some(
+      (combo) => combo.role === userRole && combo.subrole === userSubrole
+    );
+
+    if (!isAllowed) {
+      return next(
+        new ApiError(
+          "Forbidden: You do not have permission to access this route.",
+          403
+        )
+      );
+    }
+
+    next();
   };
 };
 
-export { protect, restrictToRolesAndSubroles };
+export { protect, restrictToRoleSubrole };

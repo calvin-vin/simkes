@@ -5,7 +5,7 @@ import { getIO } from "../socket.js";
 import ApiError from "../utils/apiError.js";
 import { findDoctorOrFail } from "./doctor.service.js";
 import { findMedicalCategoryOrFail } from "./medicalCategory.service.js";
-import { findPatientWithExternalIdOrFail } from "./patient.service.js";
+import { findPatientIdOrFail } from "./patient.service.js";
 import { generateQr } from "../utils/generateQr.js";
 import { saveFile } from "../utils/saveFile.js";
 
@@ -19,7 +19,7 @@ export const createReservation = async ({
   const [doctor, medicalCategory, patient] = await Promise.all([
     findDoctorOrFail({ doctorId, includes: { schedules: true } }),
     findMedicalCategoryOrFail({ medicalCategoryId }),
-    findPatientWithExternalIdOrFail({
+    findPatientIdOrFail({
       patientExternalId,
       select: { id: true, name: true },
     }),

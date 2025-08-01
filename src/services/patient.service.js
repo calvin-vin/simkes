@@ -1,13 +1,10 @@
 import prisma from "../config/db.js";
 import ApiError from "../utils/apiError.js";
 
-export const findPatientWithExternalIdOrFail = async ({
-  patientExternalId,
-  select,
-}) => {
+export const findPatientIdOrFail = async ({ patientId, select }) => {
   const patient = await prisma.patient.findUnique({
-    where: { externalId: patientExternalId },
-    select,
+    where: { id: patientId },
+    ...(select && { select }),
   });
 
   if (!patient) {
@@ -19,14 +16,14 @@ export const findPatientWithExternalIdOrFail = async ({
 
 export const ensurePatientExists = async (user) => {
   const patient = await prisma.patient.upsert({
-    where: { externalId: user.id },
+    where: { id: user.id },
     update: {
       name: user.profile.name,
       nik: user.identity,
       phone: user.phone,
     },
     create: {
-      externalId: user.id,
+      id: user.id,
       name: user.profile.name,
       nik: user.identity,
       phone: user.phone,

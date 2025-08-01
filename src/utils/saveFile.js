@@ -11,7 +11,7 @@ import { randomBytes } from "crypto";
  * @param {string} extension - File extension including dot (e.g. ".pdf" or ".png")
  * @returns {string} - Public accessible file path (relative to base folder)
  */
-export const saveFile = async ({
+export const saveFile = ({
   buffer,
   baseFolder = "public",
   subFolder = "",
@@ -28,7 +28,7 @@ export const saveFile = async ({
   const filePath = path.join(folderPath, fileName);
 
   // Ensure folder exists
-  await fs.mkdir(folderPath, { recursive: true });
+  fs.mkdir(folderPath, { recursive: true });
 
   // Save file
   fs.writeFile(filePath, buffer);

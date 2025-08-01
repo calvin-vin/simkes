@@ -21,21 +21,49 @@ model Reservation {
   qrCodeUrl         String
   status            ReservationStatus @default(WAITING)
   referralFile      String?           @unique
+  patientPaymentId  String
+  patientPayment    PatientPayment    @relation(fields: [patientPaymentId], references: [id])
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
 }
 
 model Patient {
-  id           String        @id @default(uuid())
-  externalId   String        @unique
+  id           String           @unique
   name         String
+  simrsId      String?
   nik          String?
-  bpjsNumber   String?
   phone        String?
   reservations Reservation[]
+  payments     PatientPayment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model PaymentMethod {
+  id       String           @id @default(uuid())
+  name     String           @unique
+  patients PatientPayment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PatientPayment {
+  id              String  @id @default(uuid())
+  patientId       String
+  paymentMethodId String
+  participantId   String
+  paymentFile     String?
+
+  patient       Patient       @relation(fields: [patientId], references: [id])
+  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+  reservations  Reservation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([patientId, paymentMethodId])
 }
 
 model MedicalCategory {
@@ -89,6 +117,16 @@ model DoctorSchedule {
   updatedAt      DateTime @updatedAt
 }
 
+model Medicine {
+  id         String    @id @default(uuid())
+  name       String
+  unit       String
+  stock      Int
+  externalId String?
+  syncedAt   DateTime?
+  updatedAt  DateTime
+}
+
 enum Days {
   MINGGU
   SENIN
@@ -101,6 +139,9 @@ enum Days {
 
 enum ReservationStatus {
   WAITING
-  CALLED
+  ONGOING
   DONE
+  SKIPPED
+  RECALLED
+  EXPIRED
 }

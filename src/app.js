@@ -15,7 +15,12 @@ import errorHandler from "./middlewares/error.js";
 import loggingMiddleware from "./middlewares/logging.js";
 import notFoundHandler from "./middlewares/notFoundHandler.js";
 
+// Global Routes
+import paymentMethodRoute from "./routes/paymentMethod.route.js";
+
+// Patient Routes
 import patientRoute from "./routes/patient.route.js";
+import patientPaymentRoute from "./routes/patientPayment.route.js";
 import reservationRoute from "./routes/reservation.route.js";
 
 dayjs.extend(isSameOrBefore);
@@ -39,7 +44,13 @@ app.use(express.static(path.join(process.cwd(), "public")));
 app.get("/", (req, res) => {
   res.send("API SIM PELAYANAN KESEHATAN MALINAU");
 });
+
+// Global Routes
+app.use("/api/v1/payment-methods", paymentMethodRoute);
+
+// Patient Routes
 app.use("/api/v1/patients", patientRoute);
+app.use("/api/v1/patient-payments", patientPaymentRoute);
 app.use("/api/v1/reservations", reservationRoute);
 
 // 3.) ERROR HANDLING
