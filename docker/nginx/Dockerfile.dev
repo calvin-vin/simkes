@@ -1,0 +1,8 @@
+FROM nginx:alpine
+
+# Copy konfigurasi nginx development
+COPY nginx.dev.conf /etc/nginx/nginx.conf
+
+# Pastikan tidak ada entrypoint.sh di local dev
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

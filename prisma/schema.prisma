@@ -68,18 +68,19 @@ model PatientPayment {
 
 model MedicalCategory {
   id           String                  @id @default(uuid())
-  externalId   String                  @unique
+  simrsId      String                  @unique
   name         String
   reservations Reservation[]
   doctors      DoctorMedicalCategory[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  syncedAt  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Doctor {
   id                String                  @id @default(uuid())
-  externalId        String                  @unique
+  simrsId           String                  @unique
   name              String
   code              String
   reservations      Reservation[]
@@ -106,7 +107,7 @@ model DoctorMedicalCategory {
 
 model DoctorSchedule {
   id             String   @id @default(uuid())
-  externalId     String   @unique
+  simrsId        String   @unique
   doctorId       String
   doctor         Doctor   @relation(fields: [doctorId], references: [id])
   specialization String
@@ -118,13 +119,13 @@ model DoctorSchedule {
 }
 
 model Medicine {
-  id         String    @id @default(uuid())
-  name       String
-  unit       String
-  stock      Int
-  externalId String?
-  syncedAt   DateTime?
-  updatedAt  DateTime
+  id        String    @id @default(uuid())
+  name      String
+  unit      String
+  stock     Int
+  simrsId   String?
+  syncedAt  DateTime?
+  updatedAt DateTime
 }
 
 enum Days {
