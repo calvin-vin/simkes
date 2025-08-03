@@ -54,7 +54,7 @@ export const getPaymentMethodById = catchAsync(async (req, res) => {
   return apiSuccess(
     res,
     200,
-    "Payment method found successfully",
+    "Payment method retrieved successfully",
     paymentMethodResource(paymentMethod)
   );
 });
@@ -63,10 +63,10 @@ export const getAllPaymentMethods = catchAsync(async (req, res) => {
   const query = getAllPaymentMethodSchema.parse(req.query);
   const paymentMethods = await paymentMethodService.getAllPaymentMethods(query);
 
-  return apiSuccess(res, 200, "Payment methods found successfully", {
+  return apiSuccess(res, 200, "Payment methods retrieved successfully", {
     results: paymentMethods.results.map((paymentMethod) =>
       paymentMethodResource(paymentMethod)
     ),
-    ...paymentMethods,
+    ...paymentMethods.pagination,
   });
 });

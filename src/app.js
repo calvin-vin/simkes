@@ -17,6 +17,7 @@ import notFoundHandler from "./middlewares/notFoundHandler.js";
 
 // Global Routes
 import paymentMethodRoute from "./routes/paymentMethod.route.js";
+import medicalCategoryRoute from "./routes/medicalCategory.route.js";
 
 // Patient Routes
 import patientRoute from "./routes/patient.route.js";
@@ -47,6 +48,7 @@ app.get("/", (req, res) => {
 
 // Global Routes
 app.use("/api/v1/payment-methods", paymentMethodRoute);
+app.use("/api/v1/medical-categories", medicalCategoryRoute);
 
 // Patient Routes
 app.use("/api/v1/patients", patientRoute);
