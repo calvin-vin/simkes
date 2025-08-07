@@ -8,6 +8,7 @@ export const patientResource = (patient) => {
     simRsId: patient.simRsId ? patient.simRsId : null,
     nik: patient.nik,
     phone: patient.phone,
+    email: patient.email,
     createdAt: dayjs(patient.createdAt)
       .tz(TIMEZONE)
       .format("YYYY-MM-DD HH:mm:ss"),

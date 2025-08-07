@@ -21,12 +21,14 @@ export const ensurePatientExists = async (user) => {
       name: user.profile.name,
       nik: user.identity,
       phone: user.phone,
+      email: user.email,
     },
     create: {
       id: user.id,
       name: user.profile.name,
       nik: user.identity,
       phone: user.phone,
+      email: user.email,
     },
   });
 

@@ -28,13 +28,15 @@ model Reservation {
 }
 
 model Patient {
-  id           String           @unique
-  name         String
-  simrsId      String?
-  nik          String?
-  phone        String?
-  reservations Reservation[]
-  payments     PatientPayment[]
+  id                String             @unique
+  name              String
+  simrsId           String?
+  nik               String?
+  phone             String?
+  email             String?
+  reservations      Reservation[]
+  payments          PatientPayment[]
+  emergencyRequests EmergencyRequest[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -126,6 +128,53 @@ model Medicine {
   simrsId   String?
   syncedAt  DateTime?
   updatedAt DateTime
+}
+
+model EmergencyRequest {
+  id           String             @id @default(uuid())
+  patientId    String
+  patient      Patient            @relation(fields: [patientId], references: [id])
+  location     String
+  note         String?
+  status       EmergencyStatus    @default(PENDING)
+  assignedToId String?
+  assignedTo   AmbulanceStaff?    @relation(fields: [assignedToId], references: [id])
+  histories    EmergencyHistory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EmergencyHistory {
+  id                     String          @id @default(uuid())
+  emergencyRequestId     String
+  ambulanceStaffLocation String?
+  status                 EmergencyStatus
+  note                   String?
+  createdAt              DateTime        @default(now())
+
+  emergencyRequest EmergencyRequest @relation(fields: [emergencyRequestId], references: [id])
+}
+
+model AmbulanceStaff {
+  id        String   @id @default(uuid())
+  name      String
+  phone     String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  EmergencyRequest EmergencyRequest[]
+}
+
+enum EmergencyStatus {
+  PENDING
+  ASSIGNED
+  ON_THE_WAY
+  ARRIVED
+  PATIENT_IN_CAR
+  TO_HOSPITAL
+  COMPLETED
 }
 
 enum Days {

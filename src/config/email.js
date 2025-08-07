@@ -1,5 +1,8 @@
 import nodemailer from "nodemailer";
 import logger from "../utils/logger.js";
+import { generateNewEmergencyEmailToAmbulanceStaff } from "../views/email/newEmergencyEmailToAmbulanceStaff.js";
+import { generateAssignedStaffEmailToPatient } from "../views/email/generateAssignedStaffEmailToPatient.js";
+import { generateUpdatedEmergencyStatusEmailToPatient } from "../views/email/generateUpdatedEmergencyStatusEmailToPatient.js";
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
@@ -30,4 +33,70 @@ const sendEmail = async (to, subject, text, html) => {
   }
 };
 
-export { sendEmail };
+const sendEmailtoAmbulanceStaff = async ({
+  email,
+  staffName,
+  emergencyId,
+  patientName,
+  location,
+  note,
+}) => {
+  const { subject, text, html } = generateNewEmergencyEmailToAmbulanceStaff({
+    staffName,
+    emergencyId,
+    patientName,
+    location,
+    note,
+  });
+
+  return await sendEmail(email, subject, text, html);
+};
+
+const sendAssignedStaffEmailtoPatient = async ({
+  email,
+  staffName,
+  emergencyId,
+  patientName,
+  location,
+  note,
+  status,
+}) => {
+  const { subject, text, html } = generateAssignedStaffEmailToPatient({
+    staffName,
+    emergencyId,
+    patientName,
+    location,
+    note,
+    status,
+  });
+
+  return await sendEmail(email, subject, text, html);
+};
+
+const sendUpdatedEmergencyStatusEmailToPatient = async ({
+  email,
+  staffName,
+  emergencyId,
+  patientName,
+  location,
+  note,
+  status,
+}) => {
+  const { subject, text, html } = generateUpdatedEmergencyStatusEmailToPatient({
+    staffName,
+    emergencyId,
+    patientName,
+    location,
+    note,
+    status,
+  });
+
+  return await sendEmail(email, subject, text, html);
+};
+
+export {
+  sendEmail,
+  sendEmailtoAmbulanceStaff,
+  sendAssignedStaffEmailtoPatient,
+  sendUpdatedEmergencyStatusEmailToPatient,
+};
