@@ -1,0 +1,127 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: simkes-api
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - REDIS_HOST=redis
+    env_file: .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./logs:/app/logs
+    entrypoint: ["/bin/sh", "-c", "/app/entrypoint.sh"]
+    networks:
+      - simkes-network
+    ports:
+      - "3001:3000" # Expose to host for testing
+    depends_on:
+      - db
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+
+  worker:
+    container_name: simkes-worker
+    build: .
+    command: ["/app/entrypoint-worker.sh"]
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - simkes-network
+
+  bullboard:
+    container_name: simkes-bullboard
+    build: .
+    command: ["node", "bullboard.js"]
+    ports:
+      - "3100:3100"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - simkes-network
+
+  mock-api:
+    build:
+      context: ./mock
+      dockerfile: Dockerfile
+    container_name: mock-api
+    ports:
+      - "4001:4001"
+    networks:
+      - simkes-network
+
+  redis:
+    image: redis:6
+    container_name: redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - simkes-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-simkes
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    networks:
+      - simkes-network
+
+  db:
+    image: postgres:15
+    container_name: simkes-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: simkes_db
+      POSTGRES_USER: simkes_user
+      POSTGRES_PASSWORD: simkes_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - simkes-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-simkes
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: calvinganteng2024
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - db
+    networks:
+      - simkes-network
+
+networks:
+  simkes-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  pgadmin-data:
+  redis_data:
