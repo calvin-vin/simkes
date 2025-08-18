@@ -1,38 +1,8 @@
-import prisma from "../config/db.js";
 import ApiError from "../utils/apiError.js";
-
-const createPaymentMethod = async ({ name }) => {
-  const paymentMethod = await prisma.paymentMethod.create({
-    data: { name },
-  });
-  return paymentMethod;
-};
-
-const updatePaymentMethod = async (id, { name }) => {
-  const existing = await prisma.paymentMethod.findUnique({ where: { id } });
-
-  if (!existing) {
-    throw new ApiError("Payment method not found", 404);
-  }
-
-  return await prisma.paymentMethod.update({
-    where: { id },
-    data: { name },
-  });
-};
-
-const deletePaymentMethod = async (id) => {
-  const existing = await prisma.paymentMethod.findUnique({ where: { id } });
-
-  if (!existing) {
-    throw new ApiError("Payment method not found", 404);
-  }
-
-  return prisma.paymentMethod.delete({ where: { id } });
-};
+import { simrsPrisma } from "../config/db.js";
 
 const getPaymentMethodById = async (id) => {
-  const paymentMethod = await prisma.paymentMethod.findUnique({
+  const paymentMethod = await simrsPrisma.paymentMethod.findUnique({
     where: { id },
   });
 
@@ -49,27 +19,29 @@ const getAllPaymentMethods = async (query) => {
   const filters = {};
 
   if (search) {
-    filters.name = { contains: search, mode: "insensitive" };
+    filters.reportdisplay = { contains: search, mode: "insensitive" };
   }
 
+  filters.statusenabled = true;
+
   const orderBy = {};
-  if (sortBy && ["name", "createdAt"].includes(sortBy)) {
+  if (sortBy && ["reportdisplay"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
         : "asc";
   } else {
-    orderBy["createdAt"] = "desc"; // default sorting by createdAt desc
+    orderBy["reportdisplay"] = "desc"; // default sorting by createdAt desc
   }
 
   const [paymentMethods, total] = await Promise.all([
-    prisma.paymentMethod.findMany({
+    simrsPrisma.paymentMethod.findMany({
       where: filters,
       skip: (page - 1) * limit,
       take: limit,
       orderBy,
     }),
-    prisma.paymentMethod.count({
+    simrsPrisma.paymentMethod.count({
       where: filters,
     }),
   ]);
@@ -86,7 +58,7 @@ const getAllPaymentMethods = async (query) => {
 };
 
 const findPaymentMethodOrFail = async ({ paymentMethodId, select }) => {
-  const paymentMethod = await prisma.paymentMethod.findUnique({
+  const paymentMethod = await simrsPrisma.paymentMethod.findUnique({
     where: { id: paymentMethodId },
     select,
   });
@@ -98,11 +70,4 @@ const findPaymentMethodOrFail = async ({ paymentMethodId, select }) => {
   return paymentMethod;
 };
 
-export {
-  createPaymentMethod,
-  updatePaymentMethod,
-  deletePaymentMethod,
-  getPaymentMethodById,
-  getAllPaymentMethods,
-  findPaymentMethodOrFail,
-};
+export { getPaymentMethodById, getAllPaymentMethods, findPaymentMethodOrFail };

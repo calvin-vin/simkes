@@ -1,9 +1,9 @@
-import prisma from "../config/db.js";
+import { simkesPrisma } from "../config/db.js";
 import ApiError from "../utils/apiError.js";
 import axios from "axios";
 
 export const findMedicalCategoryOrFail = async ({ medicalCategoryId }) => {
-  const medicalCategory = await prisma.medicalCategory.findUnique({
+  const medicalCategory = await simkesPrisma.medicalCategory.findUnique({
     where: { id: medicalCategoryId },
   });
 
@@ -31,7 +31,7 @@ export const syncMedicalCategories = async () => {
     for (const item of simrsData) {
       const simrsId = String(item.id);
 
-      await prisma.medicalCategory.upsert({
+      await simkesPrisma.medicalCategory.upsert({
         where: { simrsId },
         update: {
           name: item.name,
@@ -46,7 +46,7 @@ export const syncMedicalCategories = async () => {
     }
 
     // Hapus data lokal yang tidak ada di SIMRS
-    await prisma.medicalCategory.deleteMany({
+    await simkesPrisma.medicalCategory.deleteMany({
       where: {
         simrsId: {
           notIn: simrsIdsFromAPI,
@@ -80,13 +80,13 @@ export const getAllMedicalCategories = async (query) => {
   }
 
   const [categories, total] = await Promise.all([
-    prisma.medicalCategory.findMany({
+    simkesPrisma.medicalCategory.findMany({
       where: filters,
       skip: (page - 1) * limit,
       take: limit,
       orderBy,
     }),
-    prisma.medicalCategory.count({
+    simkesPrisma.medicalCategory.count({
       where: filters,
     }),
   ]);

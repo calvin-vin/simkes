@@ -1,0 +1,88 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/simrs"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("SIMRS_DATABASE_URL")
+}
+
+model PaymentMethod {
+  id            Int     @id
+  statusenabled Boolean
+  reportdisplay String
+
+  @@map("kelompokpasien_m")
+}
+
+model TempatTidur {
+  id                Int     @id
+  reportdisplay     String
+  nomorbed          Int
+  statusenabled     Boolean
+  objectkamarfk     Int?
+  objectstatusbedfk Int?
+
+  kamar  Kamar?     @relation(fields: [objectkamarfk], references: [id])
+  status StatusBed? @relation(fields: [objectstatusbedfk], references: [id])
+
+  @@map("tempattidur_m")
+}
+
+model Kamar {
+  id              Int     @id
+  namakamar       String
+  statusenabled   Boolean
+  objectruanganfk Int?
+  objectkelasfk   Int?
+
+  ruangan     Ruangan?      @relation(fields: [objectruanganfk], references: [id])
+  kelas       Kelas?        @relation(fields: [objectkelasfk], references: [id])
+  tempatTidur TempatTidur[]
+
+  @@map("kamar_m")
+}
+
+model Ruangan {
+  id                 Int     @id
+  namaruangan        String
+  statusenabled      Boolean
+  objectdepartemenfk Int?
+
+  kamars     Kamar[]
+  departemen Departemen? @relation(fields: [objectdepartemenfk], references: [id])
+
+  @@map("ruangan_m")
+}
+
+model StatusBed {
+  id            Int     @id
+  statusbed     String
+  statusenabled Boolean
+
+  tempatTidur TempatTidur[]
+
+  @@map("statusbed_m")
+}
+
+model Kelas {
+  id            Int     @id
+  namakelas     String
+  statusenabled Boolean
+
+  kamars Kamar[]
+
+  @@map("kelas_m")
+}
+
+model Departemen {
+  id             Int     @id
+  namadepartemen String
+  statusenabled  Boolean
+
+  ruangans Ruangan[]
+
+  @@map("departemen_m")
+}

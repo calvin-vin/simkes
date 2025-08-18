@@ -17,16 +17,11 @@ import notFoundHandler from "./middlewares/notFoundHandler.js";
 
 // Global Routes
 import paymentMethodRoute from "./routes/paymentMethod.route.js";
-import medicalCategoryRoute from "./routes/medicalCategory.route.js";
+import bedMonitorRoute from "./routes/bed.routes.js";
 
 // Patient Routes
-import patientRoute from "./routes/patient.route.js";
-import patientPaymentRoute from "./routes/patientPayment.route.js";
-import reservationRoute from "./routes/reservation.route.js";
-import emergencyRoute from "./routes/emergency.route.js";
 
 // Ambulance Staff Routes
-import ambulanceStaffRoute from "./routes/ambulanceStaff.route.js";
 
 dayjs.extend(isSameOrBefore);
 dayjs.locale("id");
@@ -52,16 +47,17 @@ app.get("/", (req, res) => {
 
 // Global Routes
 app.use("/api/v1/payment-methods", paymentMethodRoute);
-app.use("/api/v1/medical-categories", medicalCategoryRoute);
+app.use("/api/v1/bed", bedMonitorRoute);
+// app.use("/api/v1/medical-categories", medicalCategoryRoute);
 
-// Patient Routes
-app.use("/api/v1/patients", patientRoute);
-app.use("/api/v1/patient-payments", patientPaymentRoute);
-app.use("/api/v1/reservations", reservationRoute);
-app.use("/api/v1/emergencies", emergencyRoute);
+// // Patient Routes
+// app.use("/api/v1/patients", patientRoute);
+// app.use("/api/v1/patient-payments", patientPaymentRoute);
+// app.use("/api/v1/reservations", reservationRoute);
+// app.use("/api/v1/emergencies", emergencyRoute);
 
-// Ambulance Staff Routes
-app.use("/api/v1/ambulance-staffs", ambulanceStaffRoute);
+// // Ambulance Staff Routes
+// app.use("/api/v1/ambulance-staffs", ambulanceStaffRoute);
 
 // 3.) ERROR HANDLING
 app.use(notFoundHandler);

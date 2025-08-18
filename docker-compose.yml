@@ -53,16 +53,6 @@ services:
     networks:
       - simkes-network
 
-  mock-api:
-    build:
-      context: ./mock
-      dockerfile: Dockerfile
-    container_name: mock-api
-    ports:
-      - "4001:4001"
-    networks:
-      - simkes-network
-
   redis:
     image: redis:6
     container_name: redis

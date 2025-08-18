@@ -1,0 +1,198 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/simkes"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("SIMKES_DATABASE_URL")
+}
+
+model Reservation {
+  id                String            @id @default(uuid())
+  patientId         String
+  patient           Patient           @relation(fields: [patientId], references: [id])
+  medicalCategoryId String
+  medicalCategory   MedicalCategory   @relation(fields: [medicalCategoryId], references: [id])
+  doctorId          String
+  doctor            Doctor            @relation(fields: [doctorId], references: [id])
+  reservationDate   DateTime
+  queueNumber       String
+  qrCodeUrl         String
+  status            ReservationStatus @default(WAITING)
+  referralFile      String?           @unique
+  patientPaymentId  String
+  patientPayment    PatientPayment    @relation(fields: [patientPaymentId], references: [id])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+model Patient {
+  id                String             @unique
+  name              String
+  simrsId           String?
+  nik               String?
+  phone             String?
+  email             String?
+  reservations      Reservation[]
+  payments          PatientPayment[]
+  emergencyRequests EmergencyRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PaymentMethod {
+  id       String           @id @default(uuid())
+  name     String           @unique
+  patients PatientPayment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PatientPayment {
+  id              String  @id @default(uuid())
+  patientId       String
+  paymentMethodId String
+  participantId   String
+  paymentFile     String?
+
+  patient       Patient       @relation(fields: [patientId], references: [id])
+  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+  reservations  Reservation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([patientId, paymentMethodId])
+}
+
+model MedicalCategory {
+  id           String                  @id @default(uuid())
+  simrsId      String                  @unique
+  name         String
+  reservations Reservation[]
+  doctors      DoctorMedicalCategory[]
+
+  syncedAt  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Doctor {
+  id                String                  @id @default(uuid())
+  simrsId           String                  @unique
+  name              String
+  code              String
+  reservations      Reservation[]
+  schedules         DoctorSchedule[]
+  medicalCategories DoctorMedicalCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DoctorMedicalCategory {
+  id                String @id @default(uuid())
+  doctorId          String
+  medicalCategoryId String
+
+  doctor          Doctor          @relation(fields: [doctorId], references: [id])
+  medicalCategory MedicalCategory @relation(fields: [medicalCategoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([doctorId, medicalCategoryId])
+}
+
+model DoctorSchedule {
+  id             String   @id @default(uuid())
+  simrsId        String   @unique
+  doctorId       String
+  doctor         Doctor   @relation(fields: [doctorId], references: [id])
+  specialization String
+  day            String
+  startTime      String
+  endTime        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Medicine {
+  id        String    @id @default(uuid())
+  name      String
+  unit      String
+  stock     Int
+  simrsId   String?
+  syncedAt  DateTime?
+  updatedAt DateTime
+}
+
+model EmergencyRequest {
+  id           String             @id @default(uuid())
+  patientId    String
+  patient      Patient            @relation(fields: [patientId], references: [id])
+  location     String
+  note         String?
+  status       EmergencyStatus    @default(PENDING)
+  assignedToId String?
+  assignedTo   AmbulanceStaff?    @relation(fields: [assignedToId], references: [id])
+  histories    EmergencyHistory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EmergencyHistory {
+  id                     String          @id @default(uuid())
+  emergencyRequestId     String
+  ambulanceStaffLocation String?
+  status                 EmergencyStatus
+  note                   String?
+  createdAt              DateTime        @default(now())
+
+  emergencyRequest EmergencyRequest @relation(fields: [emergencyRequestId], references: [id])
+}
+
+model AmbulanceStaff {
+  id        String   @id @default(uuid())
+  name      String
+  phone     String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  EmergencyRequest EmergencyRequest[]
+}
+
+enum EmergencyStatus {
+  PENDING
+  ASSIGNED
+  ON_THE_WAY
+  ARRIVED
+  PATIENT_IN_CAR
+  TO_HOSPITAL
+  COMPLETED
+}
+
+enum Days {
+  MINGGU
+  SENIN
+  SELASA
+  RABU
+  KAMIS
+  JUMAT
+  SABTU
+}
+
+enum ReservationStatus {
+  WAITING
+  ONGOING
+  DONE
+  SKIPPED
+  RECALLED
+  EXPIRED
+}
