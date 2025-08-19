@@ -1,4 +1,5 @@
 import { simrsPrisma } from "../config/db.js";
+import ApiError from "../utils/apiError.js";
 
 /**
  * Ambil data detail tempat tidur dengan pagination dan filter
@@ -12,6 +13,8 @@ export const getKetersediaanTempatTidur = async (query) => {
     idstatusbed,
     page = 1,
     limit = 10,
+    sortBy,
+    sortOrder,
   } = query;
 
   const filters = {
@@ -32,6 +35,16 @@ export const getKetersediaanTempatTidur = async (query) => {
     ...(idstatusbed ? { objectstatusbedfk: Number(idstatusbed) } : {}),
   };
 
+  const orderBy = {};
+  if (sortBy && ["id"].includes(sortBy)) {
+    orderBy[sortBy] =
+      sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
+        ? sortOrder.toLowerCase()
+        : "asc";
+  } else {
+    orderBy["id"] = "asc";
+  }
+
   const [beds, total] = await Promise.all([
     simrsPrisma.tempatTidur.findMany({
       where: filters,
@@ -50,6 +63,7 @@ export const getKetersediaanTempatTidur = async (query) => {
       },
       skip: (page - 1) * limit,
       take: Number(limit),
+      orderBy,
     }),
     simrsPrisma.tempatTidur.count({
       where: filters,
@@ -65,6 +79,34 @@ export const getKetersediaanTempatTidur = async (query) => {
       totalPages: Math.ceil(total / limit),
     },
   };
+};
+
+/**
+ * Ambil data detail tempat tidur berdasarkan ID
+ */
+export const getKetersediaanTempatTidurById = async (id) => {
+  const bed = await simrsPrisma.tempatTidur.findUnique({
+    where: { id: Number(id) },
+    include: {
+      kamar: {
+        include: {
+          ruangan: {
+            include: {
+              departemen: true,
+            },
+          },
+          kelas: true,
+        },
+      },
+      status: true,
+    },
+  });
+
+  if (!bed) {
+    throw new ApiError("Tempat tidur tidak ditemukan", 404);
+  }
+
+  return bed;
 };
 
 /**
@@ -105,7 +147,7 @@ export const getSummaryTempatTidur = async (query) => {
 /**
  * Ambil data detail tempat tidur dengan summary
  */
-export const getKetersediaanTempatTidurWithSummary = async (query) => {
+export const getKamarwithTempatTidur = async (query) => {
   const {
     namaruangan,
     idkelas,
@@ -114,6 +156,8 @@ export const getKetersediaanTempatTidurWithSummary = async (query) => {
     idstatusbed,
     page = 1,
     limit = 10,
+    sortBy,
+    sortOrder,
   } = query;
 
   const kamarFilters = {
@@ -138,6 +182,16 @@ export const getKetersediaanTempatTidurWithSummary = async (query) => {
     ...(idkamar ? { id: Number(idkamar) } : {}),
   };
 
+  const orderBy = {};
+  if (sortBy && ["id", "namakamar"].includes(sortBy)) {
+    orderBy[sortBy] =
+      sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
+        ? sortOrder.toLowerCase()
+        : "asc";
+  } else {
+    orderBy["id"] = "asc";
+  }
+
   const [kamars, total] = await Promise.all([
     simrsPrisma.kamar.findMany({
       where: kamarFilters,
@@ -154,6 +208,7 @@ export const getKetersediaanTempatTidurWithSummary = async (query) => {
       },
       skip: (page - 1) * limit,
       take: Number(limit),
+      orderBy,
     }),
     simrsPrisma.kamar.count({ where: kamarFilters }),
   ]);
@@ -196,6 +251,57 @@ export const getKetersediaanTempatTidurWithSummary = async (query) => {
       limit: Number(limit),
       totalPages: Math.ceil(total / limit),
     },
+  };
+};
+
+/**
+ * Ambil detail 1 kamar beserta tempat tidurnya + summary
+ */
+export const getKamarwithTempatTidurById = async (id) => {
+  const kamar = await simrsPrisma.kamar.findUnique({
+    where: { id: Number(id), statusenabled: true },
+    include: {
+      ruangan: { include: { departemen: true } },
+      kelas: true,
+      tempatTidur: {
+        where: {
+          statusenabled: true,
+        },
+        include: { status: true },
+      },
+    },
+  });
+
+  if (!kamar) {
+    throw new ApiError("Kamar tidak ditemukan", 404);
+  }
+
+  const summary = { kosong: 0, terisi: 0 };
+
+  const tempatTidur = kamar.tempatTidur.map((bed) => {
+    if (bed.objectstatusbedfk === 2) summary.kosong++;
+    else summary.terisi++;
+
+    return {
+      id: bed.id,
+      nomor: bed.nomorbed,
+      display: bed.reportdisplay,
+      idstatusbed: bed.status?.id,
+      statusbed: bed.status?.statusbed ?? null,
+    };
+  });
+
+  return {
+    idkamar: kamar.id,
+    namakamar: kamar.namakamar,
+    idkelas: kamar.kelas?.id,
+    namakelas: kamar.kelas?.namakelas ?? null,
+    idruangan: kamar.ruangan?.id,
+    namaruangan: kamar.ruangan?.namaruangan,
+    iddepartemen: kamar.ruangan?.departemen?.id,
+    namadepartemen: kamar.ruangan?.departemen?.namadepartemen,
+    summary,
+    tempatTidur,
   };
 };
 

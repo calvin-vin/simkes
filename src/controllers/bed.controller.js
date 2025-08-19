@@ -2,9 +2,11 @@ import {
   bedClassCollection,
   bedCollection,
   bedKamarCollection,
+  bedResource,
   bedRuanganCollection,
   bedStatusCollection,
   kamarWithBedCollection,
+  kamarWithBedResource,
 } from "../resources/bed.resource.js";
 import {
   getAllKamarSchema,
@@ -28,6 +30,17 @@ export const getKetersediaanTempatTidur = catchAsync(async (req, res) => {
   });
 });
 
+export const getKetersediaanTempatTidurById = catchAsync(async (req, res) => {
+  const beds = await bedService.getKetersediaanTempatTidurById(req.params.id);
+
+  return apiSuccess(
+    res,
+    200,
+    "Ketersediaan tempat tidur berhasil diambil",
+    bedResource(beds)
+  );
+});
+
 export const getSummaryKetersediaanTempatTidur = catchAsync(
   async (req, res) => {
     const query = getKetersediaanTempatTidurSchema.partial().parse(req.query);
@@ -43,25 +56,32 @@ export const getSummaryKetersediaanTempatTidur = catchAsync(
   }
 );
 
-export const getKetersediaanTempatTidurWithSummary = catchAsync(
-  async (req, res) => {
-    const query = getKetersediaanTempatTidurSchema.partial().parse(req.query);
+export const getKamarwithTempatTidur = catchAsync(async (req, res) => {
+  const query = getKetersediaanTempatTidurSchema.parse(req.query);
 
-    const summary = await bedService.getKetersediaanTempatTidurWithSummary(
-      query
-    );
+  const kamar = await bedService.getKamarwithTempatTidur(query);
 
-    return apiSuccess(
-      res,
-      200,
-      "Ketersediaan tempat tidur dengan summary berhasil diambil",
-      {
-        results: kamarWithBedCollection(summary.results),
-        pagination: summary.pagination,
-      }
-    );
-  }
-);
+  return apiSuccess(
+    res,
+    200,
+    "Ketersediaan kamar dengan tempat tidur berhasil diambil",
+    {
+      results: kamarWithBedCollection(kamar.results),
+      pagination: kamar.pagination,
+    }
+  );
+});
+
+export const getKamarwithTempatTidurById = catchAsync(async (req, res) => {
+  const kamar = await bedService.getKamarwithTempatTidurById(req.params.id);
+
+  return apiSuccess(
+    res,
+    200,
+    "Ketersediaan kamar dengan tempat tidur berhasil diambil",
+    kamarWithBedResource(kamar)
+  );
+});
 
 export const getAllStatusBed = catchAsync(async (req, res) => {
   const query = getAllStatusBedSchema.parse(req.query);

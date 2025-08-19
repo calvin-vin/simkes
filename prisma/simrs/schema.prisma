@@ -51,8 +51,9 @@ model Ruangan {
     statusenabled      Boolean
     objectdepartemenfk Int?
 
-    kamars     Kamar[]
-    departemen Departemen? @relation(fields: [objectdepartemenfk], references: [id])
+    kamars      Kamar[]
+    departemen  Departemen?        @relation(fields: [objectdepartemenfk], references: [id])
+    stokDetails StokProdukDetail[]
 
     @@map("ruangan_m")
 }
@@ -85,4 +86,42 @@ model Departemen {
     ruangans Ruangan[]
 
     @@map("departemen_m")
+}
+
+model Produk {
+    id            Int     @id
+    namaproduk    String
+    statusenabled Boolean @default(true) @map("statusenabled")
+
+    stokDetails StokProdukDetail[]
+
+    @@map("produk_m")
+}
+
+model StrukPelayanan {
+    norec    String   @id
+    tglstruk DateTime
+
+    stokDetails StokProdukDetail[]
+
+    @@map("strukpelayanan_t")
+}
+
+model StokProdukDetail {
+    norec              String    @id
+    objectprodukfk     Int
+    objectruanganfk    Int
+    nostrukterimafk    String
+    objectasalprodukfk Int?
+    harganetto2        Float?
+    hargadiscount      Float?
+    qtyproduk          Float
+    statusenabled      Boolean
+    tglkadaluarsa      DateTime?
+
+    produk  Produk         @relation(fields: [objectprodukfk], references: [id])
+    ruangan Ruangan        @relation(fields: [objectruanganfk], references: [id])
+    struk   StrukPelayanan @relation(fields: [nostrukterimafk], references: [norec])
+
+    @@map("stokprodukdetail_t")
 }

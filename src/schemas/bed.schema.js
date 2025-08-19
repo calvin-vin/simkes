@@ -8,6 +8,8 @@ export const getKetersediaanTempatTidurSchema = z.object({
   idruangan: z.coerce.number().optional(),
   idkamar: z.coerce.number().optional(),
   idstatusbed: z.coerce.number().min(1).max(100).optional(),
+  sortBy: z.string().optional(),
+  sortOrder: z.enum(["asc", "desc"]).optional(),
 });
 
 export const getSummaryKetersediaanTempatTidurSchema = z.object({

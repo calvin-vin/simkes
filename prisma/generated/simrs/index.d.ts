@@ -48,6 +48,21 @@ export type Kelas = $Result.DefaultSelection<Prisma.$KelasPayload>
  * 
  */
 export type Departemen = $Result.DefaultSelection<Prisma.$DepartemenPayload>
+/**
+ * Model Produk
+ * 
+ */
+export type Produk = $Result.DefaultSelection<Prisma.$ProdukPayload>
+/**
+ * Model StrukPelayanan
+ * 
+ */
+export type StrukPelayanan = $Result.DefaultSelection<Prisma.$StrukPelayananPayload>
+/**
+ * Model StokProdukDetail
+ * 
+ */
+export type StokProdukDetail = $Result.DefaultSelection<Prisma.$StokProdukDetailPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -243,6 +258,36 @@ export class PrismaClient<
     * ```
     */
   get departemen(): Prisma.DepartemenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.produk`: Exposes CRUD operations for the **Produk** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Produks
+    * const produks = await prisma.produk.findMany()
+    * ```
+    */
+  get produk(): Prisma.ProdukDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.strukPelayanan`: Exposes CRUD operations for the **StrukPelayanan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StrukPelayanans
+    * const strukPelayanans = await prisma.strukPelayanan.findMany()
+    * ```
+    */
+  get strukPelayanan(): Prisma.StrukPelayananDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.stokProdukDetail`: Exposes CRUD operations for the **StokProdukDetail** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StokProdukDetails
+    * const stokProdukDetails = await prisma.stokProdukDetail.findMany()
+    * ```
+    */
+  get stokProdukDetail(): Prisma.StokProdukDetailDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -689,7 +734,10 @@ export namespace Prisma {
     Ruangan: 'Ruangan',
     StatusBed: 'StatusBed',
     Kelas: 'Kelas',
-    Departemen: 'Departemen'
+    Departemen: 'Departemen',
+    Produk: 'Produk',
+    StrukPelayanan: 'StrukPelayanan',
+    StokProdukDetail: 'StokProdukDetail'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -708,7 +756,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "paymentMethod" | "tempatTidur" | "kamar" | "ruangan" | "statusBed" | "kelas" | "departemen"
+      modelProps: "paymentMethod" | "tempatTidur" | "kamar" | "ruangan" | "statusBed" | "kelas" | "departemen" | "produk" | "strukPelayanan" | "stokProdukDetail"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1230,6 +1278,228 @@ export namespace Prisma {
           }
         }
       }
+      Produk: {
+        payload: Prisma.$ProdukPayload<ExtArgs>
+        fields: Prisma.ProdukFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProdukFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProdukFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>
+          }
+          findFirst: {
+            args: Prisma.ProdukFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProdukFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>
+          }
+          findMany: {
+            args: Prisma.ProdukFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>[]
+          }
+          create: {
+            args: Prisma.ProdukCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>
+          }
+          createMany: {
+            args: Prisma.ProdukCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProdukCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>[]
+          }
+          delete: {
+            args: Prisma.ProdukDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>
+          }
+          update: {
+            args: Prisma.ProdukUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProdukDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProdukUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProdukUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProdukUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProdukPayload>
+          }
+          aggregate: {
+            args: Prisma.ProdukAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProduk>
+          }
+          groupBy: {
+            args: Prisma.ProdukGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProdukGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProdukCountArgs<ExtArgs>
+            result: $Utils.Optional<ProdukCountAggregateOutputType> | number
+          }
+        }
+      }
+      StrukPelayanan: {
+        payload: Prisma.$StrukPelayananPayload<ExtArgs>
+        fields: Prisma.StrukPelayananFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StrukPelayananFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StrukPelayananFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>
+          }
+          findFirst: {
+            args: Prisma.StrukPelayananFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StrukPelayananFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>
+          }
+          findMany: {
+            args: Prisma.StrukPelayananFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>[]
+          }
+          create: {
+            args: Prisma.StrukPelayananCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>
+          }
+          createMany: {
+            args: Prisma.StrukPelayananCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StrukPelayananCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>[]
+          }
+          delete: {
+            args: Prisma.StrukPelayananDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>
+          }
+          update: {
+            args: Prisma.StrukPelayananUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>
+          }
+          deleteMany: {
+            args: Prisma.StrukPelayananDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StrukPelayananUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StrukPelayananUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>[]
+          }
+          upsert: {
+            args: Prisma.StrukPelayananUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StrukPelayananPayload>
+          }
+          aggregate: {
+            args: Prisma.StrukPelayananAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStrukPelayanan>
+          }
+          groupBy: {
+            args: Prisma.StrukPelayananGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StrukPelayananGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StrukPelayananCountArgs<ExtArgs>
+            result: $Utils.Optional<StrukPelayananCountAggregateOutputType> | number
+          }
+        }
+      }
+      StokProdukDetail: {
+        payload: Prisma.$StokProdukDetailPayload<ExtArgs>
+        fields: Prisma.StokProdukDetailFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StokProdukDetailFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StokProdukDetailFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>
+          }
+          findFirst: {
+            args: Prisma.StokProdukDetailFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StokProdukDetailFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>
+          }
+          findMany: {
+            args: Prisma.StokProdukDetailFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>[]
+          }
+          create: {
+            args: Prisma.StokProdukDetailCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>
+          }
+          createMany: {
+            args: Prisma.StokProdukDetailCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StokProdukDetailCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>[]
+          }
+          delete: {
+            args: Prisma.StokProdukDetailDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>
+          }
+          update: {
+            args: Prisma.StokProdukDetailUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>
+          }
+          deleteMany: {
+            args: Prisma.StokProdukDetailDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StokProdukDetailUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StokProdukDetailUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>[]
+          }
+          upsert: {
+            args: Prisma.StokProdukDetailUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StokProdukDetailPayload>
+          }
+          aggregate: {
+            args: Prisma.StokProdukDetailAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStokProdukDetail>
+          }
+          groupBy: {
+            args: Prisma.StokProdukDetailGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StokProdukDetailGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StokProdukDetailCountArgs<ExtArgs>
+            result: $Utils.Optional<StokProdukDetailCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1321,6 +1591,9 @@ export namespace Prisma {
     statusBed?: StatusBedOmit
     kelas?: KelasOmit
     departemen?: DepartemenOmit
+    produk?: ProdukOmit
+    strukPelayanan?: StrukPelayananOmit
+    stokProdukDetail?: StokProdukDetailOmit
   }
 
   /* Types for Logging */
@@ -1447,10 +1720,12 @@ export namespace Prisma {
 
   export type RuanganCountOutputType = {
     kamars: number
+    stokDetails: number
   }
 
   export type RuanganCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kamars?: boolean | RuanganCountOutputTypeCountKamarsArgs
+    stokDetails?: boolean | RuanganCountOutputTypeCountStokDetailsArgs
   }
 
   // Custom InputTypes
@@ -1469,6 +1744,13 @@ export namespace Prisma {
    */
   export type RuanganCountOutputTypeCountKamarsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: KamarWhereInput
+  }
+
+  /**
+   * RuanganCountOutputType without action
+   */
+  export type RuanganCountOutputTypeCountStokDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StokProdukDetailWhereInput
   }
 
 
@@ -1562,6 +1844,68 @@ export namespace Prisma {
    */
   export type DepartemenCountOutputTypeCountRuangansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RuanganWhereInput
+  }
+
+
+  /**
+   * Count Type ProdukCountOutputType
+   */
+
+  export type ProdukCountOutputType = {
+    stokDetails: number
+  }
+
+  export type ProdukCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stokDetails?: boolean | ProdukCountOutputTypeCountStokDetailsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProdukCountOutputType without action
+   */
+  export type ProdukCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProdukCountOutputType
+     */
+    select?: ProdukCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProdukCountOutputType without action
+   */
+  export type ProdukCountOutputTypeCountStokDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StokProdukDetailWhereInput
+  }
+
+
+  /**
+   * Count Type StrukPelayananCountOutputType
+   */
+
+  export type StrukPelayananCountOutputType = {
+    stokDetails: number
+  }
+
+  export type StrukPelayananCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stokDetails?: boolean | StrukPelayananCountOutputTypeCountStokDetailsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StrukPelayananCountOutputType without action
+   */
+  export type StrukPelayananCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayananCountOutputType
+     */
+    select?: StrukPelayananCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StrukPelayananCountOutputType without action
+   */
+  export type StrukPelayananCountOutputTypeCountStokDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StokProdukDetailWhereInput
   }
 
 
@@ -5107,6 +5451,7 @@ export namespace Prisma {
     objectdepartemenfk?: boolean
     kamars?: boolean | Ruangan$kamarsArgs<ExtArgs>
     departemen?: boolean | Ruangan$departemenArgs<ExtArgs>
+    stokDetails?: boolean | Ruangan$stokDetailsArgs<ExtArgs>
     _count?: boolean | RuanganCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ruangan"]>
 
@@ -5137,6 +5482,7 @@ export namespace Prisma {
   export type RuanganInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kamars?: boolean | Ruangan$kamarsArgs<ExtArgs>
     departemen?: boolean | Ruangan$departemenArgs<ExtArgs>
+    stokDetails?: boolean | Ruangan$stokDetailsArgs<ExtArgs>
     _count?: boolean | RuanganCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RuanganIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5151,6 +5497,7 @@ export namespace Prisma {
     objects: {
       kamars: Prisma.$KamarPayload<ExtArgs>[]
       departemen: Prisma.$DepartemenPayload<ExtArgs> | null
+      stokDetails: Prisma.$StokProdukDetailPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5553,6 +5900,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     kamars<T extends Ruangan$kamarsArgs<ExtArgs> = {}>(args?: Subset<T, Ruangan$kamarsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KamarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     departemen<T extends Ruangan$departemenArgs<ExtArgs> = {}>(args?: Subset<T, Ruangan$departemenArgs<ExtArgs>>): Prisma__DepartemenClient<$Result.GetResult<Prisma.$DepartemenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    stokDetails<T extends Ruangan$stokDetailsArgs<ExtArgs> = {}>(args?: Subset<T, Ruangan$stokDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6022,6 +6370,30 @@ export namespace Prisma {
      */
     include?: DepartemenInclude<ExtArgs> | null
     where?: DepartemenWhereInput
+  }
+
+  /**
+   * Ruangan.stokDetails
+   */
+  export type Ruangan$stokDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    where?: StokProdukDetailWhereInput
+    orderBy?: StokProdukDetailOrderByWithRelationInput | StokProdukDetailOrderByWithRelationInput[]
+    cursor?: StokProdukDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StokProdukDetailScalarFieldEnum | StokProdukDetailScalarFieldEnum[]
   }
 
   /**
@@ -9278,6 +9650,3308 @@ export namespace Prisma {
 
 
   /**
+   * Model Produk
+   */
+
+  export type AggregateProduk = {
+    _count: ProdukCountAggregateOutputType | null
+    _avg: ProdukAvgAggregateOutputType | null
+    _sum: ProdukSumAggregateOutputType | null
+    _min: ProdukMinAggregateOutputType | null
+    _max: ProdukMaxAggregateOutputType | null
+  }
+
+  export type ProdukAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProdukSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProdukMinAggregateOutputType = {
+    id: number | null
+    namaproduk: string | null
+    statusenabled: boolean | null
+  }
+
+  export type ProdukMaxAggregateOutputType = {
+    id: number | null
+    namaproduk: string | null
+    statusenabled: boolean | null
+  }
+
+  export type ProdukCountAggregateOutputType = {
+    id: number
+    namaproduk: number
+    statusenabled: number
+    _all: number
+  }
+
+
+  export type ProdukAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ProdukSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ProdukMinAggregateInputType = {
+    id?: true
+    namaproduk?: true
+    statusenabled?: true
+  }
+
+  export type ProdukMaxAggregateInputType = {
+    id?: true
+    namaproduk?: true
+    statusenabled?: true
+  }
+
+  export type ProdukCountAggregateInputType = {
+    id?: true
+    namaproduk?: true
+    statusenabled?: true
+    _all?: true
+  }
+
+  export type ProdukAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Produk to aggregate.
+     */
+    where?: ProdukWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Produks to fetch.
+     */
+    orderBy?: ProdukOrderByWithRelationInput | ProdukOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProdukWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Produks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Produks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Produks
+    **/
+    _count?: true | ProdukCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProdukAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProdukSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProdukMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProdukMaxAggregateInputType
+  }
+
+  export type GetProdukAggregateType<T extends ProdukAggregateArgs> = {
+        [P in keyof T & keyof AggregateProduk]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProduk[P]>
+      : GetScalarType<T[P], AggregateProduk[P]>
+  }
+
+
+
+
+  export type ProdukGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProdukWhereInput
+    orderBy?: ProdukOrderByWithAggregationInput | ProdukOrderByWithAggregationInput[]
+    by: ProdukScalarFieldEnum[] | ProdukScalarFieldEnum
+    having?: ProdukScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProdukCountAggregateInputType | true
+    _avg?: ProdukAvgAggregateInputType
+    _sum?: ProdukSumAggregateInputType
+    _min?: ProdukMinAggregateInputType
+    _max?: ProdukMaxAggregateInputType
+  }
+
+  export type ProdukGroupByOutputType = {
+    id: number
+    namaproduk: string
+    statusenabled: boolean
+    _count: ProdukCountAggregateOutputType | null
+    _avg: ProdukAvgAggregateOutputType | null
+    _sum: ProdukSumAggregateOutputType | null
+    _min: ProdukMinAggregateOutputType | null
+    _max: ProdukMaxAggregateOutputType | null
+  }
+
+  type GetProdukGroupByPayload<T extends ProdukGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProdukGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProdukGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProdukGroupByOutputType[P]>
+            : GetScalarType<T[P], ProdukGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProdukSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    namaproduk?: boolean
+    statusenabled?: boolean
+    stokDetails?: boolean | Produk$stokDetailsArgs<ExtArgs>
+    _count?: boolean | ProdukCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["produk"]>
+
+  export type ProdukSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    namaproduk?: boolean
+    statusenabled?: boolean
+  }, ExtArgs["result"]["produk"]>
+
+  export type ProdukSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    namaproduk?: boolean
+    statusenabled?: boolean
+  }, ExtArgs["result"]["produk"]>
+
+  export type ProdukSelectScalar = {
+    id?: boolean
+    namaproduk?: boolean
+    statusenabled?: boolean
+  }
+
+  export type ProdukOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "namaproduk" | "statusenabled", ExtArgs["result"]["produk"]>
+  export type ProdukInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stokDetails?: boolean | Produk$stokDetailsArgs<ExtArgs>
+    _count?: boolean | ProdukCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProdukIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProdukIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ProdukPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Produk"
+    objects: {
+      stokDetails: Prisma.$StokProdukDetailPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      namaproduk: string
+      statusenabled: boolean
+    }, ExtArgs["result"]["produk"]>
+    composites: {}
+  }
+
+  type ProdukGetPayload<S extends boolean | null | undefined | ProdukDefaultArgs> = $Result.GetResult<Prisma.$ProdukPayload, S>
+
+  type ProdukCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProdukFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProdukCountAggregateInputType | true
+    }
+
+  export interface ProdukDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Produk'], meta: { name: 'Produk' } }
+    /**
+     * Find zero or one Produk that matches the filter.
+     * @param {ProdukFindUniqueArgs} args - Arguments to find a Produk
+     * @example
+     * // Get one Produk
+     * const produk = await prisma.produk.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProdukFindUniqueArgs>(args: SelectSubset<T, ProdukFindUniqueArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Produk that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProdukFindUniqueOrThrowArgs} args - Arguments to find a Produk
+     * @example
+     * // Get one Produk
+     * const produk = await prisma.produk.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProdukFindUniqueOrThrowArgs>(args: SelectSubset<T, ProdukFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Produk that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProdukFindFirstArgs} args - Arguments to find a Produk
+     * @example
+     * // Get one Produk
+     * const produk = await prisma.produk.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProdukFindFirstArgs>(args?: SelectSubset<T, ProdukFindFirstArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Produk that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProdukFindFirstOrThrowArgs} args - Arguments to find a Produk
+     * @example
+     * // Get one Produk
+     * const produk = await prisma.produk.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProdukFindFirstOrThrowArgs>(args?: SelectSubset<T, ProdukFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Produks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProdukFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Produks
+     * const produks = await prisma.produk.findMany()
+     * 
+     * // Get first 10 Produks
+     * const produks = await prisma.produk.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const produkWithIdOnly = await prisma.produk.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProdukFindManyArgs>(args?: SelectSubset<T, ProdukFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Produk.
+     * @param {ProdukCreateArgs} args - Arguments to create a Produk.
+     * @example
+     * // Create one Produk
+     * const Produk = await prisma.produk.create({
+     *   data: {
+     *     // ... data to create a Produk
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProdukCreateArgs>(args: SelectSubset<T, ProdukCreateArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Produks.
+     * @param {ProdukCreateManyArgs} args - Arguments to create many Produks.
+     * @example
+     * // Create many Produks
+     * const produk = await prisma.produk.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProdukCreateManyArgs>(args?: SelectSubset<T, ProdukCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Produks and returns the data saved in the database.
+     * @param {ProdukCreateManyAndReturnArgs} args - Arguments to create many Produks.
+     * @example
+     * // Create many Produks
+     * const produk = await prisma.produk.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Produks and only return the `id`
+     * const produkWithIdOnly = await prisma.produk.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProdukCreateManyAndReturnArgs>(args?: SelectSubset<T, ProdukCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Produk.
+     * @param {ProdukDeleteArgs} args - Arguments to delete one Produk.
+     * @example
+     * // Delete one Produk
+     * const Produk = await prisma.produk.delete({
+     *   where: {
+     *     // ... filter to delete one Produk
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProdukDeleteArgs>(args: SelectSubset<T, ProdukDeleteArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Produk.
+     * @param {ProdukUpdateArgs} args - Arguments to update one Produk.
+     * @example
+     * // Update one Produk
+     * const produk = await prisma.produk.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProdukUpdateArgs>(args: SelectSubset<T, ProdukUpdateArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Produks.
+     * @param {ProdukDeleteManyArgs} args - Arguments to filter Produks to delete.
+     * @example
+     * // Delete a few Produks
+     * const { count } = await prisma.produk.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProdukDeleteManyArgs>(args?: SelectSubset<T, ProdukDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Produks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProdukUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Produks
+     * const produk = await prisma.produk.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProdukUpdateManyArgs>(args: SelectSubset<T, ProdukUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Produks and returns the data updated in the database.
+     * @param {ProdukUpdateManyAndReturnArgs} args - Arguments to update many Produks.
+     * @example
+     * // Update many Produks
+     * const produk = await prisma.produk.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Produks and only return the `id`
+     * const produkWithIdOnly = await prisma.produk.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProdukUpdateManyAndReturnArgs>(args: SelectSubset<T, ProdukUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Produk.
+     * @param {ProdukUpsertArgs} args - Arguments to update or create a Produk.
+     * @example
+     * // Update or create a Produk
+     * const produk = await prisma.produk.upsert({
+     *   create: {
+     *     // ... data to create a Produk
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Produk we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProdukUpsertArgs>(args: SelectSubset<T, ProdukUpsertArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Produks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProdukCountArgs} args - Arguments to filter Produks to count.
+     * @example
+     * // Count the number of Produks
+     * const count = await prisma.produk.count({
+     *   where: {
+     *     // ... the filter for the Produks we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProdukCountArgs>(
+      args?: Subset<T, ProdukCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProdukCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Produk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProdukAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProdukAggregateArgs>(args: Subset<T, ProdukAggregateArgs>): Prisma.PrismaPromise<GetProdukAggregateType<T>>
+
+    /**
+     * Group by Produk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProdukGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProdukGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProdukGroupByArgs['orderBy'] }
+        : { orderBy?: ProdukGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProdukGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProdukGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Produk model
+   */
+  readonly fields: ProdukFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Produk.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProdukClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    stokDetails<T extends Produk$stokDetailsArgs<ExtArgs> = {}>(args?: Subset<T, Produk$stokDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Produk model
+   */
+  interface ProdukFieldRefs {
+    readonly id: FieldRef<"Produk", 'Int'>
+    readonly namaproduk: FieldRef<"Produk", 'String'>
+    readonly statusenabled: FieldRef<"Produk", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Produk findUnique
+   */
+  export type ProdukFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * Filter, which Produk to fetch.
+     */
+    where: ProdukWhereUniqueInput
+  }
+
+  /**
+   * Produk findUniqueOrThrow
+   */
+  export type ProdukFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * Filter, which Produk to fetch.
+     */
+    where: ProdukWhereUniqueInput
+  }
+
+  /**
+   * Produk findFirst
+   */
+  export type ProdukFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * Filter, which Produk to fetch.
+     */
+    where?: ProdukWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Produks to fetch.
+     */
+    orderBy?: ProdukOrderByWithRelationInput | ProdukOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Produks.
+     */
+    cursor?: ProdukWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Produks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Produks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Produks.
+     */
+    distinct?: ProdukScalarFieldEnum | ProdukScalarFieldEnum[]
+  }
+
+  /**
+   * Produk findFirstOrThrow
+   */
+  export type ProdukFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * Filter, which Produk to fetch.
+     */
+    where?: ProdukWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Produks to fetch.
+     */
+    orderBy?: ProdukOrderByWithRelationInput | ProdukOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Produks.
+     */
+    cursor?: ProdukWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Produks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Produks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Produks.
+     */
+    distinct?: ProdukScalarFieldEnum | ProdukScalarFieldEnum[]
+  }
+
+  /**
+   * Produk findMany
+   */
+  export type ProdukFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * Filter, which Produks to fetch.
+     */
+    where?: ProdukWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Produks to fetch.
+     */
+    orderBy?: ProdukOrderByWithRelationInput | ProdukOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Produks.
+     */
+    cursor?: ProdukWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Produks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Produks.
+     */
+    skip?: number
+    distinct?: ProdukScalarFieldEnum | ProdukScalarFieldEnum[]
+  }
+
+  /**
+   * Produk create
+   */
+  export type ProdukCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Produk.
+     */
+    data: XOR<ProdukCreateInput, ProdukUncheckedCreateInput>
+  }
+
+  /**
+   * Produk createMany
+   */
+  export type ProdukCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Produks.
+     */
+    data: ProdukCreateManyInput | ProdukCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Produk createManyAndReturn
+   */
+  export type ProdukCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * The data used to create many Produks.
+     */
+    data: ProdukCreateManyInput | ProdukCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Produk update
+   */
+  export type ProdukUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Produk.
+     */
+    data: XOR<ProdukUpdateInput, ProdukUncheckedUpdateInput>
+    /**
+     * Choose, which Produk to update.
+     */
+    where: ProdukWhereUniqueInput
+  }
+
+  /**
+   * Produk updateMany
+   */
+  export type ProdukUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Produks.
+     */
+    data: XOR<ProdukUpdateManyMutationInput, ProdukUncheckedUpdateManyInput>
+    /**
+     * Filter which Produks to update
+     */
+    where?: ProdukWhereInput
+    /**
+     * Limit how many Produks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Produk updateManyAndReturn
+   */
+  export type ProdukUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * The data used to update Produks.
+     */
+    data: XOR<ProdukUpdateManyMutationInput, ProdukUncheckedUpdateManyInput>
+    /**
+     * Filter which Produks to update
+     */
+    where?: ProdukWhereInput
+    /**
+     * Limit how many Produks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Produk upsert
+   */
+  export type ProdukUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Produk to update in case it exists.
+     */
+    where: ProdukWhereUniqueInput
+    /**
+     * In case the Produk found by the `where` argument doesn't exist, create a new Produk with this data.
+     */
+    create: XOR<ProdukCreateInput, ProdukUncheckedCreateInput>
+    /**
+     * In case the Produk was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProdukUpdateInput, ProdukUncheckedUpdateInput>
+  }
+
+  /**
+   * Produk delete
+   */
+  export type ProdukDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+    /**
+     * Filter which Produk to delete.
+     */
+    where: ProdukWhereUniqueInput
+  }
+
+  /**
+   * Produk deleteMany
+   */
+  export type ProdukDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Produks to delete
+     */
+    where?: ProdukWhereInput
+    /**
+     * Limit how many Produks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Produk.stokDetails
+   */
+  export type Produk$stokDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    where?: StokProdukDetailWhereInput
+    orderBy?: StokProdukDetailOrderByWithRelationInput | StokProdukDetailOrderByWithRelationInput[]
+    cursor?: StokProdukDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StokProdukDetailScalarFieldEnum | StokProdukDetailScalarFieldEnum[]
+  }
+
+  /**
+   * Produk without action
+   */
+  export type ProdukDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Produk
+     */
+    select?: ProdukSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Produk
+     */
+    omit?: ProdukOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdukInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StrukPelayanan
+   */
+
+  export type AggregateStrukPelayanan = {
+    _count: StrukPelayananCountAggregateOutputType | null
+    _min: StrukPelayananMinAggregateOutputType | null
+    _max: StrukPelayananMaxAggregateOutputType | null
+  }
+
+  export type StrukPelayananMinAggregateOutputType = {
+    norec: string | null
+    tglstruk: Date | null
+  }
+
+  export type StrukPelayananMaxAggregateOutputType = {
+    norec: string | null
+    tglstruk: Date | null
+  }
+
+  export type StrukPelayananCountAggregateOutputType = {
+    norec: number
+    tglstruk: number
+    _all: number
+  }
+
+
+  export type StrukPelayananMinAggregateInputType = {
+    norec?: true
+    tglstruk?: true
+  }
+
+  export type StrukPelayananMaxAggregateInputType = {
+    norec?: true
+    tglstruk?: true
+  }
+
+  export type StrukPelayananCountAggregateInputType = {
+    norec?: true
+    tglstruk?: true
+    _all?: true
+  }
+
+  export type StrukPelayananAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StrukPelayanan to aggregate.
+     */
+    where?: StrukPelayananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StrukPelayanans to fetch.
+     */
+    orderBy?: StrukPelayananOrderByWithRelationInput | StrukPelayananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StrukPelayananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StrukPelayanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StrukPelayanans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StrukPelayanans
+    **/
+    _count?: true | StrukPelayananCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StrukPelayananMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StrukPelayananMaxAggregateInputType
+  }
+
+  export type GetStrukPelayananAggregateType<T extends StrukPelayananAggregateArgs> = {
+        [P in keyof T & keyof AggregateStrukPelayanan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStrukPelayanan[P]>
+      : GetScalarType<T[P], AggregateStrukPelayanan[P]>
+  }
+
+
+
+
+  export type StrukPelayananGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StrukPelayananWhereInput
+    orderBy?: StrukPelayananOrderByWithAggregationInput | StrukPelayananOrderByWithAggregationInput[]
+    by: StrukPelayananScalarFieldEnum[] | StrukPelayananScalarFieldEnum
+    having?: StrukPelayananScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StrukPelayananCountAggregateInputType | true
+    _min?: StrukPelayananMinAggregateInputType
+    _max?: StrukPelayananMaxAggregateInputType
+  }
+
+  export type StrukPelayananGroupByOutputType = {
+    norec: string
+    tglstruk: Date
+    _count: StrukPelayananCountAggregateOutputType | null
+    _min: StrukPelayananMinAggregateOutputType | null
+    _max: StrukPelayananMaxAggregateOutputType | null
+  }
+
+  type GetStrukPelayananGroupByPayload<T extends StrukPelayananGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StrukPelayananGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StrukPelayananGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StrukPelayananGroupByOutputType[P]>
+            : GetScalarType<T[P], StrukPelayananGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StrukPelayananSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    norec?: boolean
+    tglstruk?: boolean
+    stokDetails?: boolean | StrukPelayanan$stokDetailsArgs<ExtArgs>
+    _count?: boolean | StrukPelayananCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["strukPelayanan"]>
+
+  export type StrukPelayananSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    norec?: boolean
+    tglstruk?: boolean
+  }, ExtArgs["result"]["strukPelayanan"]>
+
+  export type StrukPelayananSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    norec?: boolean
+    tglstruk?: boolean
+  }, ExtArgs["result"]["strukPelayanan"]>
+
+  export type StrukPelayananSelectScalar = {
+    norec?: boolean
+    tglstruk?: boolean
+  }
+
+  export type StrukPelayananOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"norec" | "tglstruk", ExtArgs["result"]["strukPelayanan"]>
+  export type StrukPelayananInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stokDetails?: boolean | StrukPelayanan$stokDetailsArgs<ExtArgs>
+    _count?: boolean | StrukPelayananCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type StrukPelayananIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type StrukPelayananIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $StrukPelayananPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StrukPelayanan"
+    objects: {
+      stokDetails: Prisma.$StokProdukDetailPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      norec: string
+      tglstruk: Date
+    }, ExtArgs["result"]["strukPelayanan"]>
+    composites: {}
+  }
+
+  type StrukPelayananGetPayload<S extends boolean | null | undefined | StrukPelayananDefaultArgs> = $Result.GetResult<Prisma.$StrukPelayananPayload, S>
+
+  type StrukPelayananCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StrukPelayananFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StrukPelayananCountAggregateInputType | true
+    }
+
+  export interface StrukPelayananDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StrukPelayanan'], meta: { name: 'StrukPelayanan' } }
+    /**
+     * Find zero or one StrukPelayanan that matches the filter.
+     * @param {StrukPelayananFindUniqueArgs} args - Arguments to find a StrukPelayanan
+     * @example
+     * // Get one StrukPelayanan
+     * const strukPelayanan = await prisma.strukPelayanan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StrukPelayananFindUniqueArgs>(args: SelectSubset<T, StrukPelayananFindUniqueArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StrukPelayanan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StrukPelayananFindUniqueOrThrowArgs} args - Arguments to find a StrukPelayanan
+     * @example
+     * // Get one StrukPelayanan
+     * const strukPelayanan = await prisma.strukPelayanan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StrukPelayananFindUniqueOrThrowArgs>(args: SelectSubset<T, StrukPelayananFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StrukPelayanan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StrukPelayananFindFirstArgs} args - Arguments to find a StrukPelayanan
+     * @example
+     * // Get one StrukPelayanan
+     * const strukPelayanan = await prisma.strukPelayanan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StrukPelayananFindFirstArgs>(args?: SelectSubset<T, StrukPelayananFindFirstArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StrukPelayanan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StrukPelayananFindFirstOrThrowArgs} args - Arguments to find a StrukPelayanan
+     * @example
+     * // Get one StrukPelayanan
+     * const strukPelayanan = await prisma.strukPelayanan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StrukPelayananFindFirstOrThrowArgs>(args?: SelectSubset<T, StrukPelayananFindFirstOrThrowArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StrukPelayanans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StrukPelayananFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StrukPelayanans
+     * const strukPelayanans = await prisma.strukPelayanan.findMany()
+     * 
+     * // Get first 10 StrukPelayanans
+     * const strukPelayanans = await prisma.strukPelayanan.findMany({ take: 10 })
+     * 
+     * // Only select the `norec`
+     * const strukPelayananWithNorecOnly = await prisma.strukPelayanan.findMany({ select: { norec: true } })
+     * 
+     */
+    findMany<T extends StrukPelayananFindManyArgs>(args?: SelectSubset<T, StrukPelayananFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StrukPelayanan.
+     * @param {StrukPelayananCreateArgs} args - Arguments to create a StrukPelayanan.
+     * @example
+     * // Create one StrukPelayanan
+     * const StrukPelayanan = await prisma.strukPelayanan.create({
+     *   data: {
+     *     // ... data to create a StrukPelayanan
+     *   }
+     * })
+     * 
+     */
+    create<T extends StrukPelayananCreateArgs>(args: SelectSubset<T, StrukPelayananCreateArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StrukPelayanans.
+     * @param {StrukPelayananCreateManyArgs} args - Arguments to create many StrukPelayanans.
+     * @example
+     * // Create many StrukPelayanans
+     * const strukPelayanan = await prisma.strukPelayanan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StrukPelayananCreateManyArgs>(args?: SelectSubset<T, StrukPelayananCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StrukPelayanans and returns the data saved in the database.
+     * @param {StrukPelayananCreateManyAndReturnArgs} args - Arguments to create many StrukPelayanans.
+     * @example
+     * // Create many StrukPelayanans
+     * const strukPelayanan = await prisma.strukPelayanan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StrukPelayanans and only return the `norec`
+     * const strukPelayananWithNorecOnly = await prisma.strukPelayanan.createManyAndReturn({
+     *   select: { norec: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StrukPelayananCreateManyAndReturnArgs>(args?: SelectSubset<T, StrukPelayananCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StrukPelayanan.
+     * @param {StrukPelayananDeleteArgs} args - Arguments to delete one StrukPelayanan.
+     * @example
+     * // Delete one StrukPelayanan
+     * const StrukPelayanan = await prisma.strukPelayanan.delete({
+     *   where: {
+     *     // ... filter to delete one StrukPelayanan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StrukPelayananDeleteArgs>(args: SelectSubset<T, StrukPelayananDeleteArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StrukPelayanan.
+     * @param {StrukPelayananUpdateArgs} args - Arguments to update one StrukPelayanan.
+     * @example
+     * // Update one StrukPelayanan
+     * const strukPelayanan = await prisma.strukPelayanan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StrukPelayananUpdateArgs>(args: SelectSubset<T, StrukPelayananUpdateArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StrukPelayanans.
+     * @param {StrukPelayananDeleteManyArgs} args - Arguments to filter StrukPelayanans to delete.
+     * @example
+     * // Delete a few StrukPelayanans
+     * const { count } = await prisma.strukPelayanan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StrukPelayananDeleteManyArgs>(args?: SelectSubset<T, StrukPelayananDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StrukPelayanans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StrukPelayananUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StrukPelayanans
+     * const strukPelayanan = await prisma.strukPelayanan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StrukPelayananUpdateManyArgs>(args: SelectSubset<T, StrukPelayananUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StrukPelayanans and returns the data updated in the database.
+     * @param {StrukPelayananUpdateManyAndReturnArgs} args - Arguments to update many StrukPelayanans.
+     * @example
+     * // Update many StrukPelayanans
+     * const strukPelayanan = await prisma.strukPelayanan.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StrukPelayanans and only return the `norec`
+     * const strukPelayananWithNorecOnly = await prisma.strukPelayanan.updateManyAndReturn({
+     *   select: { norec: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StrukPelayananUpdateManyAndReturnArgs>(args: SelectSubset<T, StrukPelayananUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StrukPelayanan.
+     * @param {StrukPelayananUpsertArgs} args - Arguments to update or create a StrukPelayanan.
+     * @example
+     * // Update or create a StrukPelayanan
+     * const strukPelayanan = await prisma.strukPelayanan.upsert({
+     *   create: {
+     *     // ... data to create a StrukPelayanan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StrukPelayanan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StrukPelayananUpsertArgs>(args: SelectSubset<T, StrukPelayananUpsertArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StrukPelayanans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StrukPelayananCountArgs} args - Arguments to filter StrukPelayanans to count.
+     * @example
+     * // Count the number of StrukPelayanans
+     * const count = await prisma.strukPelayanan.count({
+     *   where: {
+     *     // ... the filter for the StrukPelayanans we want to count
+     *   }
+     * })
+    **/
+    count<T extends StrukPelayananCountArgs>(
+      args?: Subset<T, StrukPelayananCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StrukPelayananCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StrukPelayanan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StrukPelayananAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StrukPelayananAggregateArgs>(args: Subset<T, StrukPelayananAggregateArgs>): Prisma.PrismaPromise<GetStrukPelayananAggregateType<T>>
+
+    /**
+     * Group by StrukPelayanan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StrukPelayananGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StrukPelayananGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StrukPelayananGroupByArgs['orderBy'] }
+        : { orderBy?: StrukPelayananGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StrukPelayananGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStrukPelayananGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StrukPelayanan model
+   */
+  readonly fields: StrukPelayananFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StrukPelayanan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StrukPelayananClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    stokDetails<T extends StrukPelayanan$stokDetailsArgs<ExtArgs> = {}>(args?: Subset<T, StrukPelayanan$stokDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StrukPelayanan model
+   */
+  interface StrukPelayananFieldRefs {
+    readonly norec: FieldRef<"StrukPelayanan", 'String'>
+    readonly tglstruk: FieldRef<"StrukPelayanan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StrukPelayanan findUnique
+   */
+  export type StrukPelayananFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * Filter, which StrukPelayanan to fetch.
+     */
+    where: StrukPelayananWhereUniqueInput
+  }
+
+  /**
+   * StrukPelayanan findUniqueOrThrow
+   */
+  export type StrukPelayananFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * Filter, which StrukPelayanan to fetch.
+     */
+    where: StrukPelayananWhereUniqueInput
+  }
+
+  /**
+   * StrukPelayanan findFirst
+   */
+  export type StrukPelayananFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * Filter, which StrukPelayanan to fetch.
+     */
+    where?: StrukPelayananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StrukPelayanans to fetch.
+     */
+    orderBy?: StrukPelayananOrderByWithRelationInput | StrukPelayananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StrukPelayanans.
+     */
+    cursor?: StrukPelayananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StrukPelayanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StrukPelayanans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StrukPelayanans.
+     */
+    distinct?: StrukPelayananScalarFieldEnum | StrukPelayananScalarFieldEnum[]
+  }
+
+  /**
+   * StrukPelayanan findFirstOrThrow
+   */
+  export type StrukPelayananFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * Filter, which StrukPelayanan to fetch.
+     */
+    where?: StrukPelayananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StrukPelayanans to fetch.
+     */
+    orderBy?: StrukPelayananOrderByWithRelationInput | StrukPelayananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StrukPelayanans.
+     */
+    cursor?: StrukPelayananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StrukPelayanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StrukPelayanans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StrukPelayanans.
+     */
+    distinct?: StrukPelayananScalarFieldEnum | StrukPelayananScalarFieldEnum[]
+  }
+
+  /**
+   * StrukPelayanan findMany
+   */
+  export type StrukPelayananFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * Filter, which StrukPelayanans to fetch.
+     */
+    where?: StrukPelayananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StrukPelayanans to fetch.
+     */
+    orderBy?: StrukPelayananOrderByWithRelationInput | StrukPelayananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StrukPelayanans.
+     */
+    cursor?: StrukPelayananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StrukPelayanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StrukPelayanans.
+     */
+    skip?: number
+    distinct?: StrukPelayananScalarFieldEnum | StrukPelayananScalarFieldEnum[]
+  }
+
+  /**
+   * StrukPelayanan create
+   */
+  export type StrukPelayananCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StrukPelayanan.
+     */
+    data: XOR<StrukPelayananCreateInput, StrukPelayananUncheckedCreateInput>
+  }
+
+  /**
+   * StrukPelayanan createMany
+   */
+  export type StrukPelayananCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StrukPelayanans.
+     */
+    data: StrukPelayananCreateManyInput | StrukPelayananCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StrukPelayanan createManyAndReturn
+   */
+  export type StrukPelayananCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * The data used to create many StrukPelayanans.
+     */
+    data: StrukPelayananCreateManyInput | StrukPelayananCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StrukPelayanan update
+   */
+  export type StrukPelayananUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StrukPelayanan.
+     */
+    data: XOR<StrukPelayananUpdateInput, StrukPelayananUncheckedUpdateInput>
+    /**
+     * Choose, which StrukPelayanan to update.
+     */
+    where: StrukPelayananWhereUniqueInput
+  }
+
+  /**
+   * StrukPelayanan updateMany
+   */
+  export type StrukPelayananUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StrukPelayanans.
+     */
+    data: XOR<StrukPelayananUpdateManyMutationInput, StrukPelayananUncheckedUpdateManyInput>
+    /**
+     * Filter which StrukPelayanans to update
+     */
+    where?: StrukPelayananWhereInput
+    /**
+     * Limit how many StrukPelayanans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StrukPelayanan updateManyAndReturn
+   */
+  export type StrukPelayananUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * The data used to update StrukPelayanans.
+     */
+    data: XOR<StrukPelayananUpdateManyMutationInput, StrukPelayananUncheckedUpdateManyInput>
+    /**
+     * Filter which StrukPelayanans to update
+     */
+    where?: StrukPelayananWhereInput
+    /**
+     * Limit how many StrukPelayanans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StrukPelayanan upsert
+   */
+  export type StrukPelayananUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StrukPelayanan to update in case it exists.
+     */
+    where: StrukPelayananWhereUniqueInput
+    /**
+     * In case the StrukPelayanan found by the `where` argument doesn't exist, create a new StrukPelayanan with this data.
+     */
+    create: XOR<StrukPelayananCreateInput, StrukPelayananUncheckedCreateInput>
+    /**
+     * In case the StrukPelayanan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StrukPelayananUpdateInput, StrukPelayananUncheckedUpdateInput>
+  }
+
+  /**
+   * StrukPelayanan delete
+   */
+  export type StrukPelayananDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+    /**
+     * Filter which StrukPelayanan to delete.
+     */
+    where: StrukPelayananWhereUniqueInput
+  }
+
+  /**
+   * StrukPelayanan deleteMany
+   */
+  export type StrukPelayananDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StrukPelayanans to delete
+     */
+    where?: StrukPelayananWhereInput
+    /**
+     * Limit how many StrukPelayanans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StrukPelayanan.stokDetails
+   */
+  export type StrukPelayanan$stokDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    where?: StokProdukDetailWhereInput
+    orderBy?: StokProdukDetailOrderByWithRelationInput | StokProdukDetailOrderByWithRelationInput[]
+    cursor?: StokProdukDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StokProdukDetailScalarFieldEnum | StokProdukDetailScalarFieldEnum[]
+  }
+
+  /**
+   * StrukPelayanan without action
+   */
+  export type StrukPelayananDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StrukPelayanan
+     */
+    select?: StrukPelayananSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StrukPelayanan
+     */
+    omit?: StrukPelayananOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StrukPelayananInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StokProdukDetail
+   */
+
+  export type AggregateStokProdukDetail = {
+    _count: StokProdukDetailCountAggregateOutputType | null
+    _avg: StokProdukDetailAvgAggregateOutputType | null
+    _sum: StokProdukDetailSumAggregateOutputType | null
+    _min: StokProdukDetailMinAggregateOutputType | null
+    _max: StokProdukDetailMaxAggregateOutputType | null
+  }
+
+  export type StokProdukDetailAvgAggregateOutputType = {
+    objectprodukfk: number | null
+    objectruanganfk: number | null
+    objectasalprodukfk: number | null
+    harganetto2: number | null
+    hargadiscount: number | null
+    qtyproduk: number | null
+  }
+
+  export type StokProdukDetailSumAggregateOutputType = {
+    objectprodukfk: number | null
+    objectruanganfk: number | null
+    objectasalprodukfk: number | null
+    harganetto2: number | null
+    hargadiscount: number | null
+    qtyproduk: number | null
+  }
+
+  export type StokProdukDetailMinAggregateOutputType = {
+    norec: string | null
+    objectprodukfk: number | null
+    objectruanganfk: number | null
+    nostrukterimafk: string | null
+    objectasalprodukfk: number | null
+    harganetto2: number | null
+    hargadiscount: number | null
+    qtyproduk: number | null
+    statusenabled: boolean | null
+    tglkadaluarsa: Date | null
+  }
+
+  export type StokProdukDetailMaxAggregateOutputType = {
+    norec: string | null
+    objectprodukfk: number | null
+    objectruanganfk: number | null
+    nostrukterimafk: string | null
+    objectasalprodukfk: number | null
+    harganetto2: number | null
+    hargadiscount: number | null
+    qtyproduk: number | null
+    statusenabled: boolean | null
+    tglkadaluarsa: Date | null
+  }
+
+  export type StokProdukDetailCountAggregateOutputType = {
+    norec: number
+    objectprodukfk: number
+    objectruanganfk: number
+    nostrukterimafk: number
+    objectasalprodukfk: number
+    harganetto2: number
+    hargadiscount: number
+    qtyproduk: number
+    statusenabled: number
+    tglkadaluarsa: number
+    _all: number
+  }
+
+
+  export type StokProdukDetailAvgAggregateInputType = {
+    objectprodukfk?: true
+    objectruanganfk?: true
+    objectasalprodukfk?: true
+    harganetto2?: true
+    hargadiscount?: true
+    qtyproduk?: true
+  }
+
+  export type StokProdukDetailSumAggregateInputType = {
+    objectprodukfk?: true
+    objectruanganfk?: true
+    objectasalprodukfk?: true
+    harganetto2?: true
+    hargadiscount?: true
+    qtyproduk?: true
+  }
+
+  export type StokProdukDetailMinAggregateInputType = {
+    norec?: true
+    objectprodukfk?: true
+    objectruanganfk?: true
+    nostrukterimafk?: true
+    objectasalprodukfk?: true
+    harganetto2?: true
+    hargadiscount?: true
+    qtyproduk?: true
+    statusenabled?: true
+    tglkadaluarsa?: true
+  }
+
+  export type StokProdukDetailMaxAggregateInputType = {
+    norec?: true
+    objectprodukfk?: true
+    objectruanganfk?: true
+    nostrukterimafk?: true
+    objectasalprodukfk?: true
+    harganetto2?: true
+    hargadiscount?: true
+    qtyproduk?: true
+    statusenabled?: true
+    tglkadaluarsa?: true
+  }
+
+  export type StokProdukDetailCountAggregateInputType = {
+    norec?: true
+    objectprodukfk?: true
+    objectruanganfk?: true
+    nostrukterimafk?: true
+    objectasalprodukfk?: true
+    harganetto2?: true
+    hargadiscount?: true
+    qtyproduk?: true
+    statusenabled?: true
+    tglkadaluarsa?: true
+    _all?: true
+  }
+
+  export type StokProdukDetailAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StokProdukDetail to aggregate.
+     */
+    where?: StokProdukDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StokProdukDetails to fetch.
+     */
+    orderBy?: StokProdukDetailOrderByWithRelationInput | StokProdukDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StokProdukDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StokProdukDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StokProdukDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StokProdukDetails
+    **/
+    _count?: true | StokProdukDetailCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StokProdukDetailAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StokProdukDetailSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StokProdukDetailMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StokProdukDetailMaxAggregateInputType
+  }
+
+  export type GetStokProdukDetailAggregateType<T extends StokProdukDetailAggregateArgs> = {
+        [P in keyof T & keyof AggregateStokProdukDetail]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStokProdukDetail[P]>
+      : GetScalarType<T[P], AggregateStokProdukDetail[P]>
+  }
+
+
+
+
+  export type StokProdukDetailGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StokProdukDetailWhereInput
+    orderBy?: StokProdukDetailOrderByWithAggregationInput | StokProdukDetailOrderByWithAggregationInput[]
+    by: StokProdukDetailScalarFieldEnum[] | StokProdukDetailScalarFieldEnum
+    having?: StokProdukDetailScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StokProdukDetailCountAggregateInputType | true
+    _avg?: StokProdukDetailAvgAggregateInputType
+    _sum?: StokProdukDetailSumAggregateInputType
+    _min?: StokProdukDetailMinAggregateInputType
+    _max?: StokProdukDetailMaxAggregateInputType
+  }
+
+  export type StokProdukDetailGroupByOutputType = {
+    norec: string
+    objectprodukfk: number
+    objectruanganfk: number
+    nostrukterimafk: string
+    objectasalprodukfk: number | null
+    harganetto2: number | null
+    hargadiscount: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa: Date | null
+    _count: StokProdukDetailCountAggregateOutputType | null
+    _avg: StokProdukDetailAvgAggregateOutputType | null
+    _sum: StokProdukDetailSumAggregateOutputType | null
+    _min: StokProdukDetailMinAggregateOutputType | null
+    _max: StokProdukDetailMaxAggregateOutputType | null
+  }
+
+  type GetStokProdukDetailGroupByPayload<T extends StokProdukDetailGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StokProdukDetailGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StokProdukDetailGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StokProdukDetailGroupByOutputType[P]>
+            : GetScalarType<T[P], StokProdukDetailGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StokProdukDetailSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    norec?: boolean
+    objectprodukfk?: boolean
+    objectruanganfk?: boolean
+    nostrukterimafk?: boolean
+    objectasalprodukfk?: boolean
+    harganetto2?: boolean
+    hargadiscount?: boolean
+    qtyproduk?: boolean
+    statusenabled?: boolean
+    tglkadaluarsa?: boolean
+    produk?: boolean | ProdukDefaultArgs<ExtArgs>
+    ruangan?: boolean | RuanganDefaultArgs<ExtArgs>
+    struk?: boolean | StrukPelayananDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stokProdukDetail"]>
+
+  export type StokProdukDetailSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    norec?: boolean
+    objectprodukfk?: boolean
+    objectruanganfk?: boolean
+    nostrukterimafk?: boolean
+    objectasalprodukfk?: boolean
+    harganetto2?: boolean
+    hargadiscount?: boolean
+    qtyproduk?: boolean
+    statusenabled?: boolean
+    tglkadaluarsa?: boolean
+    produk?: boolean | ProdukDefaultArgs<ExtArgs>
+    ruangan?: boolean | RuanganDefaultArgs<ExtArgs>
+    struk?: boolean | StrukPelayananDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stokProdukDetail"]>
+
+  export type StokProdukDetailSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    norec?: boolean
+    objectprodukfk?: boolean
+    objectruanganfk?: boolean
+    nostrukterimafk?: boolean
+    objectasalprodukfk?: boolean
+    harganetto2?: boolean
+    hargadiscount?: boolean
+    qtyproduk?: boolean
+    statusenabled?: boolean
+    tglkadaluarsa?: boolean
+    produk?: boolean | ProdukDefaultArgs<ExtArgs>
+    ruangan?: boolean | RuanganDefaultArgs<ExtArgs>
+    struk?: boolean | StrukPelayananDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stokProdukDetail"]>
+
+  export type StokProdukDetailSelectScalar = {
+    norec?: boolean
+    objectprodukfk?: boolean
+    objectruanganfk?: boolean
+    nostrukterimafk?: boolean
+    objectasalprodukfk?: boolean
+    harganetto2?: boolean
+    hargadiscount?: boolean
+    qtyproduk?: boolean
+    statusenabled?: boolean
+    tglkadaluarsa?: boolean
+  }
+
+  export type StokProdukDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"norec" | "objectprodukfk" | "objectruanganfk" | "nostrukterimafk" | "objectasalprodukfk" | "harganetto2" | "hargadiscount" | "qtyproduk" | "statusenabled" | "tglkadaluarsa", ExtArgs["result"]["stokProdukDetail"]>
+  export type StokProdukDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produk?: boolean | ProdukDefaultArgs<ExtArgs>
+    ruangan?: boolean | RuanganDefaultArgs<ExtArgs>
+    struk?: boolean | StrukPelayananDefaultArgs<ExtArgs>
+  }
+  export type StokProdukDetailIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produk?: boolean | ProdukDefaultArgs<ExtArgs>
+    ruangan?: boolean | RuanganDefaultArgs<ExtArgs>
+    struk?: boolean | StrukPelayananDefaultArgs<ExtArgs>
+  }
+  export type StokProdukDetailIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produk?: boolean | ProdukDefaultArgs<ExtArgs>
+    ruangan?: boolean | RuanganDefaultArgs<ExtArgs>
+    struk?: boolean | StrukPelayananDefaultArgs<ExtArgs>
+  }
+
+  export type $StokProdukDetailPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StokProdukDetail"
+    objects: {
+      produk: Prisma.$ProdukPayload<ExtArgs>
+      ruangan: Prisma.$RuanganPayload<ExtArgs>
+      struk: Prisma.$StrukPelayananPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      norec: string
+      objectprodukfk: number
+      objectruanganfk: number
+      nostrukterimafk: string
+      objectasalprodukfk: number | null
+      harganetto2: number | null
+      hargadiscount: number | null
+      qtyproduk: number
+      statusenabled: boolean
+      tglkadaluarsa: Date | null
+    }, ExtArgs["result"]["stokProdukDetail"]>
+    composites: {}
+  }
+
+  type StokProdukDetailGetPayload<S extends boolean | null | undefined | StokProdukDetailDefaultArgs> = $Result.GetResult<Prisma.$StokProdukDetailPayload, S>
+
+  type StokProdukDetailCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StokProdukDetailFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StokProdukDetailCountAggregateInputType | true
+    }
+
+  export interface StokProdukDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StokProdukDetail'], meta: { name: 'StokProdukDetail' } }
+    /**
+     * Find zero or one StokProdukDetail that matches the filter.
+     * @param {StokProdukDetailFindUniqueArgs} args - Arguments to find a StokProdukDetail
+     * @example
+     * // Get one StokProdukDetail
+     * const stokProdukDetail = await prisma.stokProdukDetail.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StokProdukDetailFindUniqueArgs>(args: SelectSubset<T, StokProdukDetailFindUniqueArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StokProdukDetail that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StokProdukDetailFindUniqueOrThrowArgs} args - Arguments to find a StokProdukDetail
+     * @example
+     * // Get one StokProdukDetail
+     * const stokProdukDetail = await prisma.stokProdukDetail.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StokProdukDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, StokProdukDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StokProdukDetail that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StokProdukDetailFindFirstArgs} args - Arguments to find a StokProdukDetail
+     * @example
+     * // Get one StokProdukDetail
+     * const stokProdukDetail = await prisma.stokProdukDetail.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StokProdukDetailFindFirstArgs>(args?: SelectSubset<T, StokProdukDetailFindFirstArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StokProdukDetail that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StokProdukDetailFindFirstOrThrowArgs} args - Arguments to find a StokProdukDetail
+     * @example
+     * // Get one StokProdukDetail
+     * const stokProdukDetail = await prisma.stokProdukDetail.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StokProdukDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, StokProdukDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StokProdukDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StokProdukDetailFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StokProdukDetails
+     * const stokProdukDetails = await prisma.stokProdukDetail.findMany()
+     * 
+     * // Get first 10 StokProdukDetails
+     * const stokProdukDetails = await prisma.stokProdukDetail.findMany({ take: 10 })
+     * 
+     * // Only select the `norec`
+     * const stokProdukDetailWithNorecOnly = await prisma.stokProdukDetail.findMany({ select: { norec: true } })
+     * 
+     */
+    findMany<T extends StokProdukDetailFindManyArgs>(args?: SelectSubset<T, StokProdukDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StokProdukDetail.
+     * @param {StokProdukDetailCreateArgs} args - Arguments to create a StokProdukDetail.
+     * @example
+     * // Create one StokProdukDetail
+     * const StokProdukDetail = await prisma.stokProdukDetail.create({
+     *   data: {
+     *     // ... data to create a StokProdukDetail
+     *   }
+     * })
+     * 
+     */
+    create<T extends StokProdukDetailCreateArgs>(args: SelectSubset<T, StokProdukDetailCreateArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StokProdukDetails.
+     * @param {StokProdukDetailCreateManyArgs} args - Arguments to create many StokProdukDetails.
+     * @example
+     * // Create many StokProdukDetails
+     * const stokProdukDetail = await prisma.stokProdukDetail.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StokProdukDetailCreateManyArgs>(args?: SelectSubset<T, StokProdukDetailCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StokProdukDetails and returns the data saved in the database.
+     * @param {StokProdukDetailCreateManyAndReturnArgs} args - Arguments to create many StokProdukDetails.
+     * @example
+     * // Create many StokProdukDetails
+     * const stokProdukDetail = await prisma.stokProdukDetail.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StokProdukDetails and only return the `norec`
+     * const stokProdukDetailWithNorecOnly = await prisma.stokProdukDetail.createManyAndReturn({
+     *   select: { norec: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StokProdukDetailCreateManyAndReturnArgs>(args?: SelectSubset<T, StokProdukDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StokProdukDetail.
+     * @param {StokProdukDetailDeleteArgs} args - Arguments to delete one StokProdukDetail.
+     * @example
+     * // Delete one StokProdukDetail
+     * const StokProdukDetail = await prisma.stokProdukDetail.delete({
+     *   where: {
+     *     // ... filter to delete one StokProdukDetail
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StokProdukDetailDeleteArgs>(args: SelectSubset<T, StokProdukDetailDeleteArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StokProdukDetail.
+     * @param {StokProdukDetailUpdateArgs} args - Arguments to update one StokProdukDetail.
+     * @example
+     * // Update one StokProdukDetail
+     * const stokProdukDetail = await prisma.stokProdukDetail.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StokProdukDetailUpdateArgs>(args: SelectSubset<T, StokProdukDetailUpdateArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StokProdukDetails.
+     * @param {StokProdukDetailDeleteManyArgs} args - Arguments to filter StokProdukDetails to delete.
+     * @example
+     * // Delete a few StokProdukDetails
+     * const { count } = await prisma.stokProdukDetail.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StokProdukDetailDeleteManyArgs>(args?: SelectSubset<T, StokProdukDetailDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StokProdukDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StokProdukDetailUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StokProdukDetails
+     * const stokProdukDetail = await prisma.stokProdukDetail.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StokProdukDetailUpdateManyArgs>(args: SelectSubset<T, StokProdukDetailUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StokProdukDetails and returns the data updated in the database.
+     * @param {StokProdukDetailUpdateManyAndReturnArgs} args - Arguments to update many StokProdukDetails.
+     * @example
+     * // Update many StokProdukDetails
+     * const stokProdukDetail = await prisma.stokProdukDetail.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StokProdukDetails and only return the `norec`
+     * const stokProdukDetailWithNorecOnly = await prisma.stokProdukDetail.updateManyAndReturn({
+     *   select: { norec: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StokProdukDetailUpdateManyAndReturnArgs>(args: SelectSubset<T, StokProdukDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StokProdukDetail.
+     * @param {StokProdukDetailUpsertArgs} args - Arguments to update or create a StokProdukDetail.
+     * @example
+     * // Update or create a StokProdukDetail
+     * const stokProdukDetail = await prisma.stokProdukDetail.upsert({
+     *   create: {
+     *     // ... data to create a StokProdukDetail
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StokProdukDetail we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StokProdukDetailUpsertArgs>(args: SelectSubset<T, StokProdukDetailUpsertArgs<ExtArgs>>): Prisma__StokProdukDetailClient<$Result.GetResult<Prisma.$StokProdukDetailPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StokProdukDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StokProdukDetailCountArgs} args - Arguments to filter StokProdukDetails to count.
+     * @example
+     * // Count the number of StokProdukDetails
+     * const count = await prisma.stokProdukDetail.count({
+     *   where: {
+     *     // ... the filter for the StokProdukDetails we want to count
+     *   }
+     * })
+    **/
+    count<T extends StokProdukDetailCountArgs>(
+      args?: Subset<T, StokProdukDetailCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StokProdukDetailCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StokProdukDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StokProdukDetailAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StokProdukDetailAggregateArgs>(args: Subset<T, StokProdukDetailAggregateArgs>): Prisma.PrismaPromise<GetStokProdukDetailAggregateType<T>>
+
+    /**
+     * Group by StokProdukDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StokProdukDetailGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StokProdukDetailGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StokProdukDetailGroupByArgs['orderBy'] }
+        : { orderBy?: StokProdukDetailGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StokProdukDetailGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStokProdukDetailGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StokProdukDetail model
+   */
+  readonly fields: StokProdukDetailFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StokProdukDetail.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StokProdukDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    produk<T extends ProdukDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProdukDefaultArgs<ExtArgs>>): Prisma__ProdukClient<$Result.GetResult<Prisma.$ProdukPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ruangan<T extends RuanganDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RuanganDefaultArgs<ExtArgs>>): Prisma__RuanganClient<$Result.GetResult<Prisma.$RuanganPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    struk<T extends StrukPelayananDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StrukPelayananDefaultArgs<ExtArgs>>): Prisma__StrukPelayananClient<$Result.GetResult<Prisma.$StrukPelayananPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StokProdukDetail model
+   */
+  interface StokProdukDetailFieldRefs {
+    readonly norec: FieldRef<"StokProdukDetail", 'String'>
+    readonly objectprodukfk: FieldRef<"StokProdukDetail", 'Int'>
+    readonly objectruanganfk: FieldRef<"StokProdukDetail", 'Int'>
+    readonly nostrukterimafk: FieldRef<"StokProdukDetail", 'String'>
+    readonly objectasalprodukfk: FieldRef<"StokProdukDetail", 'Int'>
+    readonly harganetto2: FieldRef<"StokProdukDetail", 'Float'>
+    readonly hargadiscount: FieldRef<"StokProdukDetail", 'Float'>
+    readonly qtyproduk: FieldRef<"StokProdukDetail", 'Float'>
+    readonly statusenabled: FieldRef<"StokProdukDetail", 'Boolean'>
+    readonly tglkadaluarsa: FieldRef<"StokProdukDetail", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StokProdukDetail findUnique
+   */
+  export type StokProdukDetailFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which StokProdukDetail to fetch.
+     */
+    where: StokProdukDetailWhereUniqueInput
+  }
+
+  /**
+   * StokProdukDetail findUniqueOrThrow
+   */
+  export type StokProdukDetailFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which StokProdukDetail to fetch.
+     */
+    where: StokProdukDetailWhereUniqueInput
+  }
+
+  /**
+   * StokProdukDetail findFirst
+   */
+  export type StokProdukDetailFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which StokProdukDetail to fetch.
+     */
+    where?: StokProdukDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StokProdukDetails to fetch.
+     */
+    orderBy?: StokProdukDetailOrderByWithRelationInput | StokProdukDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StokProdukDetails.
+     */
+    cursor?: StokProdukDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StokProdukDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StokProdukDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StokProdukDetails.
+     */
+    distinct?: StokProdukDetailScalarFieldEnum | StokProdukDetailScalarFieldEnum[]
+  }
+
+  /**
+   * StokProdukDetail findFirstOrThrow
+   */
+  export type StokProdukDetailFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which StokProdukDetail to fetch.
+     */
+    where?: StokProdukDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StokProdukDetails to fetch.
+     */
+    orderBy?: StokProdukDetailOrderByWithRelationInput | StokProdukDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StokProdukDetails.
+     */
+    cursor?: StokProdukDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StokProdukDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StokProdukDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StokProdukDetails.
+     */
+    distinct?: StokProdukDetailScalarFieldEnum | StokProdukDetailScalarFieldEnum[]
+  }
+
+  /**
+   * StokProdukDetail findMany
+   */
+  export type StokProdukDetailFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which StokProdukDetails to fetch.
+     */
+    where?: StokProdukDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StokProdukDetails to fetch.
+     */
+    orderBy?: StokProdukDetailOrderByWithRelationInput | StokProdukDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StokProdukDetails.
+     */
+    cursor?: StokProdukDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StokProdukDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StokProdukDetails.
+     */
+    skip?: number
+    distinct?: StokProdukDetailScalarFieldEnum | StokProdukDetailScalarFieldEnum[]
+  }
+
+  /**
+   * StokProdukDetail create
+   */
+  export type StokProdukDetailCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StokProdukDetail.
+     */
+    data: XOR<StokProdukDetailCreateInput, StokProdukDetailUncheckedCreateInput>
+  }
+
+  /**
+   * StokProdukDetail createMany
+   */
+  export type StokProdukDetailCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StokProdukDetails.
+     */
+    data: StokProdukDetailCreateManyInput | StokProdukDetailCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StokProdukDetail createManyAndReturn
+   */
+  export type StokProdukDetailCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * The data used to create many StokProdukDetails.
+     */
+    data: StokProdukDetailCreateManyInput | StokProdukDetailCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StokProdukDetail update
+   */
+  export type StokProdukDetailUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StokProdukDetail.
+     */
+    data: XOR<StokProdukDetailUpdateInput, StokProdukDetailUncheckedUpdateInput>
+    /**
+     * Choose, which StokProdukDetail to update.
+     */
+    where: StokProdukDetailWhereUniqueInput
+  }
+
+  /**
+   * StokProdukDetail updateMany
+   */
+  export type StokProdukDetailUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StokProdukDetails.
+     */
+    data: XOR<StokProdukDetailUpdateManyMutationInput, StokProdukDetailUncheckedUpdateManyInput>
+    /**
+     * Filter which StokProdukDetails to update
+     */
+    where?: StokProdukDetailWhereInput
+    /**
+     * Limit how many StokProdukDetails to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StokProdukDetail updateManyAndReturn
+   */
+  export type StokProdukDetailUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * The data used to update StokProdukDetails.
+     */
+    data: XOR<StokProdukDetailUpdateManyMutationInput, StokProdukDetailUncheckedUpdateManyInput>
+    /**
+     * Filter which StokProdukDetails to update
+     */
+    where?: StokProdukDetailWhereInput
+    /**
+     * Limit how many StokProdukDetails to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StokProdukDetail upsert
+   */
+  export type StokProdukDetailUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StokProdukDetail to update in case it exists.
+     */
+    where: StokProdukDetailWhereUniqueInput
+    /**
+     * In case the StokProdukDetail found by the `where` argument doesn't exist, create a new StokProdukDetail with this data.
+     */
+    create: XOR<StokProdukDetailCreateInput, StokProdukDetailUncheckedCreateInput>
+    /**
+     * In case the StokProdukDetail was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StokProdukDetailUpdateInput, StokProdukDetailUncheckedUpdateInput>
+  }
+
+  /**
+   * StokProdukDetail delete
+   */
+  export type StokProdukDetailDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+    /**
+     * Filter which StokProdukDetail to delete.
+     */
+    where: StokProdukDetailWhereUniqueInput
+  }
+
+  /**
+   * StokProdukDetail deleteMany
+   */
+  export type StokProdukDetailDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StokProdukDetails to delete
+     */
+    where?: StokProdukDetailWhereInput
+    /**
+     * Limit how many StokProdukDetails to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StokProdukDetail without action
+   */
+  export type StokProdukDetailDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StokProdukDetail
+     */
+    select?: StokProdukDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StokProdukDetail
+     */
+    omit?: StokProdukDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StokProdukDetailInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9360,6 +13034,39 @@ export namespace Prisma {
   export type DepartemenScalarFieldEnum = (typeof DepartemenScalarFieldEnum)[keyof typeof DepartemenScalarFieldEnum]
 
 
+  export const ProdukScalarFieldEnum: {
+    id: 'id',
+    namaproduk: 'namaproduk',
+    statusenabled: 'statusenabled'
+  };
+
+  export type ProdukScalarFieldEnum = (typeof ProdukScalarFieldEnum)[keyof typeof ProdukScalarFieldEnum]
+
+
+  export const StrukPelayananScalarFieldEnum: {
+    norec: 'norec',
+    tglstruk: 'tglstruk'
+  };
+
+  export type StrukPelayananScalarFieldEnum = (typeof StrukPelayananScalarFieldEnum)[keyof typeof StrukPelayananScalarFieldEnum]
+
+
+  export const StokProdukDetailScalarFieldEnum: {
+    norec: 'norec',
+    objectprodukfk: 'objectprodukfk',
+    objectruanganfk: 'objectruanganfk',
+    nostrukterimafk: 'nostrukterimafk',
+    objectasalprodukfk: 'objectasalprodukfk',
+    harganetto2: 'harganetto2',
+    hargadiscount: 'hargadiscount',
+    qtyproduk: 'qtyproduk',
+    statusenabled: 'statusenabled',
+    tglkadaluarsa: 'tglkadaluarsa'
+  };
+
+  export type StokProdukDetailScalarFieldEnum = (typeof StokProdukDetailScalarFieldEnum)[keyof typeof StokProdukDetailScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -9421,6 +13128,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -9623,6 +13344,7 @@ export namespace Prisma {
     objectdepartemenfk?: IntNullableFilter<"Ruangan"> | number | null
     kamars?: KamarListRelationFilter
     departemen?: XOR<DepartemenNullableScalarRelationFilter, DepartemenWhereInput> | null
+    stokDetails?: StokProdukDetailListRelationFilter
   }
 
   export type RuanganOrderByWithRelationInput = {
@@ -9632,6 +13354,7 @@ export namespace Prisma {
     objectdepartemenfk?: SortOrderInput | SortOrder
     kamars?: KamarOrderByRelationAggregateInput
     departemen?: DepartemenOrderByWithRelationInput
+    stokDetails?: StokProdukDetailOrderByRelationAggregateInput
   }
 
   export type RuanganWhereUniqueInput = Prisma.AtLeast<{
@@ -9644,6 +13367,7 @@ export namespace Prisma {
     objectdepartemenfk?: IntNullableFilter<"Ruangan"> | number | null
     kamars?: KamarListRelationFilter
     departemen?: XOR<DepartemenNullableScalarRelationFilter, DepartemenWhereInput> | null
+    stokDetails?: StokProdukDetailListRelationFilter
   }, "id">
 
   export type RuanganOrderByWithAggregationInput = {
@@ -9807,6 +13531,181 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Departemen"> | number
     namadepartemen?: StringWithAggregatesFilter<"Departemen"> | string
     statusenabled?: BoolWithAggregatesFilter<"Departemen"> | boolean
+  }
+
+  export type ProdukWhereInput = {
+    AND?: ProdukWhereInput | ProdukWhereInput[]
+    OR?: ProdukWhereInput[]
+    NOT?: ProdukWhereInput | ProdukWhereInput[]
+    id?: IntFilter<"Produk"> | number
+    namaproduk?: StringFilter<"Produk"> | string
+    statusenabled?: BoolFilter<"Produk"> | boolean
+    stokDetails?: StokProdukDetailListRelationFilter
+  }
+
+  export type ProdukOrderByWithRelationInput = {
+    id?: SortOrder
+    namaproduk?: SortOrder
+    statusenabled?: SortOrder
+    stokDetails?: StokProdukDetailOrderByRelationAggregateInput
+  }
+
+  export type ProdukWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ProdukWhereInput | ProdukWhereInput[]
+    OR?: ProdukWhereInput[]
+    NOT?: ProdukWhereInput | ProdukWhereInput[]
+    namaproduk?: StringFilter<"Produk"> | string
+    statusenabled?: BoolFilter<"Produk"> | boolean
+    stokDetails?: StokProdukDetailListRelationFilter
+  }, "id">
+
+  export type ProdukOrderByWithAggregationInput = {
+    id?: SortOrder
+    namaproduk?: SortOrder
+    statusenabled?: SortOrder
+    _count?: ProdukCountOrderByAggregateInput
+    _avg?: ProdukAvgOrderByAggregateInput
+    _max?: ProdukMaxOrderByAggregateInput
+    _min?: ProdukMinOrderByAggregateInput
+    _sum?: ProdukSumOrderByAggregateInput
+  }
+
+  export type ProdukScalarWhereWithAggregatesInput = {
+    AND?: ProdukScalarWhereWithAggregatesInput | ProdukScalarWhereWithAggregatesInput[]
+    OR?: ProdukScalarWhereWithAggregatesInput[]
+    NOT?: ProdukScalarWhereWithAggregatesInput | ProdukScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Produk"> | number
+    namaproduk?: StringWithAggregatesFilter<"Produk"> | string
+    statusenabled?: BoolWithAggregatesFilter<"Produk"> | boolean
+  }
+
+  export type StrukPelayananWhereInput = {
+    AND?: StrukPelayananWhereInput | StrukPelayananWhereInput[]
+    OR?: StrukPelayananWhereInput[]
+    NOT?: StrukPelayananWhereInput | StrukPelayananWhereInput[]
+    norec?: StringFilter<"StrukPelayanan"> | string
+    tglstruk?: DateTimeFilter<"StrukPelayanan"> | Date | string
+    stokDetails?: StokProdukDetailListRelationFilter
+  }
+
+  export type StrukPelayananOrderByWithRelationInput = {
+    norec?: SortOrder
+    tglstruk?: SortOrder
+    stokDetails?: StokProdukDetailOrderByRelationAggregateInput
+  }
+
+  export type StrukPelayananWhereUniqueInput = Prisma.AtLeast<{
+    norec?: string
+    AND?: StrukPelayananWhereInput | StrukPelayananWhereInput[]
+    OR?: StrukPelayananWhereInput[]
+    NOT?: StrukPelayananWhereInput | StrukPelayananWhereInput[]
+    tglstruk?: DateTimeFilter<"StrukPelayanan"> | Date | string
+    stokDetails?: StokProdukDetailListRelationFilter
+  }, "norec">
+
+  export type StrukPelayananOrderByWithAggregationInput = {
+    norec?: SortOrder
+    tglstruk?: SortOrder
+    _count?: StrukPelayananCountOrderByAggregateInput
+    _max?: StrukPelayananMaxOrderByAggregateInput
+    _min?: StrukPelayananMinOrderByAggregateInput
+  }
+
+  export type StrukPelayananScalarWhereWithAggregatesInput = {
+    AND?: StrukPelayananScalarWhereWithAggregatesInput | StrukPelayananScalarWhereWithAggregatesInput[]
+    OR?: StrukPelayananScalarWhereWithAggregatesInput[]
+    NOT?: StrukPelayananScalarWhereWithAggregatesInput | StrukPelayananScalarWhereWithAggregatesInput[]
+    norec?: StringWithAggregatesFilter<"StrukPelayanan"> | string
+    tglstruk?: DateTimeWithAggregatesFilter<"StrukPelayanan"> | Date | string
+  }
+
+  export type StokProdukDetailWhereInput = {
+    AND?: StokProdukDetailWhereInput | StokProdukDetailWhereInput[]
+    OR?: StokProdukDetailWhereInput[]
+    NOT?: StokProdukDetailWhereInput | StokProdukDetailWhereInput[]
+    norec?: StringFilter<"StokProdukDetail"> | string
+    objectprodukfk?: IntFilter<"StokProdukDetail"> | number
+    objectruanganfk?: IntFilter<"StokProdukDetail"> | number
+    nostrukterimafk?: StringFilter<"StokProdukDetail"> | string
+    objectasalprodukfk?: IntNullableFilter<"StokProdukDetail"> | number | null
+    harganetto2?: FloatNullableFilter<"StokProdukDetail"> | number | null
+    hargadiscount?: FloatNullableFilter<"StokProdukDetail"> | number | null
+    qtyproduk?: FloatFilter<"StokProdukDetail"> | number
+    statusenabled?: BoolFilter<"StokProdukDetail"> | boolean
+    tglkadaluarsa?: DateTimeNullableFilter<"StokProdukDetail"> | Date | string | null
+    produk?: XOR<ProdukScalarRelationFilter, ProdukWhereInput>
+    ruangan?: XOR<RuanganScalarRelationFilter, RuanganWhereInput>
+    struk?: XOR<StrukPelayananScalarRelationFilter, StrukPelayananWhereInput>
+  }
+
+  export type StokProdukDetailOrderByWithRelationInput = {
+    norec?: SortOrder
+    objectprodukfk?: SortOrder
+    objectruanganfk?: SortOrder
+    nostrukterimafk?: SortOrder
+    objectasalprodukfk?: SortOrderInput | SortOrder
+    harganetto2?: SortOrderInput | SortOrder
+    hargadiscount?: SortOrderInput | SortOrder
+    qtyproduk?: SortOrder
+    statusenabled?: SortOrder
+    tglkadaluarsa?: SortOrderInput | SortOrder
+    produk?: ProdukOrderByWithRelationInput
+    ruangan?: RuanganOrderByWithRelationInput
+    struk?: StrukPelayananOrderByWithRelationInput
+  }
+
+  export type StokProdukDetailWhereUniqueInput = Prisma.AtLeast<{
+    norec?: string
+    AND?: StokProdukDetailWhereInput | StokProdukDetailWhereInput[]
+    OR?: StokProdukDetailWhereInput[]
+    NOT?: StokProdukDetailWhereInput | StokProdukDetailWhereInput[]
+    objectprodukfk?: IntFilter<"StokProdukDetail"> | number
+    objectruanganfk?: IntFilter<"StokProdukDetail"> | number
+    nostrukterimafk?: StringFilter<"StokProdukDetail"> | string
+    objectasalprodukfk?: IntNullableFilter<"StokProdukDetail"> | number | null
+    harganetto2?: FloatNullableFilter<"StokProdukDetail"> | number | null
+    hargadiscount?: FloatNullableFilter<"StokProdukDetail"> | number | null
+    qtyproduk?: FloatFilter<"StokProdukDetail"> | number
+    statusenabled?: BoolFilter<"StokProdukDetail"> | boolean
+    tglkadaluarsa?: DateTimeNullableFilter<"StokProdukDetail"> | Date | string | null
+    produk?: XOR<ProdukScalarRelationFilter, ProdukWhereInput>
+    ruangan?: XOR<RuanganScalarRelationFilter, RuanganWhereInput>
+    struk?: XOR<StrukPelayananScalarRelationFilter, StrukPelayananWhereInput>
+  }, "norec">
+
+  export type StokProdukDetailOrderByWithAggregationInput = {
+    norec?: SortOrder
+    objectprodukfk?: SortOrder
+    objectruanganfk?: SortOrder
+    nostrukterimafk?: SortOrder
+    objectasalprodukfk?: SortOrderInput | SortOrder
+    harganetto2?: SortOrderInput | SortOrder
+    hargadiscount?: SortOrderInput | SortOrder
+    qtyproduk?: SortOrder
+    statusenabled?: SortOrder
+    tglkadaluarsa?: SortOrderInput | SortOrder
+    _count?: StokProdukDetailCountOrderByAggregateInput
+    _avg?: StokProdukDetailAvgOrderByAggregateInput
+    _max?: StokProdukDetailMaxOrderByAggregateInput
+    _min?: StokProdukDetailMinOrderByAggregateInput
+    _sum?: StokProdukDetailSumOrderByAggregateInput
+  }
+
+  export type StokProdukDetailScalarWhereWithAggregatesInput = {
+    AND?: StokProdukDetailScalarWhereWithAggregatesInput | StokProdukDetailScalarWhereWithAggregatesInput[]
+    OR?: StokProdukDetailScalarWhereWithAggregatesInput[]
+    NOT?: StokProdukDetailScalarWhereWithAggregatesInput | StokProdukDetailScalarWhereWithAggregatesInput[]
+    norec?: StringWithAggregatesFilter<"StokProdukDetail"> | string
+    objectprodukfk?: IntWithAggregatesFilter<"StokProdukDetail"> | number
+    objectruanganfk?: IntWithAggregatesFilter<"StokProdukDetail"> | number
+    nostrukterimafk?: StringWithAggregatesFilter<"StokProdukDetail"> | string
+    objectasalprodukfk?: IntNullableWithAggregatesFilter<"StokProdukDetail"> | number | null
+    harganetto2?: FloatNullableWithAggregatesFilter<"StokProdukDetail"> | number | null
+    hargadiscount?: FloatNullableWithAggregatesFilter<"StokProdukDetail"> | number | null
+    qtyproduk?: FloatWithAggregatesFilter<"StokProdukDetail"> | number
+    statusenabled?: BoolWithAggregatesFilter<"StokProdukDetail"> | boolean
+    tglkadaluarsa?: DateTimeNullableWithAggregatesFilter<"StokProdukDetail"> | Date | string | null
   }
 
   export type PaymentMethodCreateInput = {
@@ -9976,6 +13875,7 @@ export namespace Prisma {
     statusenabled: boolean
     kamars?: KamarCreateNestedManyWithoutRuanganInput
     departemen?: DepartemenCreateNestedOneWithoutRuangansInput
+    stokDetails?: StokProdukDetailCreateNestedManyWithoutRuanganInput
   }
 
   export type RuanganUncheckedCreateInput = {
@@ -9984,6 +13884,7 @@ export namespace Prisma {
     statusenabled: boolean
     objectdepartemenfk?: number | null
     kamars?: KamarUncheckedCreateNestedManyWithoutRuanganInput
+    stokDetails?: StokProdukDetailUncheckedCreateNestedManyWithoutRuanganInput
   }
 
   export type RuanganUpdateInput = {
@@ -9992,6 +13893,7 @@ export namespace Prisma {
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
     kamars?: KamarUpdateManyWithoutRuanganNestedInput
     departemen?: DepartemenUpdateOneWithoutRuangansNestedInput
+    stokDetails?: StokProdukDetailUpdateManyWithoutRuanganNestedInput
   }
 
   export type RuanganUncheckedUpdateInput = {
@@ -10000,6 +13902,7 @@ export namespace Prisma {
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
     objectdepartemenfk?: NullableIntFieldUpdateOperationsInput | number | null
     kamars?: KamarUncheckedUpdateManyWithoutRuanganNestedInput
+    stokDetails?: StokProdukDetailUncheckedUpdateManyWithoutRuanganNestedInput
   }
 
   export type RuanganCreateManyInput = {
@@ -10158,6 +14061,179 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     namadepartemen?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ProdukCreateInput = {
+    id: number
+    namaproduk: string
+    statusenabled?: boolean
+    stokDetails?: StokProdukDetailCreateNestedManyWithoutProdukInput
+  }
+
+  export type ProdukUncheckedCreateInput = {
+    id: number
+    namaproduk: string
+    statusenabled?: boolean
+    stokDetails?: StokProdukDetailUncheckedCreateNestedManyWithoutProdukInput
+  }
+
+  export type ProdukUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaproduk?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    stokDetails?: StokProdukDetailUpdateManyWithoutProdukNestedInput
+  }
+
+  export type ProdukUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaproduk?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    stokDetails?: StokProdukDetailUncheckedUpdateManyWithoutProdukNestedInput
+  }
+
+  export type ProdukCreateManyInput = {
+    id: number
+    namaproduk: string
+    statusenabled?: boolean
+  }
+
+  export type ProdukUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaproduk?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ProdukUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaproduk?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type StrukPelayananCreateInput = {
+    norec: string
+    tglstruk: Date | string
+    stokDetails?: StokProdukDetailCreateNestedManyWithoutStrukInput
+  }
+
+  export type StrukPelayananUncheckedCreateInput = {
+    norec: string
+    tglstruk: Date | string
+    stokDetails?: StokProdukDetailUncheckedCreateNestedManyWithoutStrukInput
+  }
+
+  export type StrukPelayananUpdateInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    tglstruk?: DateTimeFieldUpdateOperationsInput | Date | string
+    stokDetails?: StokProdukDetailUpdateManyWithoutStrukNestedInput
+  }
+
+  export type StrukPelayananUncheckedUpdateInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    tglstruk?: DateTimeFieldUpdateOperationsInput | Date | string
+    stokDetails?: StokProdukDetailUncheckedUpdateManyWithoutStrukNestedInput
+  }
+
+  export type StrukPelayananCreateManyInput = {
+    norec: string
+    tglstruk: Date | string
+  }
+
+  export type StrukPelayananUpdateManyMutationInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    tglstruk?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StrukPelayananUncheckedUpdateManyInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    tglstruk?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StokProdukDetailCreateInput = {
+    norec: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+    produk: ProdukCreateNestedOneWithoutStokDetailsInput
+    ruangan: RuanganCreateNestedOneWithoutStokDetailsInput
+    struk: StrukPelayananCreateNestedOneWithoutStokDetailsInput
+  }
+
+  export type StokProdukDetailUncheckedCreateInput = {
+    norec: string
+    objectprodukfk: number
+    objectruanganfk: number
+    nostrukterimafk: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
+  export type StokProdukDetailUpdateInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    produk?: ProdukUpdateOneRequiredWithoutStokDetailsNestedInput
+    ruangan?: RuanganUpdateOneRequiredWithoutStokDetailsNestedInput
+    struk?: StrukPelayananUpdateOneRequiredWithoutStokDetailsNestedInput
+  }
+
+  export type StokProdukDetailUncheckedUpdateInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectprodukfk?: IntFieldUpdateOperationsInput | number
+    objectruanganfk?: IntFieldUpdateOperationsInput | number
+    nostrukterimafk?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StokProdukDetailCreateManyInput = {
+    norec: string
+    objectprodukfk: number
+    objectruanganfk: number
+    nostrukterimafk: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
+  export type StokProdukDetailUpdateManyMutationInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StokProdukDetailUncheckedUpdateManyInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectprodukfk?: IntFieldUpdateOperationsInput | number
+    objectruanganfk?: IntFieldUpdateOperationsInput | number
+    nostrukterimafk?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -10409,7 +14485,17 @@ export namespace Prisma {
     isNot?: DepartemenWhereInput | null
   }
 
+  export type StokProdukDetailListRelationFilter = {
+    every?: StokProdukDetailWhereInput
+    some?: StokProdukDetailWhereInput
+    none?: StokProdukDetailWhereInput
+  }
+
   export type KamarOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StokProdukDetailOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10530,6 +14616,223 @@ export namespace Prisma {
 
   export type DepartemenSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type ProdukCountOrderByAggregateInput = {
+    id?: SortOrder
+    namaproduk?: SortOrder
+    statusenabled?: SortOrder
+  }
+
+  export type ProdukAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ProdukMaxOrderByAggregateInput = {
+    id?: SortOrder
+    namaproduk?: SortOrder
+    statusenabled?: SortOrder
+  }
+
+  export type ProdukMinOrderByAggregateInput = {
+    id?: SortOrder
+    namaproduk?: SortOrder
+    statusenabled?: SortOrder
+  }
+
+  export type ProdukSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type StrukPelayananCountOrderByAggregateInput = {
+    norec?: SortOrder
+    tglstruk?: SortOrder
+  }
+
+  export type StrukPelayananMaxOrderByAggregateInput = {
+    norec?: SortOrder
+    tglstruk?: SortOrder
+  }
+
+  export type StrukPelayananMinOrderByAggregateInput = {
+    norec?: SortOrder
+    tglstruk?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type ProdukScalarRelationFilter = {
+    is?: ProdukWhereInput
+    isNot?: ProdukWhereInput
+  }
+
+  export type RuanganScalarRelationFilter = {
+    is?: RuanganWhereInput
+    isNot?: RuanganWhereInput
+  }
+
+  export type StrukPelayananScalarRelationFilter = {
+    is?: StrukPelayananWhereInput
+    isNot?: StrukPelayananWhereInput
+  }
+
+  export type StokProdukDetailCountOrderByAggregateInput = {
+    norec?: SortOrder
+    objectprodukfk?: SortOrder
+    objectruanganfk?: SortOrder
+    nostrukterimafk?: SortOrder
+    objectasalprodukfk?: SortOrder
+    harganetto2?: SortOrder
+    hargadiscount?: SortOrder
+    qtyproduk?: SortOrder
+    statusenabled?: SortOrder
+    tglkadaluarsa?: SortOrder
+  }
+
+  export type StokProdukDetailAvgOrderByAggregateInput = {
+    objectprodukfk?: SortOrder
+    objectruanganfk?: SortOrder
+    objectasalprodukfk?: SortOrder
+    harganetto2?: SortOrder
+    hargadiscount?: SortOrder
+    qtyproduk?: SortOrder
+  }
+
+  export type StokProdukDetailMaxOrderByAggregateInput = {
+    norec?: SortOrder
+    objectprodukfk?: SortOrder
+    objectruanganfk?: SortOrder
+    nostrukterimafk?: SortOrder
+    objectasalprodukfk?: SortOrder
+    harganetto2?: SortOrder
+    hargadiscount?: SortOrder
+    qtyproduk?: SortOrder
+    statusenabled?: SortOrder
+    tglkadaluarsa?: SortOrder
+  }
+
+  export type StokProdukDetailMinOrderByAggregateInput = {
+    norec?: SortOrder
+    objectprodukfk?: SortOrder
+    objectruanganfk?: SortOrder
+    nostrukterimafk?: SortOrder
+    objectasalprodukfk?: SortOrder
+    harganetto2?: SortOrder
+    hargadiscount?: SortOrder
+    qtyproduk?: SortOrder
+    statusenabled?: SortOrder
+    tglkadaluarsa?: SortOrder
+  }
+
+  export type StokProdukDetailSumOrderByAggregateInput = {
+    objectprodukfk?: SortOrder
+    objectruanganfk?: SortOrder
+    objectasalprodukfk?: SortOrder
+    harganetto2?: SortOrder
+    hargadiscount?: SortOrder
+    qtyproduk?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -10675,11 +14978,25 @@ export namespace Prisma {
     connect?: DepartemenWhereUniqueInput
   }
 
+  export type StokProdukDetailCreateNestedManyWithoutRuanganInput = {
+    create?: XOR<StokProdukDetailCreateWithoutRuanganInput, StokProdukDetailUncheckedCreateWithoutRuanganInput> | StokProdukDetailCreateWithoutRuanganInput[] | StokProdukDetailUncheckedCreateWithoutRuanganInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutRuanganInput | StokProdukDetailCreateOrConnectWithoutRuanganInput[]
+    createMany?: StokProdukDetailCreateManyRuanganInputEnvelope
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+  }
+
   export type KamarUncheckedCreateNestedManyWithoutRuanganInput = {
     create?: XOR<KamarCreateWithoutRuanganInput, KamarUncheckedCreateWithoutRuanganInput> | KamarCreateWithoutRuanganInput[] | KamarUncheckedCreateWithoutRuanganInput[]
     connectOrCreate?: KamarCreateOrConnectWithoutRuanganInput | KamarCreateOrConnectWithoutRuanganInput[]
     createMany?: KamarCreateManyRuanganInputEnvelope
     connect?: KamarWhereUniqueInput | KamarWhereUniqueInput[]
+  }
+
+  export type StokProdukDetailUncheckedCreateNestedManyWithoutRuanganInput = {
+    create?: XOR<StokProdukDetailCreateWithoutRuanganInput, StokProdukDetailUncheckedCreateWithoutRuanganInput> | StokProdukDetailCreateWithoutRuanganInput[] | StokProdukDetailUncheckedCreateWithoutRuanganInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutRuanganInput | StokProdukDetailCreateOrConnectWithoutRuanganInput[]
+    createMany?: StokProdukDetailCreateManyRuanganInputEnvelope
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
   }
 
   export type KamarUpdateManyWithoutRuanganNestedInput = {
@@ -10706,6 +15023,20 @@ export namespace Prisma {
     update?: XOR<XOR<DepartemenUpdateToOneWithWhereWithoutRuangansInput, DepartemenUpdateWithoutRuangansInput>, DepartemenUncheckedUpdateWithoutRuangansInput>
   }
 
+  export type StokProdukDetailUpdateManyWithoutRuanganNestedInput = {
+    create?: XOR<StokProdukDetailCreateWithoutRuanganInput, StokProdukDetailUncheckedCreateWithoutRuanganInput> | StokProdukDetailCreateWithoutRuanganInput[] | StokProdukDetailUncheckedCreateWithoutRuanganInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutRuanganInput | StokProdukDetailCreateOrConnectWithoutRuanganInput[]
+    upsert?: StokProdukDetailUpsertWithWhereUniqueWithoutRuanganInput | StokProdukDetailUpsertWithWhereUniqueWithoutRuanganInput[]
+    createMany?: StokProdukDetailCreateManyRuanganInputEnvelope
+    set?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    disconnect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    delete?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    update?: StokProdukDetailUpdateWithWhereUniqueWithoutRuanganInput | StokProdukDetailUpdateWithWhereUniqueWithoutRuanganInput[]
+    updateMany?: StokProdukDetailUpdateManyWithWhereWithoutRuanganInput | StokProdukDetailUpdateManyWithWhereWithoutRuanganInput[]
+    deleteMany?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
+  }
+
   export type KamarUncheckedUpdateManyWithoutRuanganNestedInput = {
     create?: XOR<KamarCreateWithoutRuanganInput, KamarUncheckedCreateWithoutRuanganInput> | KamarCreateWithoutRuanganInput[] | KamarUncheckedCreateWithoutRuanganInput[]
     connectOrCreate?: KamarCreateOrConnectWithoutRuanganInput | KamarCreateOrConnectWithoutRuanganInput[]
@@ -10718,6 +15049,20 @@ export namespace Prisma {
     update?: KamarUpdateWithWhereUniqueWithoutRuanganInput | KamarUpdateWithWhereUniqueWithoutRuanganInput[]
     updateMany?: KamarUpdateManyWithWhereWithoutRuanganInput | KamarUpdateManyWithWhereWithoutRuanganInput[]
     deleteMany?: KamarScalarWhereInput | KamarScalarWhereInput[]
+  }
+
+  export type StokProdukDetailUncheckedUpdateManyWithoutRuanganNestedInput = {
+    create?: XOR<StokProdukDetailCreateWithoutRuanganInput, StokProdukDetailUncheckedCreateWithoutRuanganInput> | StokProdukDetailCreateWithoutRuanganInput[] | StokProdukDetailUncheckedCreateWithoutRuanganInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutRuanganInput | StokProdukDetailCreateOrConnectWithoutRuanganInput[]
+    upsert?: StokProdukDetailUpsertWithWhereUniqueWithoutRuanganInput | StokProdukDetailUpsertWithWhereUniqueWithoutRuanganInput[]
+    createMany?: StokProdukDetailCreateManyRuanganInputEnvelope
+    set?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    disconnect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    delete?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    update?: StokProdukDetailUpdateWithWhereUniqueWithoutRuanganInput | StokProdukDetailUpdateWithWhereUniqueWithoutRuanganInput[]
+    updateMany?: StokProdukDetailUpdateManyWithWhereWithoutRuanganInput | StokProdukDetailUpdateManyWithWhereWithoutRuanganInput[]
+    deleteMany?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
   }
 
   export type TempatTidurCreateNestedManyWithoutStatusInput = {
@@ -10846,6 +15191,156 @@ export namespace Prisma {
     deleteMany?: RuanganScalarWhereInput | RuanganScalarWhereInput[]
   }
 
+  export type StokProdukDetailCreateNestedManyWithoutProdukInput = {
+    create?: XOR<StokProdukDetailCreateWithoutProdukInput, StokProdukDetailUncheckedCreateWithoutProdukInput> | StokProdukDetailCreateWithoutProdukInput[] | StokProdukDetailUncheckedCreateWithoutProdukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutProdukInput | StokProdukDetailCreateOrConnectWithoutProdukInput[]
+    createMany?: StokProdukDetailCreateManyProdukInputEnvelope
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+  }
+
+  export type StokProdukDetailUncheckedCreateNestedManyWithoutProdukInput = {
+    create?: XOR<StokProdukDetailCreateWithoutProdukInput, StokProdukDetailUncheckedCreateWithoutProdukInput> | StokProdukDetailCreateWithoutProdukInput[] | StokProdukDetailUncheckedCreateWithoutProdukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutProdukInput | StokProdukDetailCreateOrConnectWithoutProdukInput[]
+    createMany?: StokProdukDetailCreateManyProdukInputEnvelope
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+  }
+
+  export type StokProdukDetailUpdateManyWithoutProdukNestedInput = {
+    create?: XOR<StokProdukDetailCreateWithoutProdukInput, StokProdukDetailUncheckedCreateWithoutProdukInput> | StokProdukDetailCreateWithoutProdukInput[] | StokProdukDetailUncheckedCreateWithoutProdukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutProdukInput | StokProdukDetailCreateOrConnectWithoutProdukInput[]
+    upsert?: StokProdukDetailUpsertWithWhereUniqueWithoutProdukInput | StokProdukDetailUpsertWithWhereUniqueWithoutProdukInput[]
+    createMany?: StokProdukDetailCreateManyProdukInputEnvelope
+    set?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    disconnect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    delete?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    update?: StokProdukDetailUpdateWithWhereUniqueWithoutProdukInput | StokProdukDetailUpdateWithWhereUniqueWithoutProdukInput[]
+    updateMany?: StokProdukDetailUpdateManyWithWhereWithoutProdukInput | StokProdukDetailUpdateManyWithWhereWithoutProdukInput[]
+    deleteMany?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
+  }
+
+  export type StokProdukDetailUncheckedUpdateManyWithoutProdukNestedInput = {
+    create?: XOR<StokProdukDetailCreateWithoutProdukInput, StokProdukDetailUncheckedCreateWithoutProdukInput> | StokProdukDetailCreateWithoutProdukInput[] | StokProdukDetailUncheckedCreateWithoutProdukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutProdukInput | StokProdukDetailCreateOrConnectWithoutProdukInput[]
+    upsert?: StokProdukDetailUpsertWithWhereUniqueWithoutProdukInput | StokProdukDetailUpsertWithWhereUniqueWithoutProdukInput[]
+    createMany?: StokProdukDetailCreateManyProdukInputEnvelope
+    set?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    disconnect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    delete?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    update?: StokProdukDetailUpdateWithWhereUniqueWithoutProdukInput | StokProdukDetailUpdateWithWhereUniqueWithoutProdukInput[]
+    updateMany?: StokProdukDetailUpdateManyWithWhereWithoutProdukInput | StokProdukDetailUpdateManyWithWhereWithoutProdukInput[]
+    deleteMany?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
+  }
+
+  export type StokProdukDetailCreateNestedManyWithoutStrukInput = {
+    create?: XOR<StokProdukDetailCreateWithoutStrukInput, StokProdukDetailUncheckedCreateWithoutStrukInput> | StokProdukDetailCreateWithoutStrukInput[] | StokProdukDetailUncheckedCreateWithoutStrukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutStrukInput | StokProdukDetailCreateOrConnectWithoutStrukInput[]
+    createMany?: StokProdukDetailCreateManyStrukInputEnvelope
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+  }
+
+  export type StokProdukDetailUncheckedCreateNestedManyWithoutStrukInput = {
+    create?: XOR<StokProdukDetailCreateWithoutStrukInput, StokProdukDetailUncheckedCreateWithoutStrukInput> | StokProdukDetailCreateWithoutStrukInput[] | StokProdukDetailUncheckedCreateWithoutStrukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutStrukInput | StokProdukDetailCreateOrConnectWithoutStrukInput[]
+    createMany?: StokProdukDetailCreateManyStrukInputEnvelope
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type StokProdukDetailUpdateManyWithoutStrukNestedInput = {
+    create?: XOR<StokProdukDetailCreateWithoutStrukInput, StokProdukDetailUncheckedCreateWithoutStrukInput> | StokProdukDetailCreateWithoutStrukInput[] | StokProdukDetailUncheckedCreateWithoutStrukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutStrukInput | StokProdukDetailCreateOrConnectWithoutStrukInput[]
+    upsert?: StokProdukDetailUpsertWithWhereUniqueWithoutStrukInput | StokProdukDetailUpsertWithWhereUniqueWithoutStrukInput[]
+    createMany?: StokProdukDetailCreateManyStrukInputEnvelope
+    set?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    disconnect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    delete?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    update?: StokProdukDetailUpdateWithWhereUniqueWithoutStrukInput | StokProdukDetailUpdateWithWhereUniqueWithoutStrukInput[]
+    updateMany?: StokProdukDetailUpdateManyWithWhereWithoutStrukInput | StokProdukDetailUpdateManyWithWhereWithoutStrukInput[]
+    deleteMany?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
+  }
+
+  export type StokProdukDetailUncheckedUpdateManyWithoutStrukNestedInput = {
+    create?: XOR<StokProdukDetailCreateWithoutStrukInput, StokProdukDetailUncheckedCreateWithoutStrukInput> | StokProdukDetailCreateWithoutStrukInput[] | StokProdukDetailUncheckedCreateWithoutStrukInput[]
+    connectOrCreate?: StokProdukDetailCreateOrConnectWithoutStrukInput | StokProdukDetailCreateOrConnectWithoutStrukInput[]
+    upsert?: StokProdukDetailUpsertWithWhereUniqueWithoutStrukInput | StokProdukDetailUpsertWithWhereUniqueWithoutStrukInput[]
+    createMany?: StokProdukDetailCreateManyStrukInputEnvelope
+    set?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    disconnect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    delete?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    connect?: StokProdukDetailWhereUniqueInput | StokProdukDetailWhereUniqueInput[]
+    update?: StokProdukDetailUpdateWithWhereUniqueWithoutStrukInput | StokProdukDetailUpdateWithWhereUniqueWithoutStrukInput[]
+    updateMany?: StokProdukDetailUpdateManyWithWhereWithoutStrukInput | StokProdukDetailUpdateManyWithWhereWithoutStrukInput[]
+    deleteMany?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
+  }
+
+  export type ProdukCreateNestedOneWithoutStokDetailsInput = {
+    create?: XOR<ProdukCreateWithoutStokDetailsInput, ProdukUncheckedCreateWithoutStokDetailsInput>
+    connectOrCreate?: ProdukCreateOrConnectWithoutStokDetailsInput
+    connect?: ProdukWhereUniqueInput
+  }
+
+  export type RuanganCreateNestedOneWithoutStokDetailsInput = {
+    create?: XOR<RuanganCreateWithoutStokDetailsInput, RuanganUncheckedCreateWithoutStokDetailsInput>
+    connectOrCreate?: RuanganCreateOrConnectWithoutStokDetailsInput
+    connect?: RuanganWhereUniqueInput
+  }
+
+  export type StrukPelayananCreateNestedOneWithoutStokDetailsInput = {
+    create?: XOR<StrukPelayananCreateWithoutStokDetailsInput, StrukPelayananUncheckedCreateWithoutStokDetailsInput>
+    connectOrCreate?: StrukPelayananCreateOrConnectWithoutStokDetailsInput
+    connect?: StrukPelayananWhereUniqueInput
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type ProdukUpdateOneRequiredWithoutStokDetailsNestedInput = {
+    create?: XOR<ProdukCreateWithoutStokDetailsInput, ProdukUncheckedCreateWithoutStokDetailsInput>
+    connectOrCreate?: ProdukCreateOrConnectWithoutStokDetailsInput
+    upsert?: ProdukUpsertWithoutStokDetailsInput
+    connect?: ProdukWhereUniqueInput
+    update?: XOR<XOR<ProdukUpdateToOneWithWhereWithoutStokDetailsInput, ProdukUpdateWithoutStokDetailsInput>, ProdukUncheckedUpdateWithoutStokDetailsInput>
+  }
+
+  export type RuanganUpdateOneRequiredWithoutStokDetailsNestedInput = {
+    create?: XOR<RuanganCreateWithoutStokDetailsInput, RuanganUncheckedCreateWithoutStokDetailsInput>
+    connectOrCreate?: RuanganCreateOrConnectWithoutStokDetailsInput
+    upsert?: RuanganUpsertWithoutStokDetailsInput
+    connect?: RuanganWhereUniqueInput
+    update?: XOR<XOR<RuanganUpdateToOneWithWhereWithoutStokDetailsInput, RuanganUpdateWithoutStokDetailsInput>, RuanganUncheckedUpdateWithoutStokDetailsInput>
+  }
+
+  export type StrukPelayananUpdateOneRequiredWithoutStokDetailsNestedInput = {
+    create?: XOR<StrukPelayananCreateWithoutStokDetailsInput, StrukPelayananUncheckedCreateWithoutStokDetailsInput>
+    connectOrCreate?: StrukPelayananCreateOrConnectWithoutStokDetailsInput
+    upsert?: StrukPelayananUpsertWithoutStokDetailsInput
+    connect?: StrukPelayananWhereUniqueInput
+    update?: XOR<XOR<StrukPelayananUpdateToOneWithWhereWithoutStokDetailsInput, StrukPelayananUpdateWithoutStokDetailsInput>, StrukPelayananUncheckedUpdateWithoutStokDetailsInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10966,6 +15461,88 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type KamarCreateWithoutTempatTidurInput = {
     id: number
     namakamar: string
@@ -11059,6 +15636,7 @@ export namespace Prisma {
     namaruangan: string
     statusenabled: boolean
     departemen?: DepartemenCreateNestedOneWithoutRuangansInput
+    stokDetails?: StokProdukDetailCreateNestedManyWithoutRuanganInput
   }
 
   export type RuanganUncheckedCreateWithoutKamarsInput = {
@@ -11066,6 +15644,7 @@ export namespace Prisma {
     namaruangan: string
     statusenabled: boolean
     objectdepartemenfk?: number | null
+    stokDetails?: StokProdukDetailUncheckedCreateNestedManyWithoutRuanganInput
   }
 
   export type RuanganCreateOrConnectWithoutKamarsInput = {
@@ -11132,6 +15711,7 @@ export namespace Prisma {
     namaruangan?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
     departemen?: DepartemenUpdateOneWithoutRuangansNestedInput
+    stokDetails?: StokProdukDetailUpdateManyWithoutRuanganNestedInput
   }
 
   export type RuanganUncheckedUpdateWithoutKamarsInput = {
@@ -11139,6 +15719,7 @@ export namespace Prisma {
     namaruangan?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
     objectdepartemenfk?: NullableIntFieldUpdateOperationsInput | number | null
+    stokDetails?: StokProdukDetailUncheckedUpdateManyWithoutRuanganNestedInput
   }
 
   export type KelasUpsertWithoutKamarsInput = {
@@ -11235,6 +15816,40 @@ export namespace Prisma {
     create: XOR<DepartemenCreateWithoutRuangansInput, DepartemenUncheckedCreateWithoutRuangansInput>
   }
 
+  export type StokProdukDetailCreateWithoutRuanganInput = {
+    norec: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+    produk: ProdukCreateNestedOneWithoutStokDetailsInput
+    struk: StrukPelayananCreateNestedOneWithoutStokDetailsInput
+  }
+
+  export type StokProdukDetailUncheckedCreateWithoutRuanganInput = {
+    norec: string
+    objectprodukfk: number
+    nostrukterimafk: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
+  export type StokProdukDetailCreateOrConnectWithoutRuanganInput = {
+    where: StokProdukDetailWhereUniqueInput
+    create: XOR<StokProdukDetailCreateWithoutRuanganInput, StokProdukDetailUncheckedCreateWithoutRuanganInput>
+  }
+
+  export type StokProdukDetailCreateManyRuanganInputEnvelope = {
+    data: StokProdukDetailCreateManyRuanganInput | StokProdukDetailCreateManyRuanganInput[]
+    skipDuplicates?: boolean
+  }
+
   export type KamarUpsertWithWhereUniqueWithoutRuanganInput = {
     where: KamarWhereUniqueInput
     update: XOR<KamarUpdateWithoutRuanganInput, KamarUncheckedUpdateWithoutRuanganInput>
@@ -11283,6 +15898,38 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     namadepartemen?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type StokProdukDetailUpsertWithWhereUniqueWithoutRuanganInput = {
+    where: StokProdukDetailWhereUniqueInput
+    update: XOR<StokProdukDetailUpdateWithoutRuanganInput, StokProdukDetailUncheckedUpdateWithoutRuanganInput>
+    create: XOR<StokProdukDetailCreateWithoutRuanganInput, StokProdukDetailUncheckedCreateWithoutRuanganInput>
+  }
+
+  export type StokProdukDetailUpdateWithWhereUniqueWithoutRuanganInput = {
+    where: StokProdukDetailWhereUniqueInput
+    data: XOR<StokProdukDetailUpdateWithoutRuanganInput, StokProdukDetailUncheckedUpdateWithoutRuanganInput>
+  }
+
+  export type StokProdukDetailUpdateManyWithWhereWithoutRuanganInput = {
+    where: StokProdukDetailScalarWhereInput
+    data: XOR<StokProdukDetailUpdateManyMutationInput, StokProdukDetailUncheckedUpdateManyWithoutRuanganInput>
+  }
+
+  export type StokProdukDetailScalarWhereInput = {
+    AND?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
+    OR?: StokProdukDetailScalarWhereInput[]
+    NOT?: StokProdukDetailScalarWhereInput | StokProdukDetailScalarWhereInput[]
+    norec?: StringFilter<"StokProdukDetail"> | string
+    objectprodukfk?: IntFilter<"StokProdukDetail"> | number
+    objectruanganfk?: IntFilter<"StokProdukDetail"> | number
+    nostrukterimafk?: StringFilter<"StokProdukDetail"> | string
+    objectasalprodukfk?: IntNullableFilter<"StokProdukDetail"> | number | null
+    harganetto2?: FloatNullableFilter<"StokProdukDetail"> | number | null
+    hargadiscount?: FloatNullableFilter<"StokProdukDetail"> | number | null
+    qtyproduk?: FloatFilter<"StokProdukDetail"> | number
+    statusenabled?: BoolFilter<"StokProdukDetail"> | boolean
+    tglkadaluarsa?: DateTimeNullableFilter<"StokProdukDetail"> | Date | string | null
   }
 
   export type TempatTidurCreateWithoutStatusInput = {
@@ -11374,6 +16021,7 @@ export namespace Prisma {
     namaruangan: string
     statusenabled: boolean
     kamars?: KamarCreateNestedManyWithoutRuanganInput
+    stokDetails?: StokProdukDetailCreateNestedManyWithoutRuanganInput
   }
 
   export type RuanganUncheckedCreateWithoutDepartemenInput = {
@@ -11381,6 +16029,7 @@ export namespace Prisma {
     namaruangan: string
     statusenabled: boolean
     kamars?: KamarUncheckedCreateNestedManyWithoutRuanganInput
+    stokDetails?: StokProdukDetailUncheckedCreateNestedManyWithoutRuanganInput
   }
 
   export type RuanganCreateOrConnectWithoutDepartemenInput = {
@@ -11417,6 +16066,230 @@ export namespace Prisma {
     namaruangan?: StringFilter<"Ruangan"> | string
     statusenabled?: BoolFilter<"Ruangan"> | boolean
     objectdepartemenfk?: IntNullableFilter<"Ruangan"> | number | null
+  }
+
+  export type StokProdukDetailCreateWithoutProdukInput = {
+    norec: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+    ruangan: RuanganCreateNestedOneWithoutStokDetailsInput
+    struk: StrukPelayananCreateNestedOneWithoutStokDetailsInput
+  }
+
+  export type StokProdukDetailUncheckedCreateWithoutProdukInput = {
+    norec: string
+    objectruanganfk: number
+    nostrukterimafk: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
+  export type StokProdukDetailCreateOrConnectWithoutProdukInput = {
+    where: StokProdukDetailWhereUniqueInput
+    create: XOR<StokProdukDetailCreateWithoutProdukInput, StokProdukDetailUncheckedCreateWithoutProdukInput>
+  }
+
+  export type StokProdukDetailCreateManyProdukInputEnvelope = {
+    data: StokProdukDetailCreateManyProdukInput | StokProdukDetailCreateManyProdukInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StokProdukDetailUpsertWithWhereUniqueWithoutProdukInput = {
+    where: StokProdukDetailWhereUniqueInput
+    update: XOR<StokProdukDetailUpdateWithoutProdukInput, StokProdukDetailUncheckedUpdateWithoutProdukInput>
+    create: XOR<StokProdukDetailCreateWithoutProdukInput, StokProdukDetailUncheckedCreateWithoutProdukInput>
+  }
+
+  export type StokProdukDetailUpdateWithWhereUniqueWithoutProdukInput = {
+    where: StokProdukDetailWhereUniqueInput
+    data: XOR<StokProdukDetailUpdateWithoutProdukInput, StokProdukDetailUncheckedUpdateWithoutProdukInput>
+  }
+
+  export type StokProdukDetailUpdateManyWithWhereWithoutProdukInput = {
+    where: StokProdukDetailScalarWhereInput
+    data: XOR<StokProdukDetailUpdateManyMutationInput, StokProdukDetailUncheckedUpdateManyWithoutProdukInput>
+  }
+
+  export type StokProdukDetailCreateWithoutStrukInput = {
+    norec: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+    produk: ProdukCreateNestedOneWithoutStokDetailsInput
+    ruangan: RuanganCreateNestedOneWithoutStokDetailsInput
+  }
+
+  export type StokProdukDetailUncheckedCreateWithoutStrukInput = {
+    norec: string
+    objectprodukfk: number
+    objectruanganfk: number
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
+  export type StokProdukDetailCreateOrConnectWithoutStrukInput = {
+    where: StokProdukDetailWhereUniqueInput
+    create: XOR<StokProdukDetailCreateWithoutStrukInput, StokProdukDetailUncheckedCreateWithoutStrukInput>
+  }
+
+  export type StokProdukDetailCreateManyStrukInputEnvelope = {
+    data: StokProdukDetailCreateManyStrukInput | StokProdukDetailCreateManyStrukInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StokProdukDetailUpsertWithWhereUniqueWithoutStrukInput = {
+    where: StokProdukDetailWhereUniqueInput
+    update: XOR<StokProdukDetailUpdateWithoutStrukInput, StokProdukDetailUncheckedUpdateWithoutStrukInput>
+    create: XOR<StokProdukDetailCreateWithoutStrukInput, StokProdukDetailUncheckedCreateWithoutStrukInput>
+  }
+
+  export type StokProdukDetailUpdateWithWhereUniqueWithoutStrukInput = {
+    where: StokProdukDetailWhereUniqueInput
+    data: XOR<StokProdukDetailUpdateWithoutStrukInput, StokProdukDetailUncheckedUpdateWithoutStrukInput>
+  }
+
+  export type StokProdukDetailUpdateManyWithWhereWithoutStrukInput = {
+    where: StokProdukDetailScalarWhereInput
+    data: XOR<StokProdukDetailUpdateManyMutationInput, StokProdukDetailUncheckedUpdateManyWithoutStrukInput>
+  }
+
+  export type ProdukCreateWithoutStokDetailsInput = {
+    id: number
+    namaproduk: string
+    statusenabled?: boolean
+  }
+
+  export type ProdukUncheckedCreateWithoutStokDetailsInput = {
+    id: number
+    namaproduk: string
+    statusenabled?: boolean
+  }
+
+  export type ProdukCreateOrConnectWithoutStokDetailsInput = {
+    where: ProdukWhereUniqueInput
+    create: XOR<ProdukCreateWithoutStokDetailsInput, ProdukUncheckedCreateWithoutStokDetailsInput>
+  }
+
+  export type RuanganCreateWithoutStokDetailsInput = {
+    id: number
+    namaruangan: string
+    statusenabled: boolean
+    kamars?: KamarCreateNestedManyWithoutRuanganInput
+    departemen?: DepartemenCreateNestedOneWithoutRuangansInput
+  }
+
+  export type RuanganUncheckedCreateWithoutStokDetailsInput = {
+    id: number
+    namaruangan: string
+    statusenabled: boolean
+    objectdepartemenfk?: number | null
+    kamars?: KamarUncheckedCreateNestedManyWithoutRuanganInput
+  }
+
+  export type RuanganCreateOrConnectWithoutStokDetailsInput = {
+    where: RuanganWhereUniqueInput
+    create: XOR<RuanganCreateWithoutStokDetailsInput, RuanganUncheckedCreateWithoutStokDetailsInput>
+  }
+
+  export type StrukPelayananCreateWithoutStokDetailsInput = {
+    norec: string
+    tglstruk: Date | string
+  }
+
+  export type StrukPelayananUncheckedCreateWithoutStokDetailsInput = {
+    norec: string
+    tglstruk: Date | string
+  }
+
+  export type StrukPelayananCreateOrConnectWithoutStokDetailsInput = {
+    where: StrukPelayananWhereUniqueInput
+    create: XOR<StrukPelayananCreateWithoutStokDetailsInput, StrukPelayananUncheckedCreateWithoutStokDetailsInput>
+  }
+
+  export type ProdukUpsertWithoutStokDetailsInput = {
+    update: XOR<ProdukUpdateWithoutStokDetailsInput, ProdukUncheckedUpdateWithoutStokDetailsInput>
+    create: XOR<ProdukCreateWithoutStokDetailsInput, ProdukUncheckedCreateWithoutStokDetailsInput>
+    where?: ProdukWhereInput
+  }
+
+  export type ProdukUpdateToOneWithWhereWithoutStokDetailsInput = {
+    where?: ProdukWhereInput
+    data: XOR<ProdukUpdateWithoutStokDetailsInput, ProdukUncheckedUpdateWithoutStokDetailsInput>
+  }
+
+  export type ProdukUpdateWithoutStokDetailsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaproduk?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ProdukUncheckedUpdateWithoutStokDetailsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaproduk?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RuanganUpsertWithoutStokDetailsInput = {
+    update: XOR<RuanganUpdateWithoutStokDetailsInput, RuanganUncheckedUpdateWithoutStokDetailsInput>
+    create: XOR<RuanganCreateWithoutStokDetailsInput, RuanganUncheckedCreateWithoutStokDetailsInput>
+    where?: RuanganWhereInput
+  }
+
+  export type RuanganUpdateToOneWithWhereWithoutStokDetailsInput = {
+    where?: RuanganWhereInput
+    data: XOR<RuanganUpdateWithoutStokDetailsInput, RuanganUncheckedUpdateWithoutStokDetailsInput>
+  }
+
+  export type RuanganUpdateWithoutStokDetailsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaruangan?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    kamars?: KamarUpdateManyWithoutRuanganNestedInput
+    departemen?: DepartemenUpdateOneWithoutRuangansNestedInput
+  }
+
+  export type RuanganUncheckedUpdateWithoutStokDetailsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaruangan?: StringFieldUpdateOperationsInput | string
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    objectdepartemenfk?: NullableIntFieldUpdateOperationsInput | number | null
+    kamars?: KamarUncheckedUpdateManyWithoutRuanganNestedInput
+  }
+
+  export type StrukPelayananUpsertWithoutStokDetailsInput = {
+    update: XOR<StrukPelayananUpdateWithoutStokDetailsInput, StrukPelayananUncheckedUpdateWithoutStokDetailsInput>
+    create: XOR<StrukPelayananCreateWithoutStokDetailsInput, StrukPelayananUncheckedCreateWithoutStokDetailsInput>
+    where?: StrukPelayananWhereInput
+  }
+
+  export type StrukPelayananUpdateToOneWithWhereWithoutStokDetailsInput = {
+    where?: StrukPelayananWhereInput
+    data: XOR<StrukPelayananUpdateWithoutStokDetailsInput, StrukPelayananUncheckedUpdateWithoutStokDetailsInput>
+  }
+
+  export type StrukPelayananUpdateWithoutStokDetailsInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    tglstruk?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StrukPelayananUncheckedUpdateWithoutStokDetailsInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    tglstruk?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TempatTidurCreateManyKamarInput = {
@@ -11458,6 +16331,18 @@ export namespace Prisma {
     objectkelasfk?: number | null
   }
 
+  export type StokProdukDetailCreateManyRuanganInput = {
+    norec: string
+    objectprodukfk: number
+    nostrukterimafk: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
   export type KamarUpdateWithoutRuanganInput = {
     id?: IntFieldUpdateOperationsInput | number
     namakamar?: StringFieldUpdateOperationsInput | string
@@ -11479,6 +16364,42 @@ export namespace Prisma {
     namakamar?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
     objectkelasfk?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type StokProdukDetailUpdateWithoutRuanganInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    produk?: ProdukUpdateOneRequiredWithoutStokDetailsNestedInput
+    struk?: StrukPelayananUpdateOneRequiredWithoutStokDetailsNestedInput
+  }
+
+  export type StokProdukDetailUncheckedUpdateWithoutRuanganInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectprodukfk?: IntFieldUpdateOperationsInput | number
+    nostrukterimafk?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StokProdukDetailUncheckedUpdateManyWithoutRuanganInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectprodukfk?: IntFieldUpdateOperationsInput | number
+    nostrukterimafk?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TempatTidurCreateManyStatusInput = {
@@ -11554,6 +16475,7 @@ export namespace Prisma {
     namaruangan?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
     kamars?: KamarUpdateManyWithoutRuanganNestedInput
+    stokDetails?: StokProdukDetailUpdateManyWithoutRuanganNestedInput
   }
 
   export type RuanganUncheckedUpdateWithoutDepartemenInput = {
@@ -11561,12 +16483,109 @@ export namespace Prisma {
     namaruangan?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
     kamars?: KamarUncheckedUpdateManyWithoutRuanganNestedInput
+    stokDetails?: StokProdukDetailUncheckedUpdateManyWithoutRuanganNestedInput
   }
 
   export type RuanganUncheckedUpdateManyWithoutDepartemenInput = {
     id?: IntFieldUpdateOperationsInput | number
     namaruangan?: StringFieldUpdateOperationsInput | string
     statusenabled?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type StokProdukDetailCreateManyProdukInput = {
+    norec: string
+    objectruanganfk: number
+    nostrukterimafk: string
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
+  export type StokProdukDetailUpdateWithoutProdukInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ruangan?: RuanganUpdateOneRequiredWithoutStokDetailsNestedInput
+    struk?: StrukPelayananUpdateOneRequiredWithoutStokDetailsNestedInput
+  }
+
+  export type StokProdukDetailUncheckedUpdateWithoutProdukInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectruanganfk?: IntFieldUpdateOperationsInput | number
+    nostrukterimafk?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StokProdukDetailUncheckedUpdateManyWithoutProdukInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectruanganfk?: IntFieldUpdateOperationsInput | number
+    nostrukterimafk?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StokProdukDetailCreateManyStrukInput = {
+    norec: string
+    objectprodukfk: number
+    objectruanganfk: number
+    objectasalprodukfk?: number | null
+    harganetto2?: number | null
+    hargadiscount?: number | null
+    qtyproduk: number
+    statusenabled: boolean
+    tglkadaluarsa?: Date | string | null
+  }
+
+  export type StokProdukDetailUpdateWithoutStrukInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    produk?: ProdukUpdateOneRequiredWithoutStokDetailsNestedInput
+    ruangan?: RuanganUpdateOneRequiredWithoutStokDetailsNestedInput
+  }
+
+  export type StokProdukDetailUncheckedUpdateWithoutStrukInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectprodukfk?: IntFieldUpdateOperationsInput | number
+    objectruanganfk?: IntFieldUpdateOperationsInput | number
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StokProdukDetailUncheckedUpdateManyWithoutStrukInput = {
+    norec?: StringFieldUpdateOperationsInput | string
+    objectprodukfk?: IntFieldUpdateOperationsInput | number
+    objectruanganfk?: IntFieldUpdateOperationsInput | number
+    objectasalprodukfk?: NullableIntFieldUpdateOperationsInput | number | null
+    harganetto2?: NullableFloatFieldUpdateOperationsInput | number | null
+    hargadiscount?: NullableFloatFieldUpdateOperationsInput | number | null
+    qtyproduk?: FloatFieldUpdateOperationsInput | number
+    statusenabled?: BoolFieldUpdateOperationsInput | boolean
+    tglkadaluarsa?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

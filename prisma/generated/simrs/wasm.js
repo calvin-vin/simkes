@@ -168,6 +168,30 @@ exports.Prisma.DepartemenScalarFieldEnum = {
   statusenabled: 'statusenabled'
 };
 
+exports.Prisma.ProdukScalarFieldEnum = {
+  id: 'id',
+  namaproduk: 'namaproduk',
+  statusenabled: 'statusenabled'
+};
+
+exports.Prisma.StrukPelayananScalarFieldEnum = {
+  norec: 'norec',
+  tglstruk: 'tglstruk'
+};
+
+exports.Prisma.StokProdukDetailScalarFieldEnum = {
+  norec: 'norec',
+  objectprodukfk: 'objectprodukfk',
+  objectruanganfk: 'objectruanganfk',
+  nostrukterimafk: 'nostrukterimafk',
+  objectasalprodukfk: 'objectasalprodukfk',
+  harganetto2: 'harganetto2',
+  hargadiscount: 'hargadiscount',
+  qtyproduk: 'qtyproduk',
+  statusenabled: 'statusenabled',
+  tglkadaluarsa: 'tglkadaluarsa'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -191,7 +215,10 @@ exports.Prisma.ModelName = {
   Ruangan: 'Ruangan',
   StatusBed: 'StatusBed',
   Kelas: 'Kelas',
-  Departemen: 'Departemen'
+  Departemen: 'Departemen',
+  Produk: 'Produk',
+  StrukPelayanan: 'StrukPelayanan',
+  StokProdukDetail: 'StokProdukDetail'
 };
 
 /**

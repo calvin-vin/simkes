@@ -2,7 +2,7 @@ export const bedResource = (bed) => {
   return {
     id: bed.id,
     nomor: bed.nomorbed,
-    display: bed.reportdisplay,
+    reportdisplay: bed.reportdisplay,
     idstatusbed: bed.status?.id,
     statusbed: bed.status?.statusbed ?? null,
     idkamar: bed.kamar?.id,
@@ -34,10 +34,10 @@ export const kamarWithBedResource = (kamar) => {
       kosong: kamar.summary?.kosong ?? 0,
       terisi: kamar.summary?.terisi ?? 0,
     },
-    tempatTidur: kamar.tempatTidur.map((bed) => ({
+    tempattidur: kamar.tempatTidur.map((bed) => ({
       id: bed.id,
-      nomor: bed.nomor, // konsisten sama service (bed.nomor)
-      display: bed.display, // konsisten sama service (bed.display)
+      nomor: bed.nomor,
+      display: bed.display,
       idstatusbed: bed.idstatusbed,
       statusbed: bed.statusbed,
     })),
