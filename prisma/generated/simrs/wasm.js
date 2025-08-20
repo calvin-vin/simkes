@@ -122,74 +122,94 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.PaymentMethodScalarFieldEnum = {
   id: 'id',
-  statusenabled: 'statusenabled',
-  reportdisplay: 'reportdisplay'
+  isEnabled: 'isEnabled',
+  displayName: 'displayName'
 };
 
-exports.Prisma.TempatTidurScalarFieldEnum = {
+exports.Prisma.BedScalarFieldEnum = {
   id: 'id',
-  reportdisplay: 'reportdisplay',
-  nomorbed: 'nomorbed',
-  statusenabled: 'statusenabled',
-  objectkamarfk: 'objectkamarfk',
-  objectstatusbedfk: 'objectstatusbedfk'
+  displayName: 'displayName',
+  bedNumber: 'bedNumber',
+  isEnabled: 'isEnabled',
+  roomId: 'roomId',
+  bedStatusId: 'bedStatusId'
 };
 
-exports.Prisma.KamarScalarFieldEnum = {
+exports.Prisma.RoomScalarFieldEnum = {
   id: 'id',
-  namakamar: 'namakamar',
-  statusenabled: 'statusenabled',
-  objectruanganfk: 'objectruanganfk',
-  objectkelasfk: 'objectkelasfk'
+  roomName: 'roomName',
+  isEnabled: 'isEnabled',
+  unitId: 'unitId',
+  classId: 'classId'
 };
 
-exports.Prisma.RuanganScalarFieldEnum = {
+exports.Prisma.UnitScalarFieldEnum = {
   id: 'id',
-  namaruangan: 'namaruangan',
-  statusenabled: 'statusenabled',
-  objectdepartemenfk: 'objectdepartemenfk'
+  unitName: 'unitName',
+  isEnabled: 'isEnabled',
+  departmentId: 'departmentId'
 };
 
-exports.Prisma.StatusBedScalarFieldEnum = {
+exports.Prisma.BedStatusScalarFieldEnum = {
   id: 'id',
-  statusbed: 'statusbed',
-  statusenabled: 'statusenabled'
+  status: 'status',
+  isEnabled: 'isEnabled'
 };
 
-exports.Prisma.KelasScalarFieldEnum = {
+exports.Prisma.ClassScalarFieldEnum = {
   id: 'id',
-  namakelas: 'namakelas',
-  statusenabled: 'statusenabled'
+  className: 'className',
+  isEnabled: 'isEnabled'
 };
 
-exports.Prisma.DepartemenScalarFieldEnum = {
+exports.Prisma.DepartmentScalarFieldEnum = {
   id: 'id',
-  namadepartemen: 'namadepartemen',
-  statusenabled: 'statusenabled'
+  departmentName: 'departmentName',
+  isEnabled: 'isEnabled'
 };
 
-exports.Prisma.ProdukScalarFieldEnum = {
+exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
-  namaproduk: 'namaproduk',
-  statusenabled: 'statusenabled'
+  productName: 'productName',
+  isEnabled: 'isEnabled'
 };
 
-exports.Prisma.StrukPelayananScalarFieldEnum = {
-  norec: 'norec',
-  tglstruk: 'tglstruk'
+exports.Prisma.ServiceReceiptScalarFieldEnum = {
+  id: 'id',
+  receiptAt: 'receiptAt'
 };
 
-exports.Prisma.StokProdukDetailScalarFieldEnum = {
-  norec: 'norec',
-  objectprodukfk: 'objectprodukfk',
-  objectruanganfk: 'objectruanganfk',
-  nostrukterimafk: 'nostrukterimafk',
-  objectasalprodukfk: 'objectasalprodukfk',
-  harganetto2: 'harganetto2',
-  hargadiscount: 'hargadiscount',
-  qtyproduk: 'qtyproduk',
-  statusenabled: 'statusenabled',
-  tglkadaluarsa: 'tglkadaluarsa'
+exports.Prisma.StockDetailScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  unitId: 'unitId',
+  receiptId: 'receiptId',
+  sourceProductId: 'sourceProductId',
+  netPrice: 'netPrice',
+  discountPrice: 'discountPrice',
+  quantity: 'quantity',
+  isEnabled: 'isEnabled',
+  expiredAt: 'expiredAt'
+};
+
+exports.Prisma.DoctorScheduleScalarFieldEnum = {
+  id: 'id',
+  unitId: 'unitId',
+  doctorId: 'doctorId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  note: 'note',
+  days: 'days',
+  isEnabled: 'isEnabled'
+};
+
+exports.Prisma.EmployeeScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  sipNumber: 'sipNumber',
+  strNumber: 'strNumber',
+  identityNo: 'identityNo',
+  isEnabled: 'isEnabled'
 };
 
 exports.Prisma.SortOrder = {
@@ -210,15 +230,17 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   PaymentMethod: 'PaymentMethod',
-  TempatTidur: 'TempatTidur',
-  Kamar: 'Kamar',
-  Ruangan: 'Ruangan',
-  StatusBed: 'StatusBed',
-  Kelas: 'Kelas',
-  Departemen: 'Departemen',
-  Produk: 'Produk',
-  StrukPelayanan: 'StrukPelayanan',
-  StokProdukDetail: 'StokProdukDetail'
+  Bed: 'Bed',
+  Room: 'Room',
+  Unit: 'Unit',
+  BedStatus: 'BedStatus',
+  Class: 'Class',
+  Department: 'Department',
+  Product: 'Product',
+  ServiceReceipt: 'ServiceReceipt',
+  StockDetail: 'StockDetail',
+  DoctorSchedule: 'DoctorSchedule',
+  Employee: 'Employee'
 };
 
 /**

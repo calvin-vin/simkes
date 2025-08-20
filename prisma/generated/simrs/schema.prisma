@@ -10,118 +10,148 @@ datasource db {
 }
 
 model PaymentMethod {
-  id            Int     @id
-  statusenabled Boolean
-  reportdisplay String
+  id          Int     @id
+  isEnabled   Boolean @map("statusenabled")
+  displayName String  @map("reportdisplay")
 
   @@map("kelompokpasien_m")
 }
 
-model TempatTidur {
-  id                Int     @id
-  reportdisplay     String
-  nomorbed          Int
-  statusenabled     Boolean
-  objectkamarfk     Int?
-  objectstatusbedfk Int?
+model Bed {
+  id          Int     @id
+  displayName String  @map("reportdisplay")
+  bedNumber   Int     @map("nomorbed")
+  isEnabled   Boolean @map("statusenabled")
+  roomId      Int?    @map("objectkamarfk")
+  bedStatusId Int?    @map("objectstatusbedfk")
 
-  kamar  Kamar?     @relation(fields: [objectkamarfk], references: [id])
-  status StatusBed? @relation(fields: [objectstatusbedfk], references: [id])
+  room      Room?      @relation(fields: [roomId], references: [id])
+  bedStatus BedStatus? @relation(fields: [bedStatusId], references: [id])
 
   @@map("tempattidur_m")
 }
 
-model Kamar {
-  id              Int     @id
-  namakamar       String
-  statusenabled   Boolean
-  objectruanganfk Int?
-  objectkelasfk   Int?
+model Room {
+  id        Int     @id
+  roomName  String  @map("namakamar")
+  isEnabled Boolean @map("statusenabled")
+  unitId    Int?    @map("objectruanganfk")
+  classId   Int?    @map("objectkelasfk")
 
-  ruangan     Ruangan?      @relation(fields: [objectruanganfk], references: [id])
-  kelas       Kelas?        @relation(fields: [objectkelasfk], references: [id])
-  tempatTidur TempatTidur[]
+  unit  Unit?  @relation(fields: [unitId], references: [id])
+  class Class? @relation(fields: [classId], references: [id])
+  beds  Bed[]
 
   @@map("kamar_m")
 }
 
-model Ruangan {
-  id                 Int     @id
-  namaruangan        String
-  statusenabled      Boolean
-  objectdepartemenfk Int?
+model Unit {
+  id           Int     @id
+  unitName     String  @map("namaruangan")
+  isEnabled    Boolean @map("statusenabled")
+  departmentId Int?    @map("objectdepartemenfk")
 
-  kamars      Kamar[]
-  departemen  Departemen?        @relation(fields: [objectdepartemenfk], references: [id])
-  stokDetails StokProdukDetail[]
+  rooms           Room[]
+  department      Department?      @relation(fields: [departmentId], references: [id])
+  stockDetails    StockDetail[]
+  doctorSchedules DoctorSchedule[]
 
   @@map("ruangan_m")
 }
 
-model StatusBed {
-  id            Int     @id
-  statusbed     String
-  statusenabled Boolean
+model BedStatus {
+  id        Int     @id
+  status    String  @map("statusbed")
+  isEnabled Boolean @map("statusenabled")
 
-  tempatTidur TempatTidur[]
+  beds Bed[]
 
   @@map("statusbed_m")
 }
 
-model Kelas {
-  id            Int     @id
-  namakelas     String
-  statusenabled Boolean
+model Class {
+  id        Int     @id
+  className String  @map("namakelas")
+  isEnabled Boolean @map("statusenabled")
 
-  kamars Kamar[]
+  rooms Room[]
 
   @@map("kelas_m")
 }
 
-model Departemen {
+model Department {
   id             Int     @id
-  namadepartemen String
-  statusenabled  Boolean
+  departmentName String  @map("namadepartemen")
+  isEnabled      Boolean @map("statusenabled")
 
-  ruangans Ruangan[]
+  units Unit[]
 
   @@map("departemen_m")
 }
 
-model Produk {
-  id            Int     @id
-  namaproduk    String
-  statusenabled Boolean @default(true) @map("statusenabled")
+model Product {
+  id          Int     @id
+  productName String  @map("namaproduk")
+  isEnabled   Boolean @default(true) @map("statusenabled")
 
-  stokDetails StokProdukDetail[]
+  stockDetails StockDetail[]
 
   @@map("produk_m")
 }
 
-model StrukPelayanan {
-  norec    String   @id
-  tglstruk DateTime
+model ServiceReceipt {
+  id        String   @id @map("norec")
+  receiptAt DateTime @map("tglstruk")
 
-  stokDetails StokProdukDetail[]
+  stockDetails StockDetail[]
 
   @@map("strukpelayanan_t")
 }
 
-model StokProdukDetail {
-  norec              String    @id
-  objectprodukfk     Int
-  objectruanganfk    Int
-  nostrukterimafk    String
-  objectasalprodukfk Int?
-  harganetto2        Float?
-  hargadiscount      Float?
-  qtyproduk          Float
-  statusenabled      Boolean
-  tglkadaluarsa      DateTime?
+model StockDetail {
+  id              String    @id @map("norec")
+  productId       Int       @map("objectprodukfk")
+  unitId          Int       @map("objectruanganfk")
+  receiptId       String    @map("nostrukterimafk")
+  sourceProductId Int?      @map("objectasalprodukfk")
+  netPrice        Float?    @map("harganetto2")
+  discountPrice   Float?    @map("hargadiscount")
+  quantity        Float     @map("qtyproduk")
+  isEnabled       Boolean   @map("statusenabled")
+  expiredAt       DateTime? @map("tglkadaluarsa")
 
-  produk  Produk         @relation(fields: [objectprodukfk], references: [id])
-  ruangan Ruangan        @relation(fields: [objectruanganfk], references: [id])
-  struk   StrukPelayanan @relation(fields: [nostrukterimafk], references: [norec])
+  product Product        @relation(fields: [productId], references: [id])
+  unit    Unit           @relation(fields: [unitId], references: [id])
+  receipt ServiceReceipt @relation(fields: [receiptId], references: [id])
 
   @@map("stokprodukdetail_t")
+}
+
+model DoctorSchedule {
+  id        Int     @id
+  unitId    Int     @map("objectruanganfk")
+  doctorId  Int     @map("objectpegawaifk")
+  startTime String  @map("jammulai") // bisa diubah ke DateTime
+  endTime   String  @map("jamakhir")
+  note      String? @map("keterangan")
+  days      String  @map("hari")
+  isEnabled Boolean @map("statusenabled")
+
+  unit   Unit     @relation(fields: [unitId], references: [id])
+  doctor Employee @relation(fields: [doctorId], references: [id])
+
+  @@map("jadwaldokter_m")
+}
+
+model Employee {
+  id         Int     @id
+  fullName   String  @map("namalengkap")
+  sipNumber  String? @map("nosip")
+  strNumber  String? @map("nostr")
+  identityNo String? @map("noidentitas")
+  isEnabled  Boolean @map("statusenabled")
+
+  doctorSchedules DoctorSchedule[]
+
+  @@map("pegawai_m")
 }
