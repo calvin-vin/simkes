@@ -1,21 +1,21 @@
 import { simrsPrisma } from "../config/db.js";
 import ApiError from "../utils/apiError.js";
 
-export const getAllProductWithQuantity = async (query) => {
-  const { namaproduk, page = 1, limit = 10, sortBy, sortOrder } = query;
+export const getAllMedicines = async (query) => {
+  const { productName, page = 1, limit = 10, sortBy, sortOrder } = query;
 
   const filters = {
-    statusenabled: true,
-    ...(namaproduk
-      ? { namaproduk: { contains: namaproduk, mode: "insensitive" } }
+    isEnabled: true,
+    ...(productName
+      ? { productName: { contains: productName, mode: "insensitive" } }
       : {}),
-    stokDetails: {
-      some: {}, // hanya produk yg punya stok
+    stockDetails: {
+      some: {}, // only products that have stock
     },
   };
 
   const orderBy = {};
-  if (sortBy && ["id", "namaproduk"].includes(sortBy)) {
+  if (sortBy && ["id", "productName"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
@@ -25,17 +25,17 @@ export const getAllProductWithQuantity = async (query) => {
   }
 
   const [products, total] = await Promise.all([
-    simrsPrisma.produk.findMany({
+    simrsPrisma.product.findMany({
       where: filters,
       include: {
-        stokDetails: {
+        stockDetails: {
           select: {
-            qtyproduk: true,
-            tglkadaluarsa: true,
-            ruangan: {
+            quantity: true,
+            expiredAt: true,
+            unit: {
               select: {
                 id: true,
-                namaruangan: true,
+                unitName: true,
               },
             },
           },
@@ -45,25 +45,24 @@ export const getAllProductWithQuantity = async (query) => {
       take: Number(limit),
       orderBy,
     }),
-    simrsPrisma.produk.count({
+    simrsPrisma.product.count({
       where: filters,
     }),
   ]);
 
   const results = products.map((p) => {
-    const totalQuantity = p.stokDetails.reduce(
-      (sum, s) => sum + (s.qtyproduk || 0),
+    const totalQuantity = p.stockDetails.reduce(
+      (sum, s) => sum + (s.quantity || 0),
       0
     );
 
     const nearestExpired =
-      p.stokDetails
-        .filter((s) => s.tglkadaluarsa)
+      p.stockDetails
+        .filter((s) => s.expiredAt)
         .sort(
           (a, b) =>
-            new Date(a.tglkadaluarsa).getTime() -
-            new Date(b.tglkadaluarsa).getTime()
-        )[0]?.tglkadaluarsa || null;
+            new Date(a.expiredAt).getTime() - new Date(b.expiredAt).getTime()
+        )[0]?.expiredAt || null;
 
     return {
       ...p,
@@ -83,18 +82,18 @@ export const getAllProductWithQuantity = async (query) => {
   };
 };
 
-export const getProductById = async (id) => {
-  const product = await simrsPrisma.produk.findUnique({
-    where: { id: Number(id), statusenabled: true },
+export const getMedicineById = async (id) => {
+  const product = await simrsPrisma.product.findUnique({
+    where: { id: Number(id), isEnabled: true },
     include: {
-      stokDetails: {
+      stockDetails: {
         select: {
-          qtyproduk: true,
-          tglkadaluarsa: true,
-          ruangan: {
+          quantity: true,
+          expiredAt: true,
+          unit: {
             select: {
               id: true,
-              namaruangan: true,
+              unitName: true,
             },
           },
         },
@@ -103,22 +102,21 @@ export const getProductById = async (id) => {
   });
 
   if (!product) {
-    throw new ApiError("Obat tidak ditemukan", 404);
+    throw new ApiError("Product not found", 404);
   }
 
-  const totalQuantity = product.stokDetails.reduce(
-    (sum, s) => sum + (s.qtyproduk || 0),
+  const totalQuantity = product.stockDetails.reduce(
+    (sum, s) => sum + (s.quantity || 0),
     0
   );
 
   const nearestExpired =
-    product.stokDetails
-      .filter((s) => s.tglkadaluarsa)
+    product.stockDetails
+      .filter((s) => s.expiredAt)
       .sort(
         (a, b) =>
-          new Date(a.tglkadaluarsa).getTime() -
-          new Date(b.tglkadaluarsa).getTime()
-      )[0]?.tglkadaluarsa || null;
+          new Date(a.expiredAt).getTime() - new Date(b.expiredAt).getTime()
+      )[0]?.expiredAt || null;
 
   return {
     ...product,

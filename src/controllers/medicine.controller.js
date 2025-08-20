@@ -2,29 +2,29 @@ import {
   medicineCollection,
   medicineResource,
 } from "../resources/medicine.resource.js";
-import { getInformasiStokSchema } from "../schemas/medicine.schema.js";
+import { getMedicineSchema } from "../schemas/medicine.schema.js";
 import * as medicineService from "../services/medicine.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
 import catchAsync from "../utils/catchAsync.js";
 
-export const getInformasiStok = catchAsync(async (req, res) => {
-  const query = getInformasiStokSchema.parse(req.query);
+export const getAllMedicines = catchAsync(async (req, res) => {
+  const query = getMedicineSchema.parse(req.query);
 
-  const medicines = await medicineService.getAllProductWithQuantity(query);
+  const medicines = await medicineService.getAllMedicines(query);
 
-  return apiSuccess(res, 200, "Informasi stok obat berhasil diambil", {
+  return apiSuccess(res, 200, "Medicines retrieved successfully", {
     results: medicineCollection(medicines.results),
     pagination: medicines.pagination,
   });
 });
 
-export const getDetailInformasiStok = catchAsync(async (req, res) => {
-  const medicines = await medicineService.getProductById(req.params.id);
+export const getMedicineById = catchAsync(async (req, res) => {
+  const medicines = await medicineService.getMedicineById(req.params.id);
 
   return apiSuccess(
     res,
     200,
-    "Detail informasi stok obat berhasil diambil",
+    "Medicine retrieved successfully",
     medicineResource(medicines)
   );
 });

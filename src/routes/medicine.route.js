@@ -1,12 +1,12 @@
 import express from "express";
 import {
-  getDetailInformasiStok,
-  getInformasiStok,
+  getAllMedicines,
+  getMedicineById,
 } from "../controllers/medicine.controller.js";
 
 const router = express.Router();
 
-router.get("/", getInformasiStok);
-router.get("/:id", getDetailInformasiStok);
+router.get("/", getAllMedicines);
+router.get("/:id", getMedicineById);
 
 export default router;
