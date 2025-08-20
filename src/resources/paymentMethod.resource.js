@@ -1,10 +1,10 @@
-import { TIMEZONE } from "../constants/dayTime.js";
-import dayjs from "dayjs";
-
 export const paymentMethodResource = (paymentMethod) => {
   return {
     id: paymentMethod.id,
-    statusenabled: paymentMethod.statusenabled,
-    reportdisplay: paymentMethod.reportdisplay,
+    displayName: paymentMethod.displayName,
   };
+};
+
+export const paymentMethodCollection = (paymentMethods) => {
+  return paymentMethods.map(paymentMethodResource);
 };

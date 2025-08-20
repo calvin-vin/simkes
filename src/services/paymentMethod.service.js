@@ -3,7 +3,7 @@ import { simrsPrisma } from "../config/db.js";
 
 const getPaymentMethodById = async (id) => {
   const paymentMethod = await simrsPrisma.paymentMethod.findUnique({
-    where: { id },
+    where: { id: Number(id) },
   });
 
   if (!paymentMethod) {
@@ -19,19 +19,19 @@ const getAllPaymentMethods = async (query) => {
   const filters = {};
 
   if (search) {
-    filters.reportdisplay = { contains: search, mode: "insensitive" };
+    filters.displayName = { contains: search, mode: "insensitive" };
   }
 
-  filters.statusenabled = true;
+  filters.isEnabled = true;
 
   const orderBy = {};
-  if (sortBy && ["reportdisplay"].includes(sortBy)) {
+  if (sortBy && ["displayName"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
         : "asc";
   } else {
-    orderBy["reportdisplay"] = "desc"; // default sorting by createdAt desc
+    orderBy["displayName"] = "desc"; // default sorting by createdAt desc
   }
 
   const [paymentMethods, total] = await Promise.all([
