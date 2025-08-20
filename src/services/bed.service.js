@@ -4,13 +4,13 @@ import ApiError from "../utils/apiError.js";
 /**
  * Ambil data detail tempat tidur dengan pagination dan filter
  */
-export const getKetersediaanTempatTidur = async (query) => {
+export const getAllBeds = async (query) => {
   const {
-    namaruangan,
-    idruangan,
-    idkelas,
-    idkamar,
-    idstatusbed,
+    unitName,
+    unitId,
+    classId,
+    roomId,
+    bedStatusId,
     page = 1,
     limit = 10,
     sortBy,
@@ -18,21 +18,21 @@ export const getKetersediaanTempatTidur = async (query) => {
   } = query;
 
   const filters = {
-    kamar: {
-      ruangan: {
-        objectdepartemenfk: { in: [16, 35] },
-        statusenabled: true,
-        ...(namaruangan
-          ? { namaruangan: { contains: namaruangan, mode: "insensitive" } }
+    room: {
+      unit: {
+        departmentId: { in: [16, 35] },
+        isEnabled: true,
+        ...(unitName
+          ? { unitName: { contains: unitName, mode: "insensitive" } }
           : {}),
-        ...(idruangan ? { id: Number(idruangan) } : {}),
+        ...(unitId ? { id: Number(unitId) } : {}),
       },
-      statusenabled: true,
-      ...(idkelas ? { objectkelasfk: Number(idkelas) } : {}),
-      ...(idkamar ? { id: Number(idkamar) } : {}),
+      isEnabled: true,
+      ...(classId ? { classId: Number(classId) } : {}),
+      ...(roomId ? { id: Number(roomId) } : {}),
     },
-    statusenabled: true,
-    ...(idstatusbed ? { objectstatusbedfk: Number(idstatusbed) } : {}),
+    isEnabled: true,
+    ...(bedStatusId ? { bedStatusId: Number(bedStatusId) } : {}),
   };
 
   const orderBy = {};
@@ -45,33 +45,27 @@ export const getKetersediaanTempatTidur = async (query) => {
     orderBy["id"] = "asc";
   }
 
-  const [beds, total] = await Promise.all([
-    simrsPrisma.tempatTidur.findMany({
+  const [results, total] = await Promise.all([
+    simrsPrisma.bed.findMany({
       where: filters,
       include: {
-        kamar: {
+        room: {
           include: {
-            ruangan: {
-              include: {
-                departemen: true,
-              },
-            },
-            kelas: true,
+            unit: { include: { department: true } },
+            class: true,
           },
         },
-        status: true,
+        bedStatus: true,
       },
-      skip: (page - 1) * limit,
+      skip: (page - 1) * Number(limit),
       take: Number(limit),
       orderBy,
     }),
-    simrsPrisma.tempatTidur.count({
-      where: filters,
-    }),
+    simrsPrisma.bed.count({ where: filters }),
   ]);
 
   return {
-    results: beds,
+    results,
     pagination: {
       total,
       page: Number(page),
@@ -84,26 +78,22 @@ export const getKetersediaanTempatTidur = async (query) => {
 /**
  * Ambil data detail tempat tidur berdasarkan ID
  */
-export const getKetersediaanTempatTidurById = async (id) => {
-  const bed = await simrsPrisma.tempatTidur.findUnique({
+export const getBedById = async (id) => {
+  const bed = await simrsPrisma.bed.findUnique({
     where: { id: Number(id) },
     include: {
-      kamar: {
+      room: {
         include: {
-          ruangan: {
-            include: {
-              departemen: true,
-            },
-          },
-          kelas: true,
+          unit: { include: { department: true } },
+          class: true,
         },
       },
-      status: true,
+      bedStatus: true,
     },
   });
 
   if (!bed) {
-    throw new ApiError("Tempat tidur tidak ditemukan", 404);
+    throw new ApiError("Bed not found", 404);
   }
 
   return bed;
@@ -112,78 +102,82 @@ export const getKetersediaanTempatTidurById = async (id) => {
 /**
  * Hitung summary tempat tidur sesuai filter
  */
-export const getSummaryTempatTidur = async (query) => {
-  const { namaruangan, idruangan, idkelas, idkamar } = query;
+export const getBedSummary = async (query) => {
+  const { unitName, unitId, classId, roomId } = query;
 
   const filters = {
-    kamar: {
-      ruangan: {
-        objectdepartemenfk: { in: [16, 35] },
-        statusenabled: true,
-        ...(namaruangan
-          ? { namaruangan: { contains: namaruangan, mode: "insensitive" } }
-          : {}),
-        ...(idruangan ? { id: Number(idruangan) } : {}),
+    isEnabled: true,
+    room: {
+      is: {
+        isEnabled: true,
+        ...(classId ? { classId: Number(classId) } : {}),
+        ...(roomId ? { id: Number(roomId) } : {}),
+        unit: {
+          is: {
+            departmentId: { in: [16, 35] },
+            isEnabled: true,
+            ...(unitName
+              ? { unitName: { contains: unitName, mode: "insensitive" } }
+              : {}),
+            ...(unitId ? { id: Number(unitId) } : {}),
+          },
+        },
       },
-      statusenabled: true,
-      ...(idkelas ? { objectkelasfk: Number(idkelas) } : {}),
-      ...(idkamar ? { id: Number(idkamar) } : {}),
     },
-    statusenabled: true,
   };
 
-  const beds = await simrsPrisma.tempatTidur.findMany({
+  const beds = await simrsPrisma.bed.findMany({
     where: filters,
-    select: { objectstatusbedfk: true },
+    select: { bedStatusId: true },
   });
 
   return {
-    kamartotal: beds.length,
-    kamarisi: beds.filter((b) => b.objectstatusbedfk === 1).length,
-    kamarkosong: beds.filter((b) => b.objectstatusbedfk === 2).length,
+    total: beds.length,
+    occupied: beds.filter((b) => b.bedStatusId === 1).length,
+    empty: beds.filter((b) => b.bedStatusId === 2).length,
   };
 };
 
 /**
  * Ambil data detail tempat tidur dengan summary
  */
-export const getKamarwithTempatTidur = async (query) => {
+export const getAllRoomWithBeds = async (query) => {
   const {
-    namaruangan,
-    idkelas,
-    idruangan,
-    idkamar,
-    idstatusbed,
+    unitName,
+    classId,
+    unitId,
+    roomId,
+    bedStatusId,
     page = 1,
     limit = 10,
     sortBy,
     sortOrder,
   } = query;
 
-  const kamarFilters = {
-    ruangan: {
-      objectdepartemenfk: { in: [16, 35] },
-      statusenabled: true,
-      ...(namaruangan
-        ? { namaruangan: { contains: namaruangan, mode: "insensitive" } }
+  const roomFilters = {
+    unit: {
+      departmentId: { in: [16, 35] },
+      isEnabled: true,
+      ...(unitName
+        ? { unitName: { contains: unitName, mode: "insensitive" } }
         : {}),
-      ...(idruangan ? { id: Number(idruangan) } : {}),
+      ...(unitId ? { id: Number(unitId) } : {}),
     },
-    statusenabled: true,
-    ...(idkelas ? { objectkelasfk: Number(idkelas) } : {}),
+    isEnabled: true,
+    ...(classId ? { classId: Number(classId) } : {}),
 
-    // Hanya kamar yang punya tempat tidur
-    tempatTidur: {
+    // hanya ambil room yang punya bed
+    beds: {
       some: {
-        statusenabled: true,
-        ...(idstatusbed ? { objectstatusbedfk: Number(idstatusbed) } : {}),
+        isEnabled: true,
+        ...(bedStatusId ? { bedStatusId: Number(bedStatusId) } : {}),
       },
     },
-    ...(idkamar ? { id: Number(idkamar) } : {}),
+    ...(roomId ? { id: Number(roomId) } : {}),
   };
 
   const orderBy = {};
-  if (sortBy && ["id", "namakamar"].includes(sortBy)) {
+  if (sortBy && ["id", "roomName"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
@@ -192,61 +186,61 @@ export const getKamarwithTempatTidur = async (query) => {
     orderBy["id"] = "asc";
   }
 
-  const [kamars, total] = await Promise.all([
-    simrsPrisma.kamar.findMany({
-      where: kamarFilters,
+  const [rooms, total] = await Promise.all([
+    simrsPrisma.room.findMany({
+      where: roomFilters,
       include: {
-        ruangan: { include: { departemen: true } },
-        kelas: true,
-        tempatTidur: {
+        unit: { include: { department: true } },
+        class: true,
+        beds: {
           where: {
-            statusenabled: true,
-            ...(idstatusbed ? { objectstatusbedfk: Number(idstatusbed) } : {}),
+            isEnabled: true,
+            ...(bedStatusId ? { bedStatusId: Number(bedStatusId) } : {}),
           },
-          include: { status: true },
+          include: { bedStatus: true },
         },
       },
       skip: (page - 1) * limit,
       take: Number(limit),
       orderBy,
     }),
-    simrsPrisma.kamar.count({ where: kamarFilters }),
+    simrsPrisma.room.count({ where: roomFilters }),
   ]);
 
-  const results = kamars.map((kamar) => {
-    const summary = { kosong: 0, terisi: 0 };
+  const results = rooms.map((room) => {
+    const summary = { empty: 0, occupied: 0 };
 
-    const tempatTidur = kamar.tempatTidur.map((bed) => {
-      if (bed.objectstatusbedfk === 2) summary.kosong++;
-      else summary.terisi++;
+    const beds = room.beds.map((bed) => {
+      if (bed.bedStatusId === 2) summary.empty++;
+      else summary.occupied++;
 
       return {
         id: bed.id,
-        nomor: bed.nomorbed,
-        display: bed.reportdisplay,
-        idstatusbed: bed.status?.id,
-        statusbed: bed.status?.statusbed ?? null,
+        bedNumber: bed.bedNumber,
+        displayName: bed.displayName,
+        bedStatusId: bed.bedStatus?.id,
+        status: bed.bedStatus?.status ?? null,
       };
     });
 
     return {
-      idkamar: kamar.id,
-      namakamar: kamar.namakamar,
-      idkelas: kamar.kelas?.id,
-      namakelas: kamar.kelas?.namakelas ?? null,
-      idruangan: kamar.ruangan?.id,
-      namaruangan: kamar.ruangan?.namaruangan,
-      iddepartemen: kamar.ruangan?.departemen?.id,
-      namadepartemen: kamar.ruangan?.departemen?.namadepartemen,
+      roomId: room.id,
+      roomName: room.roomName,
+      classId: room.class?.id,
+      className: room.class?.className ?? null,
+      unitId: room.unit?.id,
+      unitName: room.unit?.unitName,
+      departmentId: room.unit?.department?.id,
+      departmentName: room.unit?.department?.departmentName,
       summary,
-      tempatTidur,
+      beds,
     };
   });
 
   return {
     results,
     pagination: {
-      total, // total kamar
+      total,
       page: Number(page),
       limit: Number(limit),
       totalPages: Math.ceil(total / limit),
@@ -257,69 +251,65 @@ export const getKamarwithTempatTidur = async (query) => {
 /**
  * Ambil detail 1 kamar beserta tempat tidurnya + summary
  */
-export const getKamarwithTempatTidurById = async (id) => {
-  const kamar = await simrsPrisma.kamar.findUnique({
-    where: { id: Number(id), statusenabled: true },
+export const getRoomWithBedsById = async (id) => {
+  const room = await simrsPrisma.room.findUnique({
+    where: { id: Number(id), isEnabled: true },
     include: {
-      ruangan: { include: { departemen: true } },
-      kelas: true,
-      tempatTidur: {
-        where: {
-          statusenabled: true,
-        },
-        include: { status: true },
+      unit: { include: { department: true } },
+      class: true,
+      beds: {
+        where: { isEnabled: true },
+        include: { bedStatus: true },
       },
     },
   });
 
-  if (!kamar) {
-    throw new ApiError("Kamar tidak ditemukan", 404);
+  if (!room) {
+    throw new ApiError("Room not found", 404);
   }
 
-  const summary = { kosong: 0, terisi: 0 };
+  const summary = { empty: 0, occupied: 0 };
 
-  const tempatTidur = kamar.tempatTidur.map((bed) => {
-    if (bed.objectstatusbedfk === 2) summary.kosong++;
-    else summary.terisi++;
+  const beds = room.beds.map((bed) => {
+    if (bed.bedStatusId === 2) summary.empty++;
+    else summary.occupied++;
 
     return {
       id: bed.id,
-      nomor: bed.nomorbed,
-      display: bed.reportdisplay,
-      idstatusbed: bed.status?.id,
-      statusbed: bed.status?.statusbed ?? null,
+      bedNumber: bed.bedNumber,
+      displayName: bed.displayName,
+      bedStatusId: bed.bedStatus?.id,
+      status: bed.bedStatus?.status ?? null,
     };
   });
 
   return {
-    idkamar: kamar.id,
-    namakamar: kamar.namakamar,
-    idkelas: kamar.kelas?.id,
-    namakelas: kamar.kelas?.namakelas ?? null,
-    idruangan: kamar.ruangan?.id,
-    namaruangan: kamar.ruangan?.namaruangan,
-    iddepartemen: kamar.ruangan?.departemen?.id,
-    namadepartemen: kamar.ruangan?.departemen?.namadepartemen,
+    roomId: room.id,
+    roomName: room.roomName,
+    classId: room.class?.id,
+    className: room.class?.className ?? null,
+    unitId: room.unit?.id,
+    unitName: room.unit?.unitName,
+    departmentId: room.unit?.department?.id,
+    departmentName: room.unit?.department?.departmentName,
     summary,
-    tempatTidur,
+    beds,
   };
 };
 
 /**
  * Ambil data status tempat tidur
  */
-export const getAllStatusBed = async (query) => {
-  const { statusbed, page = 1, limit = 10, sortBy, sortOrder } = query;
+export const getAllBedStatus = async (query) => {
+  const { status, page = 1, limit = 10, sortBy, sortOrder } = query;
 
   const filters = {
-    statusenabled: true,
-    ...(statusbed
-      ? { statusbed: { contains: statusbed, mode: "insensitive" } }
-      : {}),
+    isEnabled: true,
+    ...(status ? { status: { contains: status, mode: "insensitive" } } : {}),
   };
 
   const orderBy = {};
-  if (sortBy && ["id", "statusbed"].includes(sortBy)) {
+  if (sortBy && ["id", "status"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
@@ -328,20 +318,20 @@ export const getAllStatusBed = async (query) => {
     orderBy["id"] = "asc";
   }
 
-  const [statusBeds, total] = await Promise.all([
-    simrsPrisma.statusBed.findMany({
+  const [allStatus, total] = await Promise.all([
+    simrsPrisma.bedStatus.findMany({
       where: filters,
       skip: (page - 1) * limit,
       take: Number(limit),
       orderBy,
     }),
-    simrsPrisma.statusBed.count({
+    simrsPrisma.bedStatus.count({
       where: filters,
     }),
   ]);
 
   return {
-    results: statusBeds,
+    results: allStatus,
     pagination: {
       total,
       page: Number(page),
@@ -354,18 +344,18 @@ export const getAllStatusBed = async (query) => {
 /**
  * Ambil data kelas tempat tidur
  */
-export const getAllKelas = async (query) => {
-  const { namakelas, page = 1, limit = 10, sortBy, sortOrder } = query;
+export const getAllClass = async (query) => {
+  const { className, page = 1, limit = 10, sortBy, sortOrder } = query;
 
   const filters = {
-    statusenabled: true,
-    ...(namakelas
-      ? { namakelas: { contains: namakelas, mode: "insensitive" } }
+    isEnabled: true,
+    ...(className
+      ? { className: { contains: className, mode: "insensitive" } }
       : {}),
   };
 
   const orderBy = {};
-  if (sortBy && ["id", "namakelas"].includes(sortBy)) {
+  if (sortBy && ["id", "className"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
@@ -374,20 +364,20 @@ export const getAllKelas = async (query) => {
     orderBy["id"] = "asc";
   }
 
-  const [allKelas, total] = await Promise.all([
-    simrsPrisma.kelas.findMany({
+  const [allClass, total] = await Promise.all([
+    simrsPrisma.class.findMany({
       where: filters,
       skip: (page - 1) * limit,
       take: Number(limit),
       orderBy,
     }),
-    simrsPrisma.kelas.count({
+    simrsPrisma.class.count({
       where: filters,
     }),
   ]);
 
   return {
-    results: allKelas,
+    results: allClass,
     pagination: {
       total,
       page: Number(page),
@@ -400,18 +390,18 @@ export const getAllKelas = async (query) => {
 /**
  * Ambil data kamar tempat tidur
  */
-export const getAllKamar = async (query) => {
-  const { namakamar, page = 1, limit = 10, sortBy, sortOrder } = query;
+export const getAllRoom = async (query) => {
+  const { roomName, page = 1, limit = 10, sortBy, sortOrder } = query;
 
   const filters = {
-    statusenabled: true,
-    ...(namakamar
-      ? { namakamar: { contains: namakamar, mode: "insensitive" } }
+    isEnabled: true,
+    ...(roomName
+      ? { roomName: { contains: roomName, mode: "insensitive" } }
       : {}),
   };
 
   const orderBy = {};
-  if (sortBy && ["id", "namakamar"].includes(sortBy)) {
+  if (sortBy && ["id", "roomName"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
@@ -420,20 +410,20 @@ export const getAllKamar = async (query) => {
     orderBy["id"] = "asc";
   }
 
-  const [allKamar, total] = await Promise.all([
-    simrsPrisma.kamar.findMany({
+  const [allRoom, total] = await Promise.all([
+    simrsPrisma.room.findMany({
       where: filters,
       skip: (page - 1) * limit,
       take: Number(limit),
       orderBy,
     }),
-    simrsPrisma.kamar.count({
+    simrsPrisma.room.count({
       where: filters,
     }),
   ]);
 
   return {
-    results: allKamar,
+    results: allRoom,
     pagination: {
       total,
       page: Number(page),
@@ -446,18 +436,18 @@ export const getAllKamar = async (query) => {
 /**
  * Ambil data ruangan tempat tidur
  */
-export const getAllRuangan = async (query) => {
-  const { namaruangan, page = 1, limit = 10, sortBy, sortOrder } = query;
+export const getAllUnit = async (query) => {
+  const { unitName, page = 1, limit = 10, sortBy, sortOrder } = query;
 
   const filters = {
-    statusenabled: true,
-    ...(namaruangan
-      ? { namaruangan: { contains: namaruangan, mode: "insensitive" } }
+    isEnabled: true,
+    ...(unitName
+      ? { unitName: { contains: unitName, mode: "insensitive" } }
       : {}),
   };
 
   const orderBy = {};
-  if (sortBy && ["id", "namaruangan"].includes(sortBy)) {
+  if (sortBy && ["id", "unitName"].includes(sortBy)) {
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
@@ -466,20 +456,20 @@ export const getAllRuangan = async (query) => {
     orderBy["id"] = "asc";
   }
 
-  const [allRuangan, total] = await Promise.all([
-    simrsPrisma.ruangan.findMany({
+  const [allUnit, total] = await Promise.all([
+    simrsPrisma.unit.findMany({
       where: filters,
       skip: (page - 1) * limit,
       take: Number(limit),
       orderBy,
     }),
-    simrsPrisma.ruangan.count({
+    simrsPrisma.unit.count({
       where: filters,
     }),
   ]);
 
   return {
-    results: allRuangan,
+    results: allUnit,
     pagination: {
       total,
       page: Number(page),

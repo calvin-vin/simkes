@@ -1,57 +1,58 @@
 export const bedResource = (bed) => {
   return {
     id: bed.id,
-    nomor: bed.nomorbed,
-    reportdisplay: bed.reportdisplay,
-    idstatusbed: bed.status?.id,
-    statusbed: bed.status?.statusbed ?? null,
-    idkamar: bed.kamar?.id,
-    namakamar: bed.kamar?.namakamar,
-    idkelas: bed.kamar?.kelas?.id,
-    namakelas: bed.kamar?.kelas?.namakelas ?? null,
-    idruangan: bed.kamar?.ruangan?.id,
-    namaruangan: bed.kamar?.ruangan?.namaruangan,
-    iddepartemen: bed.kamar?.ruangan?.departemen?.id,
-    namadepartemen: bed.kamar?.ruangan?.departemen?.namadepartemen,
+    bedNumber: bed.bedNumber,
+    displayName: bed.displayName,
+    bedStatusId: bed.bedStatus?.id,
+    status: bed.bedStatus?.status ?? null,
+
+    roomId: bed.room?.id,
+    roomName: bed.room?.roomName,
+    classId: bed.room?.class?.id,
+    className: bed.room?.class?.className ?? null,
+    unitId: bed.room?.unit?.id,
+    unitName: bed.room?.unit?.unitName,
+    departmentId: bed.room?.unit?.department?.id,
+    departmentName: bed.room?.unit?.department?.departmentName,
   };
 };
 
 export const bedCollection = (beds) => {
-  return beds.map(bedResource);
+  return beds.map((b) => bedResource(b));
 };
 
-export const kamarWithBedResource = (kamar) => {
+export const roomWithBedResource = (room) => {
   return {
-    idkamar: kamar.idkamar,
-    namakamar: kamar.namakamar,
-    idkelas: kamar.idkelas,
-    namakelas: kamar.namakelas ?? null,
-    idruangan: kamar.idruangan,
-    namaruangan: kamar.namaruangan,
-    iddepartemen: kamar.iddepartemen,
-    namadepartemen: kamar.namadepartemen,
+    roomId: room.roomId,
+    roomName: room.roomName,
+    classId: room.classId,
+    className: room.className ?? null,
+    unitId: room.unitId,
+    unitName: room.unitName,
+    departmentId: room.departmentId,
+    departmentName: room.departmentName,
     summary: {
-      kosong: kamar.summary?.kosong ?? 0,
-      terisi: kamar.summary?.terisi ?? 0,
+      empty: room.summary?.empty ?? 0,
+      occupied: room.summary?.occupied ?? 0,
     },
-    tempattidur: kamar.tempatTidur.map((bed) => ({
+    beds: room.beds.map((bed) => ({
       id: bed.id,
-      nomor: bed.nomor,
-      display: bed.display,
-      idstatusbed: bed.idstatusbed,
-      statusbed: bed.statusbed,
+      bedNumber: bed.bedNumber,
+      displayName: bed.displayName,
+      bedStatusId: bed.bedStatusId,
+      status: bed.status,
     })),
   };
 };
 
-export const kamarWithBedCollection = (beds) => {
-  return beds.map(kamarWithBedResource);
+export const roomWithBedCollection = (beds) => {
+  return beds.map(roomWithBedResource);
 };
 
 export const bedStatusResource = (bedStatus) => {
   return {
     id: bedStatus.id,
-    statusbed: bedStatus.statusbed,
+    status: bedStatus.status,
   };
 };
 
@@ -62,7 +63,7 @@ export const bedStatusCollection = (bedStatus) => {
 export const bedClassResource = (bedClass) => {
   return {
     id: bedClass.id,
-    namakelas: bedClass.namakelas,
+    className: bedClass.className,
   };
 };
 
@@ -70,24 +71,24 @@ export const bedClassCollection = (bedClass) => {
   return bedClass.map(bedClassResource);
 };
 
-export const bedKamarResource = (bedKamar) => {
+export const bedRoomResource = (bedRoom) => {
   return {
-    id: bedKamar.id,
-    namakamar: bedKamar.namakamar,
+    id: bedRoom.id,
+    roomName: bedRoom.roomName,
   };
 };
 
-export const bedKamarCollection = (bedKamar) => {
-  return bedKamar.map(bedKamarResource);
+export const bedRoomCollection = (bedRoom) => {
+  return bedRoom.map(bedRoomResource);
 };
 
-export const bedRuanganResource = (bedRuangan) => {
+export const bedUnitResource = (bedUnit) => {
   return {
-    id: bedRuangan.id,
-    namaruangan: bedRuangan.namaruangan,
+    id: bedUnit.id,
+    unitName: bedUnit.unitName,
   };
 };
 
-export const bedRuanganCollection = (bedRuangan) => {
-  return bedRuangan.map(bedRuanganResource);
+export const bedUnitCollection = (bedUnit) => {
+  return bedUnit.map(bedUnitResource);
 };
