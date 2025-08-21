@@ -13229,8 +13229,8 @@ export namespace Prisma {
     id: number | null
     unitId: number | null
     doctorId: number | null
-    startTime: string | null
-    endTime: string | null
+    startTime: Date | null
+    endTime: Date | null
     note: string | null
     days: string | null
     isEnabled: boolean | null
@@ -13240,8 +13240,8 @@ export namespace Prisma {
     id: number | null
     unitId: number | null
     doctorId: number | null
-    startTime: string | null
-    endTime: string | null
+    startTime: Date | null
+    endTime: Date | null
     note: string | null
     days: string | null
     isEnabled: boolean | null
@@ -13396,8 +13396,8 @@ export namespace Prisma {
     id: number
     unitId: number
     doctorId: number
-    startTime: string
-    endTime: string
+    startTime: Date
+    endTime: Date
     note: string | null
     days: string
     isEnabled: boolean
@@ -13496,8 +13496,8 @@ export namespace Prisma {
       id: number
       unitId: number
       doctorId: number
-      startTime: string
-      endTime: string
+      startTime: Date
+      endTime: Date
       note: string | null
       days: string
       isEnabled: boolean
@@ -13929,8 +13929,8 @@ export namespace Prisma {
     readonly id: FieldRef<"DoctorSchedule", 'Int'>
     readonly unitId: FieldRef<"DoctorSchedule", 'Int'>
     readonly doctorId: FieldRef<"DoctorSchedule", 'Int'>
-    readonly startTime: FieldRef<"DoctorSchedule", 'String'>
-    readonly endTime: FieldRef<"DoctorSchedule", 'String'>
+    readonly startTime: FieldRef<"DoctorSchedule", 'DateTime'>
+    readonly endTime: FieldRef<"DoctorSchedule", 'DateTime'>
     readonly note: FieldRef<"DoctorSchedule", 'String'>
     readonly days: FieldRef<"DoctorSchedule", 'String'>
     readonly isEnabled: FieldRef<"DoctorSchedule", 'Boolean'>
@@ -14371,8 +14371,6 @@ export namespace Prisma {
   export type EmployeeMinAggregateOutputType = {
     id: number | null
     fullName: string | null
-    sipNumber: string | null
-    strNumber: string | null
     identityNo: string | null
     isEnabled: boolean | null
   }
@@ -14380,8 +14378,6 @@ export namespace Prisma {
   export type EmployeeMaxAggregateOutputType = {
     id: number | null
     fullName: string | null
-    sipNumber: string | null
-    strNumber: string | null
     identityNo: string | null
     isEnabled: boolean | null
   }
@@ -14389,8 +14385,6 @@ export namespace Prisma {
   export type EmployeeCountAggregateOutputType = {
     id: number
     fullName: number
-    sipNumber: number
-    strNumber: number
     identityNo: number
     isEnabled: number
     _all: number
@@ -14408,8 +14402,6 @@ export namespace Prisma {
   export type EmployeeMinAggregateInputType = {
     id?: true
     fullName?: true
-    sipNumber?: true
-    strNumber?: true
     identityNo?: true
     isEnabled?: true
   }
@@ -14417,8 +14409,6 @@ export namespace Prisma {
   export type EmployeeMaxAggregateInputType = {
     id?: true
     fullName?: true
-    sipNumber?: true
-    strNumber?: true
     identityNo?: true
     isEnabled?: true
   }
@@ -14426,8 +14416,6 @@ export namespace Prisma {
   export type EmployeeCountAggregateInputType = {
     id?: true
     fullName?: true
-    sipNumber?: true
-    strNumber?: true
     identityNo?: true
     isEnabled?: true
     _all?: true
@@ -14522,8 +14510,6 @@ export namespace Prisma {
   export type EmployeeGroupByOutputType = {
     id: number
     fullName: string
-    sipNumber: string | null
-    strNumber: string | null
     identityNo: string | null
     isEnabled: boolean
     _count: EmployeeCountAggregateOutputType | null
@@ -14550,8 +14536,6 @@ export namespace Prisma {
   export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     fullName?: boolean
-    sipNumber?: boolean
-    strNumber?: boolean
     identityNo?: boolean
     isEnabled?: boolean
     doctorSchedules?: boolean | Employee$doctorSchedulesArgs<ExtArgs>
@@ -14561,8 +14545,6 @@ export namespace Prisma {
   export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     fullName?: boolean
-    sipNumber?: boolean
-    strNumber?: boolean
     identityNo?: boolean
     isEnabled?: boolean
   }, ExtArgs["result"]["employee"]>
@@ -14570,8 +14552,6 @@ export namespace Prisma {
   export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     fullName?: boolean
-    sipNumber?: boolean
-    strNumber?: boolean
     identityNo?: boolean
     isEnabled?: boolean
   }, ExtArgs["result"]["employee"]>
@@ -14579,13 +14559,11 @@ export namespace Prisma {
   export type EmployeeSelectScalar = {
     id?: boolean
     fullName?: boolean
-    sipNumber?: boolean
-    strNumber?: boolean
     identityNo?: boolean
     isEnabled?: boolean
   }
 
-  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "sipNumber" | "strNumber" | "identityNo" | "isEnabled", ExtArgs["result"]["employee"]>
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "identityNo" | "isEnabled", ExtArgs["result"]["employee"]>
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     doctorSchedules?: boolean | Employee$doctorSchedulesArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
@@ -14601,8 +14579,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       fullName: string
-      sipNumber: string | null
-      strNumber: string | null
       identityNo: string | null
       isEnabled: boolean
     }, ExtArgs["result"]["employee"]>
@@ -15031,8 +15007,6 @@ export namespace Prisma {
   interface EmployeeFieldRefs {
     readonly id: FieldRef<"Employee", 'Int'>
     readonly fullName: FieldRef<"Employee", 'String'>
-    readonly sipNumber: FieldRef<"Employee", 'String'>
-    readonly strNumber: FieldRef<"Employee", 'String'>
     readonly identityNo: FieldRef<"Employee", 'String'>
     readonly isEnabled: FieldRef<"Employee", 'Boolean'>
   }
@@ -15598,8 +15572,6 @@ export namespace Prisma {
   export const EmployeeScalarFieldEnum: {
     id: 'id',
     fullName: 'fullName',
-    sipNumber: 'sipNumber',
-    strNumber: 'strNumber',
     identityNo: 'identityNo',
     isEnabled: 'isEnabled'
   };
@@ -16258,8 +16230,8 @@ export namespace Prisma {
     id?: IntFilter<"DoctorSchedule"> | number
     unitId?: IntFilter<"DoctorSchedule"> | number
     doctorId?: IntFilter<"DoctorSchedule"> | number
-    startTime?: StringFilter<"DoctorSchedule"> | string
-    endTime?: StringFilter<"DoctorSchedule"> | string
+    startTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
+    endTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableFilter<"DoctorSchedule"> | string | null
     days?: StringFilter<"DoctorSchedule"> | string
     isEnabled?: BoolFilter<"DoctorSchedule"> | boolean
@@ -16287,8 +16259,8 @@ export namespace Prisma {
     NOT?: DoctorScheduleWhereInput | DoctorScheduleWhereInput[]
     unitId?: IntFilter<"DoctorSchedule"> | number
     doctorId?: IntFilter<"DoctorSchedule"> | number
-    startTime?: StringFilter<"DoctorSchedule"> | string
-    endTime?: StringFilter<"DoctorSchedule"> | string
+    startTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
+    endTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableFilter<"DoctorSchedule"> | string | null
     days?: StringFilter<"DoctorSchedule"> | string
     isEnabled?: BoolFilter<"DoctorSchedule"> | boolean
@@ -16319,8 +16291,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"DoctorSchedule"> | number
     unitId?: IntWithAggregatesFilter<"DoctorSchedule"> | number
     doctorId?: IntWithAggregatesFilter<"DoctorSchedule"> | number
-    startTime?: StringWithAggregatesFilter<"DoctorSchedule"> | string
-    endTime?: StringWithAggregatesFilter<"DoctorSchedule"> | string
+    startTime?: DateTimeWithAggregatesFilter<"DoctorSchedule"> | Date | string
+    endTime?: DateTimeWithAggregatesFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableWithAggregatesFilter<"DoctorSchedule"> | string | null
     days?: StringWithAggregatesFilter<"DoctorSchedule"> | string
     isEnabled?: BoolWithAggregatesFilter<"DoctorSchedule"> | boolean
@@ -16332,8 +16304,6 @@ export namespace Prisma {
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     id?: IntFilter<"Employee"> | number
     fullName?: StringFilter<"Employee"> | string
-    sipNumber?: StringNullableFilter<"Employee"> | string | null
-    strNumber?: StringNullableFilter<"Employee"> | string | null
     identityNo?: StringNullableFilter<"Employee"> | string | null
     isEnabled?: BoolFilter<"Employee"> | boolean
     doctorSchedules?: DoctorScheduleListRelationFilter
@@ -16342,8 +16312,6 @@ export namespace Prisma {
   export type EmployeeOrderByWithRelationInput = {
     id?: SortOrder
     fullName?: SortOrder
-    sipNumber?: SortOrderInput | SortOrder
-    strNumber?: SortOrderInput | SortOrder
     identityNo?: SortOrderInput | SortOrder
     isEnabled?: SortOrder
     doctorSchedules?: DoctorScheduleOrderByRelationAggregateInput
@@ -16355,8 +16323,6 @@ export namespace Prisma {
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     fullName?: StringFilter<"Employee"> | string
-    sipNumber?: StringNullableFilter<"Employee"> | string | null
-    strNumber?: StringNullableFilter<"Employee"> | string | null
     identityNo?: StringNullableFilter<"Employee"> | string | null
     isEnabled?: BoolFilter<"Employee"> | boolean
     doctorSchedules?: DoctorScheduleListRelationFilter
@@ -16365,8 +16331,6 @@ export namespace Prisma {
   export type EmployeeOrderByWithAggregationInput = {
     id?: SortOrder
     fullName?: SortOrder
-    sipNumber?: SortOrderInput | SortOrder
-    strNumber?: SortOrderInput | SortOrder
     identityNo?: SortOrderInput | SortOrder
     isEnabled?: SortOrder
     _count?: EmployeeCountOrderByAggregateInput
@@ -16382,8 +16346,6 @@ export namespace Prisma {
     NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Employee"> | number
     fullName?: StringWithAggregatesFilter<"Employee"> | string
-    sipNumber?: StringNullableWithAggregatesFilter<"Employee"> | string | null
-    strNumber?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     identityNo?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     isEnabled?: BoolWithAggregatesFilter<"Employee"> | boolean
   }
@@ -16922,8 +16884,8 @@ export namespace Prisma {
 
   export type DoctorScheduleCreateInput = {
     id: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -16935,8 +16897,8 @@ export namespace Prisma {
     id: number
     unitId: number
     doctorId: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -16944,8 +16906,8 @@ export namespace Prisma {
 
   export type DoctorScheduleUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -16957,8 +16919,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     unitId?: IntFieldUpdateOperationsInput | number
     doctorId?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -16968,8 +16930,8 @@ export namespace Prisma {
     id: number
     unitId: number
     doctorId: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -16977,8 +16939,8 @@ export namespace Prisma {
 
   export type DoctorScheduleUpdateManyMutationInput = {
     id?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -16988,8 +16950,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     unitId?: IntFieldUpdateOperationsInput | number
     doctorId?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -16998,8 +16960,6 @@ export namespace Prisma {
   export type EmployeeCreateInput = {
     id: number
     fullName: string
-    sipNumber?: string | null
-    strNumber?: string | null
     identityNo?: string | null
     isEnabled: boolean
     doctorSchedules?: DoctorScheduleCreateNestedManyWithoutDoctorInput
@@ -17008,8 +16968,6 @@ export namespace Prisma {
   export type EmployeeUncheckedCreateInput = {
     id: number
     fullName: string
-    sipNumber?: string | null
-    strNumber?: string | null
     identityNo?: string | null
     isEnabled: boolean
     doctorSchedules?: DoctorScheduleUncheckedCreateNestedManyWithoutDoctorInput
@@ -17018,8 +16976,6 @@ export namespace Prisma {
   export type EmployeeUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullName?: StringFieldUpdateOperationsInput | string
-    sipNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    strNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityNo?: NullableStringFieldUpdateOperationsInput | string | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
     doctorSchedules?: DoctorScheduleUpdateManyWithoutDoctorNestedInput
@@ -17028,8 +16984,6 @@ export namespace Prisma {
   export type EmployeeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullName?: StringFieldUpdateOperationsInput | string
-    sipNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    strNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityNo?: NullableStringFieldUpdateOperationsInput | string | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
     doctorSchedules?: DoctorScheduleUncheckedUpdateManyWithoutDoctorNestedInput
@@ -17038,8 +16992,6 @@ export namespace Prisma {
   export type EmployeeCreateManyInput = {
     id: number
     fullName: string
-    sipNumber?: string | null
-    strNumber?: string | null
     identityNo?: string | null
     isEnabled: boolean
   }
@@ -17047,8 +16999,6 @@ export namespace Prisma {
   export type EmployeeUpdateManyMutationInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullName?: StringFieldUpdateOperationsInput | string
-    sipNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    strNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityNo?: NullableStringFieldUpdateOperationsInput | string | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -17056,8 +17006,6 @@ export namespace Prisma {
   export type EmployeeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullName?: StringFieldUpdateOperationsInput | string
-    sipNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    strNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityNo?: NullableStringFieldUpdateOperationsInput | string | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -17757,8 +17705,6 @@ export namespace Prisma {
   export type EmployeeCountOrderByAggregateInput = {
     id?: SortOrder
     fullName?: SortOrder
-    sipNumber?: SortOrder
-    strNumber?: SortOrder
     identityNo?: SortOrder
     isEnabled?: SortOrder
   }
@@ -17770,8 +17716,6 @@ export namespace Prisma {
   export type EmployeeMaxOrderByAggregateInput = {
     id?: SortOrder
     fullName?: SortOrder
-    sipNumber?: SortOrder
-    strNumber?: SortOrder
     identityNo?: SortOrder
     isEnabled?: SortOrder
   }
@@ -17779,8 +17723,6 @@ export namespace Prisma {
   export type EmployeeMinOrderByAggregateInput = {
     id?: SortOrder
     fullName?: SortOrder
-    sipNumber?: SortOrder
-    strNumber?: SortOrder
     identityNo?: SortOrder
     isEnabled?: SortOrder
   }
@@ -18957,8 +18899,8 @@ export namespace Prisma {
 
   export type DoctorScheduleCreateWithoutUnitInput = {
     id: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -18968,8 +18910,8 @@ export namespace Prisma {
   export type DoctorScheduleUncheckedCreateWithoutUnitInput = {
     id: number
     doctorId: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -19090,8 +19032,8 @@ export namespace Prisma {
     id?: IntFilter<"DoctorSchedule"> | number
     unitId?: IntFilter<"DoctorSchedule"> | number
     doctorId?: IntFilter<"DoctorSchedule"> | number
-    startTime?: StringFilter<"DoctorSchedule"> | string
-    endTime?: StringFilter<"DoctorSchedule"> | string
+    startTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
+    endTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableFilter<"DoctorSchedule"> | string | null
     days?: StringFilter<"DoctorSchedule"> | string
     isEnabled?: BoolFilter<"DoctorSchedule"> | boolean
@@ -19489,8 +19431,6 @@ export namespace Prisma {
   export type EmployeeCreateWithoutDoctorSchedulesInput = {
     id: number
     fullName: string
-    sipNumber?: string | null
-    strNumber?: string | null
     identityNo?: string | null
     isEnabled: boolean
   }
@@ -19498,8 +19438,6 @@ export namespace Prisma {
   export type EmployeeUncheckedCreateWithoutDoctorSchedulesInput = {
     id: number
     fullName: string
-    sipNumber?: string | null
-    strNumber?: string | null
     identityNo?: string | null
     isEnabled: boolean
   }
@@ -19552,8 +19490,6 @@ export namespace Prisma {
   export type EmployeeUpdateWithoutDoctorSchedulesInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullName?: StringFieldUpdateOperationsInput | string
-    sipNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    strNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityNo?: NullableStringFieldUpdateOperationsInput | string | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -19561,16 +19497,14 @@ export namespace Prisma {
   export type EmployeeUncheckedUpdateWithoutDoctorSchedulesInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullName?: StringFieldUpdateOperationsInput | string
-    sipNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    strNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityNo?: NullableStringFieldUpdateOperationsInput | string | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type DoctorScheduleCreateWithoutDoctorInput = {
     id: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -19580,8 +19514,8 @@ export namespace Prisma {
   export type DoctorScheduleUncheckedCreateWithoutDoctorInput = {
     id: number
     unitId: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -19667,8 +19601,8 @@ export namespace Prisma {
   export type DoctorScheduleCreateManyUnitInput = {
     id: number
     doctorId: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -19735,8 +19669,8 @@ export namespace Prisma {
 
   export type DoctorScheduleUpdateWithoutUnitInput = {
     id?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -19746,8 +19680,8 @@ export namespace Prisma {
   export type DoctorScheduleUncheckedUpdateWithoutUnitInput = {
     id?: IntFieldUpdateOperationsInput | number
     doctorId?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -19756,8 +19690,8 @@ export namespace Prisma {
   export type DoctorScheduleUncheckedUpdateManyWithoutUnitInput = {
     id?: IntFieldUpdateOperationsInput | number
     doctorId?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -19954,8 +19888,8 @@ export namespace Prisma {
   export type DoctorScheduleCreateManyDoctorInput = {
     id: number
     unitId: number
-    startTime: string
-    endTime: string
+    startTime: Date | string
+    endTime: Date | string
     note?: string | null
     days: string
     isEnabled: boolean
@@ -19963,8 +19897,8 @@ export namespace Prisma {
 
   export type DoctorScheduleUpdateWithoutDoctorInput = {
     id?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -19974,8 +19908,8 @@ export namespace Prisma {
   export type DoctorScheduleUncheckedUpdateWithoutDoctorInput = {
     id?: IntFieldUpdateOperationsInput | number
     unitId?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
@@ -19984,8 +19918,8 @@ export namespace Prisma {
   export type DoctorScheduleUncheckedUpdateManyWithoutDoctorInput = {
     id?: IntFieldUpdateOperationsInput | number
     unitId?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
     isEnabled?: BoolFieldUpdateOperationsInput | boolean

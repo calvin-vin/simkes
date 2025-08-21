@@ -128,14 +128,14 @@ model StockDetail {
 }
 
 model DoctorSchedule {
-    id        Int     @id
-    unitId    Int     @map("objectruanganfk")
-    doctorId  Int     @map("objectpegawaifk")
-    startTime String  @map("jammulai") // bisa diubah ke DateTime
-    endTime   String  @map("jamakhir")
-    note      String? @map("keterangan")
-    days      String  @map("hari")
-    isEnabled Boolean @map("statusenabled")
+    id        Int      @id
+    unitId    Int      @map("objectruanganfk")
+    doctorId  Int      @map("objectpegawaifk")
+    startTime DateTime @map("jammulai")
+    endTime   DateTime @map("jamakhir")
+    note      String?  @map("keterangan")
+    days      String   @map("hari")
+    isEnabled Boolean  @map("statusenabled")
 
     unit   Unit     @relation(fields: [unitId], references: [id])
     doctor Employee @relation(fields: [doctorId], references: [id])
@@ -146,8 +146,6 @@ model DoctorSchedule {
 model Employee {
     id         Int     @id
     fullName   String  @map("namalengkap")
-    sipNumber  String? @map("nosip")
-    strNumber  String? @map("nostr")
     identityNo String? @map("noidentitas")
     isEnabled  Boolean @map("statusenabled")
 

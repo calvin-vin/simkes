@@ -20,6 +20,7 @@ import paymentMethodRoute from "./routes/paymentMethod.route.js";
 import bedMonitorRoute from "./routes/bed.routes.js";
 import medicineRoute from "./routes/medicine.route.js";
 import policlinicRoute from "./routes/policlinic.route.js";
+import doctorScheduleRoute from "./routes/doctorSchedule.route.js";
 // import patientRoute from "./routes/patient.route.js";
 // import ambulanceStaffRoute from "./routes/ambulanceStaff.route.js";
 
@@ -54,6 +55,7 @@ app.use("/api/v1/payment-methods", paymentMethodRoute);
 app.use("/api/v1/bed", bedMonitorRoute);
 app.use("/api/v1/medicines", medicineRoute);
 app.use("/api/v1/policlinics", policlinicRoute);
+app.use("/api/v1/doctor-schedules", doctorScheduleRoute);
 // app.use("/api/v1/medical-categories", medicalCategoryRoute);
 
 // // Patient Routes

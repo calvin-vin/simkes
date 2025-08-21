@@ -206,8 +206,6 @@ exports.Prisma.DoctorScheduleScalarFieldEnum = {
 exports.Prisma.EmployeeScalarFieldEnum = {
   id: 'id',
   fullName: 'fullName',
-  sipNumber: 'sipNumber',
-  strNumber: 'strNumber',
   identityNo: 'identityNo',
   isEnabled: 'isEnabled'
 };
