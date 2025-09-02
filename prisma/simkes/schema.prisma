@@ -9,132 +9,9 @@ datasource db {
   url      = env("SIMKES_DATABASE_URL")
 }
 
-model Reservation {
-  id                String            @id @default(uuid())
-  patientId         String
-  patient           Patient           @relation(fields: [patientId], references: [id])
-  medicalCategoryId String
-  medicalCategory   MedicalCategory   @relation(fields: [medicalCategoryId], references: [id])
-  doctorId          String
-  doctor            Doctor            @relation(fields: [doctorId], references: [id])
-  reservationDate   DateTime
-  queueNumber       String
-  qrCodeUrl         String
-  status            ReservationStatus @default(WAITING)
-  referralFile      String?           @unique
-  patientPaymentId  String
-  patientPayment    PatientPayment    @relation(fields: [patientPaymentId], references: [id])
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-}
-
-model Patient {
-  id                String             @unique
-  name              String
-  simrsId           String?
-  nik               String?
-  phone             String?
-  email             String?
-  reservations      Reservation[]
-  payments          PatientPayment[]
-  emergencyRequests EmergencyRequest[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model PaymentMethod {
-  id       String           @id @default(uuid())
-  name     String           @unique
-  patients PatientPayment[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model PatientPayment {
-  id              String  @id @default(uuid())
-  patientId       String
-  paymentMethodId String
-  participantId   String
-  paymentFile     String?
-
-  patient       Patient       @relation(fields: [patientId], references: [id])
-  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
-  reservations  Reservation[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@unique([patientId, paymentMethodId])
-}
-
-model MedicalCategory {
-  id           String                  @id @default(uuid())
-  simrsId      String                  @unique
-  name         String
-  reservations Reservation[]
-  doctors      DoctorMedicalCategory[]
-
-  syncedAt  DateTime?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-}
-
-model Doctor {
-  id                String                  @id @default(uuid())
-  simrsId           String                  @unique
-  name              String
-  code              String
-  reservations      Reservation[]
-  schedules         DoctorSchedule[]
-  medicalCategories DoctorMedicalCategory[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model DoctorMedicalCategory {
-  id                String @id @default(uuid())
-  doctorId          String
-  medicalCategoryId String
-
-  doctor          Doctor          @relation(fields: [doctorId], references: [id])
-  medicalCategory MedicalCategory @relation(fields: [medicalCategoryId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@unique([doctorId, medicalCategoryId])
-}
-
-model DoctorSchedule {
-  id             String   @id @default(uuid())
-  simrsId        String   @unique
-  doctorId       String
-  doctor         Doctor   @relation(fields: [doctorId], references: [id])
-  specialization String
-  day            String
-  startTime      String
-  endTime        String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
-model Medicine {
-  id        String    @id @default(uuid())
-  name      String
-  unit      String
-  stock     Int
-  simrsId   String?
-  syncedAt  DateTime?
-  updatedAt DateTime
-}
-
 model EmergencyRequest {
   id           String             @id @default(uuid())
   patientId    String
-  patient      Patient            @relation(fields: [patientId], references: [id])
   location     String
   note         String?
   status       EmergencyStatus    @default(PENDING)
@@ -178,21 +55,12 @@ enum EmergencyStatus {
   COMPLETED
 }
 
-enum Days {
-  MINGGU
-  SENIN
-  SELASA
-  RABU
-  KAMIS
-  JUMAT
-  SABTU
-}
-
-enum ReservationStatus {
-  WAITING
-  ONGOING
-  DONE
-  SKIPPED
-  RECALLED
-  EXPIRED
+model ReservationQRCode {
+  id              String   @id @default(uuid())
+  reservationId   String   @unique
+  qrCodeUrl       String
+  qrCodeContent   String
+  filePath        String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

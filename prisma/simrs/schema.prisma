@@ -14,6 +14,8 @@ model PaymentMethod {
     isEnabled   Boolean @map("statusenabled")
     displayName String  @map("reportdisplay")
 
+    reservations Reservation[]
+
     @@map("kelompokpasien_m")
 }
 
@@ -55,6 +57,7 @@ model Unit {
     department      Department?      @relation(fields: [departmentId], references: [id])
     stockDetails    StockDetail[]
     doctorSchedules DoctorSchedule[]
+    reservations    Reservation[]
 
     @@map("ruangan_m")
 }
@@ -150,6 +153,105 @@ model Employee {
     isEnabled  Boolean @map("statusenabled")
 
     doctorSchedules DoctorSchedule[]
+    reservations    Reservation[]
 
     @@map("pegawai_m")
+}
+
+model Reservation {
+    id                   String   @id @map("norec")
+    isEnabled            Boolean  @default(true) @map("statusenabled")
+    unitId               Int      @map("objectruanganfk")
+    identity             String   @map("noidentitas")
+    queueNumber          Int      @map("noantrian")
+    reservationNumber    String   @map("noreservasi")
+    reservationDate      DateTime @map("tanggalreservasi")
+    paymentMethodId      Int      @map("objectkelompokpasienfk")
+    bpjsNumber           String?  @map("nobpjs")
+    otherInsuranceNumber String?  @map("noasuransilain")
+    createdAt            DateTime @default(now()) @map("tglinput")
+    referralNumber       String?  @map("norujukan")
+    doctorId             Int?     @map("objectpegawaifk")
+    notes                String?  @map("keterangan")
+    queueType            String   @map("jenis") // Format: EA001, EB001, dll
+    referralSourceId     Int?     @default(0) @map("objectasalrujukanfk")
+    isConfirmed          Boolean  @default(false) @map("isconfirm")
+    callStatus           String   @default("0") @map("statuspanggil")
+    isCancelled          Boolean  @default(false) @map("isbatal")
+    cancelReason         String?  @map("keteranganbatal")
+    // required in database
+    educationId          Int?     @default(0) @map("objectpendidikanfk")
+    type                 String?  @default("LAMA") @map("type")
+    patientType          String?  @default("LAMA") @map("tipepasien")
+
+    // Relations
+    unit           Unit            @relation(fields: [unitId], references: [id])
+    patient        Patient?        @relation(fields: [identity], references: [identity])
+    paymentMethod  PaymentMethod   @relation(fields: [paymentMethodId], references: [id])
+    doctor         Employee?       @relation(fields: [doctorId], references: [id])
+    referralSource ReferralSource? @relation(fields: [referralSourceId], references: [id])
+
+    @@map("antrianpasienregistrasi_t")
+}
+
+model Patient {
+    id                   Int       @id
+    isEnabled            Boolean   @default(true) @map("statusenabled")
+    name                 String?   @map("namapasien")
+    identity             String    @unique @map("noidentitas")
+    genderId             Int?      @map("objectjeniskelaminfk")
+    birthPlace           String?   @map("tempatlahir")
+    birthDate            DateTime? @map("tgllahir")
+    motherName           String?   @map("namaibu")
+    fatherName           String?   @map("namaayah")
+    spouseName           String?   @map("namasuamiistri")
+    bpjsNumber           String?   @map("nobpjs")
+    otherInsuranceNumber String?   @map("noasuransilain")
+    phoneNumber          String?   @map("nohp")
+    registeredAt         DateTime? @map("tgldaftar")
+    homeAddress          String?   @map("alamatrmh")
+    // religionId           Int?      @map("objectagamafk")
+    // bloodTypeId          Int?      @map("objectgolongandarahfk")
+    // occupationId         Int?      @map("objectpekerjaanfk")
+    // educationId          Int?      @map("objectpendidikanfk")
+    // maritalStatusId      Int?      @map("objectstatusperkawinanfk")
+    // titleId              Int?      @map("objecttitlefk")
+    // deathDate            DateTime? @map("tglmeninggal")
+    // nationalityId        Int?      @default(1) @map("objectkebangsaanfk")
+    // countryId            Int?      @default(0) @map("objectnegarafk")
+    // firstName            String?   @map("namadepan")
+    // lastName             String?   @map("namabelakang")
+    // birthTime            String?   @map("jamlahir")
+    // familyName           String?   @map("namakeluarga")
+    // guardianName         String?   @map("penanggungjawab")
+    // guardianRelation     String?   @map("hubungankeluargapj")
+    // guardianPhoneNumber  String?   @map("teleponpenanggungjawab")
+    // photo                String?   @map("photo")
+    // tribeId              Int?      @map("objectsukufk")
+    // familyCardNumber     String?   @map("nomorkk")
+
+    gender       Gender?       @relation(fields: [genderId], references: [id])
+    reservations Reservation[]
+
+    @@map("pasien_m")
+}
+
+model Gender {
+    id        Int     @id
+    gender    String  @map("jeniskelamin")
+    isEnabled Boolean @map("statusenabled")
+
+    patients Patient[]
+
+    @@map("jeniskelamin_m")
+}
+
+model ReferralSource {
+    id        Int     @id
+    source    String  @map("asalrujukan")
+    isEnabled Boolean @map("statusenabled")
+
+    reservations Reservation[]
+
+    @@map("asalrujukan_m")
 }

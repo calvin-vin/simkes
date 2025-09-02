@@ -210,6 +210,62 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   isEnabled: 'isEnabled'
 };
 
+exports.Prisma.ReservationScalarFieldEnum = {
+  id: 'id',
+  isEnabled: 'isEnabled',
+  unitId: 'unitId',
+  identity: 'identity',
+  queueNumber: 'queueNumber',
+  reservationNumber: 'reservationNumber',
+  reservationDate: 'reservationDate',
+  paymentMethodId: 'paymentMethodId',
+  bpjsNumber: 'bpjsNumber',
+  otherInsuranceNumber: 'otherInsuranceNumber',
+  createdAt: 'createdAt',
+  referralNumber: 'referralNumber',
+  doctorId: 'doctorId',
+  notes: 'notes',
+  queueType: 'queueType',
+  referralSourceId: 'referralSourceId',
+  isConfirmed: 'isConfirmed',
+  callStatus: 'callStatus',
+  isCancelled: 'isCancelled',
+  cancelReason: 'cancelReason',
+  educationId: 'educationId',
+  type: 'type',
+  patientType: 'patientType'
+};
+
+exports.Prisma.PatientScalarFieldEnum = {
+  id: 'id',
+  isEnabled: 'isEnabled',
+  name: 'name',
+  identity: 'identity',
+  genderId: 'genderId',
+  birthPlace: 'birthPlace',
+  birthDate: 'birthDate',
+  motherName: 'motherName',
+  fatherName: 'fatherName',
+  spouseName: 'spouseName',
+  bpjsNumber: 'bpjsNumber',
+  otherInsuranceNumber: 'otherInsuranceNumber',
+  phoneNumber: 'phoneNumber',
+  registeredAt: 'registeredAt',
+  homeAddress: 'homeAddress'
+};
+
+exports.Prisma.GenderScalarFieldEnum = {
+  id: 'id',
+  gender: 'gender',
+  isEnabled: 'isEnabled'
+};
+
+exports.Prisma.ReferralSourceScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  isEnabled: 'isEnabled'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -238,7 +294,11 @@ exports.Prisma.ModelName = {
   ServiceReceipt: 'ServiceReceipt',
   StockDetail: 'StockDetail',
   DoctorSchedule: 'DoctorSchedule',
-  Employee: 'Employee'
+  Employee: 'Employee',
+  Reservation: 'Reservation',
+  Patient: 'Patient',
+  Gender: 'Gender',
+  ReferralSource: 'ReferralSource'
 };
 
 /**

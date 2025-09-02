@@ -1,219 +1,606 @@
 import dayjs from "dayjs";
 import path from "path";
-import prisma from "../config/db.js";
-import { getIO } from "../socket.js";
+import fs from "fs/promises";
+import { v4 as uuidv4 } from "uuid";
+import { simrsPrisma } from "../config/db.js";
 import ApiError from "../utils/apiError.js";
-import { findDoctorOrFail } from "./doctor.service.js";
-import { findMedicalCategoryOrFail } from "./medicalCategory.service.js";
-import { findPatientIdOrFail } from "./patient.service.js";
 import { generateQr } from "../utils/generateQr.js";
-import { saveFile } from "../utils/saveFile.js";
+import {
+  saveQRCode,
+  getQRCodeByReservationId,
+  deleteQRCode,
+} from "./qrcode.service.js";
 
-export const createReservation = async ({
-  patientExternalId,
-  medicalCategoryId,
-  doctorId,
-  reservationDate,
-  referralFile,
-}) => {
-  const [doctor, medicalCategory, patient] = await Promise.all([
-    findDoctorOrFail({ doctorId, includes: { schedules: true } }),
-    findMedicalCategoryOrFail({ medicalCategoryId }),
-    findPatientIdOrFail({
-      patientExternalId,
-      select: { id: true, name: true },
-    }),
-  ]);
+/**
+ * Get the day name in Indonesian
+ * @param {string} date - Date string
+ * @returns {string} Day name in Indonesian
+ */
+const getDayName = (date) => {
+  const dayNames = {
+    0: "MINGGU",
+    1: "SENIN",
+    2: "SELASA",
+    3: "RABU",
+    4: "KAMIS",
+    5: "JUMAT",
+    6: "SABTU",
+  };
+  const dayIndex = dayjs(date).day();
+  return dayNames[dayIndex];
+};
 
-  await checkActiveReservationWithSameDoctor({
-    patientId: patient.id,
+/**
+ * Generate a unique reservation ID compatible with simrsPrisma model
+ * @returns {string} Unique reservation ID for 'norec' field
+ */
+const generateReservationId = () => {
+  // Generate UUID v4 for the norec field
+  return uuidv4();
+};
+
+/**
+ * Get queue number for online reservation
+ * @param {number} doctorId - Doctor ID
+ * @param {string} date - Reservation date
+ * @returns {Object} Queue numbers for morning and afternoon sessions
+ */
+export const getQueueNumberOnline = async (doctorId, date) => {
+  const reservationDate = dayjs(date).format("YYYY-MM-DD");
+
+  // Get morning reservations
+  const morningReservations = await simrsPrisma.reservation.count({
+    where: {
+      doctorId: doctorId,
+      reservationDate: {
+        gte: new Date(`${reservationDate} 00:00:00`),
+        lt: new Date(`${reservationDate} 12:00:00`),
+      },
+      queueType: {
+        startsWith: "EA",
+      },
+      isEnabled: true,
+    },
+  });
+
+  // Get afternoon reservations
+  const afternoonReservations = await simrsPrisma.reservation.count({
+    where: {
+      doctorId: doctorId,
+      reservationDate: {
+        gte: new Date(`${reservationDate} 12:00:00`),
+        lt: new Date(`${reservationDate} 23:59:59`),
+      },
+      queueType: {
+        startsWith: "EB",
+      },
+      isEnabled: true,
+    },
+  });
+
+  return {
+    pagi: morningReservations,
+    siang: afternoonReservations,
+  };
+};
+
+/**
+ * Get next queue number
+ * @param {number} doctorId - Doctor ID
+ * @param {string} date - Reservation date
+ * @returns {number} Next queue number
+ */
+export const getNextQueueNumber = async (doctorId, date) => {
+  const reservationDate = dayjs(date).format("YYYY-MM-DD");
+
+  const reservation = await simrsPrisma.reservation.findFirst({
+    where: {
+      doctorId: doctorId,
+      reservationDate: {
+        gte: new Date(`${reservationDate} 00:00:00`),
+        lt: new Date(`${reservationDate} 23:59:59`),
+      },
+      isEnabled: true,
+    },
+    orderBy: {
+      queueNumber: "desc",
+    },
+    select: {
+      queueNumber: true,
+    },
+  });
+
+  return (reservation?.queueNumber || 0) + 1;
+};
+
+/**
+ * Get all reservations
+ * @param {Object} query - Query parameters including filters, pagination, and sorting
+ * @returns {Promise<Object>} Paginated reservations with data and pagination info
+ */
+export const getAllReservations = async (query, identity) => {
+  const {
     doctorId,
-  });
+    unitId,
+    date,
+    isCancelled,
+    page = 1,
+    limit = 10,
+    sortBy = "createdAt",
+    sortOrder = "desc",
+  } = query;
 
-  const [_, __, formattedQueueNumber] = await Promise.all([
-    validateReservationDateOnDoctorSchedule(reservationDate, doctor),
-    validateReservationDateNotPast(reservationDate),
-    generateFormattedQueueNumber({
-      doctorId,
-      reservationDate,
-      doctorCode: doctor.code,
-    }),
-  ]);
+  // Build filters object
+  const filters = {
+    isEnabled: true,
+    ...(doctorId ? { doctorId: Number(doctorId) } : {}),
+    ...(unitId ? { unitId: Number(unitId) } : {}),
+    ...(identity ? { identity } : {}),
+    ...(isCancelled !== undefined
+      ? { isCancelled: isCancelled === "true" }
+      : {}),
+  };
 
-  const qrContent = `${formattedQueueNumber} | ${medicalCategoryId} | ${reservationDate}`;
-  const qrFilePath = await generateQr({
-    content: qrContent,
-    subFolder: path.join(
-      "reservations",
-      medicalCategory.name.replace(/\s+/g, "_"),
-      dayjs(reservationDate).format("YYYY-MM-DD")
-    ),
-    filenamePrefix: `${formattedQueueNumber}-${patient.name}`,
-  });
-  const qrCodeUrl = `${process.env.HOST_URL}/${qrFilePath.replace(/\\/g, "/")}`;
-
-  let referralFileUrl = null;
-  if (referralFile) {
-    const savedFilePath = await saveFile({
-      buffer: referralFile.buffer,
-      baseFolder: "public",
-      subFolder: path.join(
-        "referrals",
-        medicalCategory.name.replace(/\s+/g, "_"),
-        dayjs(reservationDate).format("YYYY-MM-DD")
-      ),
-      filenamePrefix: `${formattedQueueNumber}-${patient.name}`,
-      extension: path.extname(referralFile.originalname),
-    });
-
-    referralFileUrl = `${process.env.HOST_URL}/${savedFilePath.replace(
-      /\\/g,
-      "/"
-    )}`;
+  // Add date filter if provided
+  if (date) {
+    const filterDate = dayjs(date).format("YYYY-MM-DD");
+    filters.reservationDate = {
+      gte: new Date(`${filterDate} 00:00:00`),
+      lt: new Date(`${filterDate} 23:59:59`),
+    };
   }
 
-  const reservation = await prisma.reservation.create({
-    data: {
-      patientId: patient.id,
-      medicalCategoryId,
-      doctorId,
-      reservationDate: new Date(reservationDate),
-      queueNumber: formattedQueueNumber,
-      qrCodeUrl,
-      referralFile: referralFileUrl,
+  // Build orderBy object
+  const orderBy = {};
+  if (
+    sortBy &&
+    [
+      "reservationDate",
+      "createdAt",
+      "queueNumber",
+      "reservationNumber",
+    ].includes(sortBy)
+  ) {
+    orderBy[sortBy] =
+      sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
+        ? sortOrder.toLowerCase()
+        : "desc";
+  } else {
+    orderBy["createdAt"] = "desc"; // default sort
+  }
+
+  // Execute queries in parallel for better performance
+  const [reservations, total] = await Promise.all([
+    simrsPrisma.reservation.findMany({
+      where: filters,
+      skip: (Number(page) - 1) * Number(limit),
+      take: Number(limit),
+      orderBy,
+      include: {
+        patient: true,
+        doctor: true,
+        unit: true,
+        paymentMethod: true,
+        referralSource: true,
+      },
+    }),
+    simrsPrisma.reservation.count({ where: filters }),
+  ]);
+
+  // Get QR code information for each reservation
+  const reservationsWithQrCode = await Promise.all(
+    reservations.map(async (reservation) => {
+      try {
+        const qrCode = await getQRCodeByReservationId(reservation.id);
+        return { ...reservation, qrCodeUrl: qrCode.qrCodeUrl };
+      } catch (error) {
+        // QR code not found, continue without it
+        return { ...reservation, qrCodeUrl: null };
+      }
+    })
+  );
+
+  return {
+    results: reservationsWithQrCode,
+    pagination: {
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      totalPages: Math.ceil(total / Number(limit)),
     },
+  };
+};
+
+/**
+ * Get reservation by ID
+ * @param {string} id - Reservation ID
+ * @param {string} identity - User identity for filtering
+ * @returns {Promise<Object>} Reservation details
+ * @throws {ApiError} If reservation not found
+ */
+export const getReservationById = async (id, identity) => {
+  const where = { id };
+
+  // Add identity filter if provided
+  if (identity) {
+    where.identity = identity;
+  }
+
+  const reservation = await simrsPrisma.reservation.findFirst({
+    where,
     include: {
       patient: true,
       doctor: true,
-      medicalCategory: true,
+      unit: true,
+      paymentMethod: true,
+      referralSource: true,
     },
   });
 
-  const io = getIO();
-  io.emit("reservation:updated", {
-    doctorId: reservation.doctorId,
-    reservationDate: reservation.reservationDate,
-    message: "New reservation created",
-    queueNumber: formattedQueueNumber,
-  });
+  if (!reservation) {
+    throw new ApiError("Reservasi tidak ditemukan", 404);
+  }
+
+  // Get QR code information if available
+  try {
+    const qrCode = await getQRCodeByReservationId(id);
+    reservation.qrCodeUrl = qrCode.qrCodeUrl;
+  } catch (error) {
+    // QR code not found, continue without it
+    reservation.qrCodeUrl = null;
+  }
 
   return reservation;
 };
 
-export const skipReservation = async (reservationId) => {
-  const reservation = await prisma.reservation.findUnique({
-    where: { id: reservationId },
+/**
+ * Cancel reservation
+ * @param {string} id - Reservation ID
+ * @param {string} cancelReason - Reason for cancellation
+ * @param {string} identity - User identity for filtering
+ * @returns {Promise<Object>} Cancelled reservation
+ * @throws {ApiError} If reservation not found
+ */
+export const cancelReservation = async (id, cancelReason, identity) => {
+  const where = { id };
+
+  // Add identity filter if provided
+  if (identity) {
+    where.identity = identity;
+  }
+
+  // Check if reservation exists
+  const reservation = await simrsPrisma.reservation.findFirst({
+    where,
   });
 
   if (!reservation) {
-    throw new Error("Reservation not found");
+    throw new ApiError("Reservasi tidak ditemukan", 404);
   }
 
-  const maxQueue = await prisma.reservation.aggregate({
-    where: {
-      doctorId: reservation.doctorId,
-      reservationDate: reservation.reservationDate,
-    },
-    _max: {
-      queueNumber: true,
-    },
-  });
+  // Check if reservation is already cancelled
+  if (reservation.isCancelled) {
+    throw new ApiError("Reservasi sudah dibatalkan sebelumnya", 400);
+  }
 
-  const newQueueNumber = (maxQueue._max.queueNumber || 0) + 1;
-
-  const updated = await prisma.reservation.update({
-    where: { id: reservationId },
+  // Cancel reservation
+  const cancelledReservation = await simrsPrisma.reservation.update({
+    where: { id: reservation.id },
     data: {
-      queueNumber: newQueueNumber,
-      status: "WAITING",
+      isCancelled: true,
+      cancelReason: cancelReason,
+    },
+    include: {
+      patient: true,
+      doctor: true,
+      unit: true,
+      paymentMethod: true,
+      referralSource: true,
     },
   });
 
-  const io = getIO();
-  io.emit("reservation:updated", {
-    doctorId: updated.doctorId,
-    reservationDate: updated.reservationDate,
-    message: "Reservation skipped",
-  });
+  // Get QR code information if available
+  try {
+    const qrCode = await getQRCodeByReservationId(id);
+    cancelledReservation.qrCodeUrl = qrCode.qrCodeUrl;
+  } catch (error) {
+    // QR code not found, continue without it
+    cancelledReservation.qrCodeUrl = null;
+  }
 
-  return updated;
+  return cancelledReservation;
 };
 
-export const checkActiveReservationWithSameDoctor = async ({
-  patientId,
-  doctorId,
-}) => {
-  const existingActiveReservation = await prisma.reservation.findFirst({
-    where: {
-      patientId,
-      doctorId,
-      NOT: {
-        status: "DONE",
-      },
+/**
+ * Delete reservation (permanent delete)
+ * @param {string} id - Reservation ID
+ * @param {string} identity - User identity for filtering
+ * @returns {Promise<Object>} Deleted reservation
+ * @throws {ApiError} If reservation not found or cannot be deleted
+ */
+export const deleteReservation = async (id, identity) => {
+  const where = { id };
+
+  // Add identity filter if provided
+  if (identity) {
+    where.identity = identity;
+  }
+
+  // Check if reservation exists
+  const reservation = await simrsPrisma.reservation.findFirst({
+    where,
+    include: {
+      patient: true,
+      doctor: true,
+      unit: true,
+      paymentMethod: true,
+      referralSource: true,
     },
   });
 
-  if (existingActiveReservation) {
+  if (!reservation) {
+    throw new ApiError("Reservasi tidak ditemukan", 404);
+  }
+
+  // Check if reservation can be deleted (isConfirmed must be false and callStatus must be "0")
+  if (reservation.isConfirmed === true || reservation.callStatus !== "0") {
     throw new ApiError(
-      "You already have an unfinished reservation with this doctor. Please complete it before making a new one.",
+      "Reservasi tidak dapat dihapus karena sudah dikonfirmasi atau sudah dilayani",
       400
     );
   }
 
-  return existingActiveReservation;
-};
+  // Try to get and delete QR code if exists
+  try {
+    const qrCode = await getQRCodeByReservationId(reservation.id);
 
-export const validateReservationDateOnDoctorSchedule = async (
-  reservationDate,
-  doctor
-) => {
-  const reservationDay = dayjs(reservationDate).format("dddd").toUpperCase(); // e.g. SENIN
+    // Delete QR code file if exists
+    if (qrCode && qrCode.filePath) {
+      const fullPath = path.join("public", qrCode.filePath);
+      try {
+        await fs.access(fullPath);
+        await fs.unlink(fullPath);
+      } catch (fileError) {
+        // File doesn't exist or cannot be accessed, continue with deletion
+        console.error(`Error deleting QR code file: ${fileError.message}`);
+      }
+    }
 
-  const hasSchedule = doctor.schedules.some(
-    (schedule) => schedule.day.toUpperCase() === reservationDay
-  );
-
-  if (!hasSchedule) {
-    throw new ApiError("Doctor is not available on the selected date", 400);
+    // Delete QR code record from database
+    if (qrCode) {
+      await deleteQRCode(qrCode.id);
+    }
+  } catch (error) {
+    // QR code not found, continue with reservation deletion
+    if (error.statusCode !== 404) {
+      console.error(`Error handling QR code: ${error.message}`);
+    }
   }
+
+  // Permanently delete the reservation
+  await simrsPrisma.reservation.delete({
+    where: { id: reservation.id },
+  });
 
   return true;
 };
 
-export const validateReservationDateNotPast = async (reservationDate) => {
-  const today = dayjs().startOf("day");
-  const selectedDate = dayjs(reservationDate).startOf("day");
-
-  const isPast = selectedDate.isBefore(today);
-
-  if (isPast) {
-    throw new ApiError("Reservation date cannot be in the past", 400);
-  }
-
-  return true;
-};
-
-export const generateFormattedQueueNumber = async ({
-  doctorId,
-  reservationDate,
-  doctorCode,
-}) => {
-  const maxQueue = await prisma.reservation.aggregate({
+/**
+ * Save reservation
+ * @param {Object} data - Reservation data
+ * @returns {Object} Created reservation
+ */
+export const createReservation = async (data, userIdentity) => {
+  const patient = await simrsPrisma.patient.findFirst({
     where: {
-      doctorId,
-      reservationDate: new Date(reservationDate),
-    },
-    _max: {
-      queueNumber: true,
+      identity: userIdentity,
     },
   });
 
-  const nextQueueNumber = (maxQueue._max.queueNumber || 0) + 1;
+  // Check if reservation date is not before today
+  const today = dayjs().startOf("day");
+  const reservationDay = dayjs(data.reservationDate).startOf("day");
 
-  const formattedQueueNumber = `${doctorCode}${String(nextQueueNumber).padStart(
-    3,
-    "0"
-  )}`;
+  // Check if patient already has a reservation on the same date
+  const existingReservation = await simrsPrisma.reservation.findFirst({
+    where: {
+      identity: userIdentity,
+      reservationDate: {
+        gte: reservationDay.toDate(),
+        lt: reservationDay.add(1, "day").toDate(),
+      },
+      isCancelled: false,
+    },
+  });
 
-  return formattedQueueNumber;
+  if (existingReservation) {
+    throw new ApiError(
+      "Anda sudah memiliki reservasi pada tanggal yang sama. Tidak dapat membuat reservasi baru pada tanggal tersebut.",
+      400
+    );
+  }
+
+  if (reservationDay.isBefore(today)) {
+    throw new ApiError("Tanggal reservasi tidak boleh sebelum hari ini", 400);
+  }
+
+  // Check if doctor is available on the selected date and time
+  if (data.doctorId) {
+    const dayName = getDayName(data.reservationDate);
+    const reservationTime = dayjs(data.reservationDate).format("HH:mm:ss");
+
+    const doctorSchedule = await simrsPrisma.doctorSchedule.findFirst({
+      where: {
+        doctorId: data.doctorId,
+        unitId: data.unitId,
+        days: {
+          contains: dayName,
+        },
+        isEnabled: true,
+      },
+    });
+
+    if (!doctorSchedule) {
+      throw new ApiError("Jadwal Dokter tidak tersedia di Poli ini", 400);
+    }
+
+    // Check if reservation time is within doctor's schedule time range
+    const startTime = dayjs(doctorSchedule.startTime).format("HH:mm:ss");
+    const endTime = dayjs(doctorSchedule.endTime).format("HH:mm:ss");
+
+    if (reservationTime < startTime || reservationTime > endTime) {
+      throw new ApiError(
+        `Waktu reservasi harus dalam rentang jadwal dokter: ${startTime} - ${endTime}`,
+        400
+      );
+    }
+  }
+
+  // Check quota
+  const reservationDate = dayjs(data.reservationDate).toDate();
+
+  const reservationHour = dayjs(data.reservationDate).hour();
+  const maxQuota = 50; // Default max quota per session
+
+  // Determine if morning or afternoon based on reservation time
+  const isMorningSession = reservationHour < 12;
+
+  // Get current queue numbers
+  const quota = await getQueueNumberOnline(data.doctorId, reservationDate);
+
+  // Check if quota is full based on time of day
+  if (!isMorningSession && quota.siang >= maxQuota) {
+    throw new ApiError(
+      "Mohon maaf kuota layanan online siang sudah penuh, silahkan coba di jadwal yang lain",
+      400
+    );
+  } else if (isMorningSession && quota.pagi >= maxQuota) {
+    throw new ApiError(
+      "Mohon maaf kuota layanan online pagi sudah penuh, silahkan coba di jadwal yang lain",
+      400
+    );
+  }
+
+  // Check and get referral source
+  if (data.referralSourceId) {
+    const referralSource = await simrsPrisma.referralSource.findUnique({
+      where: {
+        id: data.referralSourceId,
+      },
+    });
+
+    if (!referralSource) {
+      throw new ApiError("Sumber rujukan tidak ditemukan", 404);
+    }
+  }
+
+  // Get unit information
+  const unit = await simrsPrisma.unit.findUnique({
+    where: {
+      id: data.unitId,
+    },
+  });
+
+  if (!unit) {
+    throw new ApiError("Poli tidak ditemukan", 404);
+  }
+
+  // Generate queue number
+  const queueNumber = await getNextQueueNumber(data.doctorId, reservationDate);
+
+  let queueType = "";
+
+  // Get counter number from unit id with zero padding (3 digits)
+  const counterNumber = String(unit.id).padStart(3, "0");
+
+  if (data.paymentMethodId === 2) {
+    // BPJS - assuming ID 2 is BPJS
+    if (!isMorningSession) {
+      queueType = `EB${counterNumber}`;
+    } else {
+      queueType = `EA${counterNumber}`;
+    }
+  } else {
+    // Non-BPJS
+    if (!isMorningSession) {
+      queueType = `ED${counterNumber}`;
+    } else {
+      queueType = `EC${counterNumber}`;
+    }
+  }
+
+  // Generate QR code
+  const qrContent = `${queueType}-${String(queueNumber).padStart(4, "0")} | ${
+    data.unitId
+  } | ${reservationDate}`;
+
+  const qrFilePath = await generateQr({
+    content: qrContent,
+    subFolder: path.join(
+      "reservations",
+      unit.unitName,
+      dayjs(reservationDate).format("YYYY-MM-DD")
+    ),
+    filenamePrefix: `${queueType}-${String(queueNumber).padStart(4, "0")}-${
+      patient.name
+    }`,
+  });
+  const qrCodeUrl = `${process.env.HOST_URL}/${qrFilePath.replace(/\\/g, "/")}`;
+
+  // Generate reservation ID once and use it consistently
+  const reservationId = generateReservationId().replace(/-/g, "");
+
+  // Save QR code information to simkes database
+  const savedQRCode = await saveQRCode({
+    reservationId,
+    qrCodeUrl,
+    qrCodeContent: qrContent,
+    filePath: qrFilePath,
+  });
+
+  const reservationData = {
+    id: reservationId,
+    isEnabled: true,
+    unitId: data.unitId,
+    reservationNumber: `${dayjs().format("YYYYMMDD")}-${queueNumber}`,
+    reservationDate: new Date(reservationDate),
+    paymentMethodId: data.paymentMethodId,
+    identity: patient.identity,
+    bpjsNumber: data.bpjsNumber || null,
+    otherInsuranceNumber: data.otherInsuranceNumber || null,
+    referralNumber: data.referralNumber || null,
+    referralSourceId: data.referralSourceId || null,
+    doctorId: data.doctorId,
+    queueNumber: queueNumber,
+    queueType: queueType,
+    notes: data.notes || null,
+    isConfirmed: false,
+    callStatus: "0",
+    isCancelled: false,
+  };
+
+  const createdReservation = await simrsPrisma.reservation.create({
+    data: reservationData,
+    include: {
+      patient: true,
+      doctor: true,
+      unit: true,
+      paymentMethod: true,
+      referralSource: true,
+    },
+  });
+
+  // Tambahkan qrCodeUrl dari simkes ke response
+  createdReservation.qrCodeUrl = savedQRCode.qrCodeUrl;
+
+  // Emit socket event
+  // const io = getIO();
+  // io.emit("reservation:updated", {
+  //   doctorId: createdReservation.doctorId,
+  //   reservationDate: createdReservation.reservationDate,
+  //   message: "New reservation created",
+  //   queueNumber: createdReservation.queueType,
+  // });
+
+  return createdReservation;
 };

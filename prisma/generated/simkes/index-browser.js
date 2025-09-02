@@ -120,97 +120,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ReservationScalarFieldEnum = {
-  id: 'id',
-  patientId: 'patientId',
-  medicalCategoryId: 'medicalCategoryId',
-  doctorId: 'doctorId',
-  reservationDate: 'reservationDate',
-  queueNumber: 'queueNumber',
-  qrCodeUrl: 'qrCodeUrl',
-  status: 'status',
-  referralFile: 'referralFile',
-  patientPaymentId: 'patientPaymentId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PatientScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  simrsId: 'simrsId',
-  nik: 'nik',
-  phone: 'phone',
-  email: 'email',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PaymentMethodScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PatientPaymentScalarFieldEnum = {
-  id: 'id',
-  patientId: 'patientId',
-  paymentMethodId: 'paymentMethodId',
-  participantId: 'participantId',
-  paymentFile: 'paymentFile',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MedicalCategoryScalarFieldEnum = {
-  id: 'id',
-  simrsId: 'simrsId',
-  name: 'name',
-  syncedAt: 'syncedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DoctorScalarFieldEnum = {
-  id: 'id',
-  simrsId: 'simrsId',
-  name: 'name',
-  code: 'code',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DoctorMedicalCategoryScalarFieldEnum = {
-  id: 'id',
-  doctorId: 'doctorId',
-  medicalCategoryId: 'medicalCategoryId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DoctorScheduleScalarFieldEnum = {
-  id: 'id',
-  simrsId: 'simrsId',
-  doctorId: 'doctorId',
-  specialization: 'specialization',
-  day: 'day',
-  startTime: 'startTime',
-  endTime: 'endTime',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MedicineScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  unit: 'unit',
-  stock: 'stock',
-  simrsId: 'simrsId',
-  syncedAt: 'syncedAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.EmergencyRequestScalarFieldEnum = {
   id: 'id',
   patientId: 'patientId',
@@ -240,6 +149,16 @@ exports.Prisma.AmbulanceStaffScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ReservationQRCodeScalarFieldEnum = {
+  id: 'id',
+  reservationId: 'reservationId',
+  qrCodeUrl: 'qrCodeUrl',
+  qrCodeContent: 'qrCodeContent',
+  filePath: 'filePath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -254,15 +173,6 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.ReservationStatus = exports.$Enums.ReservationStatus = {
-  WAITING: 'WAITING',
-  ONGOING: 'ONGOING',
-  DONE: 'DONE',
-  SKIPPED: 'SKIPPED',
-  RECALLED: 'RECALLED',
-  EXPIRED: 'EXPIRED'
-};
-
 exports.EmergencyStatus = exports.$Enums.EmergencyStatus = {
   PENDING: 'PENDING',
   ASSIGNED: 'ASSIGNED',
@@ -274,18 +184,10 @@ exports.EmergencyStatus = exports.$Enums.EmergencyStatus = {
 };
 
 exports.Prisma.ModelName = {
-  Reservation: 'Reservation',
-  Patient: 'Patient',
-  PaymentMethod: 'PaymentMethod',
-  PatientPayment: 'PatientPayment',
-  MedicalCategory: 'MedicalCategory',
-  Doctor: 'Doctor',
-  DoctorMedicalCategory: 'DoctorMedicalCategory',
-  DoctorSchedule: 'DoctorSchedule',
-  Medicine: 'Medicine',
   EmergencyRequest: 'EmergencyRequest',
   EmergencyHistory: 'EmergencyHistory',
-  AmbulanceStaff: 'AmbulanceStaff'
+  AmbulanceStaff: 'AmbulanceStaff',
+  ReservationQRCode: 'ReservationQRCode'
 };
 
 /**

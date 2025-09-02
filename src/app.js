@@ -21,10 +21,15 @@ import bedMonitorRoute from "./routes/bed.routes.js";
 import medicineRoute from "./routes/medicine.route.js";
 import policlinicRoute from "./routes/policlinic.route.js";
 import doctorScheduleRoute from "./routes/doctorSchedule.route.js";
-// import patientRoute from "./routes/patient.route.js";
+import genderRoute from "./routes/gender.route.js";
+import referralSourceRoute from "./routes/referralSource.js";
+import qrcodeRoute from "./routes/qrcode.route.js";
+
 // import ambulanceStaffRoute from "./routes/ambulanceStaff.route.js";
 
 // Patient Routes
+import patientRoute from "./routes/patient.route.js";
+import reservationRoute from "./routes/reservation.route.js";
 
 // Ambulance Staff Routes
 
@@ -56,10 +61,13 @@ app.use("/api/v1/bed", bedMonitorRoute);
 app.use("/api/v1/medicines", medicineRoute);
 app.use("/api/v1/policlinics", policlinicRoute);
 app.use("/api/v1/doctor-schedules", doctorScheduleRoute);
-// app.use("/api/v1/medical-categories", medicalCategoryRoute);
+app.use("/api/v1/gender", genderRoute);
+app.use("/api/v1/referral-sources", referralSourceRoute);
 
-// // Patient Routes
-// app.use("/api/v1/patients", patientRoute);
+// Patient Routes
+app.use("/api/v1/patients", patientRoute);
+app.use("/api/v1/reservations", reservationRoute);
+app.use("/api/v1/qrcodes", qrcodeRoute);
 // app.use("/api/v1/patient-payments", patientPaymentRoute);
 // app.use("/api/v1/reservations", reservationRoute);
 // app.use("/api/v1/emergencies", emergencyRoute);

@@ -1,7 +1,9 @@
 import { ZodError } from "zod";
 import ApiError from "../utils/apiError.js";
-import { Prisma } from "@prisma/client";
 import multer from "multer";
+
+// Import Prisma error classes directly
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library.js";
 
 const handleZodError = (err) => {
   const formattedErrors = err.errors.map((e) => ({
@@ -51,7 +53,7 @@ const errorHandler = (err, req, res, next) => {
     return sendErrorValidation(err, res);
   }
 
-  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+  if (err instanceof PrismaClientKnownRequestError) {
     if (err.code === "P2002") {
       const fields = err.meta?.target?.join(", ") || "unknown field";
       const message = `Field(s) must be unique: ${fields}`;
