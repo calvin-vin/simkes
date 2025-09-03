@@ -159,6 +159,17 @@ exports.Prisma.ReservationQRCodeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.HospitalLocationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  address: 'address',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -187,7 +198,8 @@ exports.Prisma.ModelName = {
   EmergencyRequest: 'EmergencyRequest',
   EmergencyHistory: 'EmergencyHistory',
   AmbulanceStaff: 'AmbulanceStaff',
-  ReservationQRCode: 'ReservationQRCode'
+  ReservationQRCode: 'ReservationQRCode',
+  HospitalLocation: 'HospitalLocation'
 };
 
 /**

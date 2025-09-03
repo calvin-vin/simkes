@@ -30,3 +30,18 @@ export const reservationFilterSchema = z.object({
     .default("createdAt"),
   sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
 });
+
+export const checkinSchema = z.object({
+  latitude: z.number().or(
+    z
+      .string()
+      .regex(/^-?\d+(\.\d+)?$/)
+      .transform(Number)
+  ),
+  longitude: z.number().or(
+    z
+      .string()
+      .regex(/^-?\d+(\.\d+)?$/)
+      .transform(Number)
+  ),
+});

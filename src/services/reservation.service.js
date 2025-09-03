@@ -10,6 +10,7 @@ import {
   getQRCodeByReservationId,
   deleteQRCode,
 } from "./qrcode.service.js";
+import { isPatientWithinHospitalRange } from "./hospitalLocation.service.js";
 
 /**
  * Get the day name in Indonesian
@@ -45,6 +46,90 @@ const generateReservationId = () => {
  * @param {string} date - Reservation date
  * @returns {Object} Queue numbers for morning and afternoon sessions
  */
+/**
+ * Check-in a reservation
+ * @param {string} id - Reservation ID
+ * @param {number} latitude - Patient's current latitude
+ * @param {number} longitude - Patient's current longitude
+ * @returns {Object} Updated reservation
+ */
+export const checkinReservation = async (id, latitude, longitude, identity) => {
+  // Find the reservation
+  const reservation = await simrsPrisma.reservation.findFirst({
+    where: {
+      id,
+      isEnabled: true,
+      identity: identity,
+    },
+  });
+
+  if (!reservation) {
+    throw new ApiError("Reservasi tidak ditemukan", 404);
+  }
+
+  // Check if reservation is already confirmed
+  if (reservation.isConfirmed) {
+    throw new ApiError("Reservasi sudah dikonfirmasi sebelumnya", 400);
+  }
+
+  // Check if reservation is cancelled
+  if (reservation.isCancelled) {
+    throw new ApiError("Reservasi sudah dibatalkan", 400);
+  }
+
+  // Check if patient is within hospital range (1 km)
+  const isWithinRange = await isPatientWithinHospitalRange(
+    latitude,
+    longitude,
+    1
+  );
+
+  if (!isWithinRange) {
+    throw new ApiError(
+      "Anda berada di luar jangkauan rumah sakit. Silakan datang ke lokasi rumah sakit untuk check-in",
+      400
+    );
+  }
+
+  // Check if it's within valid check-in time (from 06:00 on reservation day until reservation time)
+  const reservationTime = dayjs(reservation.reservationDate);
+  const currentTime = dayjs();
+  const reservationDate = reservationTime.format("YYYY-MM-DD");
+  const checkInStartTime = dayjs(`${reservationDate} 06:00:00`);
+
+  // Check if current time is before 06:00 on reservation day
+  // if (currentTime.isBefore(checkInStartTime)) {
+  //   throw new ApiError(
+  //     `Anda hanya dapat check-in mulai pukul 06:00 pada tanggal reservasi. Jadwal reservasi Anda pada ${reservationTime.format(
+  //       "DD/MM/YYYY HH:mm"
+  //     )}`,
+  //     400
+  //   );
+  // }
+
+  // // Check if current time is after reservation time
+  // if (currentTime.isAfter(reservationTime)) {
+  //   throw new ApiError(
+  //     `Waktu check-in telah berakhir. Jadwal reservasi Anda pada ${reservationTime.format(
+  //       "DD/MM/YYYY HH:mm"
+  //     )}`,
+  //     400
+  //   );
+  // }
+
+  // Update reservation to confirmed
+  const updatedReservation = await simrsPrisma.reservation.update({
+    where: {
+      id,
+    },
+    data: {
+      isConfirmed: true,
+    },
+  });
+
+  return updatedReservation;
+};
+
 export const getQueueNumberOnline = async (doctorId, date) => {
   const reservationDate = dayjs(date).format("YYYY-MM-DD");
 
@@ -413,12 +498,12 @@ export const createReservation = async (data, userIdentity) => {
     },
   });
 
-  if (existingReservation) {
-    throw new ApiError(
-      "Anda sudah memiliki reservasi pada tanggal yang sama. Tidak dapat membuat reservasi baru pada tanggal tersebut.",
-      400
-    );
-  }
+  // if (existingReservation) {
+  //   throw new ApiError(
+  //     "Anda sudah memiliki reservasi pada tanggal yang sama. Tidak dapat membuat reservasi baru pada tanggal tersebut.",
+  //     400
+  //   );
+  // }
 
   if (reservationDay.isBefore(today)) {
     throw new ApiError("Tanggal reservasi tidak boleh sebelum hari ini", 400);

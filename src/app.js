@@ -25,6 +25,9 @@ import genderRoute from "./routes/gender.route.js";
 import referralSourceRoute from "./routes/referralSource.js";
 import qrcodeRoute from "./routes/qrcode.route.js";
 
+// Operator Routes
+import hospitalLocationRoute from "./routes/hospitalLocation.route.js";
+
 // import ambulanceStaffRoute from "./routes/ambulanceStaff.route.js";
 
 // Patient Routes
@@ -63,6 +66,9 @@ app.use("/api/v1/policlinics", policlinicRoute);
 app.use("/api/v1/doctor-schedules", doctorScheduleRoute);
 app.use("/api/v1/gender", genderRoute);
 app.use("/api/v1/referral-sources", referralSourceRoute);
+
+// Operator Routes
+app.use("/api/v1/hospital-location", hospitalLocationRoute);
 
 // Patient Routes
 app.use("/api/v1/patients", patientRoute);

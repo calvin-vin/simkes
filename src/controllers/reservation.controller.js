@@ -6,6 +6,7 @@ import {
   cancelReservationSchema,
   reservationFilterSchema,
   reservationSchema,
+  checkinSchema,
 } from "../schemas/reservation.schema.js";
 import * as reservationService from "../services/reservation.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
@@ -86,4 +87,26 @@ export const deleteReservation = catchAsync(async (req, res) => {
   );
 
   return apiSuccess(res, 200, "Reservasi berhasil dihapus", deletedReservation);
+});
+
+export const checkinReservationController = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const parsedBody = checkinSchema.parse(req.body);
+  const { latitude, longitude } = parsedBody;
+  const userIdentity = req.user.identity;
+
+  const reservation = await reservationService.checkinReservation(
+    id,
+    latitude,
+    longitude,
+    userIdentity
+  );
+
+  return apiSuccess(
+    res,
+    200,
+    "Check-in berhasil dilakukan",
+    // reservationResource(reservation)
+    reservation
+  );
 });

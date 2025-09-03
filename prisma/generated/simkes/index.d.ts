@@ -33,6 +33,11 @@ export type AmbulanceStaff = $Result.DefaultSelection<Prisma.$AmbulanceStaffPayl
  * 
  */
 export type ReservationQRCode = $Result.DefaultSelection<Prisma.$ReservationQRCodePayload>
+/**
+ * Model HospitalLocation
+ * 
+ */
+export type HospitalLocation = $Result.DefaultSelection<Prisma.$HospitalLocationPayload>
 
 /**
  * Enums
@@ -220,6 +225,16 @@ export class PrismaClient<
     * ```
     */
   get reservationQRCode(): Prisma.ReservationQRCodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.hospitalLocation`: Exposes CRUD operations for the **HospitalLocation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HospitalLocations
+    * const hospitalLocations = await prisma.hospitalLocation.findMany()
+    * ```
+    */
+  get hospitalLocation(): Prisma.HospitalLocationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -663,7 +678,8 @@ export namespace Prisma {
     EmergencyRequest: 'EmergencyRequest',
     EmergencyHistory: 'EmergencyHistory',
     AmbulanceStaff: 'AmbulanceStaff',
-    ReservationQRCode: 'ReservationQRCode'
+    ReservationQRCode: 'ReservationQRCode',
+    HospitalLocation: 'HospitalLocation'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -682,7 +698,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode"
+      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -982,6 +998,80 @@ export namespace Prisma {
           }
         }
       }
+      HospitalLocation: {
+        payload: Prisma.$HospitalLocationPayload<ExtArgs>
+        fields: Prisma.HospitalLocationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HospitalLocationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HospitalLocationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>
+          }
+          findFirst: {
+            args: Prisma.HospitalLocationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HospitalLocationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>
+          }
+          findMany: {
+            args: Prisma.HospitalLocationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>[]
+          }
+          create: {
+            args: Prisma.HospitalLocationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>
+          }
+          createMany: {
+            args: Prisma.HospitalLocationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HospitalLocationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>[]
+          }
+          delete: {
+            args: Prisma.HospitalLocationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>
+          }
+          update: {
+            args: Prisma.HospitalLocationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>
+          }
+          deleteMany: {
+            args: Prisma.HospitalLocationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HospitalLocationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HospitalLocationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>[]
+          }
+          upsert: {
+            args: Prisma.HospitalLocationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HospitalLocationPayload>
+          }
+          aggregate: {
+            args: Prisma.HospitalLocationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHospitalLocation>
+          }
+          groupBy: {
+            args: Prisma.HospitalLocationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HospitalLocationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HospitalLocationCountArgs<ExtArgs>
+            result: $Utils.Optional<HospitalLocationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1070,6 +1160,7 @@ export namespace Prisma {
     emergencyHistory?: EmergencyHistoryOmit
     ambulanceStaff?: AmbulanceStaffOmit
     reservationQRCode?: ReservationQRCodeOmit
+    hospitalLocation?: HospitalLocationOmit
   }
 
   /* Types for Logging */
@@ -5547,6 +5638,1078 @@ export namespace Prisma {
 
 
   /**
+   * Model HospitalLocation
+   */
+
+  export type AggregateHospitalLocation = {
+    _count: HospitalLocationCountAggregateOutputType | null
+    _avg: HospitalLocationAvgAggregateOutputType | null
+    _sum: HospitalLocationSumAggregateOutputType | null
+    _min: HospitalLocationMinAggregateOutputType | null
+    _max: HospitalLocationMaxAggregateOutputType | null
+  }
+
+  export type HospitalLocationAvgAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type HospitalLocationSumAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type HospitalLocationMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    latitude: number | null
+    longitude: number | null
+    address: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HospitalLocationMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    latitude: number | null
+    longitude: number | null
+    address: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HospitalLocationCountAggregateOutputType = {
+    id: number
+    name: number
+    latitude: number
+    longitude: number
+    address: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type HospitalLocationAvgAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
+
+  export type HospitalLocationSumAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
+
+  export type HospitalLocationMinAggregateInputType = {
+    id?: true
+    name?: true
+    latitude?: true
+    longitude?: true
+    address?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HospitalLocationMaxAggregateInputType = {
+    id?: true
+    name?: true
+    latitude?: true
+    longitude?: true
+    address?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HospitalLocationCountAggregateInputType = {
+    id?: true
+    name?: true
+    latitude?: true
+    longitude?: true
+    address?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type HospitalLocationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HospitalLocation to aggregate.
+     */
+    where?: HospitalLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HospitalLocations to fetch.
+     */
+    orderBy?: HospitalLocationOrderByWithRelationInput | HospitalLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HospitalLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HospitalLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HospitalLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HospitalLocations
+    **/
+    _count?: true | HospitalLocationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HospitalLocationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HospitalLocationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HospitalLocationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HospitalLocationMaxAggregateInputType
+  }
+
+  export type GetHospitalLocationAggregateType<T extends HospitalLocationAggregateArgs> = {
+        [P in keyof T & keyof AggregateHospitalLocation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHospitalLocation[P]>
+      : GetScalarType<T[P], AggregateHospitalLocation[P]>
+  }
+
+
+
+
+  export type HospitalLocationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HospitalLocationWhereInput
+    orderBy?: HospitalLocationOrderByWithAggregationInput | HospitalLocationOrderByWithAggregationInput[]
+    by: HospitalLocationScalarFieldEnum[] | HospitalLocationScalarFieldEnum
+    having?: HospitalLocationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HospitalLocationCountAggregateInputType | true
+    _avg?: HospitalLocationAvgAggregateInputType
+    _sum?: HospitalLocationSumAggregateInputType
+    _min?: HospitalLocationMinAggregateInputType
+    _max?: HospitalLocationMaxAggregateInputType
+  }
+
+  export type HospitalLocationGroupByOutputType = {
+    id: string
+    name: string
+    latitude: number
+    longitude: number
+    address: string
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: HospitalLocationCountAggregateOutputType | null
+    _avg: HospitalLocationAvgAggregateOutputType | null
+    _sum: HospitalLocationSumAggregateOutputType | null
+    _min: HospitalLocationMinAggregateOutputType | null
+    _max: HospitalLocationMaxAggregateOutputType | null
+  }
+
+  type GetHospitalLocationGroupByPayload<T extends HospitalLocationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HospitalLocationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HospitalLocationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HospitalLocationGroupByOutputType[P]>
+            : GetScalarType<T[P], HospitalLocationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HospitalLocationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    address?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["hospitalLocation"]>
+
+  export type HospitalLocationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    address?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["hospitalLocation"]>
+
+  export type HospitalLocationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    address?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["hospitalLocation"]>
+
+  export type HospitalLocationSelectScalar = {
+    id?: boolean
+    name?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    address?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type HospitalLocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "address" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["hospitalLocation"]>
+
+  export type $HospitalLocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HospitalLocation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      latitude: number
+      longitude: number
+      address: string
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["hospitalLocation"]>
+    composites: {}
+  }
+
+  type HospitalLocationGetPayload<S extends boolean | null | undefined | HospitalLocationDefaultArgs> = $Result.GetResult<Prisma.$HospitalLocationPayload, S>
+
+  type HospitalLocationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HospitalLocationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HospitalLocationCountAggregateInputType | true
+    }
+
+  export interface HospitalLocationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HospitalLocation'], meta: { name: 'HospitalLocation' } }
+    /**
+     * Find zero or one HospitalLocation that matches the filter.
+     * @param {HospitalLocationFindUniqueArgs} args - Arguments to find a HospitalLocation
+     * @example
+     * // Get one HospitalLocation
+     * const hospitalLocation = await prisma.hospitalLocation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HospitalLocationFindUniqueArgs>(args: SelectSubset<T, HospitalLocationFindUniqueArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HospitalLocation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HospitalLocationFindUniqueOrThrowArgs} args - Arguments to find a HospitalLocation
+     * @example
+     * // Get one HospitalLocation
+     * const hospitalLocation = await prisma.hospitalLocation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HospitalLocationFindUniqueOrThrowArgs>(args: SelectSubset<T, HospitalLocationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HospitalLocation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HospitalLocationFindFirstArgs} args - Arguments to find a HospitalLocation
+     * @example
+     * // Get one HospitalLocation
+     * const hospitalLocation = await prisma.hospitalLocation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HospitalLocationFindFirstArgs>(args?: SelectSubset<T, HospitalLocationFindFirstArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HospitalLocation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HospitalLocationFindFirstOrThrowArgs} args - Arguments to find a HospitalLocation
+     * @example
+     * // Get one HospitalLocation
+     * const hospitalLocation = await prisma.hospitalLocation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HospitalLocationFindFirstOrThrowArgs>(args?: SelectSubset<T, HospitalLocationFindFirstOrThrowArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HospitalLocations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HospitalLocationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HospitalLocations
+     * const hospitalLocations = await prisma.hospitalLocation.findMany()
+     * 
+     * // Get first 10 HospitalLocations
+     * const hospitalLocations = await prisma.hospitalLocation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const hospitalLocationWithIdOnly = await prisma.hospitalLocation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HospitalLocationFindManyArgs>(args?: SelectSubset<T, HospitalLocationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HospitalLocation.
+     * @param {HospitalLocationCreateArgs} args - Arguments to create a HospitalLocation.
+     * @example
+     * // Create one HospitalLocation
+     * const HospitalLocation = await prisma.hospitalLocation.create({
+     *   data: {
+     *     // ... data to create a HospitalLocation
+     *   }
+     * })
+     * 
+     */
+    create<T extends HospitalLocationCreateArgs>(args: SelectSubset<T, HospitalLocationCreateArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HospitalLocations.
+     * @param {HospitalLocationCreateManyArgs} args - Arguments to create many HospitalLocations.
+     * @example
+     * // Create many HospitalLocations
+     * const hospitalLocation = await prisma.hospitalLocation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HospitalLocationCreateManyArgs>(args?: SelectSubset<T, HospitalLocationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HospitalLocations and returns the data saved in the database.
+     * @param {HospitalLocationCreateManyAndReturnArgs} args - Arguments to create many HospitalLocations.
+     * @example
+     * // Create many HospitalLocations
+     * const hospitalLocation = await prisma.hospitalLocation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HospitalLocations and only return the `id`
+     * const hospitalLocationWithIdOnly = await prisma.hospitalLocation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HospitalLocationCreateManyAndReturnArgs>(args?: SelectSubset<T, HospitalLocationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HospitalLocation.
+     * @param {HospitalLocationDeleteArgs} args - Arguments to delete one HospitalLocation.
+     * @example
+     * // Delete one HospitalLocation
+     * const HospitalLocation = await prisma.hospitalLocation.delete({
+     *   where: {
+     *     // ... filter to delete one HospitalLocation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HospitalLocationDeleteArgs>(args: SelectSubset<T, HospitalLocationDeleteArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HospitalLocation.
+     * @param {HospitalLocationUpdateArgs} args - Arguments to update one HospitalLocation.
+     * @example
+     * // Update one HospitalLocation
+     * const hospitalLocation = await prisma.hospitalLocation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HospitalLocationUpdateArgs>(args: SelectSubset<T, HospitalLocationUpdateArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HospitalLocations.
+     * @param {HospitalLocationDeleteManyArgs} args - Arguments to filter HospitalLocations to delete.
+     * @example
+     * // Delete a few HospitalLocations
+     * const { count } = await prisma.hospitalLocation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HospitalLocationDeleteManyArgs>(args?: SelectSubset<T, HospitalLocationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HospitalLocations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HospitalLocationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HospitalLocations
+     * const hospitalLocation = await prisma.hospitalLocation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HospitalLocationUpdateManyArgs>(args: SelectSubset<T, HospitalLocationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HospitalLocations and returns the data updated in the database.
+     * @param {HospitalLocationUpdateManyAndReturnArgs} args - Arguments to update many HospitalLocations.
+     * @example
+     * // Update many HospitalLocations
+     * const hospitalLocation = await prisma.hospitalLocation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HospitalLocations and only return the `id`
+     * const hospitalLocationWithIdOnly = await prisma.hospitalLocation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HospitalLocationUpdateManyAndReturnArgs>(args: SelectSubset<T, HospitalLocationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HospitalLocation.
+     * @param {HospitalLocationUpsertArgs} args - Arguments to update or create a HospitalLocation.
+     * @example
+     * // Update or create a HospitalLocation
+     * const hospitalLocation = await prisma.hospitalLocation.upsert({
+     *   create: {
+     *     // ... data to create a HospitalLocation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HospitalLocation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HospitalLocationUpsertArgs>(args: SelectSubset<T, HospitalLocationUpsertArgs<ExtArgs>>): Prisma__HospitalLocationClient<$Result.GetResult<Prisma.$HospitalLocationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HospitalLocations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HospitalLocationCountArgs} args - Arguments to filter HospitalLocations to count.
+     * @example
+     * // Count the number of HospitalLocations
+     * const count = await prisma.hospitalLocation.count({
+     *   where: {
+     *     // ... the filter for the HospitalLocations we want to count
+     *   }
+     * })
+    **/
+    count<T extends HospitalLocationCountArgs>(
+      args?: Subset<T, HospitalLocationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HospitalLocationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HospitalLocation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HospitalLocationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HospitalLocationAggregateArgs>(args: Subset<T, HospitalLocationAggregateArgs>): Prisma.PrismaPromise<GetHospitalLocationAggregateType<T>>
+
+    /**
+     * Group by HospitalLocation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HospitalLocationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HospitalLocationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HospitalLocationGroupByArgs['orderBy'] }
+        : { orderBy?: HospitalLocationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HospitalLocationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHospitalLocationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HospitalLocation model
+   */
+  readonly fields: HospitalLocationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HospitalLocation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HospitalLocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HospitalLocation model
+   */
+  interface HospitalLocationFieldRefs {
+    readonly id: FieldRef<"HospitalLocation", 'String'>
+    readonly name: FieldRef<"HospitalLocation", 'String'>
+    readonly latitude: FieldRef<"HospitalLocation", 'Float'>
+    readonly longitude: FieldRef<"HospitalLocation", 'Float'>
+    readonly address: FieldRef<"HospitalLocation", 'String'>
+    readonly isActive: FieldRef<"HospitalLocation", 'Boolean'>
+    readonly createdAt: FieldRef<"HospitalLocation", 'DateTime'>
+    readonly updatedAt: FieldRef<"HospitalLocation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HospitalLocation findUnique
+   */
+  export type HospitalLocationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which HospitalLocation to fetch.
+     */
+    where: HospitalLocationWhereUniqueInput
+  }
+
+  /**
+   * HospitalLocation findUniqueOrThrow
+   */
+  export type HospitalLocationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which HospitalLocation to fetch.
+     */
+    where: HospitalLocationWhereUniqueInput
+  }
+
+  /**
+   * HospitalLocation findFirst
+   */
+  export type HospitalLocationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which HospitalLocation to fetch.
+     */
+    where?: HospitalLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HospitalLocations to fetch.
+     */
+    orderBy?: HospitalLocationOrderByWithRelationInput | HospitalLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HospitalLocations.
+     */
+    cursor?: HospitalLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HospitalLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HospitalLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HospitalLocations.
+     */
+    distinct?: HospitalLocationScalarFieldEnum | HospitalLocationScalarFieldEnum[]
+  }
+
+  /**
+   * HospitalLocation findFirstOrThrow
+   */
+  export type HospitalLocationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which HospitalLocation to fetch.
+     */
+    where?: HospitalLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HospitalLocations to fetch.
+     */
+    orderBy?: HospitalLocationOrderByWithRelationInput | HospitalLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HospitalLocations.
+     */
+    cursor?: HospitalLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HospitalLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HospitalLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HospitalLocations.
+     */
+    distinct?: HospitalLocationScalarFieldEnum | HospitalLocationScalarFieldEnum[]
+  }
+
+  /**
+   * HospitalLocation findMany
+   */
+  export type HospitalLocationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which HospitalLocations to fetch.
+     */
+    where?: HospitalLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HospitalLocations to fetch.
+     */
+    orderBy?: HospitalLocationOrderByWithRelationInput | HospitalLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HospitalLocations.
+     */
+    cursor?: HospitalLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HospitalLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HospitalLocations.
+     */
+    skip?: number
+    distinct?: HospitalLocationScalarFieldEnum | HospitalLocationScalarFieldEnum[]
+  }
+
+  /**
+   * HospitalLocation create
+   */
+  export type HospitalLocationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a HospitalLocation.
+     */
+    data: XOR<HospitalLocationCreateInput, HospitalLocationUncheckedCreateInput>
+  }
+
+  /**
+   * HospitalLocation createMany
+   */
+  export type HospitalLocationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HospitalLocations.
+     */
+    data: HospitalLocationCreateManyInput | HospitalLocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HospitalLocation createManyAndReturn
+   */
+  export type HospitalLocationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * The data used to create many HospitalLocations.
+     */
+    data: HospitalLocationCreateManyInput | HospitalLocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HospitalLocation update
+   */
+  export type HospitalLocationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a HospitalLocation.
+     */
+    data: XOR<HospitalLocationUpdateInput, HospitalLocationUncheckedUpdateInput>
+    /**
+     * Choose, which HospitalLocation to update.
+     */
+    where: HospitalLocationWhereUniqueInput
+  }
+
+  /**
+   * HospitalLocation updateMany
+   */
+  export type HospitalLocationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HospitalLocations.
+     */
+    data: XOR<HospitalLocationUpdateManyMutationInput, HospitalLocationUncheckedUpdateManyInput>
+    /**
+     * Filter which HospitalLocations to update
+     */
+    where?: HospitalLocationWhereInput
+    /**
+     * Limit how many HospitalLocations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HospitalLocation updateManyAndReturn
+   */
+  export type HospitalLocationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * The data used to update HospitalLocations.
+     */
+    data: XOR<HospitalLocationUpdateManyMutationInput, HospitalLocationUncheckedUpdateManyInput>
+    /**
+     * Filter which HospitalLocations to update
+     */
+    where?: HospitalLocationWhereInput
+    /**
+     * Limit how many HospitalLocations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HospitalLocation upsert
+   */
+  export type HospitalLocationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the HospitalLocation to update in case it exists.
+     */
+    where: HospitalLocationWhereUniqueInput
+    /**
+     * In case the HospitalLocation found by the `where` argument doesn't exist, create a new HospitalLocation with this data.
+     */
+    create: XOR<HospitalLocationCreateInput, HospitalLocationUncheckedCreateInput>
+    /**
+     * In case the HospitalLocation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HospitalLocationUpdateInput, HospitalLocationUncheckedUpdateInput>
+  }
+
+  /**
+   * HospitalLocation delete
+   */
+  export type HospitalLocationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+    /**
+     * Filter which HospitalLocation to delete.
+     */
+    where: HospitalLocationWhereUniqueInput
+  }
+
+  /**
+   * HospitalLocation deleteMany
+   */
+  export type HospitalLocationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HospitalLocations to delete
+     */
+    where?: HospitalLocationWhereInput
+    /**
+     * Limit how many HospitalLocations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HospitalLocation without action
+   */
+  export type HospitalLocationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HospitalLocation
+     */
+    select?: HospitalLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HospitalLocation
+     */
+    omit?: HospitalLocationOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5609,6 +6772,20 @@ export namespace Prisma {
   };
 
   export type ReservationQRCodeScalarFieldEnum = (typeof ReservationQRCodeScalarFieldEnum)[keyof typeof ReservationQRCodeScalarFieldEnum]
+
+
+  export const HospitalLocationScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    address: 'address',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type HospitalLocationScalarFieldEnum = (typeof HospitalLocationScalarFieldEnum)[keyof typeof HospitalLocationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5679,6 +6856,27 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -5952,6 +7150,75 @@ export namespace Prisma {
     filePath?: StringWithAggregatesFilter<"ReservationQRCode"> | string
     createdAt?: DateTimeWithAggregatesFilter<"ReservationQRCode"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ReservationQRCode"> | Date | string
+  }
+
+  export type HospitalLocationWhereInput = {
+    AND?: HospitalLocationWhereInput | HospitalLocationWhereInput[]
+    OR?: HospitalLocationWhereInput[]
+    NOT?: HospitalLocationWhereInput | HospitalLocationWhereInput[]
+    id?: StringFilter<"HospitalLocation"> | string
+    name?: StringFilter<"HospitalLocation"> | string
+    latitude?: FloatFilter<"HospitalLocation"> | number
+    longitude?: FloatFilter<"HospitalLocation"> | number
+    address?: StringFilter<"HospitalLocation"> | string
+    isActive?: BoolFilter<"HospitalLocation"> | boolean
+    createdAt?: DateTimeFilter<"HospitalLocation"> | Date | string
+    updatedAt?: DateTimeFilter<"HospitalLocation"> | Date | string
+  }
+
+  export type HospitalLocationOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    address?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HospitalLocationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: HospitalLocationWhereInput | HospitalLocationWhereInput[]
+    OR?: HospitalLocationWhereInput[]
+    NOT?: HospitalLocationWhereInput | HospitalLocationWhereInput[]
+    name?: StringFilter<"HospitalLocation"> | string
+    latitude?: FloatFilter<"HospitalLocation"> | number
+    longitude?: FloatFilter<"HospitalLocation"> | number
+    address?: StringFilter<"HospitalLocation"> | string
+    isActive?: BoolFilter<"HospitalLocation"> | boolean
+    createdAt?: DateTimeFilter<"HospitalLocation"> | Date | string
+    updatedAt?: DateTimeFilter<"HospitalLocation"> | Date | string
+  }, "id">
+
+  export type HospitalLocationOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    address?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: HospitalLocationCountOrderByAggregateInput
+    _avg?: HospitalLocationAvgOrderByAggregateInput
+    _max?: HospitalLocationMaxOrderByAggregateInput
+    _min?: HospitalLocationMinOrderByAggregateInput
+    _sum?: HospitalLocationSumOrderByAggregateInput
+  }
+
+  export type HospitalLocationScalarWhereWithAggregatesInput = {
+    AND?: HospitalLocationScalarWhereWithAggregatesInput | HospitalLocationScalarWhereWithAggregatesInput[]
+    OR?: HospitalLocationScalarWhereWithAggregatesInput[]
+    NOT?: HospitalLocationScalarWhereWithAggregatesInput | HospitalLocationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HospitalLocation"> | string
+    name?: StringWithAggregatesFilter<"HospitalLocation"> | string
+    latitude?: FloatWithAggregatesFilter<"HospitalLocation"> | number
+    longitude?: FloatWithAggregatesFilter<"HospitalLocation"> | number
+    address?: StringWithAggregatesFilter<"HospitalLocation"> | string
+    isActive?: BoolWithAggregatesFilter<"HospitalLocation"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"HospitalLocation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HospitalLocation"> | Date | string
   }
 
   export type EmergencyRequestCreateInput = {
@@ -6233,6 +7500,83 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HospitalLocationCreateInput = {
+    id?: string
+    name: string
+    latitude: number
+    longitude: number
+    address: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HospitalLocationUncheckedCreateInput = {
+    id?: string
+    name: string
+    latitude: number
+    longitude: number
+    address: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HospitalLocationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HospitalLocationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HospitalLocationCreateManyInput = {
+    id?: string
+    name: string
+    latitude: number
+    longitude: number
+    address: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HospitalLocationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HospitalLocationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6493,6 +7837,89 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type HospitalLocationCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    address?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HospitalLocationAvgOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type HospitalLocationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    address?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HospitalLocationMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    address?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HospitalLocationSumOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type AmbulanceStaffCreateNestedOneWithoutEmergencyRequestInput = {
     create?: XOR<AmbulanceStaffCreateWithoutEmergencyRequestInput, AmbulanceStaffUncheckedCreateWithoutEmergencyRequestInput>
     connectOrCreate?: AmbulanceStaffCreateOrConnectWithoutEmergencyRequestInput
@@ -6623,6 +8050,18 @@ export namespace Prisma {
     deleteMany?: EmergencyRequestScalarWhereInput | EmergencyRequestScalarWhereInput[]
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6747,6 +8186,46 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type AmbulanceStaffCreateWithoutEmergencyRequestInput = {
