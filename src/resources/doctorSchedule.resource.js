@@ -5,6 +5,8 @@ export const doctorScheduleResource = (schedule) => {
     unitName: schedule.unit?.unitName,
     doctorId: schedule.doctor.id,
     fullName: schedule.doctor.fullName,
+    averageRating: schedule.doctor.averageRating || 0,
+    totalRatings: schedule.doctor.totalRatings || 0,
     startTime: schedule.startTime
       ? schedule.startTime.toTimeString().split(" ")[0]
       : null, // => "08:00:00"

@@ -149,3 +149,33 @@ export const getDoctorRatingByReservationId = async (reservationId) => {
 
   return doctorRating;
 };
+
+/**
+ * Mendapatkan rata-rata rating dokter berdasarkan ID dokter
+ * @param {number} doctorId - ID dokter
+ * @returns {Promise<number>} Rata-rata rating dokter (0-5)
+ */
+export const getAverageRatingByDoctorId = async (doctorId) => {
+  const result = await simkesPrisma.doctorRating.aggregate({
+    where: { doctorId: Number(doctorId) },
+    _avg: {
+      rating: true,
+    },
+    _count: {
+      rating: true,
+    },
+  });
+
+  // Jika tidak ada rating, kembalikan 0
+  if (!result._count.rating || result._count.rating === 0) {
+    return {
+      averageRating: 0,
+      totalRatings: 0
+    };
+  }
+
+  return {
+    averageRating: parseFloat(result._avg.rating.toFixed(1)),
+    totalRatings: result._count.rating
+  };
+};
