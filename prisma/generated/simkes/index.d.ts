@@ -48,6 +48,16 @@ export type DoctorRating = $Result.DefaultSelection<Prisma.$DoctorRatingPayload>
  * 
  */
 export type UnitRating = $Result.DefaultSelection<Prisma.$UnitRatingPayload>
+/**
+ * Model Facility
+ * 
+ */
+export type Facility = $Result.DefaultSelection<Prisma.$FacilityPayload>
+/**
+ * Model FacilityPhoto
+ * 
+ */
+export type FacilityPhoto = $Result.DefaultSelection<Prisma.$FacilityPhotoPayload>
 
 /**
  * Enums
@@ -265,6 +275,26 @@ export class PrismaClient<
     * ```
     */
   get unitRating(): Prisma.UnitRatingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.facility`: Exposes CRUD operations for the **Facility** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Facilities
+    * const facilities = await prisma.facility.findMany()
+    * ```
+    */
+  get facility(): Prisma.FacilityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.facilityPhoto`: Exposes CRUD operations for the **FacilityPhoto** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FacilityPhotos
+    * const facilityPhotos = await prisma.facilityPhoto.findMany()
+    * ```
+    */
+  get facilityPhoto(): Prisma.FacilityPhotoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -711,7 +741,9 @@ export namespace Prisma {
     ReservationQRCode: 'ReservationQRCode',
     HospitalLocation: 'HospitalLocation',
     DoctorRating: 'DoctorRating',
-    UnitRating: 'UnitRating'
+    UnitRating: 'UnitRating',
+    Facility: 'Facility',
+    FacilityPhoto: 'FacilityPhoto'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -730,7 +762,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating" | "unitRating"
+      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating" | "unitRating" | "facility" | "facilityPhoto"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1252,6 +1284,154 @@ export namespace Prisma {
           }
         }
       }
+      Facility: {
+        payload: Prisma.$FacilityPayload<ExtArgs>
+        fields: Prisma.FacilityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FacilityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FacilityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          findFirst: {
+            args: Prisma.FacilityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FacilityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          findMany: {
+            args: Prisma.FacilityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>[]
+          }
+          create: {
+            args: Prisma.FacilityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          createMany: {
+            args: Prisma.FacilityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FacilityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>[]
+          }
+          delete: {
+            args: Prisma.FacilityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          update: {
+            args: Prisma.FacilityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          deleteMany: {
+            args: Prisma.FacilityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FacilityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FacilityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>[]
+          }
+          upsert: {
+            args: Prisma.FacilityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          aggregate: {
+            args: Prisma.FacilityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFacility>
+          }
+          groupBy: {
+            args: Prisma.FacilityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FacilityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FacilityCountArgs<ExtArgs>
+            result: $Utils.Optional<FacilityCountAggregateOutputType> | number
+          }
+        }
+      }
+      FacilityPhoto: {
+        payload: Prisma.$FacilityPhotoPayload<ExtArgs>
+        fields: Prisma.FacilityPhotoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FacilityPhotoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FacilityPhotoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>
+          }
+          findFirst: {
+            args: Prisma.FacilityPhotoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FacilityPhotoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>
+          }
+          findMany: {
+            args: Prisma.FacilityPhotoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>[]
+          }
+          create: {
+            args: Prisma.FacilityPhotoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>
+          }
+          createMany: {
+            args: Prisma.FacilityPhotoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FacilityPhotoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>[]
+          }
+          delete: {
+            args: Prisma.FacilityPhotoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>
+          }
+          update: {
+            args: Prisma.FacilityPhotoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>
+          }
+          deleteMany: {
+            args: Prisma.FacilityPhotoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FacilityPhotoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FacilityPhotoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>[]
+          }
+          upsert: {
+            args: Prisma.FacilityPhotoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPhotoPayload>
+          }
+          aggregate: {
+            args: Prisma.FacilityPhotoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFacilityPhoto>
+          }
+          groupBy: {
+            args: Prisma.FacilityPhotoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FacilityPhotoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FacilityPhotoCountArgs<ExtArgs>
+            result: $Utils.Optional<FacilityPhotoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1343,6 +1523,8 @@ export namespace Prisma {
     hospitalLocation?: HospitalLocationOmit
     doctorRating?: DoctorRatingOmit
     unitRating?: UnitRatingOmit
+    facility?: FacilityOmit
+    facilityPhoto?: FacilityPhotoOmit
   }
 
   /* Types for Logging */
@@ -1491,6 +1673,37 @@ export namespace Prisma {
    */
   export type AmbulanceStaffCountOutputTypeCountEmergencyRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmergencyRequestWhereInput
+  }
+
+
+  /**
+   * Count Type FacilityCountOutputType
+   */
+
+  export type FacilityCountOutputType = {
+    photos: number
+  }
+
+  export type FacilityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    photos?: boolean | FacilityCountOutputTypeCountPhotosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FacilityCountOutputType without action
+   */
+  export type FacilityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityCountOutputType
+     */
+    select?: FacilityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FacilityCountOutputType without action
+   */
+  export type FacilityCountOutputTypeCountPhotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityPhotoWhereInput
   }
 
 
@@ -9036,6 +9249,2147 @@ export namespace Prisma {
 
 
   /**
+   * Model Facility
+   */
+
+  export type AggregateFacility = {
+    _count: FacilityCountAggregateOutputType | null
+    _min: FacilityMinAggregateOutputType | null
+    _max: FacilityMaxAggregateOutputType | null
+  }
+
+  export type FacilityMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    status: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    status: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FacilityMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FacilityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Facility to aggregate.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Facilities
+    **/
+    _count?: true | FacilityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FacilityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FacilityMaxAggregateInputType
+  }
+
+  export type GetFacilityAggregateType<T extends FacilityAggregateArgs> = {
+        [P in keyof T & keyof AggregateFacility]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFacility[P]>
+      : GetScalarType<T[P], AggregateFacility[P]>
+  }
+
+
+
+
+  export type FacilityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityWhereInput
+    orderBy?: FacilityOrderByWithAggregationInput | FacilityOrderByWithAggregationInput[]
+    by: FacilityScalarFieldEnum[] | FacilityScalarFieldEnum
+    having?: FacilityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FacilityCountAggregateInputType | true
+    _min?: FacilityMinAggregateInputType
+    _max?: FacilityMaxAggregateInputType
+  }
+
+  export type FacilityGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    status: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: FacilityCountAggregateOutputType | null
+    _min: FacilityMinAggregateOutputType | null
+    _max: FacilityMaxAggregateOutputType | null
+  }
+
+  type GetFacilityGroupByPayload<T extends FacilityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FacilityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FacilityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FacilityGroupByOutputType[P]>
+            : GetScalarType<T[P], FacilityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FacilitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    photos?: boolean | Facility$photosArgs<ExtArgs>
+    _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facility"]>
+
+  export type FacilitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["facility"]>
+
+  export type FacilitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["facility"]>
+
+  export type FacilitySelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FacilityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["facility"]>
+  export type FacilityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    photos?: boolean | Facility$photosArgs<ExtArgs>
+    _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FacilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type FacilityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $FacilityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Facility"
+    objects: {
+      photos: Prisma.$FacilityPhotoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      status: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["facility"]>
+    composites: {}
+  }
+
+  type FacilityGetPayload<S extends boolean | null | undefined | FacilityDefaultArgs> = $Result.GetResult<Prisma.$FacilityPayload, S>
+
+  type FacilityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FacilityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FacilityCountAggregateInputType | true
+    }
+
+  export interface FacilityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Facility'], meta: { name: 'Facility' } }
+    /**
+     * Find zero or one Facility that matches the filter.
+     * @param {FacilityFindUniqueArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FacilityFindUniqueArgs>(args: SelectSubset<T, FacilityFindUniqueArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Facility that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FacilityFindUniqueOrThrowArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FacilityFindUniqueOrThrowArgs>(args: SelectSubset<T, FacilityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Facility that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityFindFirstArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FacilityFindFirstArgs>(args?: SelectSubset<T, FacilityFindFirstArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Facility that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityFindFirstOrThrowArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FacilityFindFirstOrThrowArgs>(args?: SelectSubset<T, FacilityFindFirstOrThrowArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Facilities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Facilities
+     * const facilities = await prisma.facility.findMany()
+     * 
+     * // Get first 10 Facilities
+     * const facilities = await prisma.facility.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const facilityWithIdOnly = await prisma.facility.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FacilityFindManyArgs>(args?: SelectSubset<T, FacilityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Facility.
+     * @param {FacilityCreateArgs} args - Arguments to create a Facility.
+     * @example
+     * // Create one Facility
+     * const Facility = await prisma.facility.create({
+     *   data: {
+     *     // ... data to create a Facility
+     *   }
+     * })
+     * 
+     */
+    create<T extends FacilityCreateArgs>(args: SelectSubset<T, FacilityCreateArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Facilities.
+     * @param {FacilityCreateManyArgs} args - Arguments to create many Facilities.
+     * @example
+     * // Create many Facilities
+     * const facility = await prisma.facility.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FacilityCreateManyArgs>(args?: SelectSubset<T, FacilityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Facilities and returns the data saved in the database.
+     * @param {FacilityCreateManyAndReturnArgs} args - Arguments to create many Facilities.
+     * @example
+     * // Create many Facilities
+     * const facility = await prisma.facility.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Facilities and only return the `id`
+     * const facilityWithIdOnly = await prisma.facility.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FacilityCreateManyAndReturnArgs>(args?: SelectSubset<T, FacilityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Facility.
+     * @param {FacilityDeleteArgs} args - Arguments to delete one Facility.
+     * @example
+     * // Delete one Facility
+     * const Facility = await prisma.facility.delete({
+     *   where: {
+     *     // ... filter to delete one Facility
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FacilityDeleteArgs>(args: SelectSubset<T, FacilityDeleteArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Facility.
+     * @param {FacilityUpdateArgs} args - Arguments to update one Facility.
+     * @example
+     * // Update one Facility
+     * const facility = await prisma.facility.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FacilityUpdateArgs>(args: SelectSubset<T, FacilityUpdateArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Facilities.
+     * @param {FacilityDeleteManyArgs} args - Arguments to filter Facilities to delete.
+     * @example
+     * // Delete a few Facilities
+     * const { count } = await prisma.facility.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FacilityDeleteManyArgs>(args?: SelectSubset<T, FacilityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Facilities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Facilities
+     * const facility = await prisma.facility.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FacilityUpdateManyArgs>(args: SelectSubset<T, FacilityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Facilities and returns the data updated in the database.
+     * @param {FacilityUpdateManyAndReturnArgs} args - Arguments to update many Facilities.
+     * @example
+     * // Update many Facilities
+     * const facility = await prisma.facility.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Facilities and only return the `id`
+     * const facilityWithIdOnly = await prisma.facility.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FacilityUpdateManyAndReturnArgs>(args: SelectSubset<T, FacilityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Facility.
+     * @param {FacilityUpsertArgs} args - Arguments to update or create a Facility.
+     * @example
+     * // Update or create a Facility
+     * const facility = await prisma.facility.upsert({
+     *   create: {
+     *     // ... data to create a Facility
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Facility we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FacilityUpsertArgs>(args: SelectSubset<T, FacilityUpsertArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Facilities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityCountArgs} args - Arguments to filter Facilities to count.
+     * @example
+     * // Count the number of Facilities
+     * const count = await prisma.facility.count({
+     *   where: {
+     *     // ... the filter for the Facilities we want to count
+     *   }
+     * })
+    **/
+    count<T extends FacilityCountArgs>(
+      args?: Subset<T, FacilityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FacilityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Facility.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FacilityAggregateArgs>(args: Subset<T, FacilityAggregateArgs>): Prisma.PrismaPromise<GetFacilityAggregateType<T>>
+
+    /**
+     * Group by Facility.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FacilityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FacilityGroupByArgs['orderBy'] }
+        : { orderBy?: FacilityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FacilityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFacilityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Facility model
+   */
+  readonly fields: FacilityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Facility.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FacilityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    photos<T extends Facility$photosArgs<ExtArgs> = {}>(args?: Subset<T, Facility$photosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Facility model
+   */
+  interface FacilityFieldRefs {
+    readonly id: FieldRef<"Facility", 'String'>
+    readonly name: FieldRef<"Facility", 'String'>
+    readonly description: FieldRef<"Facility", 'String'>
+    readonly status: FieldRef<"Facility", 'Boolean'>
+    readonly createdAt: FieldRef<"Facility", 'DateTime'>
+    readonly updatedAt: FieldRef<"Facility", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Facility findUnique
+   */
+  export type FacilityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility findUniqueOrThrow
+   */
+  export type FacilityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility findFirst
+   */
+  export type FacilityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Facilities.
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Facilities.
+     */
+    distinct?: FacilityScalarFieldEnum | FacilityScalarFieldEnum[]
+  }
+
+  /**
+   * Facility findFirstOrThrow
+   */
+  export type FacilityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Facilities.
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Facilities.
+     */
+    distinct?: FacilityScalarFieldEnum | FacilityScalarFieldEnum[]
+  }
+
+  /**
+   * Facility findMany
+   */
+  export type FacilityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facilities to fetch.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Facilities.
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    distinct?: FacilityScalarFieldEnum | FacilityScalarFieldEnum[]
+  }
+
+  /**
+   * Facility create
+   */
+  export type FacilityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Facility.
+     */
+    data: XOR<FacilityCreateInput, FacilityUncheckedCreateInput>
+  }
+
+  /**
+   * Facility createMany
+   */
+  export type FacilityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Facilities.
+     */
+    data: FacilityCreateManyInput | FacilityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Facility createManyAndReturn
+   */
+  export type FacilityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * The data used to create many Facilities.
+     */
+    data: FacilityCreateManyInput | FacilityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Facility update
+   */
+  export type FacilityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Facility.
+     */
+    data: XOR<FacilityUpdateInput, FacilityUncheckedUpdateInput>
+    /**
+     * Choose, which Facility to update.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility updateMany
+   */
+  export type FacilityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Facilities.
+     */
+    data: XOR<FacilityUpdateManyMutationInput, FacilityUncheckedUpdateManyInput>
+    /**
+     * Filter which Facilities to update
+     */
+    where?: FacilityWhereInput
+    /**
+     * Limit how many Facilities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Facility updateManyAndReturn
+   */
+  export type FacilityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * The data used to update Facilities.
+     */
+    data: XOR<FacilityUpdateManyMutationInput, FacilityUncheckedUpdateManyInput>
+    /**
+     * Filter which Facilities to update
+     */
+    where?: FacilityWhereInput
+    /**
+     * Limit how many Facilities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Facility upsert
+   */
+  export type FacilityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Facility to update in case it exists.
+     */
+    where: FacilityWhereUniqueInput
+    /**
+     * In case the Facility found by the `where` argument doesn't exist, create a new Facility with this data.
+     */
+    create: XOR<FacilityCreateInput, FacilityUncheckedCreateInput>
+    /**
+     * In case the Facility was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FacilityUpdateInput, FacilityUncheckedUpdateInput>
+  }
+
+  /**
+   * Facility delete
+   */
+  export type FacilityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter which Facility to delete.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility deleteMany
+   */
+  export type FacilityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Facilities to delete
+     */
+    where?: FacilityWhereInput
+    /**
+     * Limit how many Facilities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Facility.photos
+   */
+  export type Facility$photosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    where?: FacilityPhotoWhereInput
+    orderBy?: FacilityPhotoOrderByWithRelationInput | FacilityPhotoOrderByWithRelationInput[]
+    cursor?: FacilityPhotoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FacilityPhotoScalarFieldEnum | FacilityPhotoScalarFieldEnum[]
+  }
+
+  /**
+   * Facility without action
+   */
+  export type FacilityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FacilityPhoto
+   */
+
+  export type AggregateFacilityPhoto = {
+    _count: FacilityPhotoCountAggregateOutputType | null
+    _min: FacilityPhotoMinAggregateOutputType | null
+    _max: FacilityPhotoMaxAggregateOutputType | null
+  }
+
+  export type FacilityPhotoMinAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    photoUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityPhotoMaxAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    photoUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityPhotoCountAggregateOutputType = {
+    id: number
+    facilityId: number
+    photoUrl: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FacilityPhotoMinAggregateInputType = {
+    id?: true
+    facilityId?: true
+    photoUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityPhotoMaxAggregateInputType = {
+    id?: true
+    facilityId?: true
+    photoUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityPhotoCountAggregateInputType = {
+    id?: true
+    facilityId?: true
+    photoUrl?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FacilityPhotoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityPhoto to aggregate.
+     */
+    where?: FacilityPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityPhotos to fetch.
+     */
+    orderBy?: FacilityPhotoOrderByWithRelationInput | FacilityPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FacilityPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityPhotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FacilityPhotos
+    **/
+    _count?: true | FacilityPhotoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FacilityPhotoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FacilityPhotoMaxAggregateInputType
+  }
+
+  export type GetFacilityPhotoAggregateType<T extends FacilityPhotoAggregateArgs> = {
+        [P in keyof T & keyof AggregateFacilityPhoto]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFacilityPhoto[P]>
+      : GetScalarType<T[P], AggregateFacilityPhoto[P]>
+  }
+
+
+
+
+  export type FacilityPhotoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityPhotoWhereInput
+    orderBy?: FacilityPhotoOrderByWithAggregationInput | FacilityPhotoOrderByWithAggregationInput[]
+    by: FacilityPhotoScalarFieldEnum[] | FacilityPhotoScalarFieldEnum
+    having?: FacilityPhotoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FacilityPhotoCountAggregateInputType | true
+    _min?: FacilityPhotoMinAggregateInputType
+    _max?: FacilityPhotoMaxAggregateInputType
+  }
+
+  export type FacilityPhotoGroupByOutputType = {
+    id: string
+    facilityId: string
+    photoUrl: string
+    createdAt: Date
+    updatedAt: Date
+    _count: FacilityPhotoCountAggregateOutputType | null
+    _min: FacilityPhotoMinAggregateOutputType | null
+    _max: FacilityPhotoMaxAggregateOutputType | null
+  }
+
+  type GetFacilityPhotoGroupByPayload<T extends FacilityPhotoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FacilityPhotoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FacilityPhotoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FacilityPhotoGroupByOutputType[P]>
+            : GetScalarType<T[P], FacilityPhotoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FacilityPhotoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    photoUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityPhoto"]>
+
+  export type FacilityPhotoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    photoUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityPhoto"]>
+
+  export type FacilityPhotoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    photoUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityPhoto"]>
+
+  export type FacilityPhotoSelectScalar = {
+    id?: boolean
+    facilityId?: boolean
+    photoUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FacilityPhotoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "facilityId" | "photoUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["facilityPhoto"]>
+  export type FacilityPhotoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+  export type FacilityPhotoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+  export type FacilityPhotoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+
+  export type $FacilityPhotoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FacilityPhoto"
+    objects: {
+      facility: Prisma.$FacilityPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      facilityId: string
+      photoUrl: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["facilityPhoto"]>
+    composites: {}
+  }
+
+  type FacilityPhotoGetPayload<S extends boolean | null | undefined | FacilityPhotoDefaultArgs> = $Result.GetResult<Prisma.$FacilityPhotoPayload, S>
+
+  type FacilityPhotoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FacilityPhotoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FacilityPhotoCountAggregateInputType | true
+    }
+
+  export interface FacilityPhotoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FacilityPhoto'], meta: { name: 'FacilityPhoto' } }
+    /**
+     * Find zero or one FacilityPhoto that matches the filter.
+     * @param {FacilityPhotoFindUniqueArgs} args - Arguments to find a FacilityPhoto
+     * @example
+     * // Get one FacilityPhoto
+     * const facilityPhoto = await prisma.facilityPhoto.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FacilityPhotoFindUniqueArgs>(args: SelectSubset<T, FacilityPhotoFindUniqueArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FacilityPhoto that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FacilityPhotoFindUniqueOrThrowArgs} args - Arguments to find a FacilityPhoto
+     * @example
+     * // Get one FacilityPhoto
+     * const facilityPhoto = await prisma.facilityPhoto.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FacilityPhotoFindUniqueOrThrowArgs>(args: SelectSubset<T, FacilityPhotoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityPhoto that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityPhotoFindFirstArgs} args - Arguments to find a FacilityPhoto
+     * @example
+     * // Get one FacilityPhoto
+     * const facilityPhoto = await prisma.facilityPhoto.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FacilityPhotoFindFirstArgs>(args?: SelectSubset<T, FacilityPhotoFindFirstArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityPhoto that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityPhotoFindFirstOrThrowArgs} args - Arguments to find a FacilityPhoto
+     * @example
+     * // Get one FacilityPhoto
+     * const facilityPhoto = await prisma.facilityPhoto.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FacilityPhotoFindFirstOrThrowArgs>(args?: SelectSubset<T, FacilityPhotoFindFirstOrThrowArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FacilityPhotos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityPhotoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FacilityPhotos
+     * const facilityPhotos = await prisma.facilityPhoto.findMany()
+     * 
+     * // Get first 10 FacilityPhotos
+     * const facilityPhotos = await prisma.facilityPhoto.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const facilityPhotoWithIdOnly = await prisma.facilityPhoto.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FacilityPhotoFindManyArgs>(args?: SelectSubset<T, FacilityPhotoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FacilityPhoto.
+     * @param {FacilityPhotoCreateArgs} args - Arguments to create a FacilityPhoto.
+     * @example
+     * // Create one FacilityPhoto
+     * const FacilityPhoto = await prisma.facilityPhoto.create({
+     *   data: {
+     *     // ... data to create a FacilityPhoto
+     *   }
+     * })
+     * 
+     */
+    create<T extends FacilityPhotoCreateArgs>(args: SelectSubset<T, FacilityPhotoCreateArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FacilityPhotos.
+     * @param {FacilityPhotoCreateManyArgs} args - Arguments to create many FacilityPhotos.
+     * @example
+     * // Create many FacilityPhotos
+     * const facilityPhoto = await prisma.facilityPhoto.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FacilityPhotoCreateManyArgs>(args?: SelectSubset<T, FacilityPhotoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FacilityPhotos and returns the data saved in the database.
+     * @param {FacilityPhotoCreateManyAndReturnArgs} args - Arguments to create many FacilityPhotos.
+     * @example
+     * // Create many FacilityPhotos
+     * const facilityPhoto = await prisma.facilityPhoto.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FacilityPhotos and only return the `id`
+     * const facilityPhotoWithIdOnly = await prisma.facilityPhoto.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FacilityPhotoCreateManyAndReturnArgs>(args?: SelectSubset<T, FacilityPhotoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FacilityPhoto.
+     * @param {FacilityPhotoDeleteArgs} args - Arguments to delete one FacilityPhoto.
+     * @example
+     * // Delete one FacilityPhoto
+     * const FacilityPhoto = await prisma.facilityPhoto.delete({
+     *   where: {
+     *     // ... filter to delete one FacilityPhoto
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FacilityPhotoDeleteArgs>(args: SelectSubset<T, FacilityPhotoDeleteArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FacilityPhoto.
+     * @param {FacilityPhotoUpdateArgs} args - Arguments to update one FacilityPhoto.
+     * @example
+     * // Update one FacilityPhoto
+     * const facilityPhoto = await prisma.facilityPhoto.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FacilityPhotoUpdateArgs>(args: SelectSubset<T, FacilityPhotoUpdateArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FacilityPhotos.
+     * @param {FacilityPhotoDeleteManyArgs} args - Arguments to filter FacilityPhotos to delete.
+     * @example
+     * // Delete a few FacilityPhotos
+     * const { count } = await prisma.facilityPhoto.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FacilityPhotoDeleteManyArgs>(args?: SelectSubset<T, FacilityPhotoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityPhotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityPhotoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FacilityPhotos
+     * const facilityPhoto = await prisma.facilityPhoto.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FacilityPhotoUpdateManyArgs>(args: SelectSubset<T, FacilityPhotoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityPhotos and returns the data updated in the database.
+     * @param {FacilityPhotoUpdateManyAndReturnArgs} args - Arguments to update many FacilityPhotos.
+     * @example
+     * // Update many FacilityPhotos
+     * const facilityPhoto = await prisma.facilityPhoto.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FacilityPhotos and only return the `id`
+     * const facilityPhotoWithIdOnly = await prisma.facilityPhoto.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FacilityPhotoUpdateManyAndReturnArgs>(args: SelectSubset<T, FacilityPhotoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FacilityPhoto.
+     * @param {FacilityPhotoUpsertArgs} args - Arguments to update or create a FacilityPhoto.
+     * @example
+     * // Update or create a FacilityPhoto
+     * const facilityPhoto = await prisma.facilityPhoto.upsert({
+     *   create: {
+     *     // ... data to create a FacilityPhoto
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FacilityPhoto we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FacilityPhotoUpsertArgs>(args: SelectSubset<T, FacilityPhotoUpsertArgs<ExtArgs>>): Prisma__FacilityPhotoClient<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FacilityPhotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityPhotoCountArgs} args - Arguments to filter FacilityPhotos to count.
+     * @example
+     * // Count the number of FacilityPhotos
+     * const count = await prisma.facilityPhoto.count({
+     *   where: {
+     *     // ... the filter for the FacilityPhotos we want to count
+     *   }
+     * })
+    **/
+    count<T extends FacilityPhotoCountArgs>(
+      args?: Subset<T, FacilityPhotoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FacilityPhotoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FacilityPhoto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityPhotoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FacilityPhotoAggregateArgs>(args: Subset<T, FacilityPhotoAggregateArgs>): Prisma.PrismaPromise<GetFacilityPhotoAggregateType<T>>
+
+    /**
+     * Group by FacilityPhoto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityPhotoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FacilityPhotoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FacilityPhotoGroupByArgs['orderBy'] }
+        : { orderBy?: FacilityPhotoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FacilityPhotoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFacilityPhotoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FacilityPhoto model
+   */
+  readonly fields: FacilityPhotoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FacilityPhoto.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FacilityPhotoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FacilityPhoto model
+   */
+  interface FacilityPhotoFieldRefs {
+    readonly id: FieldRef<"FacilityPhoto", 'String'>
+    readonly facilityId: FieldRef<"FacilityPhoto", 'String'>
+    readonly photoUrl: FieldRef<"FacilityPhoto", 'String'>
+    readonly createdAt: FieldRef<"FacilityPhoto", 'DateTime'>
+    readonly updatedAt: FieldRef<"FacilityPhoto", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FacilityPhoto findUnique
+   */
+  export type FacilityPhotoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityPhoto to fetch.
+     */
+    where: FacilityPhotoWhereUniqueInput
+  }
+
+  /**
+   * FacilityPhoto findUniqueOrThrow
+   */
+  export type FacilityPhotoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityPhoto to fetch.
+     */
+    where: FacilityPhotoWhereUniqueInput
+  }
+
+  /**
+   * FacilityPhoto findFirst
+   */
+  export type FacilityPhotoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityPhoto to fetch.
+     */
+    where?: FacilityPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityPhotos to fetch.
+     */
+    orderBy?: FacilityPhotoOrderByWithRelationInput | FacilityPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityPhotos.
+     */
+    cursor?: FacilityPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityPhotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityPhotos.
+     */
+    distinct?: FacilityPhotoScalarFieldEnum | FacilityPhotoScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityPhoto findFirstOrThrow
+   */
+  export type FacilityPhotoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityPhoto to fetch.
+     */
+    where?: FacilityPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityPhotos to fetch.
+     */
+    orderBy?: FacilityPhotoOrderByWithRelationInput | FacilityPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityPhotos.
+     */
+    cursor?: FacilityPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityPhotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityPhotos.
+     */
+    distinct?: FacilityPhotoScalarFieldEnum | FacilityPhotoScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityPhoto findMany
+   */
+  export type FacilityPhotoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityPhotos to fetch.
+     */
+    where?: FacilityPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityPhotos to fetch.
+     */
+    orderBy?: FacilityPhotoOrderByWithRelationInput | FacilityPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FacilityPhotos.
+     */
+    cursor?: FacilityPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityPhotos.
+     */
+    skip?: number
+    distinct?: FacilityPhotoScalarFieldEnum | FacilityPhotoScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityPhoto create
+   */
+  export type FacilityPhotoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FacilityPhoto.
+     */
+    data: XOR<FacilityPhotoCreateInput, FacilityPhotoUncheckedCreateInput>
+  }
+
+  /**
+   * FacilityPhoto createMany
+   */
+  export type FacilityPhotoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FacilityPhotos.
+     */
+    data: FacilityPhotoCreateManyInput | FacilityPhotoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FacilityPhoto createManyAndReturn
+   */
+  export type FacilityPhotoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * The data used to create many FacilityPhotos.
+     */
+    data: FacilityPhotoCreateManyInput | FacilityPhotoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FacilityPhoto update
+   */
+  export type FacilityPhotoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FacilityPhoto.
+     */
+    data: XOR<FacilityPhotoUpdateInput, FacilityPhotoUncheckedUpdateInput>
+    /**
+     * Choose, which FacilityPhoto to update.
+     */
+    where: FacilityPhotoWhereUniqueInput
+  }
+
+  /**
+   * FacilityPhoto updateMany
+   */
+  export type FacilityPhotoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FacilityPhotos.
+     */
+    data: XOR<FacilityPhotoUpdateManyMutationInput, FacilityPhotoUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityPhotos to update
+     */
+    where?: FacilityPhotoWhereInput
+    /**
+     * Limit how many FacilityPhotos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityPhoto updateManyAndReturn
+   */
+  export type FacilityPhotoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * The data used to update FacilityPhotos.
+     */
+    data: XOR<FacilityPhotoUpdateManyMutationInput, FacilityPhotoUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityPhotos to update
+     */
+    where?: FacilityPhotoWhereInput
+    /**
+     * Limit how many FacilityPhotos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FacilityPhoto upsert
+   */
+  export type FacilityPhotoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FacilityPhoto to update in case it exists.
+     */
+    where: FacilityPhotoWhereUniqueInput
+    /**
+     * In case the FacilityPhoto found by the `where` argument doesn't exist, create a new FacilityPhoto with this data.
+     */
+    create: XOR<FacilityPhotoCreateInput, FacilityPhotoUncheckedCreateInput>
+    /**
+     * In case the FacilityPhoto was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FacilityPhotoUpdateInput, FacilityPhotoUncheckedUpdateInput>
+  }
+
+  /**
+   * FacilityPhoto delete
+   */
+  export type FacilityPhotoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+    /**
+     * Filter which FacilityPhoto to delete.
+     */
+    where: FacilityPhotoWhereUniqueInput
+  }
+
+  /**
+   * FacilityPhoto deleteMany
+   */
+  export type FacilityPhotoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityPhotos to delete
+     */
+    where?: FacilityPhotoWhereInput
+    /**
+     * Limit how many FacilityPhotos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityPhoto without action
+   */
+  export type FacilityPhotoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityPhoto
+     */
+    select?: FacilityPhotoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityPhoto
+     */
+    omit?: FacilityPhotoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityPhotoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9140,6 +11494,29 @@ export namespace Prisma {
   };
 
   export type UnitRatingScalarFieldEnum = (typeof UnitRatingScalarFieldEnum)[keyof typeof UnitRatingScalarFieldEnum]
+
+
+  export const FacilityScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FacilityScalarFieldEnum = (typeof FacilityScalarFieldEnum)[keyof typeof FacilityScalarFieldEnum]
+
+
+  export const FacilityPhotoScalarFieldEnum: {
+    id: 'id',
+    facilityId: 'facilityId',
+    photoUrl: 'photoUrl',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FacilityPhotoScalarFieldEnum = (typeof FacilityPhotoScalarFieldEnum)[keyof typeof FacilityPhotoScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9713,6 +12090,121 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"UnitRating"> | Date | string
   }
 
+  export type FacilityWhereInput = {
+    AND?: FacilityWhereInput | FacilityWhereInput[]
+    OR?: FacilityWhereInput[]
+    NOT?: FacilityWhereInput | FacilityWhereInput[]
+    id?: StringFilter<"Facility"> | string
+    name?: StringFilter<"Facility"> | string
+    description?: StringNullableFilter<"Facility"> | string | null
+    status?: BoolFilter<"Facility"> | boolean
+    createdAt?: DateTimeFilter<"Facility"> | Date | string
+    updatedAt?: DateTimeFilter<"Facility"> | Date | string
+    photos?: FacilityPhotoListRelationFilter
+  }
+
+  export type FacilityOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    photos?: FacilityPhotoOrderByRelationAggregateInput
+  }
+
+  export type FacilityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FacilityWhereInput | FacilityWhereInput[]
+    OR?: FacilityWhereInput[]
+    NOT?: FacilityWhereInput | FacilityWhereInput[]
+    name?: StringFilter<"Facility"> | string
+    description?: StringNullableFilter<"Facility"> | string | null
+    status?: BoolFilter<"Facility"> | boolean
+    createdAt?: DateTimeFilter<"Facility"> | Date | string
+    updatedAt?: DateTimeFilter<"Facility"> | Date | string
+    photos?: FacilityPhotoListRelationFilter
+  }, "id">
+
+  export type FacilityOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FacilityCountOrderByAggregateInput
+    _max?: FacilityMaxOrderByAggregateInput
+    _min?: FacilityMinOrderByAggregateInput
+  }
+
+  export type FacilityScalarWhereWithAggregatesInput = {
+    AND?: FacilityScalarWhereWithAggregatesInput | FacilityScalarWhereWithAggregatesInput[]
+    OR?: FacilityScalarWhereWithAggregatesInput[]
+    NOT?: FacilityScalarWhereWithAggregatesInput | FacilityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Facility"> | string
+    name?: StringWithAggregatesFilter<"Facility"> | string
+    description?: StringNullableWithAggregatesFilter<"Facility"> | string | null
+    status?: BoolWithAggregatesFilter<"Facility"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Facility"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Facility"> | Date | string
+  }
+
+  export type FacilityPhotoWhereInput = {
+    AND?: FacilityPhotoWhereInput | FacilityPhotoWhereInput[]
+    OR?: FacilityPhotoWhereInput[]
+    NOT?: FacilityPhotoWhereInput | FacilityPhotoWhereInput[]
+    id?: StringFilter<"FacilityPhoto"> | string
+    facilityId?: StringFilter<"FacilityPhoto"> | string
+    photoUrl?: StringFilter<"FacilityPhoto"> | string
+    createdAt?: DateTimeFilter<"FacilityPhoto"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityPhoto"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+  }
+
+  export type FacilityPhotoOrderByWithRelationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    photoUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    facility?: FacilityOrderByWithRelationInput
+  }
+
+  export type FacilityPhotoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FacilityPhotoWhereInput | FacilityPhotoWhereInput[]
+    OR?: FacilityPhotoWhereInput[]
+    NOT?: FacilityPhotoWhereInput | FacilityPhotoWhereInput[]
+    facilityId?: StringFilter<"FacilityPhoto"> | string
+    photoUrl?: StringFilter<"FacilityPhoto"> | string
+    createdAt?: DateTimeFilter<"FacilityPhoto"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityPhoto"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+  }, "id">
+
+  export type FacilityPhotoOrderByWithAggregationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    photoUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FacilityPhotoCountOrderByAggregateInput
+    _max?: FacilityPhotoMaxOrderByAggregateInput
+    _min?: FacilityPhotoMinOrderByAggregateInput
+  }
+
+  export type FacilityPhotoScalarWhereWithAggregatesInput = {
+    AND?: FacilityPhotoScalarWhereWithAggregatesInput | FacilityPhotoScalarWhereWithAggregatesInput[]
+    OR?: FacilityPhotoScalarWhereWithAggregatesInput[]
+    NOT?: FacilityPhotoScalarWhereWithAggregatesInput | FacilityPhotoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FacilityPhoto"> | string
+    facilityId?: StringWithAggregatesFilter<"FacilityPhoto"> | string
+    photoUrl?: StringWithAggregatesFilter<"FacilityPhoto"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"FacilityPhoto"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"FacilityPhoto"> | Date | string
+  }
+
   export type EmergencyRequestCreateInput = {
     id?: string
     patientId: string
@@ -10223,6 +12715,128 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FacilityCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    photos?: FacilityPhotoCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    photos?: FacilityPhotoUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    photos?: FacilityPhotoUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    photos?: FacilityPhotoUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityPhotoCreateInput = {
+    id?: string
+    photoUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutPhotosInput
+  }
+
+  export type FacilityPhotoUncheckedCreateInput = {
+    id?: string
+    facilityId: string
+    photoUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityPhotoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutPhotosNestedInput
+  }
+
+  export type FacilityPhotoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityPhotoCreateManyInput = {
+    id?: string
+    facilityId: string
+    photoUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityPhotoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityPhotoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10679,6 +13293,72 @@ export namespace Prisma {
     rating?: SortOrder
   }
 
+  export type FacilityPhotoListRelationFilter = {
+    every?: FacilityPhotoWhereInput
+    some?: FacilityPhotoWhereInput
+    none?: FacilityPhotoWhereInput
+  }
+
+  export type FacilityPhotoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FacilityCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityScalarRelationFilter = {
+    is?: FacilityWhereInput
+    isNot?: FacilityWhereInput
+  }
+
+  export type FacilityPhotoCountOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    photoUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityPhotoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    photoUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityPhotoMinOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    photoUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type AmbulanceStaffCreateNestedOneWithoutEmergencyRequestInput = {
     create?: XOR<AmbulanceStaffCreateWithoutEmergencyRequestInput, AmbulanceStaffUncheckedCreateWithoutEmergencyRequestInput>
     connectOrCreate?: AmbulanceStaffCreateOrConnectWithoutEmergencyRequestInput
@@ -10827,6 +13507,62 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type FacilityPhotoCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput> | FacilityPhotoCreateWithoutFacilityInput[] | FacilityPhotoUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityPhotoCreateOrConnectWithoutFacilityInput | FacilityPhotoCreateOrConnectWithoutFacilityInput[]
+    createMany?: FacilityPhotoCreateManyFacilityInputEnvelope
+    connect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+  }
+
+  export type FacilityPhotoUncheckedCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput> | FacilityPhotoCreateWithoutFacilityInput[] | FacilityPhotoUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityPhotoCreateOrConnectWithoutFacilityInput | FacilityPhotoCreateOrConnectWithoutFacilityInput[]
+    createMany?: FacilityPhotoCreateManyFacilityInputEnvelope
+    connect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+  }
+
+  export type FacilityPhotoUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput> | FacilityPhotoCreateWithoutFacilityInput[] | FacilityPhotoUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityPhotoCreateOrConnectWithoutFacilityInput | FacilityPhotoCreateOrConnectWithoutFacilityInput[]
+    upsert?: FacilityPhotoUpsertWithWhereUniqueWithoutFacilityInput | FacilityPhotoUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: FacilityPhotoCreateManyFacilityInputEnvelope
+    set?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    disconnect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    delete?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    connect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    update?: FacilityPhotoUpdateWithWhereUniqueWithoutFacilityInput | FacilityPhotoUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: FacilityPhotoUpdateManyWithWhereWithoutFacilityInput | FacilityPhotoUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: FacilityPhotoScalarWhereInput | FacilityPhotoScalarWhereInput[]
+  }
+
+  export type FacilityPhotoUncheckedUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput> | FacilityPhotoCreateWithoutFacilityInput[] | FacilityPhotoUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityPhotoCreateOrConnectWithoutFacilityInput | FacilityPhotoCreateOrConnectWithoutFacilityInput[]
+    upsert?: FacilityPhotoUpsertWithWhereUniqueWithoutFacilityInput | FacilityPhotoUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: FacilityPhotoCreateManyFacilityInputEnvelope
+    set?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    disconnect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    delete?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    connect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+    update?: FacilityPhotoUpdateWithWhereUniqueWithoutFacilityInput | FacilityPhotoUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: FacilityPhotoUpdateManyWithWhereWithoutFacilityInput | FacilityPhotoUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: FacilityPhotoScalarWhereInput | FacilityPhotoScalarWhereInput[]
+  }
+
+  export type FacilityCreateNestedOneWithoutPhotosInput = {
+    create?: XOR<FacilityCreateWithoutPhotosInput, FacilityUncheckedCreateWithoutPhotosInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutPhotosInput
+    connect?: FacilityWhereUniqueInput
+  }
+
+  export type FacilityUpdateOneRequiredWithoutPhotosNestedInput = {
+    create?: XOR<FacilityCreateWithoutPhotosInput, FacilityUncheckedCreateWithoutPhotosInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutPhotosInput
+    upsert?: FacilityUpsertWithoutPhotosInput
+    connect?: FacilityWhereUniqueInput
+    update?: XOR<XOR<FacilityUpdateToOneWithWhereWithoutPhotosInput, FacilityUpdateWithoutPhotosInput>, FacilityUncheckedUpdateWithoutPhotosInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11239,6 +13975,109 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"EmergencyRequest"> | Date | string
   }
 
+  export type FacilityPhotoCreateWithoutFacilityInput = {
+    id?: string
+    photoUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityPhotoUncheckedCreateWithoutFacilityInput = {
+    id?: string
+    photoUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityPhotoCreateOrConnectWithoutFacilityInput = {
+    where: FacilityPhotoWhereUniqueInput
+    create: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type FacilityPhotoCreateManyFacilityInputEnvelope = {
+    data: FacilityPhotoCreateManyFacilityInput | FacilityPhotoCreateManyFacilityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FacilityPhotoUpsertWithWhereUniqueWithoutFacilityInput = {
+    where: FacilityPhotoWhereUniqueInput
+    update: XOR<FacilityPhotoUpdateWithoutFacilityInput, FacilityPhotoUncheckedUpdateWithoutFacilityInput>
+    create: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type FacilityPhotoUpdateWithWhereUniqueWithoutFacilityInput = {
+    where: FacilityPhotoWhereUniqueInput
+    data: XOR<FacilityPhotoUpdateWithoutFacilityInput, FacilityPhotoUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type FacilityPhotoUpdateManyWithWhereWithoutFacilityInput = {
+    where: FacilityPhotoScalarWhereInput
+    data: XOR<FacilityPhotoUpdateManyMutationInput, FacilityPhotoUncheckedUpdateManyWithoutFacilityInput>
+  }
+
+  export type FacilityPhotoScalarWhereInput = {
+    AND?: FacilityPhotoScalarWhereInput | FacilityPhotoScalarWhereInput[]
+    OR?: FacilityPhotoScalarWhereInput[]
+    NOT?: FacilityPhotoScalarWhereInput | FacilityPhotoScalarWhereInput[]
+    id?: StringFilter<"FacilityPhoto"> | string
+    facilityId?: StringFilter<"FacilityPhoto"> | string
+    photoUrl?: StringFilter<"FacilityPhoto"> | string
+    createdAt?: DateTimeFilter<"FacilityPhoto"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityPhoto"> | Date | string
+  }
+
+  export type FacilityCreateWithoutPhotosInput = {
+    id?: string
+    name: string
+    description?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityUncheckedCreateWithoutPhotosInput = {
+    id?: string
+    name: string
+    description?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityCreateOrConnectWithoutPhotosInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutPhotosInput, FacilityUncheckedCreateWithoutPhotosInput>
+  }
+
+  export type FacilityUpsertWithoutPhotosInput = {
+    update: XOR<FacilityUpdateWithoutPhotosInput, FacilityUncheckedUpdateWithoutPhotosInput>
+    create: XOR<FacilityCreateWithoutPhotosInput, FacilityUncheckedCreateWithoutPhotosInput>
+    where?: FacilityWhereInput
+  }
+
+  export type FacilityUpdateToOneWithWhereWithoutPhotosInput = {
+    where?: FacilityWhereInput
+    data: XOR<FacilityUpdateWithoutPhotosInput, FacilityUncheckedUpdateWithoutPhotosInput>
+  }
+
+  export type FacilityUpdateWithoutPhotosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityUncheckedUpdateWithoutPhotosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EmergencyHistoryCreateManyEmergencyRequestInput = {
     id?: string
     ambulanceStaffLocation?: string | null
@@ -11309,6 +14148,34 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityPhotoCreateManyFacilityInput = {
+    id?: string
+    photoUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityPhotoUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityPhotoUncheckedUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityPhotoUncheckedUpdateManyWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

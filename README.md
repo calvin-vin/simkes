@@ -24,6 +24,10 @@ admin123
 
 -Checkin validasi berdasarkan waktu di komentari
 
+-unit rating belum di test
+
+-fasilitas belum diintegrasikan dengan middleware auth
+
 npx prisma generate --schema=prisma/simkes/schema.prisma
 npx prisma generate --schema=prisma/simrs/schema.prisma
 

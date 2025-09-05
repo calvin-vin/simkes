@@ -28,6 +28,7 @@ import patientRoute from "./routes/patient.route.js";
 import reservationRoute from "./routes/reservation.route.js";
 import doctorRatingRoute from "./routes/doctorRating.route.js";
 import unitRatingRoute from "./routes/unitRating.route.js";
+import facilityRoute from "./routes/facility.route.js";
 
 dayjs.extend(isSameOrBefore);
 dayjs.locale("id");
@@ -65,6 +66,7 @@ app.use("/api/v1/reservations", reservationRoute);
 app.use("/api/v1/qrcodes", qrcodeRoute);
 app.use("/api/v1/doctor-ratings", doctorRatingRoute);
 app.use("/api/v1/unit-ratings", unitRatingRoute);
+app.use("/api/v1/facilities", facilityRoute);
 // app.use("/api/v1/patient-payments", patientPaymentRoute);
 // app.use("/api/v1/emergencies", emergencyRoute);
 
