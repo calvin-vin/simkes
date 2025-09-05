@@ -27,4 +27,4 @@ admin123
 npx prisma generate --schema=prisma/simkes/schema.prisma
 npx prisma generate --schema=prisma/simrs/schema.prisma
 
-npx prisma migrate dev --name add_hospital_location --schema=prisma/simkes/schema.prisma
+npx prisma migrate dev --name add_unit_rating --schema=prisma/simkes/schema.prisma

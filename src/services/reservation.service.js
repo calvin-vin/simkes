@@ -218,8 +218,6 @@ export const getAllReservations = async (query, user) => {
     callStatus,
     page = 1,
     limit = 10,
-    sortBy = "createdAt",
-    sortOrder = "desc",
   } = query;
 
   const { role } = getUserRole(user);
@@ -252,30 +250,12 @@ export const getAllReservations = async (query, user) => {
     };
   }
 
-  // Build orderBy object
-  let orderBy;
-  if (
-    sortBy &&
-    [
-      "reservationDate",
-      "createdAt",
-      "queueNumber",
-      "reservationNumber",
-    ].includes(sortBy)
-  ) {
-    orderBy = {};
-    orderBy[sortBy] =
-      sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
-        ? sortOrder.toLowerCase()
-        : "desc";
-  } else {
-    // Default sorting: reservationDate desc, callStatus asc, queueNumber asc
-    orderBy = [
-      { reservationDate: "desc" },
-      { callStatus: "asc" },
-      { queueNumber: "asc" }
-    ];
-  }
+  // Default sorting: reservationDate desc, callStatus asc, queueNumber asc
+  const orderBy = [
+    { reservationDate: "desc" },
+    { queueNumber: "asc" },
+    { callStatus: "asc" },
+  ];
 
   // Execute queries in parallel for better performance
   const [reservations, total] = await Promise.all([

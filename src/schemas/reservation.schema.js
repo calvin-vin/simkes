@@ -24,11 +24,6 @@ export const reservationFilterSchema = z.object({
   isCancelled: z.enum(["true", "false"]).optional(),
   isConfirmed: z.enum(["true", "false"]).optional(),
   callStatus: z.enum(["0", "1", "2"]).optional(),
-  sortBy: z
-    .enum(["reservationDate", "createdAt", "queueNumber", "reservationNumber"])
-    .optional()
-    .default("createdAt"),
-  sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
 });
 
 export const checkinSchema = z.object({

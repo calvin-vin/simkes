@@ -89,3 +89,17 @@ model DoctorRating {
   @@index([doctorId])
   @@index([patientId])
 }
+
+model UnitRating {
+  id            String   @id @default(uuid())
+  reservationId String   @unique
+  unitId        Int
+  patientId     String
+  rating        Int      @db.SmallInt // Nilai rating 1-5
+  comment       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([unitId])
+  @@index([patientId])
+}

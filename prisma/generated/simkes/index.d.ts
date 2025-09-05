@@ -43,6 +43,11 @@ export type HospitalLocation = $Result.DefaultSelection<Prisma.$HospitalLocation
  * 
  */
 export type DoctorRating = $Result.DefaultSelection<Prisma.$DoctorRatingPayload>
+/**
+ * Model UnitRating
+ * 
+ */
+export type UnitRating = $Result.DefaultSelection<Prisma.$UnitRatingPayload>
 
 /**
  * Enums
@@ -250,6 +255,16 @@ export class PrismaClient<
     * ```
     */
   get doctorRating(): Prisma.DoctorRatingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.unitRating`: Exposes CRUD operations for the **UnitRating** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UnitRatings
+    * const unitRatings = await prisma.unitRating.findMany()
+    * ```
+    */
+  get unitRating(): Prisma.UnitRatingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -695,7 +710,8 @@ export namespace Prisma {
     AmbulanceStaff: 'AmbulanceStaff',
     ReservationQRCode: 'ReservationQRCode',
     HospitalLocation: 'HospitalLocation',
-    DoctorRating: 'DoctorRating'
+    DoctorRating: 'DoctorRating',
+    UnitRating: 'UnitRating'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -714,7 +730,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating"
+      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating" | "unitRating"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1162,6 +1178,80 @@ export namespace Prisma {
           }
         }
       }
+      UnitRating: {
+        payload: Prisma.$UnitRatingPayload<ExtArgs>
+        fields: Prisma.UnitRatingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UnitRatingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UnitRatingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>
+          }
+          findFirst: {
+            args: Prisma.UnitRatingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UnitRatingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>
+          }
+          findMany: {
+            args: Prisma.UnitRatingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>[]
+          }
+          create: {
+            args: Prisma.UnitRatingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>
+          }
+          createMany: {
+            args: Prisma.UnitRatingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UnitRatingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>[]
+          }
+          delete: {
+            args: Prisma.UnitRatingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>
+          }
+          update: {
+            args: Prisma.UnitRatingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>
+          }
+          deleteMany: {
+            args: Prisma.UnitRatingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UnitRatingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UnitRatingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>[]
+          }
+          upsert: {
+            args: Prisma.UnitRatingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnitRatingPayload>
+          }
+          aggregate: {
+            args: Prisma.UnitRatingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUnitRating>
+          }
+          groupBy: {
+            args: Prisma.UnitRatingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UnitRatingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UnitRatingCountArgs<ExtArgs>
+            result: $Utils.Optional<UnitRatingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1252,6 +1342,7 @@ export namespace Prisma {
     reservationQRCode?: ReservationQRCodeOmit
     hospitalLocation?: HospitalLocationOmit
     doctorRating?: DoctorRatingOmit
+    unitRating?: UnitRatingOmit
   }
 
   /* Types for Logging */
@@ -7873,6 +7964,1078 @@ export namespace Prisma {
 
 
   /**
+   * Model UnitRating
+   */
+
+  export type AggregateUnitRating = {
+    _count: UnitRatingCountAggregateOutputType | null
+    _avg: UnitRatingAvgAggregateOutputType | null
+    _sum: UnitRatingSumAggregateOutputType | null
+    _min: UnitRatingMinAggregateOutputType | null
+    _max: UnitRatingMaxAggregateOutputType | null
+  }
+
+  export type UnitRatingAvgAggregateOutputType = {
+    unitId: number | null
+    rating: number | null
+  }
+
+  export type UnitRatingSumAggregateOutputType = {
+    unitId: number | null
+    rating: number | null
+  }
+
+  export type UnitRatingMinAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    unitId: number | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UnitRatingMaxAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    unitId: number | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UnitRatingCountAggregateOutputType = {
+    id: number
+    reservationId: number
+    unitId: number
+    patientId: number
+    rating: number
+    comment: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UnitRatingAvgAggregateInputType = {
+    unitId?: true
+    rating?: true
+  }
+
+  export type UnitRatingSumAggregateInputType = {
+    unitId?: true
+    rating?: true
+  }
+
+  export type UnitRatingMinAggregateInputType = {
+    id?: true
+    reservationId?: true
+    unitId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UnitRatingMaxAggregateInputType = {
+    id?: true
+    reservationId?: true
+    unitId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UnitRatingCountAggregateInputType = {
+    id?: true
+    reservationId?: true
+    unitId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UnitRatingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UnitRating to aggregate.
+     */
+    where?: UnitRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnitRatings to fetch.
+     */
+    orderBy?: UnitRatingOrderByWithRelationInput | UnitRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UnitRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnitRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnitRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UnitRatings
+    **/
+    _count?: true | UnitRatingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UnitRatingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UnitRatingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UnitRatingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UnitRatingMaxAggregateInputType
+  }
+
+  export type GetUnitRatingAggregateType<T extends UnitRatingAggregateArgs> = {
+        [P in keyof T & keyof AggregateUnitRating]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUnitRating[P]>
+      : GetScalarType<T[P], AggregateUnitRating[P]>
+  }
+
+
+
+
+  export type UnitRatingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UnitRatingWhereInput
+    orderBy?: UnitRatingOrderByWithAggregationInput | UnitRatingOrderByWithAggregationInput[]
+    by: UnitRatingScalarFieldEnum[] | UnitRatingScalarFieldEnum
+    having?: UnitRatingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UnitRatingCountAggregateInputType | true
+    _avg?: UnitRatingAvgAggregateInputType
+    _sum?: UnitRatingSumAggregateInputType
+    _min?: UnitRatingMinAggregateInputType
+    _max?: UnitRatingMaxAggregateInputType
+  }
+
+  export type UnitRatingGroupByOutputType = {
+    id: string
+    reservationId: string
+    unitId: number
+    patientId: string
+    rating: number
+    comment: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: UnitRatingCountAggregateOutputType | null
+    _avg: UnitRatingAvgAggregateOutputType | null
+    _sum: UnitRatingSumAggregateOutputType | null
+    _min: UnitRatingMinAggregateOutputType | null
+    _max: UnitRatingMaxAggregateOutputType | null
+  }
+
+  type GetUnitRatingGroupByPayload<T extends UnitRatingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UnitRatingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UnitRatingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UnitRatingGroupByOutputType[P]>
+            : GetScalarType<T[P], UnitRatingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UnitRatingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    unitId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["unitRating"]>
+
+  export type UnitRatingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    unitId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["unitRating"]>
+
+  export type UnitRatingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    unitId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["unitRating"]>
+
+  export type UnitRatingSelectScalar = {
+    id?: boolean
+    reservationId?: boolean
+    unitId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UnitRatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reservationId" | "unitId" | "patientId" | "rating" | "comment" | "createdAt" | "updatedAt", ExtArgs["result"]["unitRating"]>
+
+  export type $UnitRatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UnitRating"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reservationId: string
+      unitId: number
+      patientId: string
+      rating: number
+      comment: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["unitRating"]>
+    composites: {}
+  }
+
+  type UnitRatingGetPayload<S extends boolean | null | undefined | UnitRatingDefaultArgs> = $Result.GetResult<Prisma.$UnitRatingPayload, S>
+
+  type UnitRatingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UnitRatingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UnitRatingCountAggregateInputType | true
+    }
+
+  export interface UnitRatingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UnitRating'], meta: { name: 'UnitRating' } }
+    /**
+     * Find zero or one UnitRating that matches the filter.
+     * @param {UnitRatingFindUniqueArgs} args - Arguments to find a UnitRating
+     * @example
+     * // Get one UnitRating
+     * const unitRating = await prisma.unitRating.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UnitRatingFindUniqueArgs>(args: SelectSubset<T, UnitRatingFindUniqueArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UnitRating that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UnitRatingFindUniqueOrThrowArgs} args - Arguments to find a UnitRating
+     * @example
+     * // Get one UnitRating
+     * const unitRating = await prisma.unitRating.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UnitRatingFindUniqueOrThrowArgs>(args: SelectSubset<T, UnitRatingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UnitRating that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnitRatingFindFirstArgs} args - Arguments to find a UnitRating
+     * @example
+     * // Get one UnitRating
+     * const unitRating = await prisma.unitRating.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UnitRatingFindFirstArgs>(args?: SelectSubset<T, UnitRatingFindFirstArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UnitRating that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnitRatingFindFirstOrThrowArgs} args - Arguments to find a UnitRating
+     * @example
+     * // Get one UnitRating
+     * const unitRating = await prisma.unitRating.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UnitRatingFindFirstOrThrowArgs>(args?: SelectSubset<T, UnitRatingFindFirstOrThrowArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UnitRatings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnitRatingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UnitRatings
+     * const unitRatings = await prisma.unitRating.findMany()
+     * 
+     * // Get first 10 UnitRatings
+     * const unitRatings = await prisma.unitRating.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const unitRatingWithIdOnly = await prisma.unitRating.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UnitRatingFindManyArgs>(args?: SelectSubset<T, UnitRatingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UnitRating.
+     * @param {UnitRatingCreateArgs} args - Arguments to create a UnitRating.
+     * @example
+     * // Create one UnitRating
+     * const UnitRating = await prisma.unitRating.create({
+     *   data: {
+     *     // ... data to create a UnitRating
+     *   }
+     * })
+     * 
+     */
+    create<T extends UnitRatingCreateArgs>(args: SelectSubset<T, UnitRatingCreateArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UnitRatings.
+     * @param {UnitRatingCreateManyArgs} args - Arguments to create many UnitRatings.
+     * @example
+     * // Create many UnitRatings
+     * const unitRating = await prisma.unitRating.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UnitRatingCreateManyArgs>(args?: SelectSubset<T, UnitRatingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UnitRatings and returns the data saved in the database.
+     * @param {UnitRatingCreateManyAndReturnArgs} args - Arguments to create many UnitRatings.
+     * @example
+     * // Create many UnitRatings
+     * const unitRating = await prisma.unitRating.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UnitRatings and only return the `id`
+     * const unitRatingWithIdOnly = await prisma.unitRating.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UnitRatingCreateManyAndReturnArgs>(args?: SelectSubset<T, UnitRatingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UnitRating.
+     * @param {UnitRatingDeleteArgs} args - Arguments to delete one UnitRating.
+     * @example
+     * // Delete one UnitRating
+     * const UnitRating = await prisma.unitRating.delete({
+     *   where: {
+     *     // ... filter to delete one UnitRating
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UnitRatingDeleteArgs>(args: SelectSubset<T, UnitRatingDeleteArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UnitRating.
+     * @param {UnitRatingUpdateArgs} args - Arguments to update one UnitRating.
+     * @example
+     * // Update one UnitRating
+     * const unitRating = await prisma.unitRating.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UnitRatingUpdateArgs>(args: SelectSubset<T, UnitRatingUpdateArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UnitRatings.
+     * @param {UnitRatingDeleteManyArgs} args - Arguments to filter UnitRatings to delete.
+     * @example
+     * // Delete a few UnitRatings
+     * const { count } = await prisma.unitRating.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UnitRatingDeleteManyArgs>(args?: SelectSubset<T, UnitRatingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UnitRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnitRatingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UnitRatings
+     * const unitRating = await prisma.unitRating.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UnitRatingUpdateManyArgs>(args: SelectSubset<T, UnitRatingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UnitRatings and returns the data updated in the database.
+     * @param {UnitRatingUpdateManyAndReturnArgs} args - Arguments to update many UnitRatings.
+     * @example
+     * // Update many UnitRatings
+     * const unitRating = await prisma.unitRating.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UnitRatings and only return the `id`
+     * const unitRatingWithIdOnly = await prisma.unitRating.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UnitRatingUpdateManyAndReturnArgs>(args: SelectSubset<T, UnitRatingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UnitRating.
+     * @param {UnitRatingUpsertArgs} args - Arguments to update or create a UnitRating.
+     * @example
+     * // Update or create a UnitRating
+     * const unitRating = await prisma.unitRating.upsert({
+     *   create: {
+     *     // ... data to create a UnitRating
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UnitRating we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UnitRatingUpsertArgs>(args: SelectSubset<T, UnitRatingUpsertArgs<ExtArgs>>): Prisma__UnitRatingClient<$Result.GetResult<Prisma.$UnitRatingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UnitRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnitRatingCountArgs} args - Arguments to filter UnitRatings to count.
+     * @example
+     * // Count the number of UnitRatings
+     * const count = await prisma.unitRating.count({
+     *   where: {
+     *     // ... the filter for the UnitRatings we want to count
+     *   }
+     * })
+    **/
+    count<T extends UnitRatingCountArgs>(
+      args?: Subset<T, UnitRatingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UnitRatingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UnitRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnitRatingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UnitRatingAggregateArgs>(args: Subset<T, UnitRatingAggregateArgs>): Prisma.PrismaPromise<GetUnitRatingAggregateType<T>>
+
+    /**
+     * Group by UnitRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnitRatingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UnitRatingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UnitRatingGroupByArgs['orderBy'] }
+        : { orderBy?: UnitRatingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UnitRatingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUnitRatingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UnitRating model
+   */
+  readonly fields: UnitRatingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UnitRating.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UnitRatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UnitRating model
+   */
+  interface UnitRatingFieldRefs {
+    readonly id: FieldRef<"UnitRating", 'String'>
+    readonly reservationId: FieldRef<"UnitRating", 'String'>
+    readonly unitId: FieldRef<"UnitRating", 'Int'>
+    readonly patientId: FieldRef<"UnitRating", 'String'>
+    readonly rating: FieldRef<"UnitRating", 'Int'>
+    readonly comment: FieldRef<"UnitRating", 'String'>
+    readonly createdAt: FieldRef<"UnitRating", 'DateTime'>
+    readonly updatedAt: FieldRef<"UnitRating", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UnitRating findUnique
+   */
+  export type UnitRatingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which UnitRating to fetch.
+     */
+    where: UnitRatingWhereUniqueInput
+  }
+
+  /**
+   * UnitRating findUniqueOrThrow
+   */
+  export type UnitRatingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which UnitRating to fetch.
+     */
+    where: UnitRatingWhereUniqueInput
+  }
+
+  /**
+   * UnitRating findFirst
+   */
+  export type UnitRatingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which UnitRating to fetch.
+     */
+    where?: UnitRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnitRatings to fetch.
+     */
+    orderBy?: UnitRatingOrderByWithRelationInput | UnitRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UnitRatings.
+     */
+    cursor?: UnitRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnitRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnitRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UnitRatings.
+     */
+    distinct?: UnitRatingScalarFieldEnum | UnitRatingScalarFieldEnum[]
+  }
+
+  /**
+   * UnitRating findFirstOrThrow
+   */
+  export type UnitRatingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which UnitRating to fetch.
+     */
+    where?: UnitRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnitRatings to fetch.
+     */
+    orderBy?: UnitRatingOrderByWithRelationInput | UnitRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UnitRatings.
+     */
+    cursor?: UnitRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnitRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnitRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UnitRatings.
+     */
+    distinct?: UnitRatingScalarFieldEnum | UnitRatingScalarFieldEnum[]
+  }
+
+  /**
+   * UnitRating findMany
+   */
+  export type UnitRatingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which UnitRatings to fetch.
+     */
+    where?: UnitRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnitRatings to fetch.
+     */
+    orderBy?: UnitRatingOrderByWithRelationInput | UnitRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UnitRatings.
+     */
+    cursor?: UnitRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnitRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnitRatings.
+     */
+    skip?: number
+    distinct?: UnitRatingScalarFieldEnum | UnitRatingScalarFieldEnum[]
+  }
+
+  /**
+   * UnitRating create
+   */
+  export type UnitRatingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a UnitRating.
+     */
+    data: XOR<UnitRatingCreateInput, UnitRatingUncheckedCreateInput>
+  }
+
+  /**
+   * UnitRating createMany
+   */
+  export type UnitRatingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UnitRatings.
+     */
+    data: UnitRatingCreateManyInput | UnitRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UnitRating createManyAndReturn
+   */
+  export type UnitRatingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * The data used to create many UnitRatings.
+     */
+    data: UnitRatingCreateManyInput | UnitRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UnitRating update
+   */
+  export type UnitRatingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a UnitRating.
+     */
+    data: XOR<UnitRatingUpdateInput, UnitRatingUncheckedUpdateInput>
+    /**
+     * Choose, which UnitRating to update.
+     */
+    where: UnitRatingWhereUniqueInput
+  }
+
+  /**
+   * UnitRating updateMany
+   */
+  export type UnitRatingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UnitRatings.
+     */
+    data: XOR<UnitRatingUpdateManyMutationInput, UnitRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which UnitRatings to update
+     */
+    where?: UnitRatingWhereInput
+    /**
+     * Limit how many UnitRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UnitRating updateManyAndReturn
+   */
+  export type UnitRatingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * The data used to update UnitRatings.
+     */
+    data: XOR<UnitRatingUpdateManyMutationInput, UnitRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which UnitRatings to update
+     */
+    where?: UnitRatingWhereInput
+    /**
+     * Limit how many UnitRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UnitRating upsert
+   */
+  export type UnitRatingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the UnitRating to update in case it exists.
+     */
+    where: UnitRatingWhereUniqueInput
+    /**
+     * In case the UnitRating found by the `where` argument doesn't exist, create a new UnitRating with this data.
+     */
+    create: XOR<UnitRatingCreateInput, UnitRatingUncheckedCreateInput>
+    /**
+     * In case the UnitRating was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UnitRatingUpdateInput, UnitRatingUncheckedUpdateInput>
+  }
+
+  /**
+   * UnitRating delete
+   */
+  export type UnitRatingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+    /**
+     * Filter which UnitRating to delete.
+     */
+    where: UnitRatingWhereUniqueInput
+  }
+
+  /**
+   * UnitRating deleteMany
+   */
+  export type UnitRatingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UnitRatings to delete
+     */
+    where?: UnitRatingWhereInput
+    /**
+     * Limit how many UnitRatings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UnitRating without action
+   */
+  export type UnitRatingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnitRating
+     */
+    select?: UnitRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnitRating
+     */
+    omit?: UnitRatingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7963,6 +9126,20 @@ export namespace Prisma {
   };
 
   export type DoctorRatingScalarFieldEnum = (typeof DoctorRatingScalarFieldEnum)[keyof typeof DoctorRatingScalarFieldEnum]
+
+
+  export const UnitRatingScalarFieldEnum: {
+    id: 'id',
+    reservationId: 'reservationId',
+    unitId: 'unitId',
+    patientId: 'patientId',
+    rating: 'rating',
+    comment: 'comment',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UnitRatingScalarFieldEnum = (typeof UnitRatingScalarFieldEnum)[keyof typeof UnitRatingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8467,6 +9644,75 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"DoctorRating"> | Date | string
   }
 
+  export type UnitRatingWhereInput = {
+    AND?: UnitRatingWhereInput | UnitRatingWhereInput[]
+    OR?: UnitRatingWhereInput[]
+    NOT?: UnitRatingWhereInput | UnitRatingWhereInput[]
+    id?: StringFilter<"UnitRating"> | string
+    reservationId?: StringFilter<"UnitRating"> | string
+    unitId?: IntFilter<"UnitRating"> | number
+    patientId?: StringFilter<"UnitRating"> | string
+    rating?: IntFilter<"UnitRating"> | number
+    comment?: StringNullableFilter<"UnitRating"> | string | null
+    createdAt?: DateTimeFilter<"UnitRating"> | Date | string
+    updatedAt?: DateTimeFilter<"UnitRating"> | Date | string
+  }
+
+  export type UnitRatingOrderByWithRelationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    unitId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UnitRatingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reservationId?: string
+    AND?: UnitRatingWhereInput | UnitRatingWhereInput[]
+    OR?: UnitRatingWhereInput[]
+    NOT?: UnitRatingWhereInput | UnitRatingWhereInput[]
+    unitId?: IntFilter<"UnitRating"> | number
+    patientId?: StringFilter<"UnitRating"> | string
+    rating?: IntFilter<"UnitRating"> | number
+    comment?: StringNullableFilter<"UnitRating"> | string | null
+    createdAt?: DateTimeFilter<"UnitRating"> | Date | string
+    updatedAt?: DateTimeFilter<"UnitRating"> | Date | string
+  }, "id" | "reservationId">
+
+  export type UnitRatingOrderByWithAggregationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    unitId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UnitRatingCountOrderByAggregateInput
+    _avg?: UnitRatingAvgOrderByAggregateInput
+    _max?: UnitRatingMaxOrderByAggregateInput
+    _min?: UnitRatingMinOrderByAggregateInput
+    _sum?: UnitRatingSumOrderByAggregateInput
+  }
+
+  export type UnitRatingScalarWhereWithAggregatesInput = {
+    AND?: UnitRatingScalarWhereWithAggregatesInput | UnitRatingScalarWhereWithAggregatesInput[]
+    OR?: UnitRatingScalarWhereWithAggregatesInput[]
+    NOT?: UnitRatingScalarWhereWithAggregatesInput | UnitRatingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UnitRating"> | string
+    reservationId?: StringWithAggregatesFilter<"UnitRating"> | string
+    unitId?: IntWithAggregatesFilter<"UnitRating"> | number
+    patientId?: StringWithAggregatesFilter<"UnitRating"> | string
+    rating?: IntWithAggregatesFilter<"UnitRating"> | number
+    comment?: StringNullableWithAggregatesFilter<"UnitRating"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"UnitRating"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UnitRating"> | Date | string
+  }
+
   export type EmergencyRequestCreateInput = {
     id?: string
     patientId: string
@@ -8900,6 +10146,83 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UnitRatingCreateInput = {
+    id?: string
+    reservationId: string
+    unitId: number
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UnitRatingUncheckedCreateInput = {
+    id?: string
+    reservationId: string
+    unitId: number
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UnitRatingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    unitId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnitRatingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    unitId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnitRatingCreateManyInput = {
+    id?: string
+    reservationId: string
+    unitId: number
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UnitRatingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    unitId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnitRatingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    unitId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -9311,6 +10634,49 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type UnitRatingCountOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    unitId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UnitRatingAvgOrderByAggregateInput = {
+    unitId?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type UnitRatingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    unitId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UnitRatingMinOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    unitId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UnitRatingSumOrderByAggregateInput = {
+    unitId?: SortOrder
+    rating?: SortOrder
   }
 
   export type AmbulanceStaffCreateNestedOneWithoutEmergencyRequestInput = {
