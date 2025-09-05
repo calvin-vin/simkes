@@ -17,33 +17,36 @@ router.use(protect);
 // Reservation routes
 router.get(
   "/",
-  restrictToRoleSubrole([{ role: "SUPER ADMIN", subrole: "SUPER ADMIN" }]),
+  restrictToRoleSubrole([
+    { role: "PATIENT", subrole: "PATIENT" },
+    { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
+    { role: "OPERATOR", subrole: "OPERATOR" },
+  ]),
   getAllReservations
 );
 router.post(
   "/",
-  restrictToRoleSubrole([{ role: "SUPER ADMIN", subrole: "SUPER ADMIN" }]),
+  restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
   createReservation
 );
 router.get(
   "/:id",
-  restrictToRoleSubrole([{ role: "SUPER ADMIN", subrole: "SUPER ADMIN" }]),
+  restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
   getReservationById
 );
 router.patch(
   "/:id/cancel",
-  restrictToRoleSubrole([{ role: "SUPER ADMIN", subrole: "SUPER ADMIN" }]),
+  restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
   cancelReservation
 );
 router.delete(
   "/:id",
-  restrictToRoleSubrole([{ role: "SUPER ADMIN", subrole: "SUPER ADMIN" }]),
+  restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
   deleteReservation
 );
-
 router.post(
   "/:id/checkin",
-  restrictToRoleSubrole([{ role: "SUPER ADMIN", subrole: "SUPER ADMIN" }]),
+  restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
   checkinReservationController
 );
 
@@ -53,7 +56,7 @@ router.patch(
   "/:id/call-status",
   restrictToRoleSubrole([
     { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
-    { role: "OPERATOR", subrole: "OPERATOR" }
+    { role: "OPERATOR", subrole: "OPERATOR" },
   ]),
   updateCallStatusController
 );

@@ -14,6 +14,7 @@ export const updateCallStatus = async (id, callStatus) => {
     where: { 
       id,
       isEnabled: true,
+      notes: "SIMKES", // Filter reservations from SIMKES application
     },
     include: {
       patient: true,

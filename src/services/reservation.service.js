@@ -11,6 +11,7 @@ import {
   deleteQRCode,
 } from "./qrcode.service.js";
 import { isPatientWithinHospitalRange } from "./hospitalLocation.service.js";
+import { getUserRole } from "../utils/getUserRole.js";
 
 /**
  * Get the day name in Indonesian
@@ -60,6 +61,7 @@ export const checkinReservation = async (id, latitude, longitude, identity) => {
       id,
       isEnabled: true,
       identity: identity,
+      notes: "SIMKES",
     },
   });
 
@@ -145,6 +147,7 @@ export const getQueueNumberOnline = async (doctorId, date) => {
         startsWith: "EA",
       },
       isEnabled: true,
+      notes: "SIMKES", // Filter reservations from SIMKES application
     },
   });
 
@@ -160,6 +163,7 @@ export const getQueueNumberOnline = async (doctorId, date) => {
         startsWith: "EB",
       },
       isEnabled: true,
+      notes: "SIMKES", // Filter reservations from SIMKES application
     },
   });
 
@@ -186,6 +190,7 @@ export const getNextQueueNumber = async (doctorId, date) => {
         lt: new Date(`${reservationDate} 23:59:59`),
       },
       isEnabled: true,
+      notes: "SIMKES", // Filter reservations from SIMKES application
     },
     orderBy: {
       queueNumber: "desc",
@@ -203,7 +208,7 @@ export const getNextQueueNumber = async (doctorId, date) => {
  * @param {Object} query - Query parameters including filters, pagination, and sorting
  * @returns {Promise<Object>} Paginated reservations with data and pagination info
  */
-export const getAllReservations = async (query, identity) => {
+export const getAllReservations = async (query, user) => {
   const {
     doctorId,
     unitId,
@@ -215,12 +220,18 @@ export const getAllReservations = async (query, identity) => {
     sortOrder = "desc",
   } = query;
 
+  const { role } = getUserRole(user);
+  const isPatient = role === "PATIENT";
+  const identity = user.identity;
+
   // Build filters object
   const filters = {
     isEnabled: true,
+    // unitId is non-nullable in schema, ensure we only query records with valid unitId
+    unitId: unitId ? Number(unitId) : { gt: 0 }, // Filter for records with unitId > 0 to avoid null values
+    notes: "SIMKES", // Filter reservations from SIMKES application
     ...(doctorId ? { doctorId: Number(doctorId) } : {}),
-    ...(unitId ? { unitId: Number(unitId) } : {}),
-    ...(identity ? { identity } : {}),
+    ...(isPatient ? { identity } : {}),
     ...(isCancelled !== undefined
       ? { isCancelled: isCancelled === "true" }
       : {}),
@@ -304,7 +315,10 @@ export const getAllReservations = async (query, identity) => {
  * @throws {ApiError} If reservation not found
  */
 export const getReservationById = async (id, identity) => {
-  const where = { id };
+  const where = {
+    id,
+    notes: "SIMKES", // Filter reservations from SIMKES application
+  };
 
   // Add identity filter if provided
   if (identity) {
@@ -347,7 +361,10 @@ export const getReservationById = async (id, identity) => {
  * @throws {ApiError} If reservation not found
  */
 export const cancelReservation = async (id, cancelReason, identity) => {
-  const where = { id };
+  const where = {
+    id,
+    notes: "SIMKES", // Filter reservations from SIMKES application
+  };
 
   // Add identity filter if provided
   if (identity) {
@@ -404,7 +421,10 @@ export const cancelReservation = async (id, cancelReason, identity) => {
  * @throws {ApiError} If reservation not found or cannot be deleted
  */
 export const deleteReservation = async (id, identity) => {
-  const where = { id };
+  const where = {
+    id,
+    notes: "SIMKES", // Filter reservations from SIMKES application
+  };
 
   // Add identity filter if provided
   if (identity) {
@@ -495,6 +515,7 @@ export const createReservation = async (data, userIdentity) => {
         lt: reservationDay.add(1, "day").toDate(),
       },
       isCancelled: false,
+      notes: "SIMKES", // Filter reservations from SIMKES application
     },
   });
 
@@ -658,7 +679,7 @@ export const createReservation = async (data, userIdentity) => {
     doctorId: data.doctorId,
     queueNumber: queueNumber,
     queueType: queueType,
-    notes: data.notes || null,
+    notes: "SIMKES",
     isConfirmed: false,
     callStatus: "0",
     isCancelled: false,

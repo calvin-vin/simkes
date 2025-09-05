@@ -36,9 +36,9 @@ export const reservationResource = (reservation) => {
           fatherName: reservation.patient.fatherName,
           spouseName: reservation.patient.spouseName,
           phoneNumber: reservation.patient.phoneNumber,
-          registeredAt: dayjs(reservation.patient.registeredAt).format(
-            "YYYY-MM-DD HH:mm:ss"
-          ),
+          registeredAt: dayjs(reservation.patient.registeredAt)
+            .tz(TIMEZONE)
+            .format("YYYY-MM-DD HH:mm:ss"),
         }
       : null,
     doctor: reservation.doctor
@@ -66,9 +66,7 @@ export const reservationResource = (reservation) => {
           source: reservation.referralSource.source,
         }
       : null,
-    updatedAt: reservation.updatedAt
-      ? dayjs(reservation.updatedAt).tz(TIMEZONE).format("YYYY-MM-DD HH:mm:ss")
-      : dayjs(new Date()).tz(TIMEZONE).format("YYYY-MM-DD HH:mm:ss"),
+    updatedAt: dayjs(new Date()).tz(TIMEZONE).format("YYYY-MM-DD HH:mm:ss"),
     qrCodeUrl: reservation.qrCodeUrl || null,
   };
 };

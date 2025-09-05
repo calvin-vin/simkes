@@ -10,7 +10,7 @@ export const getPatientByIdentity = async (identity) => {
   });
 
   if (!patient) {
-    throw new apiError(404, "Patient not found");
+    throw new apiError(404, "Data pasien tidak ditemukan");
   }
 
   return patient;

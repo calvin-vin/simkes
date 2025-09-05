@@ -170,6 +170,17 @@ exports.Prisma.HospitalLocationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DoctorRatingScalarFieldEnum = {
+  id: 'id',
+  reservationId: 'reservationId',
+  doctorId: 'doctorId',
+  patientId: 'patientId',
+  rating: 'rating',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -199,7 +210,8 @@ exports.Prisma.ModelName = {
   EmergencyHistory: 'EmergencyHistory',
   AmbulanceStaff: 'AmbulanceStaff',
   ReservationQRCode: 'ReservationQRCode',
-  HospitalLocation: 'HospitalLocation'
+  HospitalLocation: 'HospitalLocation',
+  DoctorRating: 'DoctorRating'
 };
 
 /**

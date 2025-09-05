@@ -75,3 +75,17 @@ model HospitalLocation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model DoctorRating {
+  id            String   @id @default(uuid())
+  reservationId String   @unique
+  doctorId      Int
+  patientId     String
+  rating        Int      @db.SmallInt // Nilai rating 1-5
+  comment       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([doctorId])
+  @@index([patientId])
+}

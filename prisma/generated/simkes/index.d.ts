@@ -38,6 +38,11 @@ export type ReservationQRCode = $Result.DefaultSelection<Prisma.$ReservationQRCo
  * 
  */
 export type HospitalLocation = $Result.DefaultSelection<Prisma.$HospitalLocationPayload>
+/**
+ * Model DoctorRating
+ * 
+ */
+export type DoctorRating = $Result.DefaultSelection<Prisma.$DoctorRatingPayload>
 
 /**
  * Enums
@@ -235,6 +240,16 @@ export class PrismaClient<
     * ```
     */
   get hospitalLocation(): Prisma.HospitalLocationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.doctorRating`: Exposes CRUD operations for the **DoctorRating** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DoctorRatings
+    * const doctorRatings = await prisma.doctorRating.findMany()
+    * ```
+    */
+  get doctorRating(): Prisma.DoctorRatingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -679,7 +694,8 @@ export namespace Prisma {
     EmergencyHistory: 'EmergencyHistory',
     AmbulanceStaff: 'AmbulanceStaff',
     ReservationQRCode: 'ReservationQRCode',
-    HospitalLocation: 'HospitalLocation'
+    HospitalLocation: 'HospitalLocation',
+    DoctorRating: 'DoctorRating'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -698,7 +714,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation"
+      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1072,6 +1088,80 @@ export namespace Prisma {
           }
         }
       }
+      DoctorRating: {
+        payload: Prisma.$DoctorRatingPayload<ExtArgs>
+        fields: Prisma.DoctorRatingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DoctorRatingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DoctorRatingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>
+          }
+          findFirst: {
+            args: Prisma.DoctorRatingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DoctorRatingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>
+          }
+          findMany: {
+            args: Prisma.DoctorRatingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>[]
+          }
+          create: {
+            args: Prisma.DoctorRatingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>
+          }
+          createMany: {
+            args: Prisma.DoctorRatingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DoctorRatingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>[]
+          }
+          delete: {
+            args: Prisma.DoctorRatingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>
+          }
+          update: {
+            args: Prisma.DoctorRatingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>
+          }
+          deleteMany: {
+            args: Prisma.DoctorRatingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DoctorRatingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DoctorRatingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>[]
+          }
+          upsert: {
+            args: Prisma.DoctorRatingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DoctorRatingPayload>
+          }
+          aggregate: {
+            args: Prisma.DoctorRatingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDoctorRating>
+          }
+          groupBy: {
+            args: Prisma.DoctorRatingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DoctorRatingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DoctorRatingCountArgs<ExtArgs>
+            result: $Utils.Optional<DoctorRatingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1161,6 +1251,7 @@ export namespace Prisma {
     ambulanceStaff?: AmbulanceStaffOmit
     reservationQRCode?: ReservationQRCodeOmit
     hospitalLocation?: HospitalLocationOmit
+    doctorRating?: DoctorRatingOmit
   }
 
   /* Types for Logging */
@@ -6710,6 +6801,1078 @@ export namespace Prisma {
 
 
   /**
+   * Model DoctorRating
+   */
+
+  export type AggregateDoctorRating = {
+    _count: DoctorRatingCountAggregateOutputType | null
+    _avg: DoctorRatingAvgAggregateOutputType | null
+    _sum: DoctorRatingSumAggregateOutputType | null
+    _min: DoctorRatingMinAggregateOutputType | null
+    _max: DoctorRatingMaxAggregateOutputType | null
+  }
+
+  export type DoctorRatingAvgAggregateOutputType = {
+    doctorId: number | null
+    rating: number | null
+  }
+
+  export type DoctorRatingSumAggregateOutputType = {
+    doctorId: number | null
+    rating: number | null
+  }
+
+  export type DoctorRatingMinAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    doctorId: number | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DoctorRatingMaxAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    doctorId: number | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DoctorRatingCountAggregateOutputType = {
+    id: number
+    reservationId: number
+    doctorId: number
+    patientId: number
+    rating: number
+    comment: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DoctorRatingAvgAggregateInputType = {
+    doctorId?: true
+    rating?: true
+  }
+
+  export type DoctorRatingSumAggregateInputType = {
+    doctorId?: true
+    rating?: true
+  }
+
+  export type DoctorRatingMinAggregateInputType = {
+    id?: true
+    reservationId?: true
+    doctorId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DoctorRatingMaxAggregateInputType = {
+    id?: true
+    reservationId?: true
+    doctorId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DoctorRatingCountAggregateInputType = {
+    id?: true
+    reservationId?: true
+    doctorId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DoctorRatingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DoctorRating to aggregate.
+     */
+    where?: DoctorRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DoctorRatings to fetch.
+     */
+    orderBy?: DoctorRatingOrderByWithRelationInput | DoctorRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DoctorRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DoctorRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DoctorRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DoctorRatings
+    **/
+    _count?: true | DoctorRatingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DoctorRatingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DoctorRatingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DoctorRatingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DoctorRatingMaxAggregateInputType
+  }
+
+  export type GetDoctorRatingAggregateType<T extends DoctorRatingAggregateArgs> = {
+        [P in keyof T & keyof AggregateDoctorRating]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDoctorRating[P]>
+      : GetScalarType<T[P], AggregateDoctorRating[P]>
+  }
+
+
+
+
+  export type DoctorRatingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DoctorRatingWhereInput
+    orderBy?: DoctorRatingOrderByWithAggregationInput | DoctorRatingOrderByWithAggregationInput[]
+    by: DoctorRatingScalarFieldEnum[] | DoctorRatingScalarFieldEnum
+    having?: DoctorRatingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DoctorRatingCountAggregateInputType | true
+    _avg?: DoctorRatingAvgAggregateInputType
+    _sum?: DoctorRatingSumAggregateInputType
+    _min?: DoctorRatingMinAggregateInputType
+    _max?: DoctorRatingMaxAggregateInputType
+  }
+
+  export type DoctorRatingGroupByOutputType = {
+    id: string
+    reservationId: string
+    doctorId: number
+    patientId: string
+    rating: number
+    comment: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: DoctorRatingCountAggregateOutputType | null
+    _avg: DoctorRatingAvgAggregateOutputType | null
+    _sum: DoctorRatingSumAggregateOutputType | null
+    _min: DoctorRatingMinAggregateOutputType | null
+    _max: DoctorRatingMaxAggregateOutputType | null
+  }
+
+  type GetDoctorRatingGroupByPayload<T extends DoctorRatingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DoctorRatingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DoctorRatingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DoctorRatingGroupByOutputType[P]>
+            : GetScalarType<T[P], DoctorRatingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DoctorRatingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    doctorId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["doctorRating"]>
+
+  export type DoctorRatingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    doctorId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["doctorRating"]>
+
+  export type DoctorRatingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    doctorId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["doctorRating"]>
+
+  export type DoctorRatingSelectScalar = {
+    id?: boolean
+    reservationId?: boolean
+    doctorId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DoctorRatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reservationId" | "doctorId" | "patientId" | "rating" | "comment" | "createdAt" | "updatedAt", ExtArgs["result"]["doctorRating"]>
+
+  export type $DoctorRatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DoctorRating"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reservationId: string
+      doctorId: number
+      patientId: string
+      rating: number
+      comment: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["doctorRating"]>
+    composites: {}
+  }
+
+  type DoctorRatingGetPayload<S extends boolean | null | undefined | DoctorRatingDefaultArgs> = $Result.GetResult<Prisma.$DoctorRatingPayload, S>
+
+  type DoctorRatingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DoctorRatingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DoctorRatingCountAggregateInputType | true
+    }
+
+  export interface DoctorRatingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DoctorRating'], meta: { name: 'DoctorRating' } }
+    /**
+     * Find zero or one DoctorRating that matches the filter.
+     * @param {DoctorRatingFindUniqueArgs} args - Arguments to find a DoctorRating
+     * @example
+     * // Get one DoctorRating
+     * const doctorRating = await prisma.doctorRating.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DoctorRatingFindUniqueArgs>(args: SelectSubset<T, DoctorRatingFindUniqueArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DoctorRating that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DoctorRatingFindUniqueOrThrowArgs} args - Arguments to find a DoctorRating
+     * @example
+     * // Get one DoctorRating
+     * const doctorRating = await prisma.doctorRating.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DoctorRatingFindUniqueOrThrowArgs>(args: SelectSubset<T, DoctorRatingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DoctorRating that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DoctorRatingFindFirstArgs} args - Arguments to find a DoctorRating
+     * @example
+     * // Get one DoctorRating
+     * const doctorRating = await prisma.doctorRating.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DoctorRatingFindFirstArgs>(args?: SelectSubset<T, DoctorRatingFindFirstArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DoctorRating that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DoctorRatingFindFirstOrThrowArgs} args - Arguments to find a DoctorRating
+     * @example
+     * // Get one DoctorRating
+     * const doctorRating = await prisma.doctorRating.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DoctorRatingFindFirstOrThrowArgs>(args?: SelectSubset<T, DoctorRatingFindFirstOrThrowArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DoctorRatings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DoctorRatingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DoctorRatings
+     * const doctorRatings = await prisma.doctorRating.findMany()
+     * 
+     * // Get first 10 DoctorRatings
+     * const doctorRatings = await prisma.doctorRating.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const doctorRatingWithIdOnly = await prisma.doctorRating.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DoctorRatingFindManyArgs>(args?: SelectSubset<T, DoctorRatingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DoctorRating.
+     * @param {DoctorRatingCreateArgs} args - Arguments to create a DoctorRating.
+     * @example
+     * // Create one DoctorRating
+     * const DoctorRating = await prisma.doctorRating.create({
+     *   data: {
+     *     // ... data to create a DoctorRating
+     *   }
+     * })
+     * 
+     */
+    create<T extends DoctorRatingCreateArgs>(args: SelectSubset<T, DoctorRatingCreateArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DoctorRatings.
+     * @param {DoctorRatingCreateManyArgs} args - Arguments to create many DoctorRatings.
+     * @example
+     * // Create many DoctorRatings
+     * const doctorRating = await prisma.doctorRating.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DoctorRatingCreateManyArgs>(args?: SelectSubset<T, DoctorRatingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DoctorRatings and returns the data saved in the database.
+     * @param {DoctorRatingCreateManyAndReturnArgs} args - Arguments to create many DoctorRatings.
+     * @example
+     * // Create many DoctorRatings
+     * const doctorRating = await prisma.doctorRating.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DoctorRatings and only return the `id`
+     * const doctorRatingWithIdOnly = await prisma.doctorRating.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DoctorRatingCreateManyAndReturnArgs>(args?: SelectSubset<T, DoctorRatingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DoctorRating.
+     * @param {DoctorRatingDeleteArgs} args - Arguments to delete one DoctorRating.
+     * @example
+     * // Delete one DoctorRating
+     * const DoctorRating = await prisma.doctorRating.delete({
+     *   where: {
+     *     // ... filter to delete one DoctorRating
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DoctorRatingDeleteArgs>(args: SelectSubset<T, DoctorRatingDeleteArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DoctorRating.
+     * @param {DoctorRatingUpdateArgs} args - Arguments to update one DoctorRating.
+     * @example
+     * // Update one DoctorRating
+     * const doctorRating = await prisma.doctorRating.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DoctorRatingUpdateArgs>(args: SelectSubset<T, DoctorRatingUpdateArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DoctorRatings.
+     * @param {DoctorRatingDeleteManyArgs} args - Arguments to filter DoctorRatings to delete.
+     * @example
+     * // Delete a few DoctorRatings
+     * const { count } = await prisma.doctorRating.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DoctorRatingDeleteManyArgs>(args?: SelectSubset<T, DoctorRatingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DoctorRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DoctorRatingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DoctorRatings
+     * const doctorRating = await prisma.doctorRating.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DoctorRatingUpdateManyArgs>(args: SelectSubset<T, DoctorRatingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DoctorRatings and returns the data updated in the database.
+     * @param {DoctorRatingUpdateManyAndReturnArgs} args - Arguments to update many DoctorRatings.
+     * @example
+     * // Update many DoctorRatings
+     * const doctorRating = await prisma.doctorRating.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DoctorRatings and only return the `id`
+     * const doctorRatingWithIdOnly = await prisma.doctorRating.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DoctorRatingUpdateManyAndReturnArgs>(args: SelectSubset<T, DoctorRatingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DoctorRating.
+     * @param {DoctorRatingUpsertArgs} args - Arguments to update or create a DoctorRating.
+     * @example
+     * // Update or create a DoctorRating
+     * const doctorRating = await prisma.doctorRating.upsert({
+     *   create: {
+     *     // ... data to create a DoctorRating
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DoctorRating we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DoctorRatingUpsertArgs>(args: SelectSubset<T, DoctorRatingUpsertArgs<ExtArgs>>): Prisma__DoctorRatingClient<$Result.GetResult<Prisma.$DoctorRatingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DoctorRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DoctorRatingCountArgs} args - Arguments to filter DoctorRatings to count.
+     * @example
+     * // Count the number of DoctorRatings
+     * const count = await prisma.doctorRating.count({
+     *   where: {
+     *     // ... the filter for the DoctorRatings we want to count
+     *   }
+     * })
+    **/
+    count<T extends DoctorRatingCountArgs>(
+      args?: Subset<T, DoctorRatingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DoctorRatingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DoctorRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DoctorRatingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DoctorRatingAggregateArgs>(args: Subset<T, DoctorRatingAggregateArgs>): Prisma.PrismaPromise<GetDoctorRatingAggregateType<T>>
+
+    /**
+     * Group by DoctorRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DoctorRatingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DoctorRatingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DoctorRatingGroupByArgs['orderBy'] }
+        : { orderBy?: DoctorRatingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DoctorRatingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDoctorRatingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DoctorRating model
+   */
+  readonly fields: DoctorRatingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DoctorRating.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DoctorRatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DoctorRating model
+   */
+  interface DoctorRatingFieldRefs {
+    readonly id: FieldRef<"DoctorRating", 'String'>
+    readonly reservationId: FieldRef<"DoctorRating", 'String'>
+    readonly doctorId: FieldRef<"DoctorRating", 'Int'>
+    readonly patientId: FieldRef<"DoctorRating", 'String'>
+    readonly rating: FieldRef<"DoctorRating", 'Int'>
+    readonly comment: FieldRef<"DoctorRating", 'String'>
+    readonly createdAt: FieldRef<"DoctorRating", 'DateTime'>
+    readonly updatedAt: FieldRef<"DoctorRating", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DoctorRating findUnique
+   */
+  export type DoctorRatingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which DoctorRating to fetch.
+     */
+    where: DoctorRatingWhereUniqueInput
+  }
+
+  /**
+   * DoctorRating findUniqueOrThrow
+   */
+  export type DoctorRatingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which DoctorRating to fetch.
+     */
+    where: DoctorRatingWhereUniqueInput
+  }
+
+  /**
+   * DoctorRating findFirst
+   */
+  export type DoctorRatingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which DoctorRating to fetch.
+     */
+    where?: DoctorRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DoctorRatings to fetch.
+     */
+    orderBy?: DoctorRatingOrderByWithRelationInput | DoctorRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DoctorRatings.
+     */
+    cursor?: DoctorRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DoctorRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DoctorRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DoctorRatings.
+     */
+    distinct?: DoctorRatingScalarFieldEnum | DoctorRatingScalarFieldEnum[]
+  }
+
+  /**
+   * DoctorRating findFirstOrThrow
+   */
+  export type DoctorRatingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which DoctorRating to fetch.
+     */
+    where?: DoctorRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DoctorRatings to fetch.
+     */
+    orderBy?: DoctorRatingOrderByWithRelationInput | DoctorRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DoctorRatings.
+     */
+    cursor?: DoctorRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DoctorRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DoctorRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DoctorRatings.
+     */
+    distinct?: DoctorRatingScalarFieldEnum | DoctorRatingScalarFieldEnum[]
+  }
+
+  /**
+   * DoctorRating findMany
+   */
+  export type DoctorRatingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * Filter, which DoctorRatings to fetch.
+     */
+    where?: DoctorRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DoctorRatings to fetch.
+     */
+    orderBy?: DoctorRatingOrderByWithRelationInput | DoctorRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DoctorRatings.
+     */
+    cursor?: DoctorRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DoctorRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DoctorRatings.
+     */
+    skip?: number
+    distinct?: DoctorRatingScalarFieldEnum | DoctorRatingScalarFieldEnum[]
+  }
+
+  /**
+   * DoctorRating create
+   */
+  export type DoctorRatingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DoctorRating.
+     */
+    data: XOR<DoctorRatingCreateInput, DoctorRatingUncheckedCreateInput>
+  }
+
+  /**
+   * DoctorRating createMany
+   */
+  export type DoctorRatingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DoctorRatings.
+     */
+    data: DoctorRatingCreateManyInput | DoctorRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DoctorRating createManyAndReturn
+   */
+  export type DoctorRatingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * The data used to create many DoctorRatings.
+     */
+    data: DoctorRatingCreateManyInput | DoctorRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DoctorRating update
+   */
+  export type DoctorRatingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DoctorRating.
+     */
+    data: XOR<DoctorRatingUpdateInput, DoctorRatingUncheckedUpdateInput>
+    /**
+     * Choose, which DoctorRating to update.
+     */
+    where: DoctorRatingWhereUniqueInput
+  }
+
+  /**
+   * DoctorRating updateMany
+   */
+  export type DoctorRatingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DoctorRatings.
+     */
+    data: XOR<DoctorRatingUpdateManyMutationInput, DoctorRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which DoctorRatings to update
+     */
+    where?: DoctorRatingWhereInput
+    /**
+     * Limit how many DoctorRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DoctorRating updateManyAndReturn
+   */
+  export type DoctorRatingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * The data used to update DoctorRatings.
+     */
+    data: XOR<DoctorRatingUpdateManyMutationInput, DoctorRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which DoctorRatings to update
+     */
+    where?: DoctorRatingWhereInput
+    /**
+     * Limit how many DoctorRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DoctorRating upsert
+   */
+  export type DoctorRatingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DoctorRating to update in case it exists.
+     */
+    where: DoctorRatingWhereUniqueInput
+    /**
+     * In case the DoctorRating found by the `where` argument doesn't exist, create a new DoctorRating with this data.
+     */
+    create: XOR<DoctorRatingCreateInput, DoctorRatingUncheckedCreateInput>
+    /**
+     * In case the DoctorRating was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DoctorRatingUpdateInput, DoctorRatingUncheckedUpdateInput>
+  }
+
+  /**
+   * DoctorRating delete
+   */
+  export type DoctorRatingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+    /**
+     * Filter which DoctorRating to delete.
+     */
+    where: DoctorRatingWhereUniqueInput
+  }
+
+  /**
+   * DoctorRating deleteMany
+   */
+  export type DoctorRatingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DoctorRatings to delete
+     */
+    where?: DoctorRatingWhereInput
+    /**
+     * Limit how many DoctorRatings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DoctorRating without action
+   */
+  export type DoctorRatingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DoctorRating
+     */
+    select?: DoctorRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DoctorRating
+     */
+    omit?: DoctorRatingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6786,6 +7949,20 @@ export namespace Prisma {
   };
 
   export type HospitalLocationScalarFieldEnum = (typeof HospitalLocationScalarFieldEnum)[keyof typeof HospitalLocationScalarFieldEnum]
+
+
+  export const DoctorRatingScalarFieldEnum: {
+    id: 'id',
+    reservationId: 'reservationId',
+    doctorId: 'doctorId',
+    patientId: 'patientId',
+    rating: 'rating',
+    comment: 'comment',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DoctorRatingScalarFieldEnum = (typeof DoctorRatingScalarFieldEnum)[keyof typeof DoctorRatingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7221,6 +8398,75 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"HospitalLocation"> | Date | string
   }
 
+  export type DoctorRatingWhereInput = {
+    AND?: DoctorRatingWhereInput | DoctorRatingWhereInput[]
+    OR?: DoctorRatingWhereInput[]
+    NOT?: DoctorRatingWhereInput | DoctorRatingWhereInput[]
+    id?: StringFilter<"DoctorRating"> | string
+    reservationId?: StringFilter<"DoctorRating"> | string
+    doctorId?: IntFilter<"DoctorRating"> | number
+    patientId?: StringFilter<"DoctorRating"> | string
+    rating?: IntFilter<"DoctorRating"> | number
+    comment?: StringNullableFilter<"DoctorRating"> | string | null
+    createdAt?: DateTimeFilter<"DoctorRating"> | Date | string
+    updatedAt?: DateTimeFilter<"DoctorRating"> | Date | string
+  }
+
+  export type DoctorRatingOrderByWithRelationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    doctorId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DoctorRatingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reservationId?: string
+    AND?: DoctorRatingWhereInput | DoctorRatingWhereInput[]
+    OR?: DoctorRatingWhereInput[]
+    NOT?: DoctorRatingWhereInput | DoctorRatingWhereInput[]
+    doctorId?: IntFilter<"DoctorRating"> | number
+    patientId?: StringFilter<"DoctorRating"> | string
+    rating?: IntFilter<"DoctorRating"> | number
+    comment?: StringNullableFilter<"DoctorRating"> | string | null
+    createdAt?: DateTimeFilter<"DoctorRating"> | Date | string
+    updatedAt?: DateTimeFilter<"DoctorRating"> | Date | string
+  }, "id" | "reservationId">
+
+  export type DoctorRatingOrderByWithAggregationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    doctorId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DoctorRatingCountOrderByAggregateInput
+    _avg?: DoctorRatingAvgOrderByAggregateInput
+    _max?: DoctorRatingMaxOrderByAggregateInput
+    _min?: DoctorRatingMinOrderByAggregateInput
+    _sum?: DoctorRatingSumOrderByAggregateInput
+  }
+
+  export type DoctorRatingScalarWhereWithAggregatesInput = {
+    AND?: DoctorRatingScalarWhereWithAggregatesInput | DoctorRatingScalarWhereWithAggregatesInput[]
+    OR?: DoctorRatingScalarWhereWithAggregatesInput[]
+    NOT?: DoctorRatingScalarWhereWithAggregatesInput | DoctorRatingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DoctorRating"> | string
+    reservationId?: StringWithAggregatesFilter<"DoctorRating"> | string
+    doctorId?: IntWithAggregatesFilter<"DoctorRating"> | number
+    patientId?: StringWithAggregatesFilter<"DoctorRating"> | string
+    rating?: IntWithAggregatesFilter<"DoctorRating"> | number
+    comment?: StringNullableWithAggregatesFilter<"DoctorRating"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"DoctorRating"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DoctorRating"> | Date | string
+  }
+
   export type EmergencyRequestCreateInput = {
     id?: string
     patientId: string
@@ -7577,6 +8823,83 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DoctorRatingCreateInput = {
+    id?: string
+    reservationId: string
+    doctorId: number
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DoctorRatingUncheckedCreateInput = {
+    id?: string
+    reservationId: string
+    doctorId: number
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DoctorRatingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    doctorId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DoctorRatingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    doctorId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DoctorRatingCreateManyInput = {
+    id?: string
+    reservationId: string
+    doctorId: number
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DoctorRatingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    doctorId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DoctorRatingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    doctorId?: IntFieldUpdateOperationsInput | number
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7920,6 +9243,76 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DoctorRatingCountOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    doctorId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DoctorRatingAvgOrderByAggregateInput = {
+    doctorId?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type DoctorRatingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    doctorId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DoctorRatingMinOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    doctorId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DoctorRatingSumOrderByAggregateInput = {
+    doctorId?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type AmbulanceStaffCreateNestedOneWithoutEmergencyRequestInput = {
     create?: XOR<AmbulanceStaffCreateWithoutEmergencyRequestInput, AmbulanceStaffUncheckedCreateWithoutEmergencyRequestInput>
     connectOrCreate?: AmbulanceStaffCreateOrConnectWithoutEmergencyRequestInput
@@ -8060,6 +9453,14 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8226,6 +9627,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type AmbulanceStaffCreateWithoutEmergencyRequestInput = {

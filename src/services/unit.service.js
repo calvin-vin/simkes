@@ -1,7 +1,7 @@
 import { simrsPrisma } from "../config/db.js";
 import ApiError from "../utils/apiError.js";
 
-export const getAllPolyclinics = async (query) => {
+export const getAllUnits = async (query) => {
   const { unitName, page = 1, limit = 10, sortBy, sortOrder } = query;
 
   // filter unit (poli)
@@ -27,7 +27,7 @@ export const getAllPolyclinics = async (query) => {
   }
 
   // query paralel for data & total count
-  const [polyclinics, total] = await Promise.all([
+  const [units, total] = await Promise.all([
     simrsPrisma.unit.findMany({
       where: filters,
       select: {
@@ -46,7 +46,7 @@ export const getAllPolyclinics = async (query) => {
 
   // final result
   return {
-    results: polyclinics,
+    results: units,
     pagination: {
       total,
       page: Number(page),
@@ -56,8 +56,8 @@ export const getAllPolyclinics = async (query) => {
   };
 };
 
-export const getPolyclinicById = async (id) => {
-  const polyclinic = await simrsPrisma.unit.findFirst({
+export const getUnitById = async (id) => {
+  const unit = await simrsPrisma.unit.findFirst({
     where: {
       id: Number(id),
       isEnabled: true,
@@ -72,9 +72,9 @@ export const getPolyclinicById = async (id) => {
     },
   });
 
-  if (!polyclinic) {
-    throw new ApiError("Polyclinic not found", 404);
+  if (!unit) {
+    throw new ApiError("Data unit tidak ditemukan", 404);
   }
 
-  return polyclinic;
+  return unit;
 };

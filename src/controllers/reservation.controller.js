@@ -30,11 +30,8 @@ export const createReservation = catchAsync(async (req, res) => {
 
 export const getAllReservations = catchAsync(async (req, res) => {
   const query = reservationFilterSchema.parse(req.query);
-  const identity = req.user.identity;
-  const reservations = await reservationService.getAllReservations(
-    query,
-    identity
-  );
+  const user = req.user;
+  const reservations = await reservationService.getAllReservations(query, user);
 
   return apiSuccess(res, 200, "Daftar reservasi berhasil diambil", {
     results: reservations.results.map((reservation) =>

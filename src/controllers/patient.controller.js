@@ -10,13 +10,12 @@ import { updatePatientSchema } from "../schemas/patient.schema.js";
 
 export const ensurePatient = catchAsync(async (req, res) => {
   const user = req.user;
-  console.log(user);
   const result = await patientService.ensurePatientExists(user);
 
   return apiSuccess(
     res,
     200,
-    "Patient ensured successfully",
+    "Data pasien berhasil sinkronisasi",
     ensurePatientResource(result)
   );
 });
@@ -29,7 +28,7 @@ export const getPatient = catchAsync(async (req, res) => {
   return apiSuccess(
     res,
     200,
-    "Patient retrieved successfully",
+    "Data pasien berhasil diambil",
     patientResource(patient)
   );
 });
@@ -52,7 +51,7 @@ export const updatePatient = catchAsync(async (req, res) => {
   return apiSuccess(
     res,
     200,
-    "Patient updated successfully",
+    "Data pasien berhasil diupdate",
     patientResource(updatedPatient)
   );
 });

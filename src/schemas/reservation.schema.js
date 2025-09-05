@@ -2,15 +2,13 @@ import { z } from "zod";
 
 export const reservationSchema = z.object({
   unitId: z.number().int().positive(),
-  doctorId: z.number().int().positive().optional(),
-  paymentMethodId: z.number().int().positive(),
+  doctorId: z.number().int().positive(),
+  paymentMethodId: z.number().int(),
   reservationDate: z.string(),
-  identity: z.number().int().positive().optional(),
   referralNumber: z.string().optional(),
   bpjsNumber: z.string().optional(),
   otherInsuranceNumber: z.string().optional(),
   referralSourceId: z.number().int().positive().optional(),
-  notes: z.string().optional(),
 });
 
 export const cancelReservationSchema = z.object({
