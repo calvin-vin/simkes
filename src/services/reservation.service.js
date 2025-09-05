@@ -214,6 +214,8 @@ export const getAllReservations = async (query, user) => {
     unitId,
     date,
     isCancelled,
+    isConfirmed,
+    callStatus,
     page = 1,
     limit = 10,
     sortBy = "createdAt",
@@ -235,6 +237,10 @@ export const getAllReservations = async (query, user) => {
     ...(isCancelled !== undefined
       ? { isCancelled: isCancelled === "true" }
       : {}),
+    ...(isConfirmed !== undefined
+      ? { isConfirmed: isConfirmed === "true" }
+      : {}),
+    ...(callStatus !== undefined ? { callStatus } : {}),
   };
 
   // Add date filter if provided
@@ -247,7 +253,7 @@ export const getAllReservations = async (query, user) => {
   }
 
   // Build orderBy object
-  const orderBy = {};
+  let orderBy;
   if (
     sortBy &&
     [
@@ -257,12 +263,18 @@ export const getAllReservations = async (query, user) => {
       "reservationNumber",
     ].includes(sortBy)
   ) {
+    orderBy = {};
     orderBy[sortBy] =
       sortOrder && ["asc", "desc"].includes(sortOrder.toLowerCase())
         ? sortOrder.toLowerCase()
         : "desc";
   } else {
-    orderBy["createdAt"] = "desc"; // default sort
+    // Default sorting: reservationDate desc, callStatus asc, queueNumber asc
+    orderBy = [
+      { reservationDate: "desc" },
+      { callStatus: "asc" },
+      { queueNumber: "asc" }
+    ];
   }
 
   // Execute queries in parallel for better performance

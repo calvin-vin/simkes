@@ -22,6 +22,8 @@ export const reservationFilterSchema = z.object({
   unitId: z.coerce.number().int().positive().optional(),
   date: z.string().optional(),
   isCancelled: z.enum(["true", "false"]).optional(),
+  isConfirmed: z.enum(["true", "false"]).optional(),
+  callStatus: z.enum(["0", "1", "2"]).optional(),
   sortBy: z
     .enum(["reservationDate", "createdAt", "queueNumber", "reservationNumber"])
     .optional()
