@@ -105,12 +105,12 @@ model UnitRating {
 }
 
 model Facility {
-  id          String         @id @default(uuid())
+  id          String          @id @default(uuid())
   name        String
   description String?
-  status      Boolean        @default(true)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
   photos      FacilityPhoto[]
 }
 
@@ -120,8 +120,42 @@ model FacilityPhoto {
   photoUrl   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  
-  facility   Facility @relation(fields: [facilityId], references: [id], onDelete: Cascade)
-  
+
+  facility Facility @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+
   @@index([facilityId])
+}
+
+model Post {
+  id         String   @id @default(uuid())
+  title      String
+  content    String
+  authorId   String // ID pengguna yang membuat postingan
+  authorName String // Nama pengguna yang membuat postingan
+  photoUrl   String? // URL foto postingan (opsional)
+  isActive   Boolean  @default(true) // true = aktif, false = tidak aktif
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Gallery {
+  id          String         @id @default(uuid())
+  title       String
+  description String?
+  isActive    Boolean        @default(true) // true = aktif, false = tidak aktif
+  photos      GalleryPhoto[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model GalleryPhoto {
+  id        String   @id @default(uuid())
+  galleryId String
+  photoUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  gallery Gallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+
+  @@index([galleryId])
 }

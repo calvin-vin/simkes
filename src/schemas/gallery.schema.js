@@ -1,22 +1,22 @@
 import { z } from "zod";
 
 /**
- * Schema validasi untuk fasilitas rumah sakit
+ * Schema validasi untuk gallery
  */
-export const facilitySchema = z.object({
-  name: z.string().min(1, "Nama fasilitas wajib diisi"),
+export const gallerySchema = z.object({
+  title: z.string().min(1, "Judul gallery wajib diisi"),
   description: z.string().optional(),
   isActive: z.boolean().default(true),
 });
 
 /**
- * Schema validasi untuk filter fasilitas
+ * Schema validasi untuk filter gallery
  */
-export const facilityFilterSchema = z.object({
+export const galleryFilterSchema = z.object({
   page: z.coerce.number().min(1).default(1),
   limit: z.coerce.number().min(1).max(100).default(10),
   search: z.string().optional(),
   isActive: z.enum(["true", "false"]).optional(),
-  sortBy: z.enum(["name", "createdAt"]).optional().default("createdAt"),
+  sortBy: z.enum(["title", "createdAt"]).optional().default("createdAt"),
   sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
 });

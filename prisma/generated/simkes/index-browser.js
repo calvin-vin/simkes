@@ -196,7 +196,7 @@ exports.Prisma.FacilityScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  status: 'status',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -204,6 +204,35 @@ exports.Prisma.FacilityScalarFieldEnum = {
 exports.Prisma.FacilityPhotoScalarFieldEnum = {
   id: 'id',
   facilityId: 'facilityId',
+  photoUrl: 'photoUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorId: 'authorId',
+  authorName: 'authorName',
+  photoUrl: 'photoUrl',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GalleryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GalleryPhotoScalarFieldEnum = {
+  id: 'id',
+  galleryId: 'galleryId',
   photoUrl: 'photoUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -242,7 +271,10 @@ exports.Prisma.ModelName = {
   DoctorRating: 'DoctorRating',
   UnitRating: 'UnitRating',
   Facility: 'Facility',
-  FacilityPhoto: 'FacilityPhoto'
+  FacilityPhoto: 'FacilityPhoto',
+  Post: 'Post',
+  Gallery: 'Gallery',
+  GalleryPhoto: 'GalleryPhoto'
 };
 
 /**

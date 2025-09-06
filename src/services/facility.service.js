@@ -9,12 +9,89 @@ import fs from "fs/promises";
  * @param {Object} query - Query parameters
  * @returns {Promise<Object>} Facilities with pagination
  */
+export const getAllPublicFacilities = async (query) => {
+  const {
+    page = 1,
+    limit = 10,
+    search,
+    sortBy = "createdAt",
+    sortOrder = "desc",
+  } = query;
+
+  // Build filters
+  const filters = {
+    isActive: true,
+  };
+
+  if (search) {
+    filters.name = {
+      contains: search,
+      mode: "insensitive",
+    };
+  }
+
+  // Build sort
+  const orderBy = {
+    [sortBy]: sortOrder,
+  };
+
+  // Get facilities with pagination
+  const [facilities, total] = await Promise.all([
+    simkesPrisma.facility.findMany({
+      where: filters,
+      include: {
+        photos: true,
+      },
+      skip: (page - 1) * limit,
+      take: Number(limit),
+      orderBy,
+    }),
+    simkesPrisma.facility.count({ where: filters }),
+  ]);
+
+  return {
+    results: facilities,
+    pagination: {
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+};
+
+/**
+ * Get facility by ID
+ * @param {string} id - Facility ID
+ * @returns {Promise<Object>} Facility
+ * @throws {ApiError} If facility not found
+ */
+export const getPublicFacilityById = async (id) => {
+  const facility = await simkesPrisma.facility.findUnique({
+    where: { id, isActive: true },
+    include: {
+      photos: true,
+    },
+  });
+
+  if (!facility) {
+    throw new ApiError("Fasilitas tidak ditemukan", 404);
+  }
+
+  return facility;
+};
+
+/**
+ * Get all facilities with pagination and filtering
+ * @param {Object} query - Query parameters
+ * @returns {Promise<Object>} Facilities with pagination
+ */
 export const getAllFacilities = async (query) => {
   const {
     page = 1,
     limit = 10,
     search,
-    status,
+    isActive,
     sortBy = "createdAt",
     sortOrder = "desc",
   } = query;
@@ -29,8 +106,8 @@ export const getAllFacilities = async (query) => {
     };
   }
 
-  if (status) {
-    filters.status = status === "true";
+  if (isActive) {
+    filters.isActive = isActive === "true";
   }
 
   // Build sort
@@ -90,13 +167,13 @@ export const getFacilityById = async (id) => {
  * @returns {Promise<Object>} Created facility
  */
 export const createFacility = async (data) => {
-  const { name, description, status } = data;
+  const { name, description, isActive } = data;
 
   return simkesPrisma.facility.create({
     data: {
       name,
       description,
-      status: status !== undefined ? status : true,
+      isActive: isActive !== undefined ? isActive : true,
     },
     include: {
       photos: true,
@@ -218,4 +295,6 @@ export const facilityService = {
   deleteFacility,
   addFacilityPhoto,
   deleteFacilityPhoto,
+  getAllPublicFacilities,
+  getPublicFacilityById,
 };

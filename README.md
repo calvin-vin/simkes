@@ -26,9 +26,7 @@ admin123
 
 -unit rating belum di test
 
--fasilitas belum diintegrasikan dengan middleware auth
-
 npx prisma generate --schema=prisma/simkes/schema.prisma
 npx prisma generate --schema=prisma/simrs/schema.prisma
 
-npx prisma migrate dev --name add_unit_rating --schema=prisma/simkes/schema.prisma
+npx prisma migrate dev --name change_attribute_status_to_isactive --schema=prisma/simkes/schema.prisma

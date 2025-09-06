@@ -11,7 +11,7 @@ export const facilityResource = (facility) => {
     id: facility.id,
     name: facility.name,
     description: facility.description,
-    status: facility.status,
+    isActive: facility.isActive,
     photos: facility.photos
       ? facility.photos.map((photo) => ({
           id: photo.id,
