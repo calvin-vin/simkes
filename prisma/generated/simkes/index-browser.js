@@ -122,7 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.EmergencyRequestScalarFieldEnum = {
   id: 'id',
-  patientId: 'patientId',
+  patientIdentity: 'patientIdentity',
   location: 'location',
   note: 'note',
   status: 'status',

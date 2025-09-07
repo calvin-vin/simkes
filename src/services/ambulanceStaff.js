@@ -1,7 +1,7 @@
-import prisma from "../config/db.js";
+import { simkesPrisma } from "../config/db.js";
 
 export const ensureAmbulanceStaffExists = async (user) => {
-  const ambulanceStaff = await prisma.ambulanceStaff.upsert({
+  const ambulanceStaff = await simkesPrisma.ambulanceStaff.upsert({
     where: { id: user.id },
     update: {
       name: user.profile.name,

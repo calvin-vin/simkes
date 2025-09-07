@@ -10,7 +10,7 @@ import catchAsync from "../utils/catchAsync.js";
 export const createEmergency = catchAsync(async (req, res) => {
   const parsedBody = emergencySchema.parse(req.body);
   const payload = {
-    patientId: req.user?.id,
+    patientIdentity: req.user?.identity,
     ...parsedBody,
   };
 
@@ -25,7 +25,7 @@ export const createEmergency = catchAsync(async (req, res) => {
 });
 
 export const getAllEmergencies = catchAsync(async (req, res) => {
-  const emergencies = await emergencyService.getAllEmergencies(req.query);
+  const emergencies = await emergencyService.getAllEmergencies(req.query, req.user);
   return apiSuccess(res, 200, "Emergency requests retrieved successfully", {
     results: emergencies.results.map((emergency) =>
       emergencyResource(emergency)
@@ -35,7 +35,7 @@ export const getAllEmergencies = catchAsync(async (req, res) => {
 });
 
 export const getEmergencyById = catchAsync(async (req, res) => {
-  const result = await emergencyService.getEmergencyById(req.params.id);
+  const result = await emergencyService.getEmergencyById(req.params.id, req.user);
   const showHistories = true;
   return apiSuccess(
     res,

@@ -6,9 +6,9 @@ export const emergencyResource = (emergency, showHistories = false) => {
     id: emergency.id,
     patient: emergency.patient
       ? {
-          id: emergency.patient.id,
+          identity: emergency.patient.identity,
           name: emergency.patient.name,
-          phone: emergency.patient.phone,
+          phoneNumber: emergency.patient.phoneNumber,
         }
       : null,
     location: emergency.location,

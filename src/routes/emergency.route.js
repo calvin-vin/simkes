@@ -7,19 +7,27 @@ import {
   updateEmergencyStatus,
 } from "../controllers/emergency.controller.js";
 import { protect, restrictToRoleSubrole } from "../middlewares/auth.js";
-import { ensurePatientMiddleware } from "../middlewares/ensurePatient.js";
 
 const router = express.Router();
 
 router.post(
-  "/emergencies",
+  "/",
   protect,
   restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
-  ensurePatientMiddleware,
   createEmergency
 );
 
-router.get("/", protect, getAllEmergencies);
+router.get(
+  "/",
+  protect,
+  restrictToRoleSubrole([
+    { role: "PATIENT", subrole: "PATIENT" },
+    { role: "OPERATOR", subrole: "OPERATOR" },
+    { role: "AMBULANCE STAFF", subrole: "AMBULANCE STAFF" },
+    { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
+  ]),
+  getAllEmergencies
+);
 router.get("/:id", protect, getEmergencyById);
 router.patch(
   "/:id/assign",

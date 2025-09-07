@@ -2027,7 +2027,7 @@ export namespace Prisma {
 
   export type EmergencyRequestMinAggregateOutputType = {
     id: string | null
-    patientId: string | null
+    patientIdentity: string | null
     location: string | null
     note: string | null
     status: $Enums.EmergencyStatus | null
@@ -2038,7 +2038,7 @@ export namespace Prisma {
 
   export type EmergencyRequestMaxAggregateOutputType = {
     id: string | null
-    patientId: string | null
+    patientIdentity: string | null
     location: string | null
     note: string | null
     status: $Enums.EmergencyStatus | null
@@ -2049,7 +2049,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCountAggregateOutputType = {
     id: number
-    patientId: number
+    patientIdentity: number
     location: number
     note: number
     status: number
@@ -2062,7 +2062,7 @@ export namespace Prisma {
 
   export type EmergencyRequestMinAggregateInputType = {
     id?: true
-    patientId?: true
+    patientIdentity?: true
     location?: true
     note?: true
     status?: true
@@ -2073,7 +2073,7 @@ export namespace Prisma {
 
   export type EmergencyRequestMaxAggregateInputType = {
     id?: true
-    patientId?: true
+    patientIdentity?: true
     location?: true
     note?: true
     status?: true
@@ -2084,7 +2084,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCountAggregateInputType = {
     id?: true
-    patientId?: true
+    patientIdentity?: true
     location?: true
     note?: true
     status?: true
@@ -2168,7 +2168,7 @@ export namespace Prisma {
 
   export type EmergencyRequestGroupByOutputType = {
     id: string
-    patientId: string
+    patientIdentity: string
     location: string
     note: string | null
     status: $Enums.EmergencyStatus
@@ -2196,7 +2196,7 @@ export namespace Prisma {
 
   export type EmergencyRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    patientId?: boolean
+    patientIdentity?: boolean
     location?: boolean
     note?: boolean
     status?: boolean
@@ -2210,7 +2210,7 @@ export namespace Prisma {
 
   export type EmergencyRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    patientId?: boolean
+    patientIdentity?: boolean
     location?: boolean
     note?: boolean
     status?: boolean
@@ -2222,7 +2222,7 @@ export namespace Prisma {
 
   export type EmergencyRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    patientId?: boolean
+    patientIdentity?: boolean
     location?: boolean
     note?: boolean
     status?: boolean
@@ -2234,7 +2234,7 @@ export namespace Prisma {
 
   export type EmergencyRequestSelectScalar = {
     id?: boolean
-    patientId?: boolean
+    patientIdentity?: boolean
     location?: boolean
     note?: boolean
     status?: boolean
@@ -2243,7 +2243,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type EmergencyRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patientId" | "location" | "note" | "status" | "assignedToId" | "createdAt" | "updatedAt", ExtArgs["result"]["emergencyRequest"]>
+  export type EmergencyRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patientIdentity" | "location" | "note" | "status" | "assignedToId" | "createdAt" | "updatedAt", ExtArgs["result"]["emergencyRequest"]>
   export type EmergencyRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignedTo?: boolean | EmergencyRequest$assignedToArgs<ExtArgs>
     histories?: boolean | EmergencyRequest$historiesArgs<ExtArgs>
@@ -2264,7 +2264,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      patientId: string
+      patientIdentity: string
       location: string
       note: string | null
       status: $Enums.EmergencyStatus
@@ -2697,7 +2697,7 @@ export namespace Prisma {
    */
   interface EmergencyRequestFieldRefs {
     readonly id: FieldRef<"EmergencyRequest", 'String'>
-    readonly patientId: FieldRef<"EmergencyRequest", 'String'>
+    readonly patientIdentity: FieldRef<"EmergencyRequest", 'String'>
     readonly location: FieldRef<"EmergencyRequest", 'String'>
     readonly note: FieldRef<"EmergencyRequest", 'String'>
     readonly status: FieldRef<"EmergencyRequest", 'EmergencyStatus'>
@@ -14897,7 +14897,7 @@ export namespace Prisma {
 
   export const EmergencyRequestScalarFieldEnum: {
     id: 'id',
-    patientId: 'patientId',
+    patientIdentity: 'patientIdentity',
     location: 'location',
     note: 'note',
     status: 'status',
@@ -15163,7 +15163,7 @@ export namespace Prisma {
     OR?: EmergencyRequestWhereInput[]
     NOT?: EmergencyRequestWhereInput | EmergencyRequestWhereInput[]
     id?: StringFilter<"EmergencyRequest"> | string
-    patientId?: StringFilter<"EmergencyRequest"> | string
+    patientIdentity?: StringFilter<"EmergencyRequest"> | string
     location?: StringFilter<"EmergencyRequest"> | string
     note?: StringNullableFilter<"EmergencyRequest"> | string | null
     status?: EnumEmergencyStatusFilter<"EmergencyRequest"> | $Enums.EmergencyStatus
@@ -15176,7 +15176,7 @@ export namespace Prisma {
 
   export type EmergencyRequestOrderByWithRelationInput = {
     id?: SortOrder
-    patientId?: SortOrder
+    patientIdentity?: SortOrder
     location?: SortOrder
     note?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -15192,7 +15192,7 @@ export namespace Prisma {
     AND?: EmergencyRequestWhereInput | EmergencyRequestWhereInput[]
     OR?: EmergencyRequestWhereInput[]
     NOT?: EmergencyRequestWhereInput | EmergencyRequestWhereInput[]
-    patientId?: StringFilter<"EmergencyRequest"> | string
+    patientIdentity?: StringFilter<"EmergencyRequest"> | string
     location?: StringFilter<"EmergencyRequest"> | string
     note?: StringNullableFilter<"EmergencyRequest"> | string | null
     status?: EnumEmergencyStatusFilter<"EmergencyRequest"> | $Enums.EmergencyStatus
@@ -15205,7 +15205,7 @@ export namespace Prisma {
 
   export type EmergencyRequestOrderByWithAggregationInput = {
     id?: SortOrder
-    patientId?: SortOrder
+    patientIdentity?: SortOrder
     location?: SortOrder
     note?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -15222,7 +15222,7 @@ export namespace Prisma {
     OR?: EmergencyRequestScalarWhereWithAggregatesInput[]
     NOT?: EmergencyRequestScalarWhereWithAggregatesInput | EmergencyRequestScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EmergencyRequest"> | string
-    patientId?: StringWithAggregatesFilter<"EmergencyRequest"> | string
+    patientIdentity?: StringWithAggregatesFilter<"EmergencyRequest"> | string
     location?: StringWithAggregatesFilter<"EmergencyRequest"> | string
     note?: StringNullableWithAggregatesFilter<"EmergencyRequest"> | string | null
     status?: EnumEmergencyStatusWithAggregatesFilter<"EmergencyRequest"> | $Enums.EmergencyStatus
@@ -15924,7 +15924,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCreateInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -15936,7 +15936,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedCreateInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -15948,7 +15948,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -15960,7 +15960,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -15972,7 +15972,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCreateManyInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -15983,7 +15983,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -15993,7 +15993,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -16830,7 +16830,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCountOrderByAggregateInput = {
     id?: SortOrder
-    patientId?: SortOrder
+    patientIdentity?: SortOrder
     location?: SortOrder
     note?: SortOrder
     status?: SortOrder
@@ -16841,7 +16841,7 @@ export namespace Prisma {
 
   export type EmergencyRequestMaxOrderByAggregateInput = {
     id?: SortOrder
-    patientId?: SortOrder
+    patientIdentity?: SortOrder
     location?: SortOrder
     note?: SortOrder
     status?: SortOrder
@@ -16852,7 +16852,7 @@ export namespace Prisma {
 
   export type EmergencyRequestMinOrderByAggregateInput = {
     id?: SortOrder
-    patientId?: SortOrder
+    patientIdentity?: SortOrder
     location?: SortOrder
     note?: SortOrder
     status?: SortOrder
@@ -17936,7 +17936,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCreateWithoutHistoriesInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -17947,7 +17947,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedCreateWithoutHistoriesInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -17974,7 +17974,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUpdateWithoutHistoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -17985,7 +17985,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedUpdateWithoutHistoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -17996,7 +17996,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCreateWithoutAssignedToInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -18007,7 +18007,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedCreateWithoutAssignedToInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -18047,7 +18047,7 @@ export namespace Prisma {
     OR?: EmergencyRequestScalarWhereInput[]
     NOT?: EmergencyRequestScalarWhereInput | EmergencyRequestScalarWhereInput[]
     id?: StringFilter<"EmergencyRequest"> | string
-    patientId?: StringFilter<"EmergencyRequest"> | string
+    patientIdentity?: StringFilter<"EmergencyRequest"> | string
     location?: StringFilter<"EmergencyRequest"> | string
     note?: StringNullableFilter<"EmergencyRequest"> | string | null
     status?: EnumEmergencyStatusFilter<"EmergencyRequest"> | $Enums.EmergencyStatus
@@ -18296,7 +18296,7 @@ export namespace Prisma {
 
   export type EmergencyRequestCreateManyAssignedToInput = {
     id?: string
-    patientId: string
+    patientIdentity: string
     location: string
     note?: string | null
     status?: $Enums.EmergencyStatus
@@ -18306,7 +18306,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUpdateWithoutAssignedToInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -18317,7 +18317,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedUpdateWithoutAssignedToInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus
@@ -18328,7 +18328,7 @@ export namespace Prisma {
 
   export type EmergencyRequestUncheckedUpdateManyWithoutAssignedToInput = {
     id?: StringFieldUpdateOperationsInput | string
-    patientId?: StringFieldUpdateOperationsInput | string
+    patientIdentity?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEmergencyStatusFieldUpdateOperationsInput | $Enums.EmergencyStatus

@@ -1,4 +1,4 @@
-import prisma from "../config/db.js";
+import { simkesPrisma, simrsPrisma } from "../config/db.js";
 import {
   sendAssignedStaffEmailtoPatient,
   sendEmailtoAmbulanceStaff,
@@ -10,37 +10,54 @@ import {
   sendWhatsAppToAmbulanceStaff,
 } from "../config/whatsapp.js";
 import ApiError from "../utils/apiError.js";
+import { getUserRole } from "../utils/getUserRole.js";
 
-export const createEmergencyRequest = async ({ patientId, location, note }) => {
+export const createEmergencyRequest = async ({
+  patientIdentity,
+  location,
+  note,
+}) => {
   // Check if any emergency request is not completed with the same patient
-  const existingEmergency = await prisma.emergencyRequest.findFirst({
-    where: { patientId, status: { not: "COMPLETED" } },
+  const existingEmergency = await simkesPrisma.emergencyRequest.findFirst({
+    where: { patientIdentity, status: { not: "COMPLETED" } },
   });
   if (existingEmergency) {
     throw new ApiError("Emergency request already exists", 400);
   }
 
+  // Ambil data pasien dari simrsPrisma
+  const patient = await simrsPrisma.patient.findUnique({
+    where: { identity: patientIdentity },
+  });
+
+  if (!patient) {
+    throw new ApiError("Patient not found", 404);
+  }
+
   const locationString = location.join(",");
-  const result = await prisma.emergencyRequest.create({
+  const result = await simkesPrisma.emergencyRequest.create({
     data: {
-      patientId,
+      patientIdentity,
       location: locationString,
       note,
       status: "PENDING",
     },
-    include: {
-      patient: true,
-    },
   });
 
+  // Gabungkan data emergency dengan data pasien
+  const resultWithPatient = {
+    ...result,
+    patient,
+  };
+
   // broadcast/notify all ambulance staff (simple approach: notify all staff)
-  const staffs = await prisma.ambulanceStaff.findMany();
+  const staffs = await simkesPrisma.ambulanceStaff.findMany();
   for (const s of staffs) {
     sendEmailtoAmbulanceStaff({
       email: s.email,
       staffName: s.name,
       emergencyId: result.id,
-      patientName: result.patient.name,
+      patientName: patient.name,
       location: result.location,
       note: result.note,
     });
@@ -48,37 +65,65 @@ export const createEmergencyRequest = async ({ patientId, location, note }) => {
       phone: s.phone,
       staffName: s.name,
       emergencyId: result.id,
-      patientName: result.patient.name,
+      patientName: patient.name,
       location: result.location,
       note: result.note,
     });
   }
 
-  return result;
+  return resultWithPatient;
 };
 
-export const getEmergencyById = async (id) => {
-  const emergency = await prisma.emergencyRequest.findUnique({
-    where: { id },
-    include: {
-      patient: true,
-      assignedTo: true,
-      histories: { orderBy: { createdAt: "desc" } },
-    },
-  });
-
-  if (!emergency) throw new ApiError("Emergency request not found", 404);
-  return emergency;
-};
-
-export const getAllEmergencies = async (query) => {
+export const getAllEmergencies = async (query, user) => {
   const { page = 1, limit = 10, search, sortBy, sortOrder } = query;
-
-  const filters = {};
+  
+  // Jika ada pencarian berdasarkan nama pasien, kita perlu pendekatan berbeda
+  let patientIdentities = [];
   if (search) {
-    // search by patient name
-    filters.patient = { name: { contains: search, mode: "insensitive" } };
+    // Cari pasien berdasarkan nama di simrsPrisma
+    const patients = await simrsPrisma.patient.findMany({
+      where: {
+        name: { contains: search, mode: "insensitive" },
+      },
+      select: {
+        identity: true,
+      },
+    });
+
+    patientIdentities = patients.map((p) => p.identity);
+
+    // Jika tidak ada pasien yang ditemukan dengan nama tersebut, kembalikan hasil kosong
+    if (patientIdentities.length === 0) {
+      return {
+        results: [],
+        pagination: {
+          total: 0,
+          page: Number(page),
+          limit: Number(limit),
+          totalPages: 0,
+        },
+      };
+    }
   }
+
+  // Jika user adalah patient, hanya tampilkan emergency request miliknya
+  let userRole = null;
+  let isPatient = false;
+  
+  if (user) {
+    try {
+      userRole = getUserRole(user);
+      isPatient = userRole.role === "PATIENT" && userRole.subrole === "PATIENT";
+    } catch (error) {
+      // Jika getUserRole gagal, anggap bukan patient
+      isPatient = false;
+    }
+  }
+  
+  const filters = {
+    ...(search ? { patientIdentity: { in: patientIdentities } } : {}),
+    ...(isPatient ? { patientIdentity: user.identity } : {}),
+  };
 
   const orderBy = {};
   if (sortBy && ["createdAt", "status"].includes(sortBy)) {
@@ -90,16 +135,36 @@ export const getAllEmergencies = async (query) => {
     orderBy["createdAt"] = "desc";
   }
 
-  const [results, total] = await Promise.all([
-    prisma.emergencyRequest.findMany({
+  const [emergencies, total] = await Promise.all([
+    simkesPrisma.emergencyRequest.findMany({
       where: filters,
-      include: { patient: true, assignedTo: true },
+      include: { assignedTo: true },
       skip: (Number(page) - 1) * Number(limit),
       take: Number(limit),
       orderBy,
     }),
-    prisma.emergencyRequest.count({ where: filters }),
+    simkesPrisma.emergencyRequest.count({ where: filters }),
   ]);
+
+  // Ambil data pasien untuk semua emergency requests
+  const patientIds = emergencies.map((e) => e.patientIdentity);
+  const patients = await simrsPrisma.patient.findMany({
+    where: {
+      identity: { in: patientIds },
+    },
+  });
+
+  // Buat map untuk mempermudah pencarian pasien berdasarkan identity
+  const patientMap = patients.reduce((map, patient) => {
+    map[patient.identity] = patient;
+    return map;
+  }, {});
+
+  // Gabungkan data emergency dengan data pasien
+  const results = emergencies.map((emergency) => ({
+    ...emergency,
+    patient: patientMap[emergency.patientIdentity] || null,
+  }));
 
   return {
     results,
@@ -112,13 +177,54 @@ export const getAllEmergencies = async (query) => {
   };
 };
 
+export const getEmergencyById = async (id, user) => {
+  const emergency = await simkesPrisma.emergencyRequest.findUnique({
+    where: { id },
+    include: {
+      assignedTo: true,
+      histories: { orderBy: { createdAt: "desc" } },
+    },
+  });
+
+  if (!emergency) throw new ApiError("Emergency request not found", 404);
+
+  // Cek apakah user adalah patient dan hanya boleh melihat emergency miliknya
+  let userRole = null;
+  let isPatient = false;
+  
+  if (user) {
+    try {
+      userRole = getUserRole(user);
+      isPatient = userRole.role === "PATIENT" && userRole.subrole === "PATIENT";
+    } catch (error) {
+      // Jika getUserRole gagal, anggap bukan patient
+      isPatient = false;
+    }
+  }
+  
+  if (isPatient && emergency.patientIdentity !== user.identity) {
+    throw new ApiError("You are not authorized to view this emergency request", 403);
+  }
+
+  // Ambil data pasien dari simrsPrisma
+  const patient = await simrsPrisma.patient.findUnique({
+    where: { identity: emergency.patientIdentity },
+  });
+
+  // Gabungkan data emergency dengan data pasien
+  return {
+    ...emergency,
+    patient,
+  };
+};
+
 export const assignEmergencyToStaff = async ({
   emergencyId,
   staffId,
   location,
   note,
 }) => {
-  const emergency = await prisma.emergencyRequest.findUnique({
+  const emergency = await simkesPrisma.emergencyRequest.findUnique({
     where: { id: emergencyId },
   });
   if (!emergency) throw new ApiError("Emergency request not found", 404);
@@ -126,15 +232,21 @@ export const assignEmergencyToStaff = async ({
     throw new ApiError("Emergency already assigned", 400);
   }
 
-  const staff = await prisma.ambulanceStaff.findUnique({
+  const staff = await simkesPrisma.ambulanceStaff.findUnique({
     where: { id: staffId },
   });
   if (!staff) throw new ApiError("Ambulance staff not found", 404);
 
+  // Ambil data pasien dari simrsPrisma
+  const patient = await simrsPrisma.patient.findUnique({
+    where: { identity: emergency.patientIdentity },
+  });
+  if (!patient) throw new ApiError("Patient not found", 404);
+
   const now = new Date();
 
   const locationString = location.join(",");
-  const result = await prisma.$transaction(async (tx) => {
+  const result = await simkesPrisma.$transaction(async (tx) => {
     const assign = await tx.emergencyRequest.update({
       where: { id: emergencyId },
       data: {
@@ -156,7 +268,6 @@ export const assignEmergencyToStaff = async ({
     const full = await tx.emergencyRequest.findUnique({
       where: { id: assign.id },
       include: {
-        patient: true,
         assignedTo: true,
         histories: {
           orderBy: { createdAt: "asc" },
@@ -167,9 +278,15 @@ export const assignEmergencyToStaff = async ({
     return full;
   });
 
+  // Gabungkan data emergency dengan data pasien
+  const resultWithPatient = {
+    ...result,
+    patient,
+  };
+
   sendAssignedStaffEmailtoPatient({
-    email: result.patient.email,
-    patientName: result.patient.name,
+    email: patient.phoneNumber, // Menggunakan phoneNumber sebagai email (sesuaikan jika ada field email)
+    patientName: patient.name,
     staffName: staff.name,
     emergencyId: result.id,
     location: locationString,
@@ -178,16 +295,16 @@ export const assignEmergencyToStaff = async ({
   });
 
   sendAssignedStaffWhatsAppToPatient({
-    phone: result.patient.phone,
+    phone: patient.phoneNumber,
     staffName: staff.name,
     emergencyId: result.id,
-    patientName: result.patient.name,
+    patientName: patient.name,
     location: locationString,
     note: note,
     status: result.status,
   });
 
-  return result;
+  return resultWithPatient;
 };
 
 export const updateEmergencyStatus = async ({
@@ -196,19 +313,24 @@ export const updateEmergencyStatus = async ({
   note,
   location,
 }) => {
-  const emergency = await prisma.emergencyRequest.findUnique({
+  const emergency = await simkesPrisma.emergencyRequest.findUnique({
     where: { id: emergencyId },
   });
   if (!emergency) throw new ApiError("Emergency request not found", 404);
 
+  // Ambil data pasien dari simrsPrisma
+  const patient = await simrsPrisma.patient.findUnique({
+    where: { identity: emergency.patientIdentity },
+  });
+  if (!patient) throw new ApiError("Patient not found", 404);
+
   const locationString = location.join(",");
-  const updated = await prisma.$transaction(async (tx) => {
+  const updated = await simkesPrisma.$transaction(async (tx) => {
     const r = await tx.emergencyRequest.update({
       where: { id: emergencyId },
       data: { status, updatedAt: new Date() },
       include: {
         assignedTo: true,
-        patient: true,
       },
     });
 
@@ -224,25 +346,29 @@ export const updateEmergencyStatus = async ({
     return r;
   });
 
-  // Optionally notify patient/family about status updates
-  const patient = await prisma.patient.findUnique({
-    where: { id: emergency.patientId },
-  });
+  // Gabungkan data emergency dengan data pasien
+  const updatedWithPatient = {
+    ...updated,
+    patient,
+  };
 
-  if (patient?.phone) {
+  // Notify patient/family about status updates
+  if (patient?.phoneNumber) {
     sendUpdatedEmergencyStatusWhatsAppToPatient({
-      phone: patient.phone,
+      phone: patient.phoneNumber,
       staffName: updated.assignedTo.name,
       emergencyId: updated.id,
-      patientName: updated.patient.name,
+      patientName: patient.name,
       location: locationString,
       note: note,
       status: updated.status,
     });
   }
-  if (patient?.email) {
+
+  // Menggunakan phoneNumber sebagai email (sesuaikan jika ada field email)
+  if (patient?.phoneNumber) {
     sendUpdatedEmergencyStatusEmailToPatient({
-      email: patient.email,
+      email: patient.phoneNumber,
       patientName: patient.name,
       staffName: updated.assignedTo.name,
       emergencyId: updated.id,
@@ -252,5 +378,5 @@ export const updateEmergencyStatus = async ({
     });
   }
 
-  return updated;
+  return updatedWithPatient;
 };

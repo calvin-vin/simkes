@@ -10,14 +10,14 @@ datasource db {
 }
 
 model EmergencyRequest {
-  id           String             @id @default(uuid())
-  patientId    String
-  location     String
-  note         String?
-  status       EmergencyStatus    @default(PENDING)
-  assignedToId String?
-  assignedTo   AmbulanceStaff?    @relation(fields: [assignedToId], references: [id])
-  histories    EmergencyHistory[]
+  id              String             @id @default(uuid())
+  patientIdentity String
+  location        String
+  note            String?
+  status          EmergencyStatus    @default(PENDING)
+  assignedToId    String?
+  assignedTo      AmbulanceStaff?    @relation(fields: [assignedToId], references: [id])
+  histories       EmergencyHistory[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -31,6 +31,8 @@ import unitRatingRoute from "./routes/unitRating.route.js";
 import facilityRoute from "./routes/facility.route.js";
 import postRoute from "./routes/post.route.js";
 import galleryRoute from "./routes/gallery.route.js";
+import ambulanceStaffRoute from "./routes/ambulanceStaff.route.js";
+import emergencyRoute from "./routes/emergency.route.js";
 
 dayjs.extend(isSameOrBefore);
 dayjs.locale("id");
@@ -71,11 +73,10 @@ app.use("/api/v1/unit-ratings", unitRatingRoute);
 app.use("/api/v1/facilities", facilityRoute);
 app.use("/api/v1/posts", postRoute);
 app.use("/api/v1/galleries", galleryRoute);
-// app.use("/api/v1/patient-payments", patientPaymentRoute);
-// app.use("/api/v1/emergencies", emergencyRoute);
+app.use("/api/v1/ambulance-staffs", ambulanceStaffRoute);
+app.use("/api/v1/emergencies", emergencyRoute);
 
 // // Ambulance Staff Routes
-// app.use("/api/v1/ambulance-staffs", ambulanceStaffRoute);
 
 // 3.) ERROR HANDLING
 app.use(notFoundHandler);
