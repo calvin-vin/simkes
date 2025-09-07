@@ -6,4 +6,6 @@ export const getUnitSchema = z.object({
   unitName: z.string().optional(),
   sortBy: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
+  minRating: z.coerce.number().min(0).max(5).optional(),
+  maxRating: z.coerce.number().min(0).max(5).optional(),
 });
