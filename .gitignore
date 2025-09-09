@@ -11,4 +11,3 @@ NOTES.md
 /src/generated/prisma
 public/
 logs*.json
-mock/
