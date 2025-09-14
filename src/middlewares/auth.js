@@ -4,6 +4,7 @@ import ApiError from "../utils/apiError.js";
 const protect = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || "";
+    const applicationToken = req.headers["application-token"];
     const token = authHeader.startsWith("Bearer ")
       ? authHeader.split(" ")[1]
       : null;
@@ -18,7 +19,36 @@ const protect = async (req, res, next) => {
       return next(new ApiError("Invalid token payload.", 400));
     }
 
-    const app = user.applications?.find(
+    // Validasi Application-Token
+    if (!applicationToken) {
+      return next(
+        new ApiError("Unauthorized: No application token provided.", 401)
+      );
+    }
+
+    // Verifikasi Application-Token sebagai JWT yang berisi daftar aplikasi
+    let applicationData;
+    try {
+      applicationData = await verifyToken(
+        applicationToken,
+        process.env.JWT_SECRET
+      );
+      if (
+        !applicationData?.applications ||
+        !Array.isArray(applicationData.applications)
+      ) {
+        return next(
+          new ApiError("Unauthorized: Invalid application token format.", 401)
+        );
+      }
+    } catch (error) {
+      return next(
+        new ApiError("Unauthorized: Invalid application token.", 401)
+      );
+    }
+
+    // Cari aplikasi yang sesuai dengan APPLICATION_KEY di dalam application token
+    const app = applicationData.applications.find(
       (a) => a.applicationKey === process.env.APPLICATION_KEY
     );
 

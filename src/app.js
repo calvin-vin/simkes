@@ -34,6 +34,7 @@ import postRoute from "./routes/post.route.js";
 import galleryRoute from "./routes/gallery.route.js";
 import ambulanceStaffRoute from "./routes/ambulanceStaff.route.js";
 import emergencyRoute from "./routes/emergency.route.js";
+import bannerRoute from "./routes/banner.route.js";
 
 dayjs.extend(isSameOrBefore);
 dayjs.locale("id");
@@ -77,6 +78,7 @@ app.use("/api/v1/posts", postRoute);
 app.use("/api/v1/galleries", galleryRoute);
 app.use("/api/v1/ambulance-staffs", ambulanceStaffRoute);
 app.use("/api/v1/emergencies", emergencyRoute);
+app.use("/api/v1/banners", bannerRoute);
 
 // // Ambulance Staff Routes
 

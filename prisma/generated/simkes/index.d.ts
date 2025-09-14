@@ -54,6 +54,11 @@ export type UnitRating = $Result.DefaultSelection<Prisma.$UnitRatingPayload>
  */
 export type Facility = $Result.DefaultSelection<Prisma.$FacilityPayload>
 /**
+ * Model FacilityRating
+ * 
+ */
+export type FacilityRating = $Result.DefaultSelection<Prisma.$FacilityRatingPayload>
+/**
  * Model FacilityPhoto
  * 
  */
@@ -73,6 +78,11 @@ export type Gallery = $Result.DefaultSelection<Prisma.$GalleryPayload>
  * 
  */
 export type GalleryPhoto = $Result.DefaultSelection<Prisma.$GalleryPhotoPayload>
+/**
+ * Model Banner
+ * 
+ */
+export type Banner = $Result.DefaultSelection<Prisma.$BannerPayload>
 
 /**
  * Enums
@@ -302,6 +312,16 @@ export class PrismaClient<
   get facility(): Prisma.FacilityDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.facilityRating`: Exposes CRUD operations for the **FacilityRating** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FacilityRatings
+    * const facilityRatings = await prisma.facilityRating.findMany()
+    * ```
+    */
+  get facilityRating(): Prisma.FacilityRatingDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.facilityPhoto`: Exposes CRUD operations for the **FacilityPhoto** model.
     * Example usage:
     * ```ts
@@ -340,6 +360,16 @@ export class PrismaClient<
     * ```
     */
   get galleryPhoto(): Prisma.GalleryPhotoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.banner`: Exposes CRUD operations for the **Banner** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Banners
+    * const banners = await prisma.banner.findMany()
+    * ```
+    */
+  get banner(): Prisma.BannerDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -788,10 +818,12 @@ export namespace Prisma {
     DoctorRating: 'DoctorRating',
     UnitRating: 'UnitRating',
     Facility: 'Facility',
+    FacilityRating: 'FacilityRating',
     FacilityPhoto: 'FacilityPhoto',
     Post: 'Post',
     Gallery: 'Gallery',
-    GalleryPhoto: 'GalleryPhoto'
+    GalleryPhoto: 'GalleryPhoto',
+    Banner: 'Banner'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -810,7 +842,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating" | "unitRating" | "facility" | "facilityPhoto" | "post" | "gallery" | "galleryPhoto"
+      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating" | "unitRating" | "facility" | "facilityRating" | "facilityPhoto" | "post" | "gallery" | "galleryPhoto" | "banner"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1406,6 +1438,80 @@ export namespace Prisma {
           }
         }
       }
+      FacilityRating: {
+        payload: Prisma.$FacilityRatingPayload<ExtArgs>
+        fields: Prisma.FacilityRatingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FacilityRatingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FacilityRatingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>
+          }
+          findFirst: {
+            args: Prisma.FacilityRatingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FacilityRatingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>
+          }
+          findMany: {
+            args: Prisma.FacilityRatingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>[]
+          }
+          create: {
+            args: Prisma.FacilityRatingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>
+          }
+          createMany: {
+            args: Prisma.FacilityRatingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FacilityRatingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>[]
+          }
+          delete: {
+            args: Prisma.FacilityRatingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>
+          }
+          update: {
+            args: Prisma.FacilityRatingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>
+          }
+          deleteMany: {
+            args: Prisma.FacilityRatingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FacilityRatingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FacilityRatingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>[]
+          }
+          upsert: {
+            args: Prisma.FacilityRatingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityRatingPayload>
+          }
+          aggregate: {
+            args: Prisma.FacilityRatingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFacilityRating>
+          }
+          groupBy: {
+            args: Prisma.FacilityRatingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FacilityRatingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FacilityRatingCountArgs<ExtArgs>
+            result: $Utils.Optional<FacilityRatingCountAggregateOutputType> | number
+          }
+        }
+      }
       FacilityPhoto: {
         payload: Prisma.$FacilityPhotoPayload<ExtArgs>
         fields: Prisma.FacilityPhotoFieldRefs
@@ -1702,6 +1808,80 @@ export namespace Prisma {
           }
         }
       }
+      Banner: {
+        payload: Prisma.$BannerPayload<ExtArgs>
+        fields: Prisma.BannerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BannerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BannerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          findFirst: {
+            args: Prisma.BannerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BannerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          findMany: {
+            args: Prisma.BannerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          create: {
+            args: Prisma.BannerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          createMany: {
+            args: Prisma.BannerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BannerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          delete: {
+            args: Prisma.BannerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          update: {
+            args: Prisma.BannerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          deleteMany: {
+            args: Prisma.BannerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BannerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BannerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          upsert: {
+            args: Prisma.BannerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          aggregate: {
+            args: Prisma.BannerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBanner>
+          }
+          groupBy: {
+            args: Prisma.BannerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BannerCountArgs<ExtArgs>
+            result: $Utils.Optional<BannerCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1794,10 +1974,12 @@ export namespace Prisma {
     doctorRating?: DoctorRatingOmit
     unitRating?: UnitRatingOmit
     facility?: FacilityOmit
+    facilityRating?: FacilityRatingOmit
     facilityPhoto?: FacilityPhotoOmit
     post?: PostOmit
     gallery?: GalleryOmit
     galleryPhoto?: GalleryPhotoOmit
+    banner?: BannerOmit
   }
 
   /* Types for Logging */
@@ -1955,10 +2137,12 @@ export namespace Prisma {
 
   export type FacilityCountOutputType = {
     photos: number
+    ratings: number
   }
 
   export type FacilityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     photos?: boolean | FacilityCountOutputTypeCountPhotosArgs
+    ratings?: boolean | FacilityCountOutputTypeCountRatingsArgs
   }
 
   // Custom InputTypes
@@ -1977,6 +2161,13 @@ export namespace Prisma {
    */
   export type FacilityCountOutputTypeCountPhotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FacilityPhotoWhereInput
+  }
+
+  /**
+   * FacilityCountOutputType without action
+   */
+  export type FacilityCountOutputTypeCountRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityRatingWhereInput
   }
 
 
@@ -9725,6 +9916,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     photos?: boolean | Facility$photosArgs<ExtArgs>
+    ratings?: boolean | Facility$ratingsArgs<ExtArgs>
     _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["facility"]>
 
@@ -9758,6 +9950,7 @@ export namespace Prisma {
   export type FacilityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["facility"]>
   export type FacilityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     photos?: boolean | Facility$photosArgs<ExtArgs>
+    ratings?: boolean | Facility$ratingsArgs<ExtArgs>
     _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FacilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -9767,6 +9960,7 @@ export namespace Prisma {
     name: "Facility"
     objects: {
       photos: Prisma.$FacilityPhotoPayload<ExtArgs>[]
+      ratings: Prisma.$FacilityRatingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10170,6 +10364,7 @@ export namespace Prisma {
   export interface Prisma__FacilityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     photos<T extends Facility$photosArgs<ExtArgs> = {}>(args?: Subset<T, Facility$photosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ratings<T extends Facility$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10617,6 +10812,30 @@ export namespace Prisma {
   }
 
   /**
+   * Facility.ratings
+   */
+  export type Facility$ratingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    where?: FacilityRatingWhereInput
+    orderBy?: FacilityRatingOrderByWithRelationInput | FacilityRatingOrderByWithRelationInput[]
+    cursor?: FacilityRatingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FacilityRatingScalarFieldEnum | FacilityRatingScalarFieldEnum[]
+  }
+
+  /**
    * Facility without action
    */
   export type FacilityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10632,6 +10851,1137 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: FacilityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FacilityRating
+   */
+
+  export type AggregateFacilityRating = {
+    _count: FacilityRatingCountAggregateOutputType | null
+    _avg: FacilityRatingAvgAggregateOutputType | null
+    _sum: FacilityRatingSumAggregateOutputType | null
+    _min: FacilityRatingMinAggregateOutputType | null
+    _max: FacilityRatingMaxAggregateOutputType | null
+  }
+
+  export type FacilityRatingAvgAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type FacilityRatingSumAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type FacilityRatingMinAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    facilityId: string | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityRatingMaxAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    facilityId: string | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityRatingCountAggregateOutputType = {
+    id: number
+    reservationId: number
+    facilityId: number
+    patientId: number
+    rating: number
+    comment: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FacilityRatingAvgAggregateInputType = {
+    rating?: true
+  }
+
+  export type FacilityRatingSumAggregateInputType = {
+    rating?: true
+  }
+
+  export type FacilityRatingMinAggregateInputType = {
+    id?: true
+    reservationId?: true
+    facilityId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityRatingMaxAggregateInputType = {
+    id?: true
+    reservationId?: true
+    facilityId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityRatingCountAggregateInputType = {
+    id?: true
+    reservationId?: true
+    facilityId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FacilityRatingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityRating to aggregate.
+     */
+    where?: FacilityRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityRatings to fetch.
+     */
+    orderBy?: FacilityRatingOrderByWithRelationInput | FacilityRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FacilityRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FacilityRatings
+    **/
+    _count?: true | FacilityRatingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FacilityRatingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FacilityRatingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FacilityRatingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FacilityRatingMaxAggregateInputType
+  }
+
+  export type GetFacilityRatingAggregateType<T extends FacilityRatingAggregateArgs> = {
+        [P in keyof T & keyof AggregateFacilityRating]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFacilityRating[P]>
+      : GetScalarType<T[P], AggregateFacilityRating[P]>
+  }
+
+
+
+
+  export type FacilityRatingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityRatingWhereInput
+    orderBy?: FacilityRatingOrderByWithAggregationInput | FacilityRatingOrderByWithAggregationInput[]
+    by: FacilityRatingScalarFieldEnum[] | FacilityRatingScalarFieldEnum
+    having?: FacilityRatingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FacilityRatingCountAggregateInputType | true
+    _avg?: FacilityRatingAvgAggregateInputType
+    _sum?: FacilityRatingSumAggregateInputType
+    _min?: FacilityRatingMinAggregateInputType
+    _max?: FacilityRatingMaxAggregateInputType
+  }
+
+  export type FacilityRatingGroupByOutputType = {
+    id: string
+    reservationId: string
+    facilityId: string
+    patientId: string
+    rating: number
+    comment: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: FacilityRatingCountAggregateOutputType | null
+    _avg: FacilityRatingAvgAggregateOutputType | null
+    _sum: FacilityRatingSumAggregateOutputType | null
+    _min: FacilityRatingMinAggregateOutputType | null
+    _max: FacilityRatingMaxAggregateOutputType | null
+  }
+
+  type GetFacilityRatingGroupByPayload<T extends FacilityRatingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FacilityRatingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FacilityRatingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FacilityRatingGroupByOutputType[P]>
+            : GetScalarType<T[P], FacilityRatingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FacilityRatingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    facilityId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityRating"]>
+
+  export type FacilityRatingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    facilityId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityRating"]>
+
+  export type FacilityRatingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    facilityId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityRating"]>
+
+  export type FacilityRatingSelectScalar = {
+    id?: boolean
+    reservationId?: boolean
+    facilityId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FacilityRatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reservationId" | "facilityId" | "patientId" | "rating" | "comment" | "createdAt" | "updatedAt", ExtArgs["result"]["facilityRating"]>
+  export type FacilityRatingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+  export type FacilityRatingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+  export type FacilityRatingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+
+  export type $FacilityRatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FacilityRating"
+    objects: {
+      facility: Prisma.$FacilityPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reservationId: string
+      facilityId: string
+      patientId: string
+      rating: number
+      comment: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["facilityRating"]>
+    composites: {}
+  }
+
+  type FacilityRatingGetPayload<S extends boolean | null | undefined | FacilityRatingDefaultArgs> = $Result.GetResult<Prisma.$FacilityRatingPayload, S>
+
+  type FacilityRatingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FacilityRatingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FacilityRatingCountAggregateInputType | true
+    }
+
+  export interface FacilityRatingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FacilityRating'], meta: { name: 'FacilityRating' } }
+    /**
+     * Find zero or one FacilityRating that matches the filter.
+     * @param {FacilityRatingFindUniqueArgs} args - Arguments to find a FacilityRating
+     * @example
+     * // Get one FacilityRating
+     * const facilityRating = await prisma.facilityRating.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FacilityRatingFindUniqueArgs>(args: SelectSubset<T, FacilityRatingFindUniqueArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FacilityRating that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FacilityRatingFindUniqueOrThrowArgs} args - Arguments to find a FacilityRating
+     * @example
+     * // Get one FacilityRating
+     * const facilityRating = await prisma.facilityRating.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FacilityRatingFindUniqueOrThrowArgs>(args: SelectSubset<T, FacilityRatingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityRating that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityRatingFindFirstArgs} args - Arguments to find a FacilityRating
+     * @example
+     * // Get one FacilityRating
+     * const facilityRating = await prisma.facilityRating.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FacilityRatingFindFirstArgs>(args?: SelectSubset<T, FacilityRatingFindFirstArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityRating that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityRatingFindFirstOrThrowArgs} args - Arguments to find a FacilityRating
+     * @example
+     * // Get one FacilityRating
+     * const facilityRating = await prisma.facilityRating.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FacilityRatingFindFirstOrThrowArgs>(args?: SelectSubset<T, FacilityRatingFindFirstOrThrowArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FacilityRatings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityRatingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FacilityRatings
+     * const facilityRatings = await prisma.facilityRating.findMany()
+     * 
+     * // Get first 10 FacilityRatings
+     * const facilityRatings = await prisma.facilityRating.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const facilityRatingWithIdOnly = await prisma.facilityRating.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FacilityRatingFindManyArgs>(args?: SelectSubset<T, FacilityRatingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FacilityRating.
+     * @param {FacilityRatingCreateArgs} args - Arguments to create a FacilityRating.
+     * @example
+     * // Create one FacilityRating
+     * const FacilityRating = await prisma.facilityRating.create({
+     *   data: {
+     *     // ... data to create a FacilityRating
+     *   }
+     * })
+     * 
+     */
+    create<T extends FacilityRatingCreateArgs>(args: SelectSubset<T, FacilityRatingCreateArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FacilityRatings.
+     * @param {FacilityRatingCreateManyArgs} args - Arguments to create many FacilityRatings.
+     * @example
+     * // Create many FacilityRatings
+     * const facilityRating = await prisma.facilityRating.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FacilityRatingCreateManyArgs>(args?: SelectSubset<T, FacilityRatingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FacilityRatings and returns the data saved in the database.
+     * @param {FacilityRatingCreateManyAndReturnArgs} args - Arguments to create many FacilityRatings.
+     * @example
+     * // Create many FacilityRatings
+     * const facilityRating = await prisma.facilityRating.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FacilityRatings and only return the `id`
+     * const facilityRatingWithIdOnly = await prisma.facilityRating.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FacilityRatingCreateManyAndReturnArgs>(args?: SelectSubset<T, FacilityRatingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FacilityRating.
+     * @param {FacilityRatingDeleteArgs} args - Arguments to delete one FacilityRating.
+     * @example
+     * // Delete one FacilityRating
+     * const FacilityRating = await prisma.facilityRating.delete({
+     *   where: {
+     *     // ... filter to delete one FacilityRating
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FacilityRatingDeleteArgs>(args: SelectSubset<T, FacilityRatingDeleteArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FacilityRating.
+     * @param {FacilityRatingUpdateArgs} args - Arguments to update one FacilityRating.
+     * @example
+     * // Update one FacilityRating
+     * const facilityRating = await prisma.facilityRating.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FacilityRatingUpdateArgs>(args: SelectSubset<T, FacilityRatingUpdateArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FacilityRatings.
+     * @param {FacilityRatingDeleteManyArgs} args - Arguments to filter FacilityRatings to delete.
+     * @example
+     * // Delete a few FacilityRatings
+     * const { count } = await prisma.facilityRating.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FacilityRatingDeleteManyArgs>(args?: SelectSubset<T, FacilityRatingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityRatingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FacilityRatings
+     * const facilityRating = await prisma.facilityRating.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FacilityRatingUpdateManyArgs>(args: SelectSubset<T, FacilityRatingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityRatings and returns the data updated in the database.
+     * @param {FacilityRatingUpdateManyAndReturnArgs} args - Arguments to update many FacilityRatings.
+     * @example
+     * // Update many FacilityRatings
+     * const facilityRating = await prisma.facilityRating.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FacilityRatings and only return the `id`
+     * const facilityRatingWithIdOnly = await prisma.facilityRating.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FacilityRatingUpdateManyAndReturnArgs>(args: SelectSubset<T, FacilityRatingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FacilityRating.
+     * @param {FacilityRatingUpsertArgs} args - Arguments to update or create a FacilityRating.
+     * @example
+     * // Update or create a FacilityRating
+     * const facilityRating = await prisma.facilityRating.upsert({
+     *   create: {
+     *     // ... data to create a FacilityRating
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FacilityRating we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FacilityRatingUpsertArgs>(args: SelectSubset<T, FacilityRatingUpsertArgs<ExtArgs>>): Prisma__FacilityRatingClient<$Result.GetResult<Prisma.$FacilityRatingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FacilityRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityRatingCountArgs} args - Arguments to filter FacilityRatings to count.
+     * @example
+     * // Count the number of FacilityRatings
+     * const count = await prisma.facilityRating.count({
+     *   where: {
+     *     // ... the filter for the FacilityRatings we want to count
+     *   }
+     * })
+    **/
+    count<T extends FacilityRatingCountArgs>(
+      args?: Subset<T, FacilityRatingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FacilityRatingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FacilityRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityRatingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FacilityRatingAggregateArgs>(args: Subset<T, FacilityRatingAggregateArgs>): Prisma.PrismaPromise<GetFacilityRatingAggregateType<T>>
+
+    /**
+     * Group by FacilityRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityRatingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FacilityRatingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FacilityRatingGroupByArgs['orderBy'] }
+        : { orderBy?: FacilityRatingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FacilityRatingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFacilityRatingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FacilityRating model
+   */
+  readonly fields: FacilityRatingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FacilityRating.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FacilityRatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FacilityRating model
+   */
+  interface FacilityRatingFieldRefs {
+    readonly id: FieldRef<"FacilityRating", 'String'>
+    readonly reservationId: FieldRef<"FacilityRating", 'String'>
+    readonly facilityId: FieldRef<"FacilityRating", 'String'>
+    readonly patientId: FieldRef<"FacilityRating", 'String'>
+    readonly rating: FieldRef<"FacilityRating", 'Int'>
+    readonly comment: FieldRef<"FacilityRating", 'String'>
+    readonly createdAt: FieldRef<"FacilityRating", 'DateTime'>
+    readonly updatedAt: FieldRef<"FacilityRating", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FacilityRating findUnique
+   */
+  export type FacilityRatingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityRating to fetch.
+     */
+    where: FacilityRatingWhereUniqueInput
+  }
+
+  /**
+   * FacilityRating findUniqueOrThrow
+   */
+  export type FacilityRatingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityRating to fetch.
+     */
+    where: FacilityRatingWhereUniqueInput
+  }
+
+  /**
+   * FacilityRating findFirst
+   */
+  export type FacilityRatingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityRating to fetch.
+     */
+    where?: FacilityRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityRatings to fetch.
+     */
+    orderBy?: FacilityRatingOrderByWithRelationInput | FacilityRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityRatings.
+     */
+    cursor?: FacilityRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityRatings.
+     */
+    distinct?: FacilityRatingScalarFieldEnum | FacilityRatingScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityRating findFirstOrThrow
+   */
+  export type FacilityRatingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityRating to fetch.
+     */
+    where?: FacilityRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityRatings to fetch.
+     */
+    orderBy?: FacilityRatingOrderByWithRelationInput | FacilityRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityRatings.
+     */
+    cursor?: FacilityRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityRatings.
+     */
+    distinct?: FacilityRatingScalarFieldEnum | FacilityRatingScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityRating findMany
+   */
+  export type FacilityRatingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityRatings to fetch.
+     */
+    where?: FacilityRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityRatings to fetch.
+     */
+    orderBy?: FacilityRatingOrderByWithRelationInput | FacilityRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FacilityRatings.
+     */
+    cursor?: FacilityRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityRatings.
+     */
+    skip?: number
+    distinct?: FacilityRatingScalarFieldEnum | FacilityRatingScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityRating create
+   */
+  export type FacilityRatingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FacilityRating.
+     */
+    data: XOR<FacilityRatingCreateInput, FacilityRatingUncheckedCreateInput>
+  }
+
+  /**
+   * FacilityRating createMany
+   */
+  export type FacilityRatingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FacilityRatings.
+     */
+    data: FacilityRatingCreateManyInput | FacilityRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FacilityRating createManyAndReturn
+   */
+  export type FacilityRatingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * The data used to create many FacilityRatings.
+     */
+    data: FacilityRatingCreateManyInput | FacilityRatingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FacilityRating update
+   */
+  export type FacilityRatingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FacilityRating.
+     */
+    data: XOR<FacilityRatingUpdateInput, FacilityRatingUncheckedUpdateInput>
+    /**
+     * Choose, which FacilityRating to update.
+     */
+    where: FacilityRatingWhereUniqueInput
+  }
+
+  /**
+   * FacilityRating updateMany
+   */
+  export type FacilityRatingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FacilityRatings.
+     */
+    data: XOR<FacilityRatingUpdateManyMutationInput, FacilityRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityRatings to update
+     */
+    where?: FacilityRatingWhereInput
+    /**
+     * Limit how many FacilityRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityRating updateManyAndReturn
+   */
+  export type FacilityRatingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * The data used to update FacilityRatings.
+     */
+    data: XOR<FacilityRatingUpdateManyMutationInput, FacilityRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityRatings to update
+     */
+    where?: FacilityRatingWhereInput
+    /**
+     * Limit how many FacilityRatings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FacilityRating upsert
+   */
+  export type FacilityRatingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FacilityRating to update in case it exists.
+     */
+    where: FacilityRatingWhereUniqueInput
+    /**
+     * In case the FacilityRating found by the `where` argument doesn't exist, create a new FacilityRating with this data.
+     */
+    create: XOR<FacilityRatingCreateInput, FacilityRatingUncheckedCreateInput>
+    /**
+     * In case the FacilityRating was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FacilityRatingUpdateInput, FacilityRatingUncheckedUpdateInput>
+  }
+
+  /**
+   * FacilityRating delete
+   */
+  export type FacilityRatingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
+    /**
+     * Filter which FacilityRating to delete.
+     */
+    where: FacilityRatingWhereUniqueInput
+  }
+
+  /**
+   * FacilityRating deleteMany
+   */
+  export type FacilityRatingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityRatings to delete
+     */
+    where?: FacilityRatingWhereInput
+    /**
+     * Limit how many FacilityRatings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityRating without action
+   */
+  export type FacilityRatingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityRating
+     */
+    select?: FacilityRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityRating
+     */
+    omit?: FacilityRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityRatingInclude<ExtArgs> | null
   }
 
 
@@ -14882,6 +16232,1074 @@ export namespace Prisma {
 
 
   /**
+   * Model Banner
+   */
+
+  export type AggregateBanner = {
+    _count: BannerCountAggregateOutputType | null
+    _avg: BannerAvgAggregateOutputType | null
+    _sum: BannerSumAggregateOutputType | null
+    _min: BannerMinAggregateOutputType | null
+    _max: BannerMaxAggregateOutputType | null
+  }
+
+  export type BannerAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type BannerSumAggregateOutputType = {
+    order: number | null
+  }
+
+  export type BannerMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    imageUrl: string | null
+    order: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    imageUrl: string | null
+    order: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    imageUrl: number
+    order: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BannerAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type BannerSumAggregateInputType = {
+    order?: true
+  }
+
+  export type BannerMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    imageUrl?: true
+    order?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    imageUrl?: true
+    order?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    imageUrl?: true
+    order?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BannerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Banner to aggregate.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Banners
+    **/
+    _count?: true | BannerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BannerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BannerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BannerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BannerMaxAggregateInputType
+  }
+
+  export type GetBannerAggregateType<T extends BannerAggregateArgs> = {
+        [P in keyof T & keyof AggregateBanner]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBanner[P]>
+      : GetScalarType<T[P], AggregateBanner[P]>
+  }
+
+
+
+
+  export type BannerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerWhereInput
+    orderBy?: BannerOrderByWithAggregationInput | BannerOrderByWithAggregationInput[]
+    by: BannerScalarFieldEnum[] | BannerScalarFieldEnum
+    having?: BannerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BannerCountAggregateInputType | true
+    _avg?: BannerAvgAggregateInputType
+    _sum?: BannerSumAggregateInputType
+    _min?: BannerMinAggregateInputType
+    _max?: BannerMaxAggregateInputType
+  }
+
+  export type BannerGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    imageUrl: string
+    order: number
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: BannerCountAggregateOutputType | null
+    _avg: BannerAvgAggregateOutputType | null
+    _sum: BannerSumAggregateOutputType | null
+    _min: BannerMinAggregateOutputType | null
+    _max: BannerMaxAggregateOutputType | null
+  }
+
+  type GetBannerGroupByPayload<T extends BannerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BannerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BannerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BannerGroupByOutputType[P]>
+            : GetScalarType<T[P], BannerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BannerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    order?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    order?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    order?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    order?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "imageUrl" | "order" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["banner"]>
+
+  export type $BannerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Banner"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      imageUrl: string
+      order: number
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["banner"]>
+    composites: {}
+  }
+
+  type BannerGetPayload<S extends boolean | null | undefined | BannerDefaultArgs> = $Result.GetResult<Prisma.$BannerPayload, S>
+
+  type BannerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BannerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BannerCountAggregateInputType | true
+    }
+
+  export interface BannerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Banner'], meta: { name: 'Banner' } }
+    /**
+     * Find zero or one Banner that matches the filter.
+     * @param {BannerFindUniqueArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BannerFindUniqueArgs>(args: SelectSubset<T, BannerFindUniqueArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Banner that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BannerFindUniqueOrThrowArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BannerFindUniqueOrThrowArgs>(args: SelectSubset<T, BannerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Banner that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindFirstArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BannerFindFirstArgs>(args?: SelectSubset<T, BannerFindFirstArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Banner that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindFirstOrThrowArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BannerFindFirstOrThrowArgs>(args?: SelectSubset<T, BannerFindFirstOrThrowArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Banners that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Banners
+     * const banners = await prisma.banner.findMany()
+     * 
+     * // Get first 10 Banners
+     * const banners = await prisma.banner.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bannerWithIdOnly = await prisma.banner.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BannerFindManyArgs>(args?: SelectSubset<T, BannerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Banner.
+     * @param {BannerCreateArgs} args - Arguments to create a Banner.
+     * @example
+     * // Create one Banner
+     * const Banner = await prisma.banner.create({
+     *   data: {
+     *     // ... data to create a Banner
+     *   }
+     * })
+     * 
+     */
+    create<T extends BannerCreateArgs>(args: SelectSubset<T, BannerCreateArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Banners.
+     * @param {BannerCreateManyArgs} args - Arguments to create many Banners.
+     * @example
+     * // Create many Banners
+     * const banner = await prisma.banner.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BannerCreateManyArgs>(args?: SelectSubset<T, BannerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Banners and returns the data saved in the database.
+     * @param {BannerCreateManyAndReturnArgs} args - Arguments to create many Banners.
+     * @example
+     * // Create many Banners
+     * const banner = await prisma.banner.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Banners and only return the `id`
+     * const bannerWithIdOnly = await prisma.banner.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BannerCreateManyAndReturnArgs>(args?: SelectSubset<T, BannerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Banner.
+     * @param {BannerDeleteArgs} args - Arguments to delete one Banner.
+     * @example
+     * // Delete one Banner
+     * const Banner = await prisma.banner.delete({
+     *   where: {
+     *     // ... filter to delete one Banner
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BannerDeleteArgs>(args: SelectSubset<T, BannerDeleteArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Banner.
+     * @param {BannerUpdateArgs} args - Arguments to update one Banner.
+     * @example
+     * // Update one Banner
+     * const banner = await prisma.banner.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BannerUpdateArgs>(args: SelectSubset<T, BannerUpdateArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Banners.
+     * @param {BannerDeleteManyArgs} args - Arguments to filter Banners to delete.
+     * @example
+     * // Delete a few Banners
+     * const { count } = await prisma.banner.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BannerDeleteManyArgs>(args?: SelectSubset<T, BannerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Banners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Banners
+     * const banner = await prisma.banner.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BannerUpdateManyArgs>(args: SelectSubset<T, BannerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Banners and returns the data updated in the database.
+     * @param {BannerUpdateManyAndReturnArgs} args - Arguments to update many Banners.
+     * @example
+     * // Update many Banners
+     * const banner = await prisma.banner.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Banners and only return the `id`
+     * const bannerWithIdOnly = await prisma.banner.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BannerUpdateManyAndReturnArgs>(args: SelectSubset<T, BannerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Banner.
+     * @param {BannerUpsertArgs} args - Arguments to update or create a Banner.
+     * @example
+     * // Update or create a Banner
+     * const banner = await prisma.banner.upsert({
+     *   create: {
+     *     // ... data to create a Banner
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Banner we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BannerUpsertArgs>(args: SelectSubset<T, BannerUpsertArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Banners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerCountArgs} args - Arguments to filter Banners to count.
+     * @example
+     * // Count the number of Banners
+     * const count = await prisma.banner.count({
+     *   where: {
+     *     // ... the filter for the Banners we want to count
+     *   }
+     * })
+    **/
+    count<T extends BannerCountArgs>(
+      args?: Subset<T, BannerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BannerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Banner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BannerAggregateArgs>(args: Subset<T, BannerAggregateArgs>): Prisma.PrismaPromise<GetBannerAggregateType<T>>
+
+    /**
+     * Group by Banner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BannerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BannerGroupByArgs['orderBy'] }
+        : { orderBy?: BannerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BannerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBannerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Banner model
+   */
+  readonly fields: BannerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Banner.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BannerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Banner model
+   */
+  interface BannerFieldRefs {
+    readonly id: FieldRef<"Banner", 'String'>
+    readonly title: FieldRef<"Banner", 'String'>
+    readonly description: FieldRef<"Banner", 'String'>
+    readonly imageUrl: FieldRef<"Banner", 'String'>
+    readonly order: FieldRef<"Banner", 'Int'>
+    readonly isActive: FieldRef<"Banner", 'Boolean'>
+    readonly createdAt: FieldRef<"Banner", 'DateTime'>
+    readonly updatedAt: FieldRef<"Banner", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Banner findUnique
+   */
+  export type BannerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner findUniqueOrThrow
+   */
+  export type BannerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner findFirst
+   */
+  export type BannerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Banners.
+     */
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner findFirstOrThrow
+   */
+  export type BannerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Banners.
+     */
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner findMany
+   */
+  export type BannerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Filter, which Banners to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner create
+   */
+  export type BannerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Banner.
+     */
+    data: XOR<BannerCreateInput, BannerUncheckedCreateInput>
+  }
+
+  /**
+   * Banner createMany
+   */
+  export type BannerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Banners.
+     */
+    data: BannerCreateManyInput | BannerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Banner createManyAndReturn
+   */
+  export type BannerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data used to create many Banners.
+     */
+    data: BannerCreateManyInput | BannerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Banner update
+   */
+  export type BannerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Banner.
+     */
+    data: XOR<BannerUpdateInput, BannerUncheckedUpdateInput>
+    /**
+     * Choose, which Banner to update.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner updateMany
+   */
+  export type BannerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Banners.
+     */
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyInput>
+    /**
+     * Filter which Banners to update
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Banner updateManyAndReturn
+   */
+  export type BannerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data used to update Banners.
+     */
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyInput>
+    /**
+     * Filter which Banners to update
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Banner upsert
+   */
+  export type BannerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Banner to update in case it exists.
+     */
+    where: BannerWhereUniqueInput
+    /**
+     * In case the Banner found by the `where` argument doesn't exist, create a new Banner with this data.
+     */
+    create: XOR<BannerCreateInput, BannerUncheckedCreateInput>
+    /**
+     * In case the Banner was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BannerUpdateInput, BannerUncheckedUpdateInput>
+  }
+
+  /**
+   * Banner delete
+   */
+  export type BannerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Filter which Banner to delete.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner deleteMany
+   */
+  export type BannerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Banners to delete
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Banner without action
+   */
+  export type BannerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15000,6 +17418,20 @@ export namespace Prisma {
   export type FacilityScalarFieldEnum = (typeof FacilityScalarFieldEnum)[keyof typeof FacilityScalarFieldEnum]
 
 
+  export const FacilityRatingScalarFieldEnum: {
+    id: 'id',
+    reservationId: 'reservationId',
+    facilityId: 'facilityId',
+    patientId: 'patientId',
+    rating: 'rating',
+    comment: 'comment',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FacilityRatingScalarFieldEnum = (typeof FacilityRatingScalarFieldEnum)[keyof typeof FacilityRatingScalarFieldEnum]
+
+
   export const FacilityPhotoScalarFieldEnum: {
     id: 'id',
     facilityId: 'facilityId',
@@ -15047,6 +17479,20 @@ export namespace Prisma {
   };
 
   export type GalleryPhotoScalarFieldEnum = (typeof GalleryPhotoScalarFieldEnum)[keyof typeof GalleryPhotoScalarFieldEnum]
+
+
+  export const BannerScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    imageUrl: 'imageUrl',
+    order: 'order',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BannerScalarFieldEnum = (typeof BannerScalarFieldEnum)[keyof typeof BannerScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15631,6 +18077,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Facility"> | Date | string
     updatedAt?: DateTimeFilter<"Facility"> | Date | string
     photos?: FacilityPhotoListRelationFilter
+    ratings?: FacilityRatingListRelationFilter
   }
 
   export type FacilityOrderByWithRelationInput = {
@@ -15641,6 +18088,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     photos?: FacilityPhotoOrderByRelationAggregateInput
+    ratings?: FacilityRatingOrderByRelationAggregateInput
   }
 
   export type FacilityWhereUniqueInput = Prisma.AtLeast<{
@@ -15654,6 +18102,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Facility"> | Date | string
     updatedAt?: DateTimeFilter<"Facility"> | Date | string
     photos?: FacilityPhotoListRelationFilter
+    ratings?: FacilityRatingListRelationFilter
   }, "id">
 
   export type FacilityOrderByWithAggregationInput = {
@@ -15678,6 +18127,78 @@ export namespace Prisma {
     isActive?: BoolWithAggregatesFilter<"Facility"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Facility"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Facility"> | Date | string
+  }
+
+  export type FacilityRatingWhereInput = {
+    AND?: FacilityRatingWhereInput | FacilityRatingWhereInput[]
+    OR?: FacilityRatingWhereInput[]
+    NOT?: FacilityRatingWhereInput | FacilityRatingWhereInput[]
+    id?: StringFilter<"FacilityRating"> | string
+    reservationId?: StringFilter<"FacilityRating"> | string
+    facilityId?: StringFilter<"FacilityRating"> | string
+    patientId?: StringFilter<"FacilityRating"> | string
+    rating?: IntFilter<"FacilityRating"> | number
+    comment?: StringNullableFilter<"FacilityRating"> | string | null
+    createdAt?: DateTimeFilter<"FacilityRating"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityRating"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+  }
+
+  export type FacilityRatingOrderByWithRelationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    facilityId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    facility?: FacilityOrderByWithRelationInput
+  }
+
+  export type FacilityRatingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reservationId?: string
+    AND?: FacilityRatingWhereInput | FacilityRatingWhereInput[]
+    OR?: FacilityRatingWhereInput[]
+    NOT?: FacilityRatingWhereInput | FacilityRatingWhereInput[]
+    facilityId?: StringFilter<"FacilityRating"> | string
+    patientId?: StringFilter<"FacilityRating"> | string
+    rating?: IntFilter<"FacilityRating"> | number
+    comment?: StringNullableFilter<"FacilityRating"> | string | null
+    createdAt?: DateTimeFilter<"FacilityRating"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityRating"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+  }, "id" | "reservationId">
+
+  export type FacilityRatingOrderByWithAggregationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    facilityId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FacilityRatingCountOrderByAggregateInput
+    _avg?: FacilityRatingAvgOrderByAggregateInput
+    _max?: FacilityRatingMaxOrderByAggregateInput
+    _min?: FacilityRatingMinOrderByAggregateInput
+    _sum?: FacilityRatingSumOrderByAggregateInput
+  }
+
+  export type FacilityRatingScalarWhereWithAggregatesInput = {
+    AND?: FacilityRatingScalarWhereWithAggregatesInput | FacilityRatingScalarWhereWithAggregatesInput[]
+    OR?: FacilityRatingScalarWhereWithAggregatesInput[]
+    NOT?: FacilityRatingScalarWhereWithAggregatesInput | FacilityRatingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FacilityRating"> | string
+    reservationId?: StringWithAggregatesFilter<"FacilityRating"> | string
+    facilityId?: StringWithAggregatesFilter<"FacilityRating"> | string
+    patientId?: StringWithAggregatesFilter<"FacilityRating"> | string
+    rating?: IntWithAggregatesFilter<"FacilityRating"> | number
+    comment?: StringNullableWithAggregatesFilter<"FacilityRating"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"FacilityRating"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"FacilityRating"> | Date | string
   }
 
   export type FacilityPhotoWhereInput = {
@@ -15920,6 +18441,75 @@ export namespace Prisma {
     photoUrl?: StringWithAggregatesFilter<"GalleryPhoto"> | string
     createdAt?: DateTimeWithAggregatesFilter<"GalleryPhoto"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"GalleryPhoto"> | Date | string
+  }
+
+  export type BannerWhereInput = {
+    AND?: BannerWhereInput | BannerWhereInput[]
+    OR?: BannerWhereInput[]
+    NOT?: BannerWhereInput | BannerWhereInput[]
+    id?: StringFilter<"Banner"> | string
+    title?: StringFilter<"Banner"> | string
+    description?: StringNullableFilter<"Banner"> | string | null
+    imageUrl?: StringFilter<"Banner"> | string
+    order?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
+  }
+
+  export type BannerOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrder
+    order?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BannerWhereInput | BannerWhereInput[]
+    OR?: BannerWhereInput[]
+    NOT?: BannerWhereInput | BannerWhereInput[]
+    title?: StringFilter<"Banner"> | string
+    description?: StringNullableFilter<"Banner"> | string | null
+    imageUrl?: StringFilter<"Banner"> | string
+    order?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
+  }, "id">
+
+  export type BannerOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrder
+    order?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BannerCountOrderByAggregateInput
+    _avg?: BannerAvgOrderByAggregateInput
+    _max?: BannerMaxOrderByAggregateInput
+    _min?: BannerMinOrderByAggregateInput
+    _sum?: BannerSumOrderByAggregateInput
+  }
+
+  export type BannerScalarWhereWithAggregatesInput = {
+    AND?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
+    OR?: BannerScalarWhereWithAggregatesInput[]
+    NOT?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Banner"> | string
+    title?: StringWithAggregatesFilter<"Banner"> | string
+    description?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    imageUrl?: StringWithAggregatesFilter<"Banner"> | string
+    order?: IntWithAggregatesFilter<"Banner"> | number
+    isActive?: BoolWithAggregatesFilter<"Banner"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
   }
 
   export type EmergencyRequestCreateInput = {
@@ -16440,6 +19030,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: FacilityPhotoCreateNestedManyWithoutFacilityInput
+    ratings?: FacilityRatingCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateInput = {
@@ -16450,6 +19041,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: FacilityPhotoUncheckedCreateNestedManyWithoutFacilityInput
+    ratings?: FacilityRatingUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUpdateInput = {
@@ -16460,6 +19052,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: FacilityPhotoUpdateManyWithoutFacilityNestedInput
+    ratings?: FacilityRatingUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateInput = {
@@ -16470,6 +19063,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: FacilityPhotoUncheckedUpdateManyWithoutFacilityNestedInput
+    ratings?: FacilityRatingUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityCreateManyInput = {
@@ -16495,6 +19089,82 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityRatingCreateInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutRatingsInput
+  }
+
+  export type FacilityRatingUncheckedCreateInput = {
+    id?: string
+    reservationId: string
+    facilityId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityRatingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutRatingsNestedInput
+  }
+
+  export type FacilityRatingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityRatingCreateManyInput = {
+    id?: string
+    reservationId: string
+    facilityId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityRatingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityRatingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16756,6 +19426,83 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     galleryId?: StringFieldUpdateOperationsInput | string
     photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    imageUrl: string
+    order?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    imageUrl: string
+    order?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    imageUrl: string
+    order?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17222,7 +19969,17 @@ export namespace Prisma {
     none?: FacilityPhotoWhereInput
   }
 
+  export type FacilityRatingListRelationFilter = {
+    every?: FacilityRatingWhereInput
+    some?: FacilityRatingWhereInput
+    none?: FacilityRatingWhereInput
+  }
+
   export type FacilityPhotoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FacilityRatingOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17256,6 +20013,47 @@ export namespace Prisma {
   export type FacilityScalarRelationFilter = {
     is?: FacilityWhereInput
     isNot?: FacilityWhereInput
+  }
+
+  export type FacilityRatingCountOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    facilityId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityRatingAvgOrderByAggregateInput = {
+    rating?: SortOrder
+  }
+
+  export type FacilityRatingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    facilityId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityRatingMinOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    facilityId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityRatingSumOrderByAggregateInput = {
+    rating?: SortOrder
   }
 
   export type FacilityPhotoCountOrderByAggregateInput = {
@@ -17382,6 +20180,47 @@ export namespace Prisma {
     photoUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type BannerCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    order?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerAvgOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type BannerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    order?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    order?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerSumOrderByAggregateInput = {
+    order?: SortOrder
   }
 
   export type AmbulanceStaffCreateNestedOneWithoutEmergencyRequestInput = {
@@ -17541,11 +20380,25 @@ export namespace Prisma {
     connect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
   }
 
+  export type FacilityRatingCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<FacilityRatingCreateWithoutFacilityInput, FacilityRatingUncheckedCreateWithoutFacilityInput> | FacilityRatingCreateWithoutFacilityInput[] | FacilityRatingUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityRatingCreateOrConnectWithoutFacilityInput | FacilityRatingCreateOrConnectWithoutFacilityInput[]
+    createMany?: FacilityRatingCreateManyFacilityInputEnvelope
+    connect?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+  }
+
   export type FacilityPhotoUncheckedCreateNestedManyWithoutFacilityInput = {
     create?: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput> | FacilityPhotoCreateWithoutFacilityInput[] | FacilityPhotoUncheckedCreateWithoutFacilityInput[]
     connectOrCreate?: FacilityPhotoCreateOrConnectWithoutFacilityInput | FacilityPhotoCreateOrConnectWithoutFacilityInput[]
     createMany?: FacilityPhotoCreateManyFacilityInputEnvelope
     connect?: FacilityPhotoWhereUniqueInput | FacilityPhotoWhereUniqueInput[]
+  }
+
+  export type FacilityRatingUncheckedCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<FacilityRatingCreateWithoutFacilityInput, FacilityRatingUncheckedCreateWithoutFacilityInput> | FacilityRatingCreateWithoutFacilityInput[] | FacilityRatingUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityRatingCreateOrConnectWithoutFacilityInput | FacilityRatingCreateOrConnectWithoutFacilityInput[]
+    createMany?: FacilityRatingCreateManyFacilityInputEnvelope
+    connect?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
   }
 
   export type FacilityPhotoUpdateManyWithoutFacilityNestedInput = {
@@ -17562,6 +20415,20 @@ export namespace Prisma {
     deleteMany?: FacilityPhotoScalarWhereInput | FacilityPhotoScalarWhereInput[]
   }
 
+  export type FacilityRatingUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<FacilityRatingCreateWithoutFacilityInput, FacilityRatingUncheckedCreateWithoutFacilityInput> | FacilityRatingCreateWithoutFacilityInput[] | FacilityRatingUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityRatingCreateOrConnectWithoutFacilityInput | FacilityRatingCreateOrConnectWithoutFacilityInput[]
+    upsert?: FacilityRatingUpsertWithWhereUniqueWithoutFacilityInput | FacilityRatingUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: FacilityRatingCreateManyFacilityInputEnvelope
+    set?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    disconnect?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    delete?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    connect?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    update?: FacilityRatingUpdateWithWhereUniqueWithoutFacilityInput | FacilityRatingUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: FacilityRatingUpdateManyWithWhereWithoutFacilityInput | FacilityRatingUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: FacilityRatingScalarWhereInput | FacilityRatingScalarWhereInput[]
+  }
+
   export type FacilityPhotoUncheckedUpdateManyWithoutFacilityNestedInput = {
     create?: XOR<FacilityPhotoCreateWithoutFacilityInput, FacilityPhotoUncheckedCreateWithoutFacilityInput> | FacilityPhotoCreateWithoutFacilityInput[] | FacilityPhotoUncheckedCreateWithoutFacilityInput[]
     connectOrCreate?: FacilityPhotoCreateOrConnectWithoutFacilityInput | FacilityPhotoCreateOrConnectWithoutFacilityInput[]
@@ -17574,6 +20441,34 @@ export namespace Prisma {
     update?: FacilityPhotoUpdateWithWhereUniqueWithoutFacilityInput | FacilityPhotoUpdateWithWhereUniqueWithoutFacilityInput[]
     updateMany?: FacilityPhotoUpdateManyWithWhereWithoutFacilityInput | FacilityPhotoUpdateManyWithWhereWithoutFacilityInput[]
     deleteMany?: FacilityPhotoScalarWhereInput | FacilityPhotoScalarWhereInput[]
+  }
+
+  export type FacilityRatingUncheckedUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<FacilityRatingCreateWithoutFacilityInput, FacilityRatingUncheckedCreateWithoutFacilityInput> | FacilityRatingCreateWithoutFacilityInput[] | FacilityRatingUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: FacilityRatingCreateOrConnectWithoutFacilityInput | FacilityRatingCreateOrConnectWithoutFacilityInput[]
+    upsert?: FacilityRatingUpsertWithWhereUniqueWithoutFacilityInput | FacilityRatingUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: FacilityRatingCreateManyFacilityInputEnvelope
+    set?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    disconnect?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    delete?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    connect?: FacilityRatingWhereUniqueInput | FacilityRatingWhereUniqueInput[]
+    update?: FacilityRatingUpdateWithWhereUniqueWithoutFacilityInput | FacilityRatingUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: FacilityRatingUpdateManyWithWhereWithoutFacilityInput | FacilityRatingUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: FacilityRatingScalarWhereInput | FacilityRatingScalarWhereInput[]
+  }
+
+  export type FacilityCreateNestedOneWithoutRatingsInput = {
+    create?: XOR<FacilityCreateWithoutRatingsInput, FacilityUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutRatingsInput
+    connect?: FacilityWhereUniqueInput
+  }
+
+  export type FacilityUpdateOneRequiredWithoutRatingsNestedInput = {
+    create?: XOR<FacilityCreateWithoutRatingsInput, FacilityUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutRatingsInput
+    upsert?: FacilityUpsertWithoutRatingsInput
+    connect?: FacilityWhereUniqueInput
+    update?: XOR<XOR<FacilityUpdateToOneWithWhereWithoutRatingsInput, FacilityUpdateWithoutRatingsInput>, FacilityUncheckedUpdateWithoutRatingsInput>
   }
 
   export type FacilityCreateNestedOneWithoutPhotosInput = {
@@ -18080,6 +20975,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FacilityRatingCreateWithoutFacilityInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityRatingUncheckedCreateWithoutFacilityInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityRatingCreateOrConnectWithoutFacilityInput = {
+    where: FacilityRatingWhereUniqueInput
+    create: XOR<FacilityRatingCreateWithoutFacilityInput, FacilityRatingUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type FacilityRatingCreateManyFacilityInputEnvelope = {
+    data: FacilityRatingCreateManyFacilityInput | FacilityRatingCreateManyFacilityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type FacilityPhotoUpsertWithWhereUniqueWithoutFacilityInput = {
     where: FacilityPhotoWhereUniqueInput
     update: XOR<FacilityPhotoUpdateWithoutFacilityInput, FacilityPhotoUncheckedUpdateWithoutFacilityInput>
@@ -18107,6 +21032,92 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"FacilityPhoto"> | Date | string
   }
 
+  export type FacilityRatingUpsertWithWhereUniqueWithoutFacilityInput = {
+    where: FacilityRatingWhereUniqueInput
+    update: XOR<FacilityRatingUpdateWithoutFacilityInput, FacilityRatingUncheckedUpdateWithoutFacilityInput>
+    create: XOR<FacilityRatingCreateWithoutFacilityInput, FacilityRatingUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type FacilityRatingUpdateWithWhereUniqueWithoutFacilityInput = {
+    where: FacilityRatingWhereUniqueInput
+    data: XOR<FacilityRatingUpdateWithoutFacilityInput, FacilityRatingUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type FacilityRatingUpdateManyWithWhereWithoutFacilityInput = {
+    where: FacilityRatingScalarWhereInput
+    data: XOR<FacilityRatingUpdateManyMutationInput, FacilityRatingUncheckedUpdateManyWithoutFacilityInput>
+  }
+
+  export type FacilityRatingScalarWhereInput = {
+    AND?: FacilityRatingScalarWhereInput | FacilityRatingScalarWhereInput[]
+    OR?: FacilityRatingScalarWhereInput[]
+    NOT?: FacilityRatingScalarWhereInput | FacilityRatingScalarWhereInput[]
+    id?: StringFilter<"FacilityRating"> | string
+    reservationId?: StringFilter<"FacilityRating"> | string
+    facilityId?: StringFilter<"FacilityRating"> | string
+    patientId?: StringFilter<"FacilityRating"> | string
+    rating?: IntFilter<"FacilityRating"> | number
+    comment?: StringNullableFilter<"FacilityRating"> | string | null
+    createdAt?: DateTimeFilter<"FacilityRating"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityRating"> | Date | string
+  }
+
+  export type FacilityCreateWithoutRatingsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    photos?: FacilityPhotoCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateWithoutRatingsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    photos?: FacilityPhotoUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityCreateOrConnectWithoutRatingsInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutRatingsInput, FacilityUncheckedCreateWithoutRatingsInput>
+  }
+
+  export type FacilityUpsertWithoutRatingsInput = {
+    update: XOR<FacilityUpdateWithoutRatingsInput, FacilityUncheckedUpdateWithoutRatingsInput>
+    create: XOR<FacilityCreateWithoutRatingsInput, FacilityUncheckedCreateWithoutRatingsInput>
+    where?: FacilityWhereInput
+  }
+
+  export type FacilityUpdateToOneWithWhereWithoutRatingsInput = {
+    where?: FacilityWhereInput
+    data: XOR<FacilityUpdateWithoutRatingsInput, FacilityUncheckedUpdateWithoutRatingsInput>
+  }
+
+  export type FacilityUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    photos?: FacilityPhotoUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    photos?: FacilityPhotoUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
   export type FacilityCreateWithoutPhotosInput = {
     id?: string
     name: string
@@ -18114,6 +21125,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    ratings?: FacilityRatingCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutPhotosInput = {
@@ -18123,6 +21135,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    ratings?: FacilityRatingUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutPhotosInput = {
@@ -18148,6 +21161,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: FacilityRatingUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutPhotosInput = {
@@ -18157,6 +21171,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: FacilityRatingUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type GalleryPhotoCreateWithoutGalleryInput = {
@@ -18343,6 +21358,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type FacilityRatingCreateManyFacilityInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type FacilityPhotoUpdateWithoutFacilityInput = {
     id?: StringFieldUpdateOperationsInput | string
     photoUrl?: StringFieldUpdateOperationsInput | string
@@ -18360,6 +21385,36 @@ export namespace Prisma {
   export type FacilityPhotoUncheckedUpdateManyWithoutFacilityInput = {
     id?: StringFieldUpdateOperationsInput | string
     photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityRatingUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityRatingUncheckedUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityRatingUncheckedUpdateManyWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

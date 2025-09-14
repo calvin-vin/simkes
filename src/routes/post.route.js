@@ -13,7 +13,7 @@ import { uploadPostPhoto } from "../middlewares/uploadPost.js";
 
 const router = express.Router();
 
-// Public routes - accessible to all authenticated users
+// Public routes
 router.get("/public/", getAllPublicPostsController);
 router.get("/public/:id", getPublicPostByIdController);
 

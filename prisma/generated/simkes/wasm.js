@@ -201,6 +201,17 @@ exports.Prisma.FacilityScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FacilityRatingScalarFieldEnum = {
+  id: 'id',
+  reservationId: 'reservationId',
+  facilityId: 'facilityId',
+  patientId: 'patientId',
+  rating: 'rating',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.FacilityPhotoScalarFieldEnum = {
   id: 'id',
   facilityId: 'facilityId',
@@ -238,6 +249,17 @@ exports.Prisma.GalleryPhotoScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BannerScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  order: 'order',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -271,10 +293,12 @@ exports.Prisma.ModelName = {
   DoctorRating: 'DoctorRating',
   UnitRating: 'UnitRating',
   Facility: 'Facility',
+  FacilityRating: 'FacilityRating',
   FacilityPhoto: 'FacilityPhoto',
   Post: 'Post',
   Gallery: 'Gallery',
-  GalleryPhoto: 'GalleryPhoto'
+  GalleryPhoto: 'GalleryPhoto',
+  Banner: 'Banner'
 };
 
 /**

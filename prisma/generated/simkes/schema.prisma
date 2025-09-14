@@ -105,13 +105,30 @@ model UnitRating {
 }
 
 model Facility {
-  id          String          @id @default(uuid())
+  id          String           @id @default(uuid())
   name        String
   description String?
-  isActive    Boolean         @default(true)
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  isActive    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   photos      FacilityPhoto[]
+  ratings     FacilityRating[]
+}
+
+model FacilityRating {
+  id            String   @id @default(uuid())
+  reservationId String   @unique
+  facilityId    String
+  patientId     String
+  rating        Int      @db.SmallInt // Nilai rating 1-5
+  comment       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  facility Facility @relation(fields: [facilityId], references: [id])
+
+  @@index([facilityId])
+  @@index([patientId])
 }
 
 model FacilityPhoto {
@@ -158,4 +175,15 @@ model GalleryPhoto {
   gallery Gallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
 
   @@index([galleryId])
+}
+
+model Banner {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  imageUrl    String
+  order       Int      @default(0) // Untuk mengurutkan banner
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
