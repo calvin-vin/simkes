@@ -25,7 +25,11 @@ export const createEmergency = catchAsync(async (req, res) => {
 });
 
 export const getAllEmergencies = catchAsync(async (req, res) => {
-  const emergencies = await emergencyService.getAllEmergencies(req.query, req.user);
+  const emergencies = await emergencyService.getAllEmergencies(
+    req.query,
+    req.user,
+    req.userRole
+  );
   return apiSuccess(res, 200, "Emergency requests retrieved successfully", {
     results: emergencies.results.map((emergency) =>
       emergencyResource(emergency)
@@ -35,7 +39,11 @@ export const getAllEmergencies = catchAsync(async (req, res) => {
 });
 
 export const getEmergencyById = catchAsync(async (req, res) => {
-  const result = await emergencyService.getEmergencyById(req.params.id, req.user);
+  const result = await emergencyService.getEmergencyById(
+    req.params.id,
+    req.user,
+    req.userRole
+  );
   const showHistories = true;
   return apiSuccess(
     res,

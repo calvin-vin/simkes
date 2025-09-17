@@ -12,6 +12,10 @@ export const facilityResource = (facility) => {
     name: facility.name,
     description: facility.description,
     isActive: facility.isActive,
+    rating: {
+      averageRating: facility.averageRating || 0,
+      totalRatings: facility.totalRatings || 0
+    },
     photos: facility.photos
       ? facility.photos.map((photo) => ({
           id: photo.id,

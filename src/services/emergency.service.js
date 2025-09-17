@@ -10,7 +10,6 @@ import {
   sendWhatsAppToAmbulanceStaff,
 } from "../config/whatsapp.js";
 import ApiError from "../utils/apiError.js";
-import { getUserRole } from "../utils/getUserRole.js";
 
 export const createEmergencyRequest = async ({
   patientIdentity,
@@ -74,9 +73,9 @@ export const createEmergencyRequest = async ({
   return resultWithPatient;
 };
 
-export const getAllEmergencies = async (query, user) => {
+export const getAllEmergencies = async (query, user, role) => {
   const { page = 1, limit = 10, search, sortBy, sortOrder } = query;
-  
+
   // Jika ada pencarian berdasarkan nama pasien, kita perlu pendekatan berbeda
   let patientIdentities = [];
   if (search) {
@@ -107,19 +106,8 @@ export const getAllEmergencies = async (query, user) => {
   }
 
   // Jika user adalah patient, hanya tampilkan emergency request miliknya
-  let userRole = null;
-  let isPatient = false;
-  
-  if (user) {
-    try {
-      userRole = getUserRole(user);
-      isPatient = userRole.role === "PATIENT" && userRole.subrole === "PATIENT";
-    } catch (error) {
-      // Jika getUserRole gagal, anggap bukan patient
-      isPatient = false;
-    }
-  }
-  
+  const isPatient = role === "PATIENT";
+
   const filters = {
     ...(search ? { patientIdentity: { in: patientIdentities } } : {}),
     ...(isPatient ? { patientIdentity: user.identity } : {}),
@@ -177,7 +165,7 @@ export const getAllEmergencies = async (query, user) => {
   };
 };
 
-export const getEmergencyById = async (id, user) => {
+export const getEmergencyById = async (id, user, role) => {
   const emergency = await simkesPrisma.emergencyRequest.findUnique({
     where: { id },
     include: {
@@ -189,21 +177,13 @@ export const getEmergencyById = async (id, user) => {
   if (!emergency) throw new ApiError("Emergency request not found", 404);
 
   // Cek apakah user adalah patient dan hanya boleh melihat emergency miliknya
-  let userRole = null;
-  let isPatient = false;
-  
-  if (user) {
-    try {
-      userRole = getUserRole(user);
-      isPatient = userRole.role === "PATIENT" && userRole.subrole === "PATIENT";
-    } catch (error) {
-      // Jika getUserRole gagal, anggap bukan patient
-      isPatient = false;
-    }
-  }
-  
+  const isPatient = role === "PATIENT";
+
   if (isPatient && emergency.patientIdentity !== user.identity) {
-    throw new ApiError("You are not authorized to view this emergency request", 403);
+    throw new ApiError(
+      "You are not authorized to view this emergency request",
+      403
+    );
   }
 
   // Ambil data pasien dari simrsPrisma

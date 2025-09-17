@@ -1,17 +1,16 @@
 import dayjs from "dayjs";
-import path from "path";
 import fs from "fs/promises";
+import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { simrsPrisma } from "../config/db.js";
 import ApiError from "../utils/apiError.js";
 import { generateQr } from "../utils/generateQr.js";
-import {
-  saveQRCode,
-  getQRCodeByReservationId,
-  deleteQRCode,
-} from "./qrcode.service.js";
 import { isPatientWithinHospitalRange } from "./hospitalLocation.service.js";
-import { getUserRole } from "../utils/getUserRole.js";
+import {
+  deleteQRCode,
+  getQRCodeByReservationId,
+  saveQRCode,
+} from "./qrcode.service.js";
 
 /**
  * Get the day name in Indonesian
@@ -208,7 +207,7 @@ export const getNextQueueNumber = async (doctorId, date) => {
  * @param {Object} query - Query parameters including filters, pagination, and sorting
  * @returns {Promise<Object>} Paginated reservations with data and pagination info
  */
-export const getAllReservations = async (query, user) => {
+export const getAllReservations = async (query, user, role) => {
   const {
     doctorId,
     unitId,
@@ -220,7 +219,6 @@ export const getAllReservations = async (query, user) => {
     limit = 10,
   } = query;
 
-  const { role } = getUserRole(user);
   const isPatient = role === "PATIENT";
   const identity = user.identity;
 

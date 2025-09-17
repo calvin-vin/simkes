@@ -3,6 +3,7 @@ import { simkesPrisma } from "../config/db.js";
 import ApiError from "../utils/apiError.js";
 import { saveFile } from "../utils/saveFile.js";
 import fs from "fs/promises";
+import { getAverageRatingByFacilityId } from "./facilityRating.service.js";
 
 /**
  * Get all facilities with pagination and filtering
@@ -16,6 +17,8 @@ export const getAllPublicFacilities = async (query) => {
     search,
     sortBy = "createdAt",
     sortOrder = "desc",
+    minRating,
+    maxRating
   } = query;
 
   // Build filters
@@ -35,29 +38,98 @@ export const getAllPublicFacilities = async (query) => {
     [sortBy]: sortOrder,
   };
 
-  // Get facilities with pagination
-  const [facilities, total] = await Promise.all([
-    simkesPrisma.facility.findMany({
+  // Jika ada filter rating, kita perlu mengambil semua data terlebih dahulu
+  const hasRatingFilter = minRating !== undefined || maxRating !== undefined;
+  
+  if (!hasRatingFilter) {
+    // Jika tidak ada filter rating, gunakan paginasi database normal
+    const [facilities, total] = await Promise.all([
+      simkesPrisma.facility.findMany({
+        where: filters,
+        include: {
+          photos: true,
+        },
+        skip: (page - 1) * Number(limit),
+        take: Number(limit),
+        orderBy,
+      }),
+      simkesPrisma.facility.count({ where: filters }),
+    ]);
+    
+    // Ambil rating untuk setiap fasilitas
+    const facilitiesWithRating = await Promise.all(
+      facilities.map(async (facility) => {
+        const { averageRating, totalRatings } = await getAverageRatingByFacilityId(facility.id);
+        return {
+          ...facility,
+          averageRating,
+          totalRatings
+        };
+      })
+    );
+    
+    return {
+      results: facilitiesWithRating,
+      pagination: {
+        total,
+        page: Number(page),
+        limit: Number(limit),
+        totalPages: Math.ceil(total / Number(limit)),
+      },
+    };
+  } else {
+    // Jika ada filter rating, ambil semua data terlebih dahulu
+    const allFacilities = await simkesPrisma.facility.findMany({
       where: filters,
       include: {
         photos: true,
       },
-      skip: (page - 1) * limit,
-      take: Number(limit),
       orderBy,
-    }),
-    simkesPrisma.facility.count({ where: filters }),
-  ]);
-
-  return {
-    results: facilities,
-    pagination: {
-      total,
-      page: Number(page),
-      limit: Number(limit),
-      totalPages: Math.ceil(total / limit),
-    },
-  };
+    });
+    
+    // Ambil rating untuk semua fasilitas
+    const allFacilitiesWithRating = await Promise.all(
+      allFacilities.map(async (facility) => {
+        const { averageRating, totalRatings } = await getAverageRatingByFacilityId(facility.id);
+        return {
+          ...facility,
+          averageRating,
+          totalRatings
+        };
+      })
+    );
+    
+    // Filter berdasarkan rating
+    let filteredFacilities = allFacilitiesWithRating;
+    if (minRating !== undefined) {
+      filteredFacilities = filteredFacilities.filter(
+        facility => facility.averageRating >= Number(minRating)
+      );
+    }
+    if (maxRating !== undefined) {
+      filteredFacilities = filteredFacilities.filter(
+        facility => facility.averageRating <= Number(maxRating)
+      );
+    }
+    
+    // Hitung total setelah filter
+    const filteredTotal = filteredFacilities.length;
+    
+    // Terapkan paginasi secara manual
+    const startIndex = (page - 1) * Number(limit);
+    const endIndex = startIndex + Number(limit);
+    const paginatedFacilities = filteredFacilities.slice(startIndex, endIndex);
+    
+    return {
+      results: paginatedFacilities,
+      pagination: {
+        total: filteredTotal,
+        page: Number(page),
+        limit: Number(limit),
+        totalPages: Math.ceil(filteredTotal / Number(limit)),
+      },
+    };
+  }
 };
 
 /**
@@ -78,7 +150,14 @@ export const getPublicFacilityById = async (id) => {
     throw new ApiError("Fasilitas tidak ditemukan", 404);
   }
 
-  return facility;
+  // Ambil rating untuk fasilitas
+  const { averageRating, totalRatings } = await getAverageRatingByFacilityId(facility.id);
+  
+  return {
+    ...facility,
+    averageRating,
+    totalRatings
+  };
 };
 
 /**
