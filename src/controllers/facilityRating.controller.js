@@ -1,7 +1,7 @@
 import {
   facilityRatingResource,
   facilityRatingsResource,
-  facilityAverageRatingResource
+  facilityAverageRatingResource,
 } from "../resources/facilityRating.resource.js";
 import {
   facilityRatingFilterSchema,
@@ -12,7 +12,7 @@ import {
   getAllFacilityRatings,
   getFacilityRatingById,
   getFacilityRatingByReservationId,
-  getAverageRatingByFacilityId
+  getAverageRatingByFacilityId,
 } from "../services/facilityRating.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
 import catchAsync from "../utils/catchAsync.js";
@@ -70,13 +70,15 @@ export const getFacilityRatingByIdController = catchAsync(async (req, res) => {
 export const getFacilityRatingByReservationIdController = catchAsync(
   async (req, res) => {
     const { reservationId } = req.params;
-    const facilityRating = await getFacilityRatingByReservationId(reservationId);
+    const facilityRating = await getFacilityRatingByReservationId(
+      reservationId
+    );
 
     return apiSuccess(
       res,
       200,
       "Detail penilaian fasilitas berhasil diambil",
-      facilityRatingResource(facilityRating)
+      facilityRating
     );
   }
 );

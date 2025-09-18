@@ -260,6 +260,39 @@ exports.Prisma.BannerScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.NurseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  speciality: 'speciality',
+  description: 'description',
+  photoUrl: 'photoUrl',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NurseScheduleScalarFieldEnum = {
+  id: 'id',
+  nurseId: 'nurseId',
+  dayOfWeek: 'dayOfWeek',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NurseRatingScalarFieldEnum = {
+  id: 'id',
+  reservationId: 'reservationId',
+  nurseId: 'nurseId',
+  patientId: 'patientId',
+  rating: 'rating',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -298,7 +331,10 @@ exports.Prisma.ModelName = {
   Post: 'Post',
   Gallery: 'Gallery',
   GalleryPhoto: 'GalleryPhoto',
-  Banner: 'Banner'
+  Banner: 'Banner',
+  Nurse: 'Nurse',
+  NurseSchedule: 'NurseSchedule',
+  NurseRating: 'NurseRating'
 };
 
 /**

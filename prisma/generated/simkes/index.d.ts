@@ -83,6 +83,21 @@ export type GalleryPhoto = $Result.DefaultSelection<Prisma.$GalleryPhotoPayload>
  * 
  */
 export type Banner = $Result.DefaultSelection<Prisma.$BannerPayload>
+/**
+ * Model Nurse
+ * 
+ */
+export type Nurse = $Result.DefaultSelection<Prisma.$NursePayload>
+/**
+ * Model NurseSchedule
+ * 
+ */
+export type NurseSchedule = $Result.DefaultSelection<Prisma.$NurseSchedulePayload>
+/**
+ * Model NurseRating
+ * 
+ */
+export type NurseRating = $Result.DefaultSelection<Prisma.$NurseRatingPayload>
 
 /**
  * Enums
@@ -370,6 +385,36 @@ export class PrismaClient<
     * ```
     */
   get banner(): Prisma.BannerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.nurse`: Exposes CRUD operations for the **Nurse** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Nurses
+    * const nurses = await prisma.nurse.findMany()
+    * ```
+    */
+  get nurse(): Prisma.NurseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.nurseSchedule`: Exposes CRUD operations for the **NurseSchedule** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NurseSchedules
+    * const nurseSchedules = await prisma.nurseSchedule.findMany()
+    * ```
+    */
+  get nurseSchedule(): Prisma.NurseScheduleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.nurseRating`: Exposes CRUD operations for the **NurseRating** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NurseRatings
+    * const nurseRatings = await prisma.nurseRating.findMany()
+    * ```
+    */
+  get nurseRating(): Prisma.NurseRatingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -823,7 +868,10 @@ export namespace Prisma {
     Post: 'Post',
     Gallery: 'Gallery',
     GalleryPhoto: 'GalleryPhoto',
-    Banner: 'Banner'
+    Banner: 'Banner',
+    Nurse: 'Nurse',
+    NurseSchedule: 'NurseSchedule',
+    NurseRating: 'NurseRating'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -842,7 +890,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating" | "unitRating" | "facility" | "facilityRating" | "facilityPhoto" | "post" | "gallery" | "galleryPhoto" | "banner"
+      modelProps: "emergencyRequest" | "emergencyHistory" | "ambulanceStaff" | "reservationQRCode" | "hospitalLocation" | "doctorRating" | "unitRating" | "facility" | "facilityRating" | "facilityPhoto" | "post" | "gallery" | "galleryPhoto" | "banner" | "nurse" | "nurseSchedule" | "nurseRating"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1882,6 +1930,228 @@ export namespace Prisma {
           }
         }
       }
+      Nurse: {
+        payload: Prisma.$NursePayload<ExtArgs>
+        fields: Prisma.NurseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NurseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NurseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>
+          }
+          findFirst: {
+            args: Prisma.NurseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NurseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>
+          }
+          findMany: {
+            args: Prisma.NurseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>[]
+          }
+          create: {
+            args: Prisma.NurseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>
+          }
+          createMany: {
+            args: Prisma.NurseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NurseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>[]
+          }
+          delete: {
+            args: Prisma.NurseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>
+          }
+          update: {
+            args: Prisma.NurseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>
+          }
+          deleteMany: {
+            args: Prisma.NurseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NurseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NurseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>[]
+          }
+          upsert: {
+            args: Prisma.NurseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NursePayload>
+          }
+          aggregate: {
+            args: Prisma.NurseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNurse>
+          }
+          groupBy: {
+            args: Prisma.NurseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NurseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NurseCountArgs<ExtArgs>
+            result: $Utils.Optional<NurseCountAggregateOutputType> | number
+          }
+        }
+      }
+      NurseSchedule: {
+        payload: Prisma.$NurseSchedulePayload<ExtArgs>
+        fields: Prisma.NurseScheduleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NurseScheduleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NurseScheduleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>
+          }
+          findFirst: {
+            args: Prisma.NurseScheduleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NurseScheduleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>
+          }
+          findMany: {
+            args: Prisma.NurseScheduleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>[]
+          }
+          create: {
+            args: Prisma.NurseScheduleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>
+          }
+          createMany: {
+            args: Prisma.NurseScheduleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NurseScheduleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>[]
+          }
+          delete: {
+            args: Prisma.NurseScheduleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>
+          }
+          update: {
+            args: Prisma.NurseScheduleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>
+          }
+          deleteMany: {
+            args: Prisma.NurseScheduleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NurseScheduleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NurseScheduleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>[]
+          }
+          upsert: {
+            args: Prisma.NurseScheduleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseSchedulePayload>
+          }
+          aggregate: {
+            args: Prisma.NurseScheduleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNurseSchedule>
+          }
+          groupBy: {
+            args: Prisma.NurseScheduleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NurseScheduleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NurseScheduleCountArgs<ExtArgs>
+            result: $Utils.Optional<NurseScheduleCountAggregateOutputType> | number
+          }
+        }
+      }
+      NurseRating: {
+        payload: Prisma.$NurseRatingPayload<ExtArgs>
+        fields: Prisma.NurseRatingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NurseRatingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NurseRatingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>
+          }
+          findFirst: {
+            args: Prisma.NurseRatingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NurseRatingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>
+          }
+          findMany: {
+            args: Prisma.NurseRatingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>[]
+          }
+          create: {
+            args: Prisma.NurseRatingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>
+          }
+          createMany: {
+            args: Prisma.NurseRatingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NurseRatingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>[]
+          }
+          delete: {
+            args: Prisma.NurseRatingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>
+          }
+          update: {
+            args: Prisma.NurseRatingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>
+          }
+          deleteMany: {
+            args: Prisma.NurseRatingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NurseRatingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NurseRatingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>[]
+          }
+          upsert: {
+            args: Prisma.NurseRatingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NurseRatingPayload>
+          }
+          aggregate: {
+            args: Prisma.NurseRatingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNurseRating>
+          }
+          groupBy: {
+            args: Prisma.NurseRatingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NurseRatingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NurseRatingCountArgs<ExtArgs>
+            result: $Utils.Optional<NurseRatingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1980,6 +2250,9 @@ export namespace Prisma {
     gallery?: GalleryOmit
     galleryPhoto?: GalleryPhotoOmit
     banner?: BannerOmit
+    nurse?: NurseOmit
+    nurseSchedule?: NurseScheduleOmit
+    nurseRating?: NurseRatingOmit
   }
 
   /* Types for Logging */
@@ -2199,6 +2472,46 @@ export namespace Prisma {
    */
   export type GalleryCountOutputTypeCountPhotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GalleryPhotoWhereInput
+  }
+
+
+  /**
+   * Count Type NurseCountOutputType
+   */
+
+  export type NurseCountOutputType = {
+    schedules: number
+    ratings: number
+  }
+
+  export type NurseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedules?: boolean | NurseCountOutputTypeCountSchedulesArgs
+    ratings?: boolean | NurseCountOutputTypeCountRatingsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NurseCountOutputType without action
+   */
+  export type NurseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseCountOutputType
+     */
+    select?: NurseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NurseCountOutputType without action
+   */
+  export type NurseCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NurseScheduleWhereInput
+  }
+
+  /**
+   * NurseCountOutputType without action
+   */
+  export type NurseCountOutputTypeCountRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NurseRatingWhereInput
   }
 
 
@@ -17300,6 +17613,3405 @@ export namespace Prisma {
 
 
   /**
+   * Model Nurse
+   */
+
+  export type AggregateNurse = {
+    _count: NurseCountAggregateOutputType | null
+    _min: NurseMinAggregateOutputType | null
+    _max: NurseMaxAggregateOutputType | null
+  }
+
+  export type NurseMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    speciality: string | null
+    description: string | null
+    photoUrl: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NurseMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    speciality: string | null
+    description: string | null
+    photoUrl: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NurseCountAggregateOutputType = {
+    id: number
+    name: number
+    speciality: number
+    description: number
+    photoUrl: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NurseMinAggregateInputType = {
+    id?: true
+    name?: true
+    speciality?: true
+    description?: true
+    photoUrl?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NurseMaxAggregateInputType = {
+    id?: true
+    name?: true
+    speciality?: true
+    description?: true
+    photoUrl?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NurseCountAggregateInputType = {
+    id?: true
+    name?: true
+    speciality?: true
+    description?: true
+    photoUrl?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NurseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Nurse to aggregate.
+     */
+    where?: NurseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nurses to fetch.
+     */
+    orderBy?: NurseOrderByWithRelationInput | NurseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NurseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nurses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nurses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Nurses
+    **/
+    _count?: true | NurseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NurseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NurseMaxAggregateInputType
+  }
+
+  export type GetNurseAggregateType<T extends NurseAggregateArgs> = {
+        [P in keyof T & keyof AggregateNurse]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNurse[P]>
+      : GetScalarType<T[P], AggregateNurse[P]>
+  }
+
+
+
+
+  export type NurseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NurseWhereInput
+    orderBy?: NurseOrderByWithAggregationInput | NurseOrderByWithAggregationInput[]
+    by: NurseScalarFieldEnum[] | NurseScalarFieldEnum
+    having?: NurseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NurseCountAggregateInputType | true
+    _min?: NurseMinAggregateInputType
+    _max?: NurseMaxAggregateInputType
+  }
+
+  export type NurseGroupByOutputType = {
+    id: string
+    name: string
+    speciality: string | null
+    description: string | null
+    photoUrl: string | null
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: NurseCountAggregateOutputType | null
+    _min: NurseMinAggregateOutputType | null
+    _max: NurseMaxAggregateOutputType | null
+  }
+
+  type GetNurseGroupByPayload<T extends NurseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NurseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NurseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NurseGroupByOutputType[P]>
+            : GetScalarType<T[P], NurseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NurseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    speciality?: boolean
+    description?: boolean
+    photoUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    schedules?: boolean | Nurse$schedulesArgs<ExtArgs>
+    ratings?: boolean | Nurse$ratingsArgs<ExtArgs>
+    _count?: boolean | NurseCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nurse"]>
+
+  export type NurseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    speciality?: boolean
+    description?: boolean
+    photoUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["nurse"]>
+
+  export type NurseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    speciality?: boolean
+    description?: boolean
+    photoUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["nurse"]>
+
+  export type NurseSelectScalar = {
+    id?: boolean
+    name?: boolean
+    speciality?: boolean
+    description?: boolean
+    photoUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type NurseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "speciality" | "description" | "photoUrl" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["nurse"]>
+  export type NurseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedules?: boolean | Nurse$schedulesArgs<ExtArgs>
+    ratings?: boolean | Nurse$ratingsArgs<ExtArgs>
+    _count?: boolean | NurseCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type NurseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type NurseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $NursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Nurse"
+    objects: {
+      schedules: Prisma.$NurseSchedulePayload<ExtArgs>[]
+      ratings: Prisma.$NurseRatingPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      speciality: string | null
+      description: string | null
+      photoUrl: string | null
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["nurse"]>
+    composites: {}
+  }
+
+  type NurseGetPayload<S extends boolean | null | undefined | NurseDefaultArgs> = $Result.GetResult<Prisma.$NursePayload, S>
+
+  type NurseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NurseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NurseCountAggregateInputType | true
+    }
+
+  export interface NurseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Nurse'], meta: { name: 'Nurse' } }
+    /**
+     * Find zero or one Nurse that matches the filter.
+     * @param {NurseFindUniqueArgs} args - Arguments to find a Nurse
+     * @example
+     * // Get one Nurse
+     * const nurse = await prisma.nurse.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NurseFindUniqueArgs>(args: SelectSubset<T, NurseFindUniqueArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Nurse that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NurseFindUniqueOrThrowArgs} args - Arguments to find a Nurse
+     * @example
+     * // Get one Nurse
+     * const nurse = await prisma.nurse.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NurseFindUniqueOrThrowArgs>(args: SelectSubset<T, NurseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Nurse that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseFindFirstArgs} args - Arguments to find a Nurse
+     * @example
+     * // Get one Nurse
+     * const nurse = await prisma.nurse.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NurseFindFirstArgs>(args?: SelectSubset<T, NurseFindFirstArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Nurse that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseFindFirstOrThrowArgs} args - Arguments to find a Nurse
+     * @example
+     * // Get one Nurse
+     * const nurse = await prisma.nurse.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NurseFindFirstOrThrowArgs>(args?: SelectSubset<T, NurseFindFirstOrThrowArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Nurses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Nurses
+     * const nurses = await prisma.nurse.findMany()
+     * 
+     * // Get first 10 Nurses
+     * const nurses = await prisma.nurse.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const nurseWithIdOnly = await prisma.nurse.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NurseFindManyArgs>(args?: SelectSubset<T, NurseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Nurse.
+     * @param {NurseCreateArgs} args - Arguments to create a Nurse.
+     * @example
+     * // Create one Nurse
+     * const Nurse = await prisma.nurse.create({
+     *   data: {
+     *     // ... data to create a Nurse
+     *   }
+     * })
+     * 
+     */
+    create<T extends NurseCreateArgs>(args: SelectSubset<T, NurseCreateArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Nurses.
+     * @param {NurseCreateManyArgs} args - Arguments to create many Nurses.
+     * @example
+     * // Create many Nurses
+     * const nurse = await prisma.nurse.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NurseCreateManyArgs>(args?: SelectSubset<T, NurseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Nurses and returns the data saved in the database.
+     * @param {NurseCreateManyAndReturnArgs} args - Arguments to create many Nurses.
+     * @example
+     * // Create many Nurses
+     * const nurse = await prisma.nurse.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Nurses and only return the `id`
+     * const nurseWithIdOnly = await prisma.nurse.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NurseCreateManyAndReturnArgs>(args?: SelectSubset<T, NurseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Nurse.
+     * @param {NurseDeleteArgs} args - Arguments to delete one Nurse.
+     * @example
+     * // Delete one Nurse
+     * const Nurse = await prisma.nurse.delete({
+     *   where: {
+     *     // ... filter to delete one Nurse
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NurseDeleteArgs>(args: SelectSubset<T, NurseDeleteArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Nurse.
+     * @param {NurseUpdateArgs} args - Arguments to update one Nurse.
+     * @example
+     * // Update one Nurse
+     * const nurse = await prisma.nurse.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NurseUpdateArgs>(args: SelectSubset<T, NurseUpdateArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Nurses.
+     * @param {NurseDeleteManyArgs} args - Arguments to filter Nurses to delete.
+     * @example
+     * // Delete a few Nurses
+     * const { count } = await prisma.nurse.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NurseDeleteManyArgs>(args?: SelectSubset<T, NurseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Nurses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Nurses
+     * const nurse = await prisma.nurse.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NurseUpdateManyArgs>(args: SelectSubset<T, NurseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Nurses and returns the data updated in the database.
+     * @param {NurseUpdateManyAndReturnArgs} args - Arguments to update many Nurses.
+     * @example
+     * // Update many Nurses
+     * const nurse = await prisma.nurse.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Nurses and only return the `id`
+     * const nurseWithIdOnly = await prisma.nurse.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NurseUpdateManyAndReturnArgs>(args: SelectSubset<T, NurseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Nurse.
+     * @param {NurseUpsertArgs} args - Arguments to update or create a Nurse.
+     * @example
+     * // Update or create a Nurse
+     * const nurse = await prisma.nurse.upsert({
+     *   create: {
+     *     // ... data to create a Nurse
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Nurse we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NurseUpsertArgs>(args: SelectSubset<T, NurseUpsertArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Nurses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseCountArgs} args - Arguments to filter Nurses to count.
+     * @example
+     * // Count the number of Nurses
+     * const count = await prisma.nurse.count({
+     *   where: {
+     *     // ... the filter for the Nurses we want to count
+     *   }
+     * })
+    **/
+    count<T extends NurseCountArgs>(
+      args?: Subset<T, NurseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NurseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Nurse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NurseAggregateArgs>(args: Subset<T, NurseAggregateArgs>): Prisma.PrismaPromise<GetNurseAggregateType<T>>
+
+    /**
+     * Group by Nurse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NurseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NurseGroupByArgs['orderBy'] }
+        : { orderBy?: NurseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NurseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNurseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Nurse model
+   */
+  readonly fields: NurseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Nurse.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NurseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    schedules<T extends Nurse$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Nurse$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ratings<T extends Nurse$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, Nurse$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Nurse model
+   */
+  interface NurseFieldRefs {
+    readonly id: FieldRef<"Nurse", 'String'>
+    readonly name: FieldRef<"Nurse", 'String'>
+    readonly speciality: FieldRef<"Nurse", 'String'>
+    readonly description: FieldRef<"Nurse", 'String'>
+    readonly photoUrl: FieldRef<"Nurse", 'String'>
+    readonly isActive: FieldRef<"Nurse", 'Boolean'>
+    readonly createdAt: FieldRef<"Nurse", 'DateTime'>
+    readonly updatedAt: FieldRef<"Nurse", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Nurse findUnique
+   */
+  export type NurseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * Filter, which Nurse to fetch.
+     */
+    where: NurseWhereUniqueInput
+  }
+
+  /**
+   * Nurse findUniqueOrThrow
+   */
+  export type NurseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * Filter, which Nurse to fetch.
+     */
+    where: NurseWhereUniqueInput
+  }
+
+  /**
+   * Nurse findFirst
+   */
+  export type NurseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * Filter, which Nurse to fetch.
+     */
+    where?: NurseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nurses to fetch.
+     */
+    orderBy?: NurseOrderByWithRelationInput | NurseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Nurses.
+     */
+    cursor?: NurseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nurses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nurses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Nurses.
+     */
+    distinct?: NurseScalarFieldEnum | NurseScalarFieldEnum[]
+  }
+
+  /**
+   * Nurse findFirstOrThrow
+   */
+  export type NurseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * Filter, which Nurse to fetch.
+     */
+    where?: NurseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nurses to fetch.
+     */
+    orderBy?: NurseOrderByWithRelationInput | NurseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Nurses.
+     */
+    cursor?: NurseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nurses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nurses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Nurses.
+     */
+    distinct?: NurseScalarFieldEnum | NurseScalarFieldEnum[]
+  }
+
+  /**
+   * Nurse findMany
+   */
+  export type NurseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * Filter, which Nurses to fetch.
+     */
+    where?: NurseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nurses to fetch.
+     */
+    orderBy?: NurseOrderByWithRelationInput | NurseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Nurses.
+     */
+    cursor?: NurseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nurses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nurses.
+     */
+    skip?: number
+    distinct?: NurseScalarFieldEnum | NurseScalarFieldEnum[]
+  }
+
+  /**
+   * Nurse create
+   */
+  export type NurseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Nurse.
+     */
+    data: XOR<NurseCreateInput, NurseUncheckedCreateInput>
+  }
+
+  /**
+   * Nurse createMany
+   */
+  export type NurseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Nurses.
+     */
+    data: NurseCreateManyInput | NurseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Nurse createManyAndReturn
+   */
+  export type NurseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * The data used to create many Nurses.
+     */
+    data: NurseCreateManyInput | NurseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Nurse update
+   */
+  export type NurseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Nurse.
+     */
+    data: XOR<NurseUpdateInput, NurseUncheckedUpdateInput>
+    /**
+     * Choose, which Nurse to update.
+     */
+    where: NurseWhereUniqueInput
+  }
+
+  /**
+   * Nurse updateMany
+   */
+  export type NurseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Nurses.
+     */
+    data: XOR<NurseUpdateManyMutationInput, NurseUncheckedUpdateManyInput>
+    /**
+     * Filter which Nurses to update
+     */
+    where?: NurseWhereInput
+    /**
+     * Limit how many Nurses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nurse updateManyAndReturn
+   */
+  export type NurseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * The data used to update Nurses.
+     */
+    data: XOR<NurseUpdateManyMutationInput, NurseUncheckedUpdateManyInput>
+    /**
+     * Filter which Nurses to update
+     */
+    where?: NurseWhereInput
+    /**
+     * Limit how many Nurses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nurse upsert
+   */
+  export type NurseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Nurse to update in case it exists.
+     */
+    where: NurseWhereUniqueInput
+    /**
+     * In case the Nurse found by the `where` argument doesn't exist, create a new Nurse with this data.
+     */
+    create: XOR<NurseCreateInput, NurseUncheckedCreateInput>
+    /**
+     * In case the Nurse was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NurseUpdateInput, NurseUncheckedUpdateInput>
+  }
+
+  /**
+   * Nurse delete
+   */
+  export type NurseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+    /**
+     * Filter which Nurse to delete.
+     */
+    where: NurseWhereUniqueInput
+  }
+
+  /**
+   * Nurse deleteMany
+   */
+  export type NurseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Nurses to delete
+     */
+    where?: NurseWhereInput
+    /**
+     * Limit how many Nurses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nurse.schedules
+   */
+  export type Nurse$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    where?: NurseScheduleWhereInput
+    orderBy?: NurseScheduleOrderByWithRelationInput | NurseScheduleOrderByWithRelationInput[]
+    cursor?: NurseScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NurseScheduleScalarFieldEnum | NurseScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * Nurse.ratings
+   */
+  export type Nurse$ratingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    where?: NurseRatingWhereInput
+    orderBy?: NurseRatingOrderByWithRelationInput | NurseRatingOrderByWithRelationInput[]
+    cursor?: NurseRatingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NurseRatingScalarFieldEnum | NurseRatingScalarFieldEnum[]
+  }
+
+  /**
+   * Nurse without action
+   */
+  export type NurseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nurse
+     */
+    select?: NurseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nurse
+     */
+    omit?: NurseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NurseSchedule
+   */
+
+  export type AggregateNurseSchedule = {
+    _count: NurseScheduleCountAggregateOutputType | null
+    _avg: NurseScheduleAvgAggregateOutputType | null
+    _sum: NurseScheduleSumAggregateOutputType | null
+    _min: NurseScheduleMinAggregateOutputType | null
+    _max: NurseScheduleMaxAggregateOutputType | null
+  }
+
+  export type NurseScheduleAvgAggregateOutputType = {
+    dayOfWeek: number | null
+  }
+
+  export type NurseScheduleSumAggregateOutputType = {
+    dayOfWeek: number | null
+  }
+
+  export type NurseScheduleMinAggregateOutputType = {
+    id: string | null
+    nurseId: string | null
+    dayOfWeek: number | null
+    startTime: string | null
+    endTime: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NurseScheduleMaxAggregateOutputType = {
+    id: string | null
+    nurseId: string | null
+    dayOfWeek: number | null
+    startTime: string | null
+    endTime: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NurseScheduleCountAggregateOutputType = {
+    id: number
+    nurseId: number
+    dayOfWeek: number
+    startTime: number
+    endTime: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NurseScheduleAvgAggregateInputType = {
+    dayOfWeek?: true
+  }
+
+  export type NurseScheduleSumAggregateInputType = {
+    dayOfWeek?: true
+  }
+
+  export type NurseScheduleMinAggregateInputType = {
+    id?: true
+    nurseId?: true
+    dayOfWeek?: true
+    startTime?: true
+    endTime?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NurseScheduleMaxAggregateInputType = {
+    id?: true
+    nurseId?: true
+    dayOfWeek?: true
+    startTime?: true
+    endTime?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NurseScheduleCountAggregateInputType = {
+    id?: true
+    nurseId?: true
+    dayOfWeek?: true
+    startTime?: true
+    endTime?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NurseScheduleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NurseSchedule to aggregate.
+     */
+    where?: NurseScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseSchedules to fetch.
+     */
+    orderBy?: NurseScheduleOrderByWithRelationInput | NurseScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NurseScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseSchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NurseSchedules
+    **/
+    _count?: true | NurseScheduleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NurseScheduleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NurseScheduleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NurseScheduleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NurseScheduleMaxAggregateInputType
+  }
+
+  export type GetNurseScheduleAggregateType<T extends NurseScheduleAggregateArgs> = {
+        [P in keyof T & keyof AggregateNurseSchedule]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNurseSchedule[P]>
+      : GetScalarType<T[P], AggregateNurseSchedule[P]>
+  }
+
+
+
+
+  export type NurseScheduleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NurseScheduleWhereInput
+    orderBy?: NurseScheduleOrderByWithAggregationInput | NurseScheduleOrderByWithAggregationInput[]
+    by: NurseScheduleScalarFieldEnum[] | NurseScheduleScalarFieldEnum
+    having?: NurseScheduleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NurseScheduleCountAggregateInputType | true
+    _avg?: NurseScheduleAvgAggregateInputType
+    _sum?: NurseScheduleSumAggregateInputType
+    _min?: NurseScheduleMinAggregateInputType
+    _max?: NurseScheduleMaxAggregateInputType
+  }
+
+  export type NurseScheduleGroupByOutputType = {
+    id: string
+    nurseId: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: NurseScheduleCountAggregateOutputType | null
+    _avg: NurseScheduleAvgAggregateOutputType | null
+    _sum: NurseScheduleSumAggregateOutputType | null
+    _min: NurseScheduleMinAggregateOutputType | null
+    _max: NurseScheduleMaxAggregateOutputType | null
+  }
+
+  type GetNurseScheduleGroupByPayload<T extends NurseScheduleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NurseScheduleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NurseScheduleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NurseScheduleGroupByOutputType[P]>
+            : GetScalarType<T[P], NurseScheduleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NurseScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nurseId?: boolean
+    dayOfWeek?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nurseSchedule"]>
+
+  export type NurseScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nurseId?: boolean
+    dayOfWeek?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nurseSchedule"]>
+
+  export type NurseScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nurseId?: boolean
+    dayOfWeek?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nurseSchedule"]>
+
+  export type NurseScheduleSelectScalar = {
+    id?: boolean
+    nurseId?: boolean
+    dayOfWeek?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type NurseScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nurseId" | "dayOfWeek" | "startTime" | "endTime" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["nurseSchedule"]>
+  export type NurseScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }
+  export type NurseScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }
+  export type NurseScheduleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }
+
+  export type $NurseSchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NurseSchedule"
+    objects: {
+      nurse: Prisma.$NursePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nurseId: string
+      dayOfWeek: number
+      startTime: string
+      endTime: string
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["nurseSchedule"]>
+    composites: {}
+  }
+
+  type NurseScheduleGetPayload<S extends boolean | null | undefined | NurseScheduleDefaultArgs> = $Result.GetResult<Prisma.$NurseSchedulePayload, S>
+
+  type NurseScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NurseScheduleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NurseScheduleCountAggregateInputType | true
+    }
+
+  export interface NurseScheduleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NurseSchedule'], meta: { name: 'NurseSchedule' } }
+    /**
+     * Find zero or one NurseSchedule that matches the filter.
+     * @param {NurseScheduleFindUniqueArgs} args - Arguments to find a NurseSchedule
+     * @example
+     * // Get one NurseSchedule
+     * const nurseSchedule = await prisma.nurseSchedule.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NurseScheduleFindUniqueArgs>(args: SelectSubset<T, NurseScheduleFindUniqueArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NurseSchedule that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NurseScheduleFindUniqueOrThrowArgs} args - Arguments to find a NurseSchedule
+     * @example
+     * // Get one NurseSchedule
+     * const nurseSchedule = await prisma.nurseSchedule.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NurseScheduleFindUniqueOrThrowArgs>(args: SelectSubset<T, NurseScheduleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NurseSchedule that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseScheduleFindFirstArgs} args - Arguments to find a NurseSchedule
+     * @example
+     * // Get one NurseSchedule
+     * const nurseSchedule = await prisma.nurseSchedule.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NurseScheduleFindFirstArgs>(args?: SelectSubset<T, NurseScheduleFindFirstArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NurseSchedule that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseScheduleFindFirstOrThrowArgs} args - Arguments to find a NurseSchedule
+     * @example
+     * // Get one NurseSchedule
+     * const nurseSchedule = await prisma.nurseSchedule.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NurseScheduleFindFirstOrThrowArgs>(args?: SelectSubset<T, NurseScheduleFindFirstOrThrowArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NurseSchedules that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NurseSchedules
+     * const nurseSchedules = await prisma.nurseSchedule.findMany()
+     * 
+     * // Get first 10 NurseSchedules
+     * const nurseSchedules = await prisma.nurseSchedule.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const nurseScheduleWithIdOnly = await prisma.nurseSchedule.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NurseScheduleFindManyArgs>(args?: SelectSubset<T, NurseScheduleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NurseSchedule.
+     * @param {NurseScheduleCreateArgs} args - Arguments to create a NurseSchedule.
+     * @example
+     * // Create one NurseSchedule
+     * const NurseSchedule = await prisma.nurseSchedule.create({
+     *   data: {
+     *     // ... data to create a NurseSchedule
+     *   }
+     * })
+     * 
+     */
+    create<T extends NurseScheduleCreateArgs>(args: SelectSubset<T, NurseScheduleCreateArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NurseSchedules.
+     * @param {NurseScheduleCreateManyArgs} args - Arguments to create many NurseSchedules.
+     * @example
+     * // Create many NurseSchedules
+     * const nurseSchedule = await prisma.nurseSchedule.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NurseScheduleCreateManyArgs>(args?: SelectSubset<T, NurseScheduleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NurseSchedules and returns the data saved in the database.
+     * @param {NurseScheduleCreateManyAndReturnArgs} args - Arguments to create many NurseSchedules.
+     * @example
+     * // Create many NurseSchedules
+     * const nurseSchedule = await prisma.nurseSchedule.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NurseSchedules and only return the `id`
+     * const nurseScheduleWithIdOnly = await prisma.nurseSchedule.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NurseScheduleCreateManyAndReturnArgs>(args?: SelectSubset<T, NurseScheduleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NurseSchedule.
+     * @param {NurseScheduleDeleteArgs} args - Arguments to delete one NurseSchedule.
+     * @example
+     * // Delete one NurseSchedule
+     * const NurseSchedule = await prisma.nurseSchedule.delete({
+     *   where: {
+     *     // ... filter to delete one NurseSchedule
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NurseScheduleDeleteArgs>(args: SelectSubset<T, NurseScheduleDeleteArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NurseSchedule.
+     * @param {NurseScheduleUpdateArgs} args - Arguments to update one NurseSchedule.
+     * @example
+     * // Update one NurseSchedule
+     * const nurseSchedule = await prisma.nurseSchedule.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NurseScheduleUpdateArgs>(args: SelectSubset<T, NurseScheduleUpdateArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NurseSchedules.
+     * @param {NurseScheduleDeleteManyArgs} args - Arguments to filter NurseSchedules to delete.
+     * @example
+     * // Delete a few NurseSchedules
+     * const { count } = await prisma.nurseSchedule.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NurseScheduleDeleteManyArgs>(args?: SelectSubset<T, NurseScheduleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NurseSchedules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseScheduleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NurseSchedules
+     * const nurseSchedule = await prisma.nurseSchedule.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NurseScheduleUpdateManyArgs>(args: SelectSubset<T, NurseScheduleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NurseSchedules and returns the data updated in the database.
+     * @param {NurseScheduleUpdateManyAndReturnArgs} args - Arguments to update many NurseSchedules.
+     * @example
+     * // Update many NurseSchedules
+     * const nurseSchedule = await prisma.nurseSchedule.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NurseSchedules and only return the `id`
+     * const nurseScheduleWithIdOnly = await prisma.nurseSchedule.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NurseScheduleUpdateManyAndReturnArgs>(args: SelectSubset<T, NurseScheduleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NurseSchedule.
+     * @param {NurseScheduleUpsertArgs} args - Arguments to update or create a NurseSchedule.
+     * @example
+     * // Update or create a NurseSchedule
+     * const nurseSchedule = await prisma.nurseSchedule.upsert({
+     *   create: {
+     *     // ... data to create a NurseSchedule
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NurseSchedule we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NurseScheduleUpsertArgs>(args: SelectSubset<T, NurseScheduleUpsertArgs<ExtArgs>>): Prisma__NurseScheduleClient<$Result.GetResult<Prisma.$NurseSchedulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NurseSchedules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseScheduleCountArgs} args - Arguments to filter NurseSchedules to count.
+     * @example
+     * // Count the number of NurseSchedules
+     * const count = await prisma.nurseSchedule.count({
+     *   where: {
+     *     // ... the filter for the NurseSchedules we want to count
+     *   }
+     * })
+    **/
+    count<T extends NurseScheduleCountArgs>(
+      args?: Subset<T, NurseScheduleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NurseScheduleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NurseSchedule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseScheduleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NurseScheduleAggregateArgs>(args: Subset<T, NurseScheduleAggregateArgs>): Prisma.PrismaPromise<GetNurseScheduleAggregateType<T>>
+
+    /**
+     * Group by NurseSchedule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseScheduleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NurseScheduleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NurseScheduleGroupByArgs['orderBy'] }
+        : { orderBy?: NurseScheduleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NurseScheduleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNurseScheduleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NurseSchedule model
+   */
+  readonly fields: NurseScheduleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NurseSchedule.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NurseScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    nurse<T extends NurseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NurseDefaultArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NurseSchedule model
+   */
+  interface NurseScheduleFieldRefs {
+    readonly id: FieldRef<"NurseSchedule", 'String'>
+    readonly nurseId: FieldRef<"NurseSchedule", 'String'>
+    readonly dayOfWeek: FieldRef<"NurseSchedule", 'Int'>
+    readonly startTime: FieldRef<"NurseSchedule", 'String'>
+    readonly endTime: FieldRef<"NurseSchedule", 'String'>
+    readonly isActive: FieldRef<"NurseSchedule", 'Boolean'>
+    readonly createdAt: FieldRef<"NurseSchedule", 'DateTime'>
+    readonly updatedAt: FieldRef<"NurseSchedule", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NurseSchedule findUnique
+   */
+  export type NurseScheduleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseSchedule to fetch.
+     */
+    where: NurseScheduleWhereUniqueInput
+  }
+
+  /**
+   * NurseSchedule findUniqueOrThrow
+   */
+  export type NurseScheduleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseSchedule to fetch.
+     */
+    where: NurseScheduleWhereUniqueInput
+  }
+
+  /**
+   * NurseSchedule findFirst
+   */
+  export type NurseScheduleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseSchedule to fetch.
+     */
+    where?: NurseScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseSchedules to fetch.
+     */
+    orderBy?: NurseScheduleOrderByWithRelationInput | NurseScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NurseSchedules.
+     */
+    cursor?: NurseScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseSchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NurseSchedules.
+     */
+    distinct?: NurseScheduleScalarFieldEnum | NurseScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * NurseSchedule findFirstOrThrow
+   */
+  export type NurseScheduleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseSchedule to fetch.
+     */
+    where?: NurseScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseSchedules to fetch.
+     */
+    orderBy?: NurseScheduleOrderByWithRelationInput | NurseScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NurseSchedules.
+     */
+    cursor?: NurseScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseSchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NurseSchedules.
+     */
+    distinct?: NurseScheduleScalarFieldEnum | NurseScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * NurseSchedule findMany
+   */
+  export type NurseScheduleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseSchedules to fetch.
+     */
+    where?: NurseScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseSchedules to fetch.
+     */
+    orderBy?: NurseScheduleOrderByWithRelationInput | NurseScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NurseSchedules.
+     */
+    cursor?: NurseScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseSchedules.
+     */
+    skip?: number
+    distinct?: NurseScheduleScalarFieldEnum | NurseScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * NurseSchedule create
+   */
+  export type NurseScheduleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NurseSchedule.
+     */
+    data: XOR<NurseScheduleCreateInput, NurseScheduleUncheckedCreateInput>
+  }
+
+  /**
+   * NurseSchedule createMany
+   */
+  export type NurseScheduleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NurseSchedules.
+     */
+    data: NurseScheduleCreateManyInput | NurseScheduleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NurseSchedule createManyAndReturn
+   */
+  export type NurseScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * The data used to create many NurseSchedules.
+     */
+    data: NurseScheduleCreateManyInput | NurseScheduleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NurseSchedule update
+   */
+  export type NurseScheduleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NurseSchedule.
+     */
+    data: XOR<NurseScheduleUpdateInput, NurseScheduleUncheckedUpdateInput>
+    /**
+     * Choose, which NurseSchedule to update.
+     */
+    where: NurseScheduleWhereUniqueInput
+  }
+
+  /**
+   * NurseSchedule updateMany
+   */
+  export type NurseScheduleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NurseSchedules.
+     */
+    data: XOR<NurseScheduleUpdateManyMutationInput, NurseScheduleUncheckedUpdateManyInput>
+    /**
+     * Filter which NurseSchedules to update
+     */
+    where?: NurseScheduleWhereInput
+    /**
+     * Limit how many NurseSchedules to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NurseSchedule updateManyAndReturn
+   */
+  export type NurseScheduleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * The data used to update NurseSchedules.
+     */
+    data: XOR<NurseScheduleUpdateManyMutationInput, NurseScheduleUncheckedUpdateManyInput>
+    /**
+     * Filter which NurseSchedules to update
+     */
+    where?: NurseScheduleWhereInput
+    /**
+     * Limit how many NurseSchedules to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NurseSchedule upsert
+   */
+  export type NurseScheduleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NurseSchedule to update in case it exists.
+     */
+    where: NurseScheduleWhereUniqueInput
+    /**
+     * In case the NurseSchedule found by the `where` argument doesn't exist, create a new NurseSchedule with this data.
+     */
+    create: XOR<NurseScheduleCreateInput, NurseScheduleUncheckedCreateInput>
+    /**
+     * In case the NurseSchedule was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NurseScheduleUpdateInput, NurseScheduleUncheckedUpdateInput>
+  }
+
+  /**
+   * NurseSchedule delete
+   */
+  export type NurseScheduleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+    /**
+     * Filter which NurseSchedule to delete.
+     */
+    where: NurseScheduleWhereUniqueInput
+  }
+
+  /**
+   * NurseSchedule deleteMany
+   */
+  export type NurseScheduleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NurseSchedules to delete
+     */
+    where?: NurseScheduleWhereInput
+    /**
+     * Limit how many NurseSchedules to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NurseSchedule without action
+   */
+  export type NurseScheduleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseSchedule
+     */
+    select?: NurseScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseSchedule
+     */
+    omit?: NurseScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseScheduleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NurseRating
+   */
+
+  export type AggregateNurseRating = {
+    _count: NurseRatingCountAggregateOutputType | null
+    _avg: NurseRatingAvgAggregateOutputType | null
+    _sum: NurseRatingSumAggregateOutputType | null
+    _min: NurseRatingMinAggregateOutputType | null
+    _max: NurseRatingMaxAggregateOutputType | null
+  }
+
+  export type NurseRatingAvgAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type NurseRatingSumAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type NurseRatingMinAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    nurseId: string | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NurseRatingMaxAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    nurseId: string | null
+    patientId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NurseRatingCountAggregateOutputType = {
+    id: number
+    reservationId: number
+    nurseId: number
+    patientId: number
+    rating: number
+    comment: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NurseRatingAvgAggregateInputType = {
+    rating?: true
+  }
+
+  export type NurseRatingSumAggregateInputType = {
+    rating?: true
+  }
+
+  export type NurseRatingMinAggregateInputType = {
+    id?: true
+    reservationId?: true
+    nurseId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NurseRatingMaxAggregateInputType = {
+    id?: true
+    reservationId?: true
+    nurseId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NurseRatingCountAggregateInputType = {
+    id?: true
+    reservationId?: true
+    nurseId?: true
+    patientId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NurseRatingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NurseRating to aggregate.
+     */
+    where?: NurseRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseRatings to fetch.
+     */
+    orderBy?: NurseRatingOrderByWithRelationInput | NurseRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NurseRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NurseRatings
+    **/
+    _count?: true | NurseRatingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NurseRatingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NurseRatingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NurseRatingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NurseRatingMaxAggregateInputType
+  }
+
+  export type GetNurseRatingAggregateType<T extends NurseRatingAggregateArgs> = {
+        [P in keyof T & keyof AggregateNurseRating]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNurseRating[P]>
+      : GetScalarType<T[P], AggregateNurseRating[P]>
+  }
+
+
+
+
+  export type NurseRatingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NurseRatingWhereInput
+    orderBy?: NurseRatingOrderByWithAggregationInput | NurseRatingOrderByWithAggregationInput[]
+    by: NurseRatingScalarFieldEnum[] | NurseRatingScalarFieldEnum
+    having?: NurseRatingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NurseRatingCountAggregateInputType | true
+    _avg?: NurseRatingAvgAggregateInputType
+    _sum?: NurseRatingSumAggregateInputType
+    _min?: NurseRatingMinAggregateInputType
+    _max?: NurseRatingMaxAggregateInputType
+  }
+
+  export type NurseRatingGroupByOutputType = {
+    id: string
+    reservationId: string
+    nurseId: string
+    patientId: string
+    rating: number
+    comment: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: NurseRatingCountAggregateOutputType | null
+    _avg: NurseRatingAvgAggregateOutputType | null
+    _sum: NurseRatingSumAggregateOutputType | null
+    _min: NurseRatingMinAggregateOutputType | null
+    _max: NurseRatingMaxAggregateOutputType | null
+  }
+
+  type GetNurseRatingGroupByPayload<T extends NurseRatingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NurseRatingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NurseRatingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NurseRatingGroupByOutputType[P]>
+            : GetScalarType<T[P], NurseRatingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NurseRatingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    nurseId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nurseRating"]>
+
+  export type NurseRatingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    nurseId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nurseRating"]>
+
+  export type NurseRatingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    nurseId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nurseRating"]>
+
+  export type NurseRatingSelectScalar = {
+    id?: boolean
+    reservationId?: boolean
+    nurseId?: boolean
+    patientId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type NurseRatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reservationId" | "nurseId" | "patientId" | "rating" | "comment" | "createdAt" | "updatedAt", ExtArgs["result"]["nurseRating"]>
+  export type NurseRatingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }
+  export type NurseRatingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }
+  export type NurseRatingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nurse?: boolean | NurseDefaultArgs<ExtArgs>
+  }
+
+  export type $NurseRatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NurseRating"
+    objects: {
+      nurse: Prisma.$NursePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reservationId: string
+      nurseId: string
+      patientId: string
+      rating: number
+      comment: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["nurseRating"]>
+    composites: {}
+  }
+
+  type NurseRatingGetPayload<S extends boolean | null | undefined | NurseRatingDefaultArgs> = $Result.GetResult<Prisma.$NurseRatingPayload, S>
+
+  type NurseRatingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NurseRatingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NurseRatingCountAggregateInputType | true
+    }
+
+  export interface NurseRatingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NurseRating'], meta: { name: 'NurseRating' } }
+    /**
+     * Find zero or one NurseRating that matches the filter.
+     * @param {NurseRatingFindUniqueArgs} args - Arguments to find a NurseRating
+     * @example
+     * // Get one NurseRating
+     * const nurseRating = await prisma.nurseRating.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NurseRatingFindUniqueArgs>(args: SelectSubset<T, NurseRatingFindUniqueArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NurseRating that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NurseRatingFindUniqueOrThrowArgs} args - Arguments to find a NurseRating
+     * @example
+     * // Get one NurseRating
+     * const nurseRating = await prisma.nurseRating.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NurseRatingFindUniqueOrThrowArgs>(args: SelectSubset<T, NurseRatingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NurseRating that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseRatingFindFirstArgs} args - Arguments to find a NurseRating
+     * @example
+     * // Get one NurseRating
+     * const nurseRating = await prisma.nurseRating.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NurseRatingFindFirstArgs>(args?: SelectSubset<T, NurseRatingFindFirstArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NurseRating that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseRatingFindFirstOrThrowArgs} args - Arguments to find a NurseRating
+     * @example
+     * // Get one NurseRating
+     * const nurseRating = await prisma.nurseRating.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NurseRatingFindFirstOrThrowArgs>(args?: SelectSubset<T, NurseRatingFindFirstOrThrowArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NurseRatings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseRatingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NurseRatings
+     * const nurseRatings = await prisma.nurseRating.findMany()
+     * 
+     * // Get first 10 NurseRatings
+     * const nurseRatings = await prisma.nurseRating.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const nurseRatingWithIdOnly = await prisma.nurseRating.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NurseRatingFindManyArgs>(args?: SelectSubset<T, NurseRatingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NurseRating.
+     * @param {NurseRatingCreateArgs} args - Arguments to create a NurseRating.
+     * @example
+     * // Create one NurseRating
+     * const NurseRating = await prisma.nurseRating.create({
+     *   data: {
+     *     // ... data to create a NurseRating
+     *   }
+     * })
+     * 
+     */
+    create<T extends NurseRatingCreateArgs>(args: SelectSubset<T, NurseRatingCreateArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NurseRatings.
+     * @param {NurseRatingCreateManyArgs} args - Arguments to create many NurseRatings.
+     * @example
+     * // Create many NurseRatings
+     * const nurseRating = await prisma.nurseRating.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NurseRatingCreateManyArgs>(args?: SelectSubset<T, NurseRatingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NurseRatings and returns the data saved in the database.
+     * @param {NurseRatingCreateManyAndReturnArgs} args - Arguments to create many NurseRatings.
+     * @example
+     * // Create many NurseRatings
+     * const nurseRating = await prisma.nurseRating.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NurseRatings and only return the `id`
+     * const nurseRatingWithIdOnly = await prisma.nurseRating.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NurseRatingCreateManyAndReturnArgs>(args?: SelectSubset<T, NurseRatingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NurseRating.
+     * @param {NurseRatingDeleteArgs} args - Arguments to delete one NurseRating.
+     * @example
+     * // Delete one NurseRating
+     * const NurseRating = await prisma.nurseRating.delete({
+     *   where: {
+     *     // ... filter to delete one NurseRating
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NurseRatingDeleteArgs>(args: SelectSubset<T, NurseRatingDeleteArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NurseRating.
+     * @param {NurseRatingUpdateArgs} args - Arguments to update one NurseRating.
+     * @example
+     * // Update one NurseRating
+     * const nurseRating = await prisma.nurseRating.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NurseRatingUpdateArgs>(args: SelectSubset<T, NurseRatingUpdateArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NurseRatings.
+     * @param {NurseRatingDeleteManyArgs} args - Arguments to filter NurseRatings to delete.
+     * @example
+     * // Delete a few NurseRatings
+     * const { count } = await prisma.nurseRating.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NurseRatingDeleteManyArgs>(args?: SelectSubset<T, NurseRatingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NurseRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseRatingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NurseRatings
+     * const nurseRating = await prisma.nurseRating.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NurseRatingUpdateManyArgs>(args: SelectSubset<T, NurseRatingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NurseRatings and returns the data updated in the database.
+     * @param {NurseRatingUpdateManyAndReturnArgs} args - Arguments to update many NurseRatings.
+     * @example
+     * // Update many NurseRatings
+     * const nurseRating = await prisma.nurseRating.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NurseRatings and only return the `id`
+     * const nurseRatingWithIdOnly = await prisma.nurseRating.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NurseRatingUpdateManyAndReturnArgs>(args: SelectSubset<T, NurseRatingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NurseRating.
+     * @param {NurseRatingUpsertArgs} args - Arguments to update or create a NurseRating.
+     * @example
+     * // Update or create a NurseRating
+     * const nurseRating = await prisma.nurseRating.upsert({
+     *   create: {
+     *     // ... data to create a NurseRating
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NurseRating we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NurseRatingUpsertArgs>(args: SelectSubset<T, NurseRatingUpsertArgs<ExtArgs>>): Prisma__NurseRatingClient<$Result.GetResult<Prisma.$NurseRatingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NurseRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseRatingCountArgs} args - Arguments to filter NurseRatings to count.
+     * @example
+     * // Count the number of NurseRatings
+     * const count = await prisma.nurseRating.count({
+     *   where: {
+     *     // ... the filter for the NurseRatings we want to count
+     *   }
+     * })
+    **/
+    count<T extends NurseRatingCountArgs>(
+      args?: Subset<T, NurseRatingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NurseRatingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NurseRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseRatingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NurseRatingAggregateArgs>(args: Subset<T, NurseRatingAggregateArgs>): Prisma.PrismaPromise<GetNurseRatingAggregateType<T>>
+
+    /**
+     * Group by NurseRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NurseRatingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NurseRatingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NurseRatingGroupByArgs['orderBy'] }
+        : { orderBy?: NurseRatingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NurseRatingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNurseRatingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NurseRating model
+   */
+  readonly fields: NurseRatingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NurseRating.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NurseRatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    nurse<T extends NurseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NurseDefaultArgs<ExtArgs>>): Prisma__NurseClient<$Result.GetResult<Prisma.$NursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NurseRating model
+   */
+  interface NurseRatingFieldRefs {
+    readonly id: FieldRef<"NurseRating", 'String'>
+    readonly reservationId: FieldRef<"NurseRating", 'String'>
+    readonly nurseId: FieldRef<"NurseRating", 'String'>
+    readonly patientId: FieldRef<"NurseRating", 'String'>
+    readonly rating: FieldRef<"NurseRating", 'Int'>
+    readonly comment: FieldRef<"NurseRating", 'String'>
+    readonly createdAt: FieldRef<"NurseRating", 'DateTime'>
+    readonly updatedAt: FieldRef<"NurseRating", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NurseRating findUnique
+   */
+  export type NurseRatingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseRating to fetch.
+     */
+    where: NurseRatingWhereUniqueInput
+  }
+
+  /**
+   * NurseRating findUniqueOrThrow
+   */
+  export type NurseRatingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseRating to fetch.
+     */
+    where: NurseRatingWhereUniqueInput
+  }
+
+  /**
+   * NurseRating findFirst
+   */
+  export type NurseRatingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseRating to fetch.
+     */
+    where?: NurseRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseRatings to fetch.
+     */
+    orderBy?: NurseRatingOrderByWithRelationInput | NurseRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NurseRatings.
+     */
+    cursor?: NurseRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NurseRatings.
+     */
+    distinct?: NurseRatingScalarFieldEnum | NurseRatingScalarFieldEnum[]
+  }
+
+  /**
+   * NurseRating findFirstOrThrow
+   */
+  export type NurseRatingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseRating to fetch.
+     */
+    where?: NurseRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseRatings to fetch.
+     */
+    orderBy?: NurseRatingOrderByWithRelationInput | NurseRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NurseRatings.
+     */
+    cursor?: NurseRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NurseRatings.
+     */
+    distinct?: NurseRatingScalarFieldEnum | NurseRatingScalarFieldEnum[]
+  }
+
+  /**
+   * NurseRating findMany
+   */
+  export type NurseRatingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which NurseRatings to fetch.
+     */
+    where?: NurseRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NurseRatings to fetch.
+     */
+    orderBy?: NurseRatingOrderByWithRelationInput | NurseRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NurseRatings.
+     */
+    cursor?: NurseRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NurseRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NurseRatings.
+     */
+    skip?: number
+    distinct?: NurseRatingScalarFieldEnum | NurseRatingScalarFieldEnum[]
+  }
+
+  /**
+   * NurseRating create
+   */
+  export type NurseRatingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NurseRating.
+     */
+    data: XOR<NurseRatingCreateInput, NurseRatingUncheckedCreateInput>
+  }
+
+  /**
+   * NurseRating createMany
+   */
+  export type NurseRatingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NurseRatings.
+     */
+    data: NurseRatingCreateManyInput | NurseRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NurseRating createManyAndReturn
+   */
+  export type NurseRatingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * The data used to create many NurseRatings.
+     */
+    data: NurseRatingCreateManyInput | NurseRatingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NurseRating update
+   */
+  export type NurseRatingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NurseRating.
+     */
+    data: XOR<NurseRatingUpdateInput, NurseRatingUncheckedUpdateInput>
+    /**
+     * Choose, which NurseRating to update.
+     */
+    where: NurseRatingWhereUniqueInput
+  }
+
+  /**
+   * NurseRating updateMany
+   */
+  export type NurseRatingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NurseRatings.
+     */
+    data: XOR<NurseRatingUpdateManyMutationInput, NurseRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which NurseRatings to update
+     */
+    where?: NurseRatingWhereInput
+    /**
+     * Limit how many NurseRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NurseRating updateManyAndReturn
+   */
+  export type NurseRatingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * The data used to update NurseRatings.
+     */
+    data: XOR<NurseRatingUpdateManyMutationInput, NurseRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which NurseRatings to update
+     */
+    where?: NurseRatingWhereInput
+    /**
+     * Limit how many NurseRatings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NurseRating upsert
+   */
+  export type NurseRatingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NurseRating to update in case it exists.
+     */
+    where: NurseRatingWhereUniqueInput
+    /**
+     * In case the NurseRating found by the `where` argument doesn't exist, create a new NurseRating with this data.
+     */
+    create: XOR<NurseRatingCreateInput, NurseRatingUncheckedCreateInput>
+    /**
+     * In case the NurseRating was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NurseRatingUpdateInput, NurseRatingUncheckedUpdateInput>
+  }
+
+  /**
+   * NurseRating delete
+   */
+  export type NurseRatingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+    /**
+     * Filter which NurseRating to delete.
+     */
+    where: NurseRatingWhereUniqueInput
+  }
+
+  /**
+   * NurseRating deleteMany
+   */
+  export type NurseRatingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NurseRatings to delete
+     */
+    where?: NurseRatingWhereInput
+    /**
+     * Limit how many NurseRatings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NurseRating without action
+   */
+  export type NurseRatingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NurseRating
+     */
+    select?: NurseRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NurseRating
+     */
+    omit?: NurseRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NurseRatingInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -17493,6 +21205,48 @@ export namespace Prisma {
   };
 
   export type BannerScalarFieldEnum = (typeof BannerScalarFieldEnum)[keyof typeof BannerScalarFieldEnum]
+
+
+  export const NurseScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    speciality: 'speciality',
+    description: 'description',
+    photoUrl: 'photoUrl',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NurseScalarFieldEnum = (typeof NurseScalarFieldEnum)[keyof typeof NurseScalarFieldEnum]
+
+
+  export const NurseScheduleScalarFieldEnum: {
+    id: 'id',
+    nurseId: 'nurseId',
+    dayOfWeek: 'dayOfWeek',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NurseScheduleScalarFieldEnum = (typeof NurseScheduleScalarFieldEnum)[keyof typeof NurseScheduleScalarFieldEnum]
+
+
+  export const NurseRatingScalarFieldEnum: {
+    id: 'id',
+    reservationId: 'reservationId',
+    nurseId: 'nurseId',
+    patientId: 'patientId',
+    rating: 'rating',
+    comment: 'comment',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NurseRatingScalarFieldEnum = (typeof NurseRatingScalarFieldEnum)[keyof typeof NurseRatingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -18158,10 +21912,11 @@ export namespace Prisma {
 
   export type FacilityRatingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    reservationId?: string
+    reservationId_facilityId?: FacilityRatingReservationIdFacilityIdCompoundUniqueInput
     AND?: FacilityRatingWhereInput | FacilityRatingWhereInput[]
     OR?: FacilityRatingWhereInput[]
     NOT?: FacilityRatingWhereInput | FacilityRatingWhereInput[]
+    reservationId?: StringFilter<"FacilityRating"> | string
     facilityId?: StringFilter<"FacilityRating"> | string
     patientId?: StringFilter<"FacilityRating"> | string
     rating?: IntFilter<"FacilityRating"> | number
@@ -18169,7 +21924,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"FacilityRating"> | Date | string
     updatedAt?: DateTimeFilter<"FacilityRating"> | Date | string
     facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
-  }, "id" | "reservationId">
+  }, "id" | "reservationId_facilityId">
 
   export type FacilityRatingOrderByWithAggregationInput = {
     id?: SortOrder
@@ -18510,6 +22265,224 @@ export namespace Prisma {
     isActive?: BoolWithAggregatesFilter<"Banner"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
+  }
+
+  export type NurseWhereInput = {
+    AND?: NurseWhereInput | NurseWhereInput[]
+    OR?: NurseWhereInput[]
+    NOT?: NurseWhereInput | NurseWhereInput[]
+    id?: StringFilter<"Nurse"> | string
+    name?: StringFilter<"Nurse"> | string
+    speciality?: StringNullableFilter<"Nurse"> | string | null
+    description?: StringNullableFilter<"Nurse"> | string | null
+    photoUrl?: StringNullableFilter<"Nurse"> | string | null
+    isActive?: BoolFilter<"Nurse"> | boolean
+    createdAt?: DateTimeFilter<"Nurse"> | Date | string
+    updatedAt?: DateTimeFilter<"Nurse"> | Date | string
+    schedules?: NurseScheduleListRelationFilter
+    ratings?: NurseRatingListRelationFilter
+  }
+
+  export type NurseOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    speciality?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    photoUrl?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    schedules?: NurseScheduleOrderByRelationAggregateInput
+    ratings?: NurseRatingOrderByRelationAggregateInput
+  }
+
+  export type NurseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NurseWhereInput | NurseWhereInput[]
+    OR?: NurseWhereInput[]
+    NOT?: NurseWhereInput | NurseWhereInput[]
+    name?: StringFilter<"Nurse"> | string
+    speciality?: StringNullableFilter<"Nurse"> | string | null
+    description?: StringNullableFilter<"Nurse"> | string | null
+    photoUrl?: StringNullableFilter<"Nurse"> | string | null
+    isActive?: BoolFilter<"Nurse"> | boolean
+    createdAt?: DateTimeFilter<"Nurse"> | Date | string
+    updatedAt?: DateTimeFilter<"Nurse"> | Date | string
+    schedules?: NurseScheduleListRelationFilter
+    ratings?: NurseRatingListRelationFilter
+  }, "id">
+
+  export type NurseOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    speciality?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    photoUrl?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: NurseCountOrderByAggregateInput
+    _max?: NurseMaxOrderByAggregateInput
+    _min?: NurseMinOrderByAggregateInput
+  }
+
+  export type NurseScalarWhereWithAggregatesInput = {
+    AND?: NurseScalarWhereWithAggregatesInput | NurseScalarWhereWithAggregatesInput[]
+    OR?: NurseScalarWhereWithAggregatesInput[]
+    NOT?: NurseScalarWhereWithAggregatesInput | NurseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Nurse"> | string
+    name?: StringWithAggregatesFilter<"Nurse"> | string
+    speciality?: StringNullableWithAggregatesFilter<"Nurse"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Nurse"> | string | null
+    photoUrl?: StringNullableWithAggregatesFilter<"Nurse"> | string | null
+    isActive?: BoolWithAggregatesFilter<"Nurse"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Nurse"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Nurse"> | Date | string
+  }
+
+  export type NurseScheduleWhereInput = {
+    AND?: NurseScheduleWhereInput | NurseScheduleWhereInput[]
+    OR?: NurseScheduleWhereInput[]
+    NOT?: NurseScheduleWhereInput | NurseScheduleWhereInput[]
+    id?: StringFilter<"NurseSchedule"> | string
+    nurseId?: StringFilter<"NurseSchedule"> | string
+    dayOfWeek?: IntFilter<"NurseSchedule"> | number
+    startTime?: StringFilter<"NurseSchedule"> | string
+    endTime?: StringFilter<"NurseSchedule"> | string
+    isActive?: BoolFilter<"NurseSchedule"> | boolean
+    createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
+    updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
+    nurse?: XOR<NurseScalarRelationFilter, NurseWhereInput>
+  }
+
+  export type NurseScheduleOrderByWithRelationInput = {
+    id?: SortOrder
+    nurseId?: SortOrder
+    dayOfWeek?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    nurse?: NurseOrderByWithRelationInput
+  }
+
+  export type NurseScheduleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NurseScheduleWhereInput | NurseScheduleWhereInput[]
+    OR?: NurseScheduleWhereInput[]
+    NOT?: NurseScheduleWhereInput | NurseScheduleWhereInput[]
+    nurseId?: StringFilter<"NurseSchedule"> | string
+    dayOfWeek?: IntFilter<"NurseSchedule"> | number
+    startTime?: StringFilter<"NurseSchedule"> | string
+    endTime?: StringFilter<"NurseSchedule"> | string
+    isActive?: BoolFilter<"NurseSchedule"> | boolean
+    createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
+    updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
+    nurse?: XOR<NurseScalarRelationFilter, NurseWhereInput>
+  }, "id">
+
+  export type NurseScheduleOrderByWithAggregationInput = {
+    id?: SortOrder
+    nurseId?: SortOrder
+    dayOfWeek?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: NurseScheduleCountOrderByAggregateInput
+    _avg?: NurseScheduleAvgOrderByAggregateInput
+    _max?: NurseScheduleMaxOrderByAggregateInput
+    _min?: NurseScheduleMinOrderByAggregateInput
+    _sum?: NurseScheduleSumOrderByAggregateInput
+  }
+
+  export type NurseScheduleScalarWhereWithAggregatesInput = {
+    AND?: NurseScheduleScalarWhereWithAggregatesInput | NurseScheduleScalarWhereWithAggregatesInput[]
+    OR?: NurseScheduleScalarWhereWithAggregatesInput[]
+    NOT?: NurseScheduleScalarWhereWithAggregatesInput | NurseScheduleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"NurseSchedule"> | string
+    nurseId?: StringWithAggregatesFilter<"NurseSchedule"> | string
+    dayOfWeek?: IntWithAggregatesFilter<"NurseSchedule"> | number
+    startTime?: StringWithAggregatesFilter<"NurseSchedule"> | string
+    endTime?: StringWithAggregatesFilter<"NurseSchedule"> | string
+    isActive?: BoolWithAggregatesFilter<"NurseSchedule"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"NurseSchedule"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"NurseSchedule"> | Date | string
+  }
+
+  export type NurseRatingWhereInput = {
+    AND?: NurseRatingWhereInput | NurseRatingWhereInput[]
+    OR?: NurseRatingWhereInput[]
+    NOT?: NurseRatingWhereInput | NurseRatingWhereInput[]
+    id?: StringFilter<"NurseRating"> | string
+    reservationId?: StringFilter<"NurseRating"> | string
+    nurseId?: StringFilter<"NurseRating"> | string
+    patientId?: StringFilter<"NurseRating"> | string
+    rating?: IntFilter<"NurseRating"> | number
+    comment?: StringNullableFilter<"NurseRating"> | string | null
+    createdAt?: DateTimeFilter<"NurseRating"> | Date | string
+    updatedAt?: DateTimeFilter<"NurseRating"> | Date | string
+    nurse?: XOR<NurseScalarRelationFilter, NurseWhereInput>
+  }
+
+  export type NurseRatingOrderByWithRelationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    nurseId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    nurse?: NurseOrderByWithRelationInput
+  }
+
+  export type NurseRatingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reservationId_nurseId?: NurseRatingReservationIdNurseIdCompoundUniqueInput
+    AND?: NurseRatingWhereInput | NurseRatingWhereInput[]
+    OR?: NurseRatingWhereInput[]
+    NOT?: NurseRatingWhereInput | NurseRatingWhereInput[]
+    reservationId?: StringFilter<"NurseRating"> | string
+    nurseId?: StringFilter<"NurseRating"> | string
+    patientId?: StringFilter<"NurseRating"> | string
+    rating?: IntFilter<"NurseRating"> | number
+    comment?: StringNullableFilter<"NurseRating"> | string | null
+    createdAt?: DateTimeFilter<"NurseRating"> | Date | string
+    updatedAt?: DateTimeFilter<"NurseRating"> | Date | string
+    nurse?: XOR<NurseScalarRelationFilter, NurseWhereInput>
+  }, "id" | "reservationId_nurseId">
+
+  export type NurseRatingOrderByWithAggregationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    nurseId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: NurseRatingCountOrderByAggregateInput
+    _avg?: NurseRatingAvgOrderByAggregateInput
+    _max?: NurseRatingMaxOrderByAggregateInput
+    _min?: NurseRatingMinOrderByAggregateInput
+    _sum?: NurseRatingSumOrderByAggregateInput
+  }
+
+  export type NurseRatingScalarWhereWithAggregatesInput = {
+    AND?: NurseRatingScalarWhereWithAggregatesInput | NurseRatingScalarWhereWithAggregatesInput[]
+    OR?: NurseRatingScalarWhereWithAggregatesInput[]
+    NOT?: NurseRatingScalarWhereWithAggregatesInput | NurseRatingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"NurseRating"> | string
+    reservationId?: StringWithAggregatesFilter<"NurseRating"> | string
+    nurseId?: StringWithAggregatesFilter<"NurseRating"> | string
+    patientId?: StringWithAggregatesFilter<"NurseRating"> | string
+    rating?: IntWithAggregatesFilter<"NurseRating"> | number
+    comment?: StringNullableWithAggregatesFilter<"NurseRating"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"NurseRating"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"NurseRating"> | Date | string
   }
 
   export type EmergencyRequestCreateInput = {
@@ -19507,6 +23480,243 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NurseCreateInput = {
+    id?: string
+    name: string
+    speciality?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedules?: NurseScheduleCreateNestedManyWithoutNurseInput
+    ratings?: NurseRatingCreateNestedManyWithoutNurseInput
+  }
+
+  export type NurseUncheckedCreateInput = {
+    id?: string
+    name: string
+    speciality?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedules?: NurseScheduleUncheckedCreateNestedManyWithoutNurseInput
+    ratings?: NurseRatingUncheckedCreateNestedManyWithoutNurseInput
+  }
+
+  export type NurseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: NurseScheduleUpdateManyWithoutNurseNestedInput
+    ratings?: NurseRatingUpdateManyWithoutNurseNestedInput
+  }
+
+  export type NurseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: NurseScheduleUncheckedUpdateManyWithoutNurseNestedInput
+    ratings?: NurseRatingUncheckedUpdateManyWithoutNurseNestedInput
+  }
+
+  export type NurseCreateManyInput = {
+    id?: string
+    name: string
+    speciality?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseScheduleCreateInput = {
+    id?: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    nurse: NurseCreateNestedOneWithoutSchedulesInput
+  }
+
+  export type NurseScheduleUncheckedCreateInput = {
+    id?: string
+    nurseId: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseScheduleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nurse?: NurseUpdateOneRequiredWithoutSchedulesNestedInput
+  }
+
+  export type NurseScheduleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nurseId?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseScheduleCreateManyInput = {
+    id?: string
+    nurseId: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseScheduleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseScheduleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nurseId?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseRatingCreateInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    nurse: NurseCreateNestedOneWithoutRatingsInput
+  }
+
+  export type NurseRatingUncheckedCreateInput = {
+    id?: string
+    reservationId: string
+    nurseId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseRatingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nurse?: NurseUpdateOneRequiredWithoutRatingsNestedInput
+  }
+
+  export type NurseRatingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    nurseId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseRatingCreateManyInput = {
+    id?: string
+    reservationId: string
+    nurseId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseRatingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseRatingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    nurseId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -20015,6 +24225,11 @@ export namespace Prisma {
     isNot?: FacilityWhereInput
   }
 
+  export type FacilityRatingReservationIdFacilityIdCompoundUniqueInput = {
+    reservationId: string
+    facilityId: string
+  }
+
   export type FacilityRatingCountOrderByAggregateInput = {
     id?: SortOrder
     reservationId?: SortOrder
@@ -20221,6 +24436,151 @@ export namespace Prisma {
 
   export type BannerSumOrderByAggregateInput = {
     order?: SortOrder
+  }
+
+  export type NurseScheduleListRelationFilter = {
+    every?: NurseScheduleWhereInput
+    some?: NurseScheduleWhereInput
+    none?: NurseScheduleWhereInput
+  }
+
+  export type NurseRatingListRelationFilter = {
+    every?: NurseRatingWhereInput
+    some?: NurseRatingWhereInput
+    none?: NurseRatingWhereInput
+  }
+
+  export type NurseScheduleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NurseRatingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NurseCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    speciality?: SortOrder
+    description?: SortOrder
+    photoUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    speciality?: SortOrder
+    description?: SortOrder
+    photoUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    speciality?: SortOrder
+    description?: SortOrder
+    photoUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseScalarRelationFilter = {
+    is?: NurseWhereInput
+    isNot?: NurseWhereInput
+  }
+
+  export type NurseScheduleCountOrderByAggregateInput = {
+    id?: SortOrder
+    nurseId?: SortOrder
+    dayOfWeek?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseScheduleAvgOrderByAggregateInput = {
+    dayOfWeek?: SortOrder
+  }
+
+  export type NurseScheduleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nurseId?: SortOrder
+    dayOfWeek?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseScheduleMinOrderByAggregateInput = {
+    id?: SortOrder
+    nurseId?: SortOrder
+    dayOfWeek?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseScheduleSumOrderByAggregateInput = {
+    dayOfWeek?: SortOrder
+  }
+
+  export type NurseRatingReservationIdNurseIdCompoundUniqueInput = {
+    reservationId: string
+    nurseId: string
+  }
+
+  export type NurseRatingCountOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    nurseId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseRatingAvgOrderByAggregateInput = {
+    rating?: SortOrder
+  }
+
+  export type NurseRatingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    nurseId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseRatingMinOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    nurseId?: SortOrder
+    patientId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NurseRatingSumOrderByAggregateInput = {
+    rating?: SortOrder
   }
 
   export type AmbulanceStaffCreateNestedOneWithoutEmergencyRequestInput = {
@@ -20539,6 +24899,118 @@ export namespace Prisma {
     upsert?: GalleryUpsertWithoutPhotosInput
     connect?: GalleryWhereUniqueInput
     update?: XOR<XOR<GalleryUpdateToOneWithWhereWithoutPhotosInput, GalleryUpdateWithoutPhotosInput>, GalleryUncheckedUpdateWithoutPhotosInput>
+  }
+
+  export type NurseScheduleCreateNestedManyWithoutNurseInput = {
+    create?: XOR<NurseScheduleCreateWithoutNurseInput, NurseScheduleUncheckedCreateWithoutNurseInput> | NurseScheduleCreateWithoutNurseInput[] | NurseScheduleUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseScheduleCreateOrConnectWithoutNurseInput | NurseScheduleCreateOrConnectWithoutNurseInput[]
+    createMany?: NurseScheduleCreateManyNurseInputEnvelope
+    connect?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+  }
+
+  export type NurseRatingCreateNestedManyWithoutNurseInput = {
+    create?: XOR<NurseRatingCreateWithoutNurseInput, NurseRatingUncheckedCreateWithoutNurseInput> | NurseRatingCreateWithoutNurseInput[] | NurseRatingUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseRatingCreateOrConnectWithoutNurseInput | NurseRatingCreateOrConnectWithoutNurseInput[]
+    createMany?: NurseRatingCreateManyNurseInputEnvelope
+    connect?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+  }
+
+  export type NurseScheduleUncheckedCreateNestedManyWithoutNurseInput = {
+    create?: XOR<NurseScheduleCreateWithoutNurseInput, NurseScheduleUncheckedCreateWithoutNurseInput> | NurseScheduleCreateWithoutNurseInput[] | NurseScheduleUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseScheduleCreateOrConnectWithoutNurseInput | NurseScheduleCreateOrConnectWithoutNurseInput[]
+    createMany?: NurseScheduleCreateManyNurseInputEnvelope
+    connect?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+  }
+
+  export type NurseRatingUncheckedCreateNestedManyWithoutNurseInput = {
+    create?: XOR<NurseRatingCreateWithoutNurseInput, NurseRatingUncheckedCreateWithoutNurseInput> | NurseRatingCreateWithoutNurseInput[] | NurseRatingUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseRatingCreateOrConnectWithoutNurseInput | NurseRatingCreateOrConnectWithoutNurseInput[]
+    createMany?: NurseRatingCreateManyNurseInputEnvelope
+    connect?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+  }
+
+  export type NurseScheduleUpdateManyWithoutNurseNestedInput = {
+    create?: XOR<NurseScheduleCreateWithoutNurseInput, NurseScheduleUncheckedCreateWithoutNurseInput> | NurseScheduleCreateWithoutNurseInput[] | NurseScheduleUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseScheduleCreateOrConnectWithoutNurseInput | NurseScheduleCreateOrConnectWithoutNurseInput[]
+    upsert?: NurseScheduleUpsertWithWhereUniqueWithoutNurseInput | NurseScheduleUpsertWithWhereUniqueWithoutNurseInput[]
+    createMany?: NurseScheduleCreateManyNurseInputEnvelope
+    set?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    disconnect?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    delete?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    connect?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    update?: NurseScheduleUpdateWithWhereUniqueWithoutNurseInput | NurseScheduleUpdateWithWhereUniqueWithoutNurseInput[]
+    updateMany?: NurseScheduleUpdateManyWithWhereWithoutNurseInput | NurseScheduleUpdateManyWithWhereWithoutNurseInput[]
+    deleteMany?: NurseScheduleScalarWhereInput | NurseScheduleScalarWhereInput[]
+  }
+
+  export type NurseRatingUpdateManyWithoutNurseNestedInput = {
+    create?: XOR<NurseRatingCreateWithoutNurseInput, NurseRatingUncheckedCreateWithoutNurseInput> | NurseRatingCreateWithoutNurseInput[] | NurseRatingUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseRatingCreateOrConnectWithoutNurseInput | NurseRatingCreateOrConnectWithoutNurseInput[]
+    upsert?: NurseRatingUpsertWithWhereUniqueWithoutNurseInput | NurseRatingUpsertWithWhereUniqueWithoutNurseInput[]
+    createMany?: NurseRatingCreateManyNurseInputEnvelope
+    set?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    disconnect?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    delete?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    connect?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    update?: NurseRatingUpdateWithWhereUniqueWithoutNurseInput | NurseRatingUpdateWithWhereUniqueWithoutNurseInput[]
+    updateMany?: NurseRatingUpdateManyWithWhereWithoutNurseInput | NurseRatingUpdateManyWithWhereWithoutNurseInput[]
+    deleteMany?: NurseRatingScalarWhereInput | NurseRatingScalarWhereInput[]
+  }
+
+  export type NurseScheduleUncheckedUpdateManyWithoutNurseNestedInput = {
+    create?: XOR<NurseScheduleCreateWithoutNurseInput, NurseScheduleUncheckedCreateWithoutNurseInput> | NurseScheduleCreateWithoutNurseInput[] | NurseScheduleUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseScheduleCreateOrConnectWithoutNurseInput | NurseScheduleCreateOrConnectWithoutNurseInput[]
+    upsert?: NurseScheduleUpsertWithWhereUniqueWithoutNurseInput | NurseScheduleUpsertWithWhereUniqueWithoutNurseInput[]
+    createMany?: NurseScheduleCreateManyNurseInputEnvelope
+    set?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    disconnect?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    delete?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    connect?: NurseScheduleWhereUniqueInput | NurseScheduleWhereUniqueInput[]
+    update?: NurseScheduleUpdateWithWhereUniqueWithoutNurseInput | NurseScheduleUpdateWithWhereUniqueWithoutNurseInput[]
+    updateMany?: NurseScheduleUpdateManyWithWhereWithoutNurseInput | NurseScheduleUpdateManyWithWhereWithoutNurseInput[]
+    deleteMany?: NurseScheduleScalarWhereInput | NurseScheduleScalarWhereInput[]
+  }
+
+  export type NurseRatingUncheckedUpdateManyWithoutNurseNestedInput = {
+    create?: XOR<NurseRatingCreateWithoutNurseInput, NurseRatingUncheckedCreateWithoutNurseInput> | NurseRatingCreateWithoutNurseInput[] | NurseRatingUncheckedCreateWithoutNurseInput[]
+    connectOrCreate?: NurseRatingCreateOrConnectWithoutNurseInput | NurseRatingCreateOrConnectWithoutNurseInput[]
+    upsert?: NurseRatingUpsertWithWhereUniqueWithoutNurseInput | NurseRatingUpsertWithWhereUniqueWithoutNurseInput[]
+    createMany?: NurseRatingCreateManyNurseInputEnvelope
+    set?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    disconnect?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    delete?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    connect?: NurseRatingWhereUniqueInput | NurseRatingWhereUniqueInput[]
+    update?: NurseRatingUpdateWithWhereUniqueWithoutNurseInput | NurseRatingUpdateWithWhereUniqueWithoutNurseInput[]
+    updateMany?: NurseRatingUpdateManyWithWhereWithoutNurseInput | NurseRatingUpdateManyWithWhereWithoutNurseInput[]
+    deleteMany?: NurseRatingScalarWhereInput | NurseRatingScalarWhereInput[]
+  }
+
+  export type NurseCreateNestedOneWithoutSchedulesInput = {
+    create?: XOR<NurseCreateWithoutSchedulesInput, NurseUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: NurseCreateOrConnectWithoutSchedulesInput
+    connect?: NurseWhereUniqueInput
+  }
+
+  export type NurseUpdateOneRequiredWithoutSchedulesNestedInput = {
+    create?: XOR<NurseCreateWithoutSchedulesInput, NurseUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: NurseCreateOrConnectWithoutSchedulesInput
+    upsert?: NurseUpsertWithoutSchedulesInput
+    connect?: NurseWhereUniqueInput
+    update?: XOR<XOR<NurseUpdateToOneWithWhereWithoutSchedulesInput, NurseUpdateWithoutSchedulesInput>, NurseUncheckedUpdateWithoutSchedulesInput>
+  }
+
+  export type NurseCreateNestedOneWithoutRatingsInput = {
+    create?: XOR<NurseCreateWithoutRatingsInput, NurseUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: NurseCreateOrConnectWithoutRatingsInput
+    connect?: NurseWhereUniqueInput
+  }
+
+  export type NurseUpdateOneRequiredWithoutRatingsNestedInput = {
+    create?: XOR<NurseCreateWithoutRatingsInput, NurseUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: NurseCreateOrConnectWithoutRatingsInput
+    upsert?: NurseUpsertWithoutRatingsInput
+    connect?: NurseWhereUniqueInput
+    update?: XOR<XOR<NurseUpdateToOneWithWhereWithoutRatingsInput, NurseUpdateWithoutRatingsInput>, NurseUncheckedUpdateWithoutRatingsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -21277,6 +25749,254 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NurseScheduleCreateWithoutNurseInput = {
+    id?: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseScheduleUncheckedCreateWithoutNurseInput = {
+    id?: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseScheduleCreateOrConnectWithoutNurseInput = {
+    where: NurseScheduleWhereUniqueInput
+    create: XOR<NurseScheduleCreateWithoutNurseInput, NurseScheduleUncheckedCreateWithoutNurseInput>
+  }
+
+  export type NurseScheduleCreateManyNurseInputEnvelope = {
+    data: NurseScheduleCreateManyNurseInput | NurseScheduleCreateManyNurseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NurseRatingCreateWithoutNurseInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseRatingUncheckedCreateWithoutNurseInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseRatingCreateOrConnectWithoutNurseInput = {
+    where: NurseRatingWhereUniqueInput
+    create: XOR<NurseRatingCreateWithoutNurseInput, NurseRatingUncheckedCreateWithoutNurseInput>
+  }
+
+  export type NurseRatingCreateManyNurseInputEnvelope = {
+    data: NurseRatingCreateManyNurseInput | NurseRatingCreateManyNurseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NurseScheduleUpsertWithWhereUniqueWithoutNurseInput = {
+    where: NurseScheduleWhereUniqueInput
+    update: XOR<NurseScheduleUpdateWithoutNurseInput, NurseScheduleUncheckedUpdateWithoutNurseInput>
+    create: XOR<NurseScheduleCreateWithoutNurseInput, NurseScheduleUncheckedCreateWithoutNurseInput>
+  }
+
+  export type NurseScheduleUpdateWithWhereUniqueWithoutNurseInput = {
+    where: NurseScheduleWhereUniqueInput
+    data: XOR<NurseScheduleUpdateWithoutNurseInput, NurseScheduleUncheckedUpdateWithoutNurseInput>
+  }
+
+  export type NurseScheduleUpdateManyWithWhereWithoutNurseInput = {
+    where: NurseScheduleScalarWhereInput
+    data: XOR<NurseScheduleUpdateManyMutationInput, NurseScheduleUncheckedUpdateManyWithoutNurseInput>
+  }
+
+  export type NurseScheduleScalarWhereInput = {
+    AND?: NurseScheduleScalarWhereInput | NurseScheduleScalarWhereInput[]
+    OR?: NurseScheduleScalarWhereInput[]
+    NOT?: NurseScheduleScalarWhereInput | NurseScheduleScalarWhereInput[]
+    id?: StringFilter<"NurseSchedule"> | string
+    nurseId?: StringFilter<"NurseSchedule"> | string
+    dayOfWeek?: IntFilter<"NurseSchedule"> | number
+    startTime?: StringFilter<"NurseSchedule"> | string
+    endTime?: StringFilter<"NurseSchedule"> | string
+    isActive?: BoolFilter<"NurseSchedule"> | boolean
+    createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
+    updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
+  }
+
+  export type NurseRatingUpsertWithWhereUniqueWithoutNurseInput = {
+    where: NurseRatingWhereUniqueInput
+    update: XOR<NurseRatingUpdateWithoutNurseInput, NurseRatingUncheckedUpdateWithoutNurseInput>
+    create: XOR<NurseRatingCreateWithoutNurseInput, NurseRatingUncheckedCreateWithoutNurseInput>
+  }
+
+  export type NurseRatingUpdateWithWhereUniqueWithoutNurseInput = {
+    where: NurseRatingWhereUniqueInput
+    data: XOR<NurseRatingUpdateWithoutNurseInput, NurseRatingUncheckedUpdateWithoutNurseInput>
+  }
+
+  export type NurseRatingUpdateManyWithWhereWithoutNurseInput = {
+    where: NurseRatingScalarWhereInput
+    data: XOR<NurseRatingUpdateManyMutationInput, NurseRatingUncheckedUpdateManyWithoutNurseInput>
+  }
+
+  export type NurseRatingScalarWhereInput = {
+    AND?: NurseRatingScalarWhereInput | NurseRatingScalarWhereInput[]
+    OR?: NurseRatingScalarWhereInput[]
+    NOT?: NurseRatingScalarWhereInput | NurseRatingScalarWhereInput[]
+    id?: StringFilter<"NurseRating"> | string
+    reservationId?: StringFilter<"NurseRating"> | string
+    nurseId?: StringFilter<"NurseRating"> | string
+    patientId?: StringFilter<"NurseRating"> | string
+    rating?: IntFilter<"NurseRating"> | number
+    comment?: StringNullableFilter<"NurseRating"> | string | null
+    createdAt?: DateTimeFilter<"NurseRating"> | Date | string
+    updatedAt?: DateTimeFilter<"NurseRating"> | Date | string
+  }
+
+  export type NurseCreateWithoutSchedulesInput = {
+    id?: string
+    name: string
+    speciality?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ratings?: NurseRatingCreateNestedManyWithoutNurseInput
+  }
+
+  export type NurseUncheckedCreateWithoutSchedulesInput = {
+    id?: string
+    name: string
+    speciality?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ratings?: NurseRatingUncheckedCreateNestedManyWithoutNurseInput
+  }
+
+  export type NurseCreateOrConnectWithoutSchedulesInput = {
+    where: NurseWhereUniqueInput
+    create: XOR<NurseCreateWithoutSchedulesInput, NurseUncheckedCreateWithoutSchedulesInput>
+  }
+
+  export type NurseUpsertWithoutSchedulesInput = {
+    update: XOR<NurseUpdateWithoutSchedulesInput, NurseUncheckedUpdateWithoutSchedulesInput>
+    create: XOR<NurseCreateWithoutSchedulesInput, NurseUncheckedCreateWithoutSchedulesInput>
+    where?: NurseWhereInput
+  }
+
+  export type NurseUpdateToOneWithWhereWithoutSchedulesInput = {
+    where?: NurseWhereInput
+    data: XOR<NurseUpdateWithoutSchedulesInput, NurseUncheckedUpdateWithoutSchedulesInput>
+  }
+
+  export type NurseUpdateWithoutSchedulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: NurseRatingUpdateManyWithoutNurseNestedInput
+  }
+
+  export type NurseUncheckedUpdateWithoutSchedulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: NurseRatingUncheckedUpdateManyWithoutNurseNestedInput
+  }
+
+  export type NurseCreateWithoutRatingsInput = {
+    id?: string
+    name: string
+    speciality?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedules?: NurseScheduleCreateNestedManyWithoutNurseInput
+  }
+
+  export type NurseUncheckedCreateWithoutRatingsInput = {
+    id?: string
+    name: string
+    speciality?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedules?: NurseScheduleUncheckedCreateNestedManyWithoutNurseInput
+  }
+
+  export type NurseCreateOrConnectWithoutRatingsInput = {
+    where: NurseWhereUniqueInput
+    create: XOR<NurseCreateWithoutRatingsInput, NurseUncheckedCreateWithoutRatingsInput>
+  }
+
+  export type NurseUpsertWithoutRatingsInput = {
+    update: XOR<NurseUpdateWithoutRatingsInput, NurseUncheckedUpdateWithoutRatingsInput>
+    create: XOR<NurseCreateWithoutRatingsInput, NurseUncheckedCreateWithoutRatingsInput>
+    where?: NurseWhereInput
+  }
+
+  export type NurseUpdateToOneWithWhereWithoutRatingsInput = {
+    where?: NurseWhereInput
+    data: XOR<NurseUpdateWithoutRatingsInput, NurseUncheckedUpdateWithoutRatingsInput>
+  }
+
+  export type NurseUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: NurseScheduleUpdateManyWithoutNurseNestedInput
+  }
+
+  export type NurseUncheckedUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    speciality?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: NurseScheduleUncheckedUpdateManyWithoutNurseNestedInput
+  }
+
   export type EmergencyHistoryCreateManyEmergencyRequestInput = {
     id?: string
     ambulanceStaffLocation?: string | null
@@ -21443,6 +26163,86 @@ export namespace Prisma {
   export type GalleryPhotoUncheckedUpdateManyWithoutGalleryInput = {
     id?: StringFieldUpdateOperationsInput | string
     photoUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseScheduleCreateManyNurseInput = {
+    id?: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseRatingCreateManyNurseInput = {
+    id?: string
+    reservationId: string
+    patientId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NurseScheduleUpdateWithoutNurseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseScheduleUncheckedUpdateWithoutNurseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseScheduleUncheckedUpdateManyWithoutNurseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseRatingUpdateWithoutNurseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseRatingUncheckedUpdateWithoutNurseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NurseRatingUncheckedUpdateManyWithoutNurseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

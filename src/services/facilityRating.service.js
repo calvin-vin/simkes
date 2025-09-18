@@ -29,16 +29,17 @@ export const createFacilityRating = async (data, userIdentity) => {
     );
   }
 
-  // Cek apakah sudah ada penilaian untuk reservasi ini
-  const existingRating = await simkesPrisma.facilityRating.findUnique({
+  // Cek apakah sudah ada penilaian untuk kombinasi reservasi dan fasilitas ini
+  const existingRating = await simkesPrisma.facilityRating.findFirst({
     where: {
       reservationId: data.reservationId,
+      facilityId: data.facilityId,
     },
   });
 
   if (existingRating) {
     throw new ApiError(
-      "Anda sudah memberikan penilaian untuk reservasi ini",
+      "Anda sudah memberikan penilaian untuk fasilitas ini pada reservasi yang sama",
       400
     );
   }
@@ -151,15 +152,22 @@ export const getFacilityRatingById = async (id) => {
  * @returns {Promise<Object>} Penilaian fasilitas
  */
 export const getFacilityRatingByReservationId = async (reservationId) => {
-  const facilityRating = await simkesPrisma.facilityRating.findUnique({
+  const facilityRatings = await simkesPrisma.facilityRating.findMany({
     where: { reservationId },
+    include: {
+      facility: {
+        include: {
+          photos: true,
+        },
+      },
+    },
   });
 
-  if (!facilityRating) {
-    throw new ApiError("Penilaian tidak ditemukan", 404);
+  if (facilityRatings.length === 0) {
+    throw new ApiError("Penilaian fasilitas tidak ditemukan", 404);
   }
 
-  return facilityRating;
+  return facilityRatings;
 };
 
 /**
@@ -183,13 +191,13 @@ export const getAverageRatingByFacilityId = async (facilityId) => {
     return {
       facilityId,
       averageRating: 0,
-      totalRatings: 0
+      totalRatings: 0,
     };
   }
 
   return {
     facilityId,
     averageRating: parseFloat(result._avg.rating.toFixed(1)),
-    totalRatings: result._count.rating
+    totalRatings: result._count.rating,
   };
 };

@@ -29,4 +29,4 @@ admin123
 npx prisma generate --schema=prisma/simkes/schema.prisma
 npx prisma generate --schema=prisma/simrs/schema.prisma
 
-npx prisma migrate dev --name add_banner --schema=prisma/simkes/schema.prisma
+npx prisma migrate dev --name remove_quota_from_nurse_schedule --schema=prisma/simkes/schema.prisma

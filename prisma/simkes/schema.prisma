@@ -117,7 +117,7 @@ model Facility {
 
 model FacilityRating {
   id            String   @id @default(uuid())
-  reservationId String   @unique
+  reservationId String
   facilityId    String
   patientId     String
   rating        Int      @db.SmallInt // Nilai rating 1-5
@@ -127,8 +127,10 @@ model FacilityRating {
 
   facility Facility @relation(fields: [facilityId], references: [id])
 
+  @@unique([reservationId, facilityId])
   @@index([facilityId])
   @@index([patientId])
+  @@index([reservationId])
 }
 
 model FacilityPhoto {
@@ -186,4 +188,51 @@ model Banner {
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Nurse {
+  id          String          @id @default(uuid())
+  name        String
+  speciality  String?
+  description String?
+  photoUrl    String?
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  schedules   NurseSchedule[]
+  ratings     NurseRating[]
+}
+
+model NurseSchedule {
+  id        String   @id @default(uuid())
+  nurseId   String
+  dayOfWeek Int      @db.SmallInt // 0 = Minggu, 1 = Senin, dst
+  startTime String // Format: HH:mm
+  endTime   String // Format: HH:mm
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  nurse Nurse @relation(fields: [nurseId], references: [id])
+
+  @@index([nurseId])
+  @@index([dayOfWeek])
+}
+
+model NurseRating {
+  id            String   @id @default(uuid())
+  reservationId String
+  nurseId       String
+  patientId     String
+  rating        Int      @db.SmallInt // Nilai rating 1-5
+  comment       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  nurse Nurse @relation(fields: [nurseId], references: [id])
+
+  @@unique([reservationId, nurseId])
+  @@index([nurseId])
+  @@index([patientId])
+  @@index([reservationId])
 }
