@@ -554,25 +554,50 @@ export const createReservation = async (data, userIdentity) => {
 
   // Check quota
   const reservationDate = dayjs(data.reservationDate).toDate();
-
+  const dayName = getDayName(data.reservationDate);
+  
+  // Determine if morning or afternoon based on reservation time (06:00-12:00 = morning)
   const reservationHour = dayjs(data.reservationDate).hour();
-  const maxQuota = 50; // Default max quota per session
+  const reservationMinute = dayjs(data.reservationDate).minute();
+  const reservationTimeInMinutes = (reservationHour * 60) + reservationMinute;
+  const morningStartInMinutes = 6 * 60; // 06:00
+  const morningEndInMinutes = 12 * 60; // 12:00
+  const isMorningSession = reservationTimeInMinutes >= morningStartInMinutes && reservationTimeInMinutes < morningEndInMinutes;
 
-  // Determine if morning or afternoon based on reservation time
-  const isMorningSession = reservationHour < 12;
+  // Get doctor schedule to check quota
+  const doctorSchedule = await simrsPrisma.doctorSchedule.findFirst({
+    where: {
+      doctorId: data.doctorId,
+      unitId: data.unitId,
+      days: {
+        contains: dayName,
+      },
+      isEnabled: true,
+    },
+  });
 
-  // Get current queue numbers
-  const quota = await getQueueNumberOnline(data.doctorId, reservationDate);
+  if (!doctorSchedule) {
+    throw new ApiError("Jadwal Dokter tidak tersedia di Poli ini", 400);
+  }
 
-  // Check if quota is full based on time of day
-  if (!isMorningSession && quota.siang >= maxQuota) {
+  // Get total reservations for this doctor on this day (regardless of morning/afternoon)
+  const totalReservationsToday = await simrsPrisma.reservation.count({
+    where: {
+      doctorId: data.doctorId,
+      reservationDate: {
+        gte: dayjs(reservationDate).startOf('day').toDate(),
+        lt: dayjs(reservationDate).endOf('day').toDate(),
+      },
+      isEnabled: true,
+      isCancelled: false,
+      notes: "SIMKES", // Filter reservations from SIMKES application
+    },
+  });
+
+  // Check if daily quota is full
+  if (totalReservationsToday >= doctorSchedule.quota) {
     throw new ApiError(
-      "Mohon maaf kuota layanan online siang sudah penuh, silahkan coba di jadwal yang lain",
-      400
-    );
-  } else if (isMorningSession && quota.pagi >= maxQuota) {
-    throw new ApiError(
-      "Mohon maaf kuota layanan online pagi sudah penuh, silahkan coba di jadwal yang lain",
+      "Mohon maaf kuota layanan dokter untuk hari ini sudah penuh, silahkan coba di hari yang lain",
       400
     );
   }

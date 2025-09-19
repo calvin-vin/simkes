@@ -138,6 +138,7 @@ model DoctorSchedule {
   endTime   DateTime @map("jamakhir")
   note      String?  @map("keterangan")
   days      String   @map("hari")
+  quota     Int      @map("quota")
   isEnabled Boolean  @map("statusenabled")
 
   unit   Unit     @relation(fields: [unitId], references: [id])
@@ -176,7 +177,7 @@ model Reservation {
   queueType            String   @map("jenis") // Format: EA001, EB001, dll
   referralSourceId     Int?     @default(0) @map("objectasalrujukanfk")
   isConfirmed          Boolean  @default(false) @map("isconfirm")
-  callStatus           String   @default("0") @map("statuspanggil")
+  callStatus           String   @default("0") @map("statuspanggil") // 0: belumdipanggil, 1: dipanggil, 2: sudahdipanggil
   isCancelled          Boolean  @default(false) @map("isbatal")
   cancelReason         String?  @map("keteranganbatal")
   // required in database

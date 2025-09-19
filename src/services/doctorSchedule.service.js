@@ -1,6 +1,43 @@
 import { simrsPrisma } from "../config/db.js";
 import dayjs from "dayjs";
 import { getAverageRatingByDoctorId } from "./doctorRating.service.js";
+import ApiError from "../utils/apiError.js";
+
+export const getDoctorScheduleById = async (id) => {
+  const schedule = await simrsPrisma.doctorSchedule.findUnique({
+    where: {
+      id: Number(id),
+      isEnabled: true,
+    },
+    include: {
+      unit: { select: { id: true, unitName: true } },
+      doctor: {
+        select: {
+          id: true,
+          fullName: true,
+        },
+      },
+    },
+  });
+
+  if (!schedule) {
+    throw new ApiError("Jadwal dokter tidak ditemukan", 404);
+  }
+
+  // Ambil rating dokter
+  const { averageRating, totalRatings } = await getAverageRatingByDoctorId(
+    schedule.doctor.id
+  );
+
+  return {
+    ...schedule,
+    doctor: {
+      ...schedule.doctor,
+      averageRating,
+      totalRatings,
+    },
+  };
+};
 
 export const getDoctorSchedules = async (query) => {
   const {
@@ -57,7 +94,7 @@ export const getDoctorSchedules = async (query) => {
 
   // Jika ada filter rating, kita perlu mengambil semua data terlebih dahulu
   const hasRatingFilter = minRating !== undefined || maxRating !== undefined;
-  
+
   if (!hasRatingFilter) {
     // Jika tidak ada filter rating, gunakan paginasi database normal
     const [schedules, total] = await Promise.all([
@@ -78,22 +115,23 @@ export const getDoctorSchedules = async (query) => {
       }),
       simrsPrisma.doctorSchedule.count({ where: filters }),
     ]);
-    
+
     // Ambil rating untuk setiap dokter
     const schedulesWithRating = await Promise.all(
       schedules.map(async (schedule) => {
-        const { averageRating, totalRatings } = await getAverageRatingByDoctorId(schedule.doctor.id);
+        const { averageRating, totalRatings } =
+          await getAverageRatingByDoctorId(schedule.doctor.id);
         return {
           ...schedule,
           doctor: {
             ...schedule.doctor,
             averageRating,
-            totalRatings
-          }
+            totalRatings,
+          },
         };
       })
     );
-    
+
     return {
       results: schedulesWithRating,
       pagination: {
@@ -118,43 +156,44 @@ export const getDoctorSchedules = async (query) => {
       },
       orderBy,
     });
-    
+
     // Ambil rating untuk semua dokter
     const allSchedulesWithRating = await Promise.all(
       allSchedules.map(async (schedule) => {
-        const { averageRating, totalRatings } = await getAverageRatingByDoctorId(schedule.doctor.id);
+        const { averageRating, totalRatings } =
+          await getAverageRatingByDoctorId(schedule.doctor.id);
         return {
           ...schedule,
           doctor: {
             ...schedule.doctor,
             averageRating,
-            totalRatings
-          }
+            totalRatings,
+          },
         };
       })
     );
-    
+
     // Filter berdasarkan rating
     let filteredSchedules = allSchedulesWithRating;
     if (minRating !== undefined) {
       filteredSchedules = filteredSchedules.filter(
-        schedule => schedule.doctor.averageRating >= Number(minRating)
+        (schedule) => schedule.doctor.averageRating >= Number(minRating)
       );
     }
     if (maxRating !== undefined) {
       filteredSchedules = filteredSchedules.filter(
-        schedule => schedule.doctor.averageRating <= Number(maxRating)
+        (schedule) => schedule.doctor.averageRating <= Number(maxRating)
       );
     }
-    
+
     // Hitung total setelah filter
     const filteredTotal = filteredSchedules.length;
-    
+
     // Terapkan paginasi secara manual
     const startIndex = (page - 1) * Number(limit);
     const endIndex = startIndex + Number(limit);
     const paginatedSchedules = filteredSchedules.slice(startIndex, endIndex);
-    
+
     return {
       results: paginatedSchedules,
       pagination: {

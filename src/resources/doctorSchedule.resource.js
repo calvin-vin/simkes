@@ -5,6 +5,7 @@ export const doctorScheduleResource = (schedule) => {
     unitName: schedule.unit?.unitName,
     doctorId: schedule.doctor.id,
     fullName: schedule.doctor.fullName,
+    quota: schedule.quota,
     averageRating: schedule.doctor.averageRating || 0,
     totalRatings: schedule.doctor.totalRatings || 0,
     startTime: schedule.startTime

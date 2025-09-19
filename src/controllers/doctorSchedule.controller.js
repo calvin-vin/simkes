@@ -1,5 +1,4 @@
-import { doctorScheduleCollection } from "../resources/doctorSchedule.resource.js";
-import { medicineResource } from "../resources/medicine.resource.js";
+import { doctorScheduleCollection, doctorScheduleResource } from "../resources/doctorSchedule.resource.js";
 import { getAllDoctorScheduleSchema } from "../schemas/doctorSchedule.schema.js";
 import * as doctorScheduleService from "../services/doctorSchedule.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
@@ -16,13 +15,12 @@ export const getAllDoctorSchedules = catchAsync(async (req, res) => {
   });
 });
 
-export const getMedicineById = catchAsync(async (req, res) => {
-  const medicines = await medicineService.getMedicineById(req.params.id);
-
-  return apiSuccess(
-    res,
-    200,
-    "Medicine retrieved successfully",
-    medicineResource(medicines)
+export const getDoctorScheduleById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  
+  const doctorSchedule = await doctorScheduleService.getDoctorScheduleById(id);
+  
+  return apiSuccess(res, 200, "Doctor Schedule retrieved successfully", 
+    doctorScheduleResource(doctorSchedule)
   );
 });

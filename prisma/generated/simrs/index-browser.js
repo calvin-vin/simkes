@@ -200,6 +200,7 @@ exports.Prisma.DoctorScheduleScalarFieldEnum = {
   endTime: 'endTime',
   note: 'note',
   days: 'days',
+  quota: 'quota',
   isEnabled: 'isEnabled'
 };
 

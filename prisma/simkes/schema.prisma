@@ -207,8 +207,9 @@ model NurseSchedule {
   id        String   @id @default(uuid())
   nurseId   String
   dayOfWeek Int      @db.SmallInt // 0 = Minggu, 1 = Senin, dst
-  startTime String // Format: HH:mm
-  endTime   String // Format: HH:mm
+  startTime String   // Format: HH:mm
+  endTime   String   // Format: HH:mm
+  quota     Int      @default(10)
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -231,8 +232,8 @@ model NurseRating {
 
   nurse Nurse @relation(fields: [nurseId], references: [id])
 
-  @@unique([reservationId, nurseId])
   @@index([nurseId])
   @@index([patientId])
   @@index([reservationId])
+  @@unique([reservationId, nurseId])
 }

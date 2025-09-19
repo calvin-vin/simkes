@@ -138,6 +138,7 @@ model DoctorSchedule {
     endTime   DateTime @map("jamakhir")
     note      String?  @map("keterangan")
     days      String   @map("hari")
+    quota     Int      @map("quota")
     isEnabled Boolean  @map("statusenabled")
 
     unit   Unit     @relation(fields: [unitId], references: [id])
