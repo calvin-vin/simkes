@@ -3,6 +3,7 @@ import {
   emergencySchema,
   updateStatusEmergencySchema,
   getEmergencyStatsSchema,
+  emergencyFilterSchema,
 } from "../schemas/emergency.schema.js";
 import * as emergencyService from "../services/emergency.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
@@ -26,8 +27,9 @@ export const createEmergency = catchAsync(async (req, res) => {
 });
 
 export const getAllEmergencies = catchAsync(async (req, res) => {
+  const parsedQuery = emergencyFilterSchema.parse(req.query);
   const emergencies = await emergencyService.getAllEmergencies(
-    req.query,
+    parsedQuery,
     req.user,
     req.userRole
   );

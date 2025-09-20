@@ -16,7 +16,7 @@ export const emergencyResource = (emergency, showHistories = false) => {
     status: emergency.status,
     assignedTo: emergency.assignedTo
       ? {
-          id: emergency.assignedTo.id,
+          identity: emergency.assignedTo.identity,
           name: emergency.assignedTo.name,
           phone: emergency.assignedTo.phone,
         }

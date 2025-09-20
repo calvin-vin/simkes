@@ -1,12 +1,14 @@
 import { seedAmbulanceStaff } from "./seeders/ambulanceStaff.seeder.js";
 import { simkesPrisma, simrsPrisma } from "../src/config/db.js";
 import { seedPatients } from "./seeders/patient.seeder.js";
+import { seedEmergency } from "./seeders/emergency.seeder.js";
 
 async function main() {
   console.log("🌱 Running all seeders...");
 
   await seedAmbulanceStaff(simkesPrisma);
   await seedPatients(simrsPrisma);
+  await seedEmergency(simkesPrisma, simrsPrisma);
 
   console.log("✅ All seeders executed successfully");
 }

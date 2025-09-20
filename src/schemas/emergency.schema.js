@@ -45,3 +45,24 @@ export const updateStatusEmergencySchema = z.object({
   location: locationSchema,
   note: z.string().optional(),
 });
+
+export const emergencyFilterSchema = z.object({
+  page: z.coerce.number().min(1).default(1),
+  limit: z.coerce.number().min(1).max(100).default(10),
+  search: z.string().optional(),
+  status: z.enum([
+    "PENDING", 
+    "ASSIGNED", 
+    "ON_THE_WAY", 
+    "ARRIVED", 
+    "PATIENT_IN_CAR", 
+    "TO_HOSPITAL", 
+    "COMPLETED"
+  ]).optional(),
+  assignTo: z.string().optional(),
+  sortBy: z
+    .enum(["name", "identity", "createdAt"])
+    .optional()
+    .default("createdAt"),
+  sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
+});

@@ -74,7 +74,15 @@ export const createEmergencyRequest = async ({
 };
 
 export const getAllEmergencies = async (query, user, role) => {
-  const { page = 1, limit = 10, search, sortBy, sortOrder } = query;
+  const {
+    page = 1,
+    limit = 10,
+    search,
+    sortBy,
+    sortOrder,
+    status,
+    assignTo,
+  } = query;
 
   // Jika ada pencarian berdasarkan nama pasien, kita perlu pendekatan berbeda
   let patientIdentities = [];
@@ -111,6 +119,8 @@ export const getAllEmergencies = async (query, user, role) => {
   const filters = {
     ...(search ? { patientIdentity: { in: patientIdentities } } : {}),
     ...(isPatient ? { patientIdentity: user.identity } : {}),
+    ...(status ? { status } : {}),
+    ...(assignTo ? { assignedToId: assignTo } : {}),
   };
 
   const orderBy = {};
@@ -391,11 +401,27 @@ export const getEmergencyStats = async ({
   // Calculate statistics
   const totalRequests = emergencyRequests.length;
 
-  // Count by status
-  const statusCounts = emergencyRequests.reduce((acc, request) => {
-    acc[request.status] = (acc[request.status] || 0) + 1;
+  // Count by status and ensure all statuses are included
+  const allStatuses = [
+    "PENDING",
+    "ASSIGNED",
+    "ON_THE_WAY",
+    "ARRIVED",
+    "PATIENT_IN_CAR",
+    "TO_HOSPITAL",
+    "COMPLETED"
+  ];
+  
+  // Initialize with all statuses set to 0
+  const statusCounts = allStatuses.reduce((acc, status) => {
+    acc[status] = 0;
     return acc;
   }, {});
+  
+  // Count actual occurrences
+  emergencyRequests.forEach(request => {
+    statusCounts[request.status]++;
+  });
 
   // Calculate average response time (time between PENDING and ASSIGNED)
   let totalResponseTime = 0;
@@ -429,19 +455,6 @@ export const getEmergencyStats = async ({
     }
   });
 
-  const averageResponseTimeMs =
-    requestsWithResponse > 0 ? totalResponseTime / requestsWithResponse : 0;
-
-  const averageCompletionTimeMs =
-    completedRequests > 0 ? totalCompletionTime / completedRequests : 0;
-
-  // Convert to minutes for better readability
-  const averageResponseTimeMinutes = Math.round(
-    averageResponseTimeMs / (1000 * 60)
-  );
-  const averageCompletionTimeMinutes = Math.round(
-    averageCompletionTimeMs / (1000 * 60)
-  );
 
   // Group data by time period
   const timeSeriesData = groupEmergencyRequestsByTime(
@@ -453,10 +466,6 @@ export const getEmergencyStats = async ({
     summary: {
       totalRequests,
       statusCounts,
-      averageResponseTimeMinutes,
-      averageCompletionTimeMinutes,
-      pendingRequests: statusCounts.PENDING || 0,
-      completedRequests: statusCounts.COMPLETED || 0,
     },
     timeSeriesData,
   };
