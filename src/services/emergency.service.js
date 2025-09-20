@@ -200,7 +200,7 @@ export const getEmergencyById = async (id, user, role) => {
 
 export const assignEmergencyToStaff = async ({
   emergencyId,
-  staffId,
+  staffIdentity,
   location,
   note,
 }) => {
@@ -213,7 +213,7 @@ export const assignEmergencyToStaff = async ({
   }
 
   const staff = await simkesPrisma.ambulanceStaff.findUnique({
-    where: { id: staffId },
+    where: { identity: staffIdentity },
   });
   if (!staff) throw new ApiError("Ambulance staff not found", 404);
 
@@ -360,3 +360,161 @@ export const updateEmergencyStatus = async ({
 
   return updatedWithPatient;
 };
+
+export const getEmergencyStats = async ({
+  startDate,
+  endDate,
+  groupBy = "day",
+}) => {
+  // Set default date range to last 30 days if not provided
+  const end = endDate ? new Date(`${endDate}T23:59:59Z`) : new Date();
+  const start = startDate
+    ? new Date(`${startDate}T00:00:00Z`)
+    : new Date(end.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+  // Get all emergency requests in the date range
+  const emergencyRequests = await simkesPrisma.emergencyRequest.findMany({
+    where: {
+      createdAt: {
+        gte: start,
+        lte: end,
+      },
+    },
+    include: {
+      histories: true,
+    },
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
+
+  // Calculate statistics
+  const totalRequests = emergencyRequests.length;
+
+  // Count by status
+  const statusCounts = emergencyRequests.reduce((acc, request) => {
+    acc[request.status] = (acc[request.status] || 0) + 1;
+    return acc;
+  }, {});
+
+  // Calculate average response time (time between PENDING and ASSIGNED)
+  let totalResponseTime = 0;
+  let requestsWithResponse = 0;
+
+  // Calculate average completion time (time between PENDING and COMPLETED)
+  let totalCompletionTime = 0;
+  let completedRequests = 0;
+
+  emergencyRequests.forEach((request) => {
+    const histories = request.histories.sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+
+    const pendingTime = request.createdAt;
+    const assignedHistory = histories.find((h) => h.status === "ASSIGNED");
+    const completedHistory = histories.find((h) => h.status === "COMPLETED");
+
+    if (assignedHistory) {
+      const responseTime =
+        new Date(assignedHistory.createdAt) - new Date(pendingTime);
+      totalResponseTime += responseTime;
+      requestsWithResponse++;
+    }
+
+    if (completedHistory) {
+      const completionTime =
+        new Date(completedHistory.createdAt) - new Date(pendingTime);
+      totalCompletionTime += completionTime;
+      completedRequests++;
+    }
+  });
+
+  const averageResponseTimeMs =
+    requestsWithResponse > 0 ? totalResponseTime / requestsWithResponse : 0;
+
+  const averageCompletionTimeMs =
+    completedRequests > 0 ? totalCompletionTime / completedRequests : 0;
+
+  // Convert to minutes for better readability
+  const averageResponseTimeMinutes = Math.round(
+    averageResponseTimeMs / (1000 * 60)
+  );
+  const averageCompletionTimeMinutes = Math.round(
+    averageCompletionTimeMs / (1000 * 60)
+  );
+
+  // Group data by time period
+  const timeSeriesData = groupEmergencyRequestsByTime(
+    emergencyRequests,
+    groupBy
+  );
+
+  return {
+    summary: {
+      totalRequests,
+      statusCounts,
+      averageResponseTimeMinutes,
+      averageCompletionTimeMinutes,
+      pendingRequests: statusCounts.PENDING || 0,
+      completedRequests: statusCounts.COMPLETED || 0,
+    },
+    timeSeriesData,
+  };
+};
+
+// Helper function to group emergency requests by time period
+function groupEmergencyRequestsByTime(requests, groupBy) {
+  const groupedData = {};
+
+  requests.forEach((request) => {
+    let timeKey;
+    const date = new Date(request.createdAt);
+
+    switch (groupBy) {
+      case "day":
+        timeKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
+        break;
+      case "week":
+        // Get the week number and year
+        const weekNumber = getWeekNumber(date);
+        timeKey = `${date.getFullYear()}-W${weekNumber}`;
+        break;
+      case "month":
+        timeKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}`;
+        break;
+      default:
+        timeKey = date.toISOString().split("T")[0];
+    }
+
+    if (!groupedData[timeKey]) {
+      groupedData[timeKey] = {
+        period: timeKey,
+        count: 0,
+        byStatus: {},
+      };
+    }
+
+    groupedData[timeKey].count++;
+
+    // Count by status
+    if (!groupedData[timeKey].byStatus[request.status]) {
+      groupedData[timeKey].byStatus[request.status] = 0;
+    }
+    groupedData[timeKey].byStatus[request.status]++;
+  });
+
+  // Convert to array and sort by time
+  return Object.values(groupedData).sort((a, b) =>
+    a.period.localeCompare(b.period)
+  );
+}
+
+// Helper function to get week number
+function getWeekNumber(date) {
+  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+  const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+}

@@ -1,7 +1,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "../generated/simkes"
-  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x", "windows"]
 }
 
 datasource db {
@@ -16,7 +16,7 @@ model EmergencyRequest {
   note            String?
   status          EmergencyStatus    @default(PENDING)
   assignedToId    String?
-  assignedTo      AmbulanceStaff?    @relation(fields: [assignedToId], references: [id])
+  assignedTo      AmbulanceStaff?    @relation(fields: [assignedToId], references: [identity])
   histories       EmergencyHistory[]
 
   createdAt DateTime @default(now())
@@ -35,10 +35,11 @@ model EmergencyHistory {
 }
 
 model AmbulanceStaff {
-  id        String   @id @default(uuid())
+  identity  String   @id @unique
   name      String
   phone     String
   email     String
+  photo     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -209,6 +210,7 @@ model NurseSchedule {
   dayOfWeek Int      @db.SmallInt // 0 = Minggu, 1 = Senin, dst
   startTime String // Format: HH:mm
   endTime   String // Format: HH:mm
+  quota     Int      @default(10)
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

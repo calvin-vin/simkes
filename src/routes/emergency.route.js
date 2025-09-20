@@ -5,10 +5,22 @@ import {
   getAllEmergencies,
   getEmergencyById,
   updateEmergencyStatus,
+  getEmergencyStats,
 } from "../controllers/emergency.controller.js";
 import { protect, restrictToRoleSubrole } from "../middlewares/auth.js";
 
 const router = express.Router();
+
+router.get(
+  "/stats",
+  protect,
+  restrictToRoleSubrole([
+    { role: "OPERATOR", subrole: "OPERATOR" },
+    { role: "AMBULANCE STAFF", subrole: "AMBULANCE STAFF" },
+    { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
+  ]),
+  getEmergencyStats
+);
 
 router.post(
   "/",

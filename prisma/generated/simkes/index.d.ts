@@ -4747,28 +4747,31 @@ export namespace Prisma {
   }
 
   export type AmbulanceStaffMinAggregateOutputType = {
-    id: string | null
+    identity: string | null
     name: string | null
     phone: string | null
     email: string | null
+    photo: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type AmbulanceStaffMaxAggregateOutputType = {
-    id: string | null
+    identity: string | null
     name: string | null
     phone: string | null
     email: string | null
+    photo: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type AmbulanceStaffCountAggregateOutputType = {
-    id: number
+    identity: number
     name: number
     phone: number
     email: number
+    photo: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4776,28 +4779,31 @@ export namespace Prisma {
 
 
   export type AmbulanceStaffMinAggregateInputType = {
-    id?: true
+    identity?: true
     name?: true
     phone?: true
     email?: true
+    photo?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type AmbulanceStaffMaxAggregateInputType = {
-    id?: true
+    identity?: true
     name?: true
     phone?: true
     email?: true
+    photo?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type AmbulanceStaffCountAggregateInputType = {
-    id?: true
+    identity?: true
     name?: true
     phone?: true
     email?: true
+    photo?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4876,10 +4882,11 @@ export namespace Prisma {
   }
 
   export type AmbulanceStaffGroupByOutputType = {
-    id: string
+    identity: string
     name: string
     phone: string
     email: string
+    photo: string | null
     createdAt: Date
     updatedAt: Date
     _count: AmbulanceStaffCountAggregateOutputType | null
@@ -4902,10 +4909,11 @@ export namespace Prisma {
 
 
   export type AmbulanceStaffSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    identity?: boolean
     name?: boolean
     phone?: boolean
     email?: boolean
+    photo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     EmergencyRequest?: boolean | AmbulanceStaff$EmergencyRequestArgs<ExtArgs>
@@ -4913,33 +4921,36 @@ export namespace Prisma {
   }, ExtArgs["result"]["ambulanceStaff"]>
 
   export type AmbulanceStaffSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    identity?: boolean
     name?: boolean
     phone?: boolean
     email?: boolean
+    photo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["ambulanceStaff"]>
 
   export type AmbulanceStaffSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    identity?: boolean
     name?: boolean
     phone?: boolean
     email?: boolean
+    photo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["ambulanceStaff"]>
 
   export type AmbulanceStaffSelectScalar = {
-    id?: boolean
+    identity?: boolean
     name?: boolean
     phone?: boolean
     email?: boolean
+    photo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AmbulanceStaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phone" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["ambulanceStaff"]>
+  export type AmbulanceStaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"identity" | "name" | "phone" | "email" | "photo" | "createdAt" | "updatedAt", ExtArgs["result"]["ambulanceStaff"]>
   export type AmbulanceStaffInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     EmergencyRequest?: boolean | AmbulanceStaff$EmergencyRequestArgs<ExtArgs>
     _count?: boolean | AmbulanceStaffCountOutputTypeDefaultArgs<ExtArgs>
@@ -4953,10 +4964,11 @@ export namespace Prisma {
       EmergencyRequest: Prisma.$EmergencyRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      identity: string
       name: string
       phone: string
       email: string
+      photo: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["ambulanceStaff"]>
@@ -5042,8 +5054,8 @@ export namespace Prisma {
      * // Get first 10 AmbulanceStaffs
      * const ambulanceStaffs = await prisma.ambulanceStaff.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const ambulanceStaffWithIdOnly = await prisma.ambulanceStaff.findMany({ select: { id: true } })
+     * // Only select the `identity`
+     * const ambulanceStaffWithIdentityOnly = await prisma.ambulanceStaff.findMany({ select: { identity: true } })
      * 
      */
     findMany<T extends AmbulanceStaffFindManyArgs>(args?: SelectSubset<T, AmbulanceStaffFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AmbulanceStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -5087,9 +5099,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many AmbulanceStaffs and only return the `id`
-     * const ambulanceStaffWithIdOnly = await prisma.ambulanceStaff.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many AmbulanceStaffs and only return the `identity`
+     * const ambulanceStaffWithIdentityOnly = await prisma.ambulanceStaff.createManyAndReturn({
+     *   select: { identity: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -5178,9 +5190,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more AmbulanceStaffs and only return the `id`
-     * const ambulanceStaffWithIdOnly = await prisma.ambulanceStaff.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more AmbulanceStaffs and only return the `identity`
+     * const ambulanceStaffWithIdentityOnly = await prisma.ambulanceStaff.updateManyAndReturn({
+     *   select: { identity: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5383,10 +5395,11 @@ export namespace Prisma {
    * Fields of the AmbulanceStaff model
    */
   interface AmbulanceStaffFieldRefs {
-    readonly id: FieldRef<"AmbulanceStaff", 'String'>
+    readonly identity: FieldRef<"AmbulanceStaff", 'String'>
     readonly name: FieldRef<"AmbulanceStaff", 'String'>
     readonly phone: FieldRef<"AmbulanceStaff", 'String'>
     readonly email: FieldRef<"AmbulanceStaff", 'String'>
+    readonly photo: FieldRef<"AmbulanceStaff", 'String'>
     readonly createdAt: FieldRef<"AmbulanceStaff", 'DateTime'>
     readonly updatedAt: FieldRef<"AmbulanceStaff", 'DateTime'>
   }
@@ -18763,10 +18776,12 @@ export namespace Prisma {
 
   export type NurseScheduleAvgAggregateOutputType = {
     dayOfWeek: number | null
+    quota: number | null
   }
 
   export type NurseScheduleSumAggregateOutputType = {
     dayOfWeek: number | null
+    quota: number | null
   }
 
   export type NurseScheduleMinAggregateOutputType = {
@@ -18775,6 +18790,7 @@ export namespace Prisma {
     dayOfWeek: number | null
     startTime: string | null
     endTime: string | null
+    quota: number | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -18786,6 +18802,7 @@ export namespace Prisma {
     dayOfWeek: number | null
     startTime: string | null
     endTime: string | null
+    quota: number | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -18797,6 +18814,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: number
     endTime: number
+    quota: number
     isActive: number
     createdAt: number
     updatedAt: number
@@ -18806,10 +18824,12 @@ export namespace Prisma {
 
   export type NurseScheduleAvgAggregateInputType = {
     dayOfWeek?: true
+    quota?: true
   }
 
   export type NurseScheduleSumAggregateInputType = {
     dayOfWeek?: true
+    quota?: true
   }
 
   export type NurseScheduleMinAggregateInputType = {
@@ -18818,6 +18838,7 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
+    quota?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -18829,6 +18850,7 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
+    quota?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -18840,6 +18862,7 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
+    quota?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -18938,6 +18961,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
+    quota: number
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -18968,6 +18992,7 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -18980,6 +19005,7 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -18992,6 +19018,7 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -19004,12 +19031,13 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type NurseScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nurseId" | "dayOfWeek" | "startTime" | "endTime" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["nurseSchedule"]>
+  export type NurseScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nurseId" | "dayOfWeek" | "startTime" | "endTime" | "quota" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["nurseSchedule"]>
   export type NurseScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     nurse?: boolean | NurseDefaultArgs<ExtArgs>
   }
@@ -19031,6 +19059,7 @@ export namespace Prisma {
       dayOfWeek: number
       startTime: string
       endTime: string
+      quota: number
       isActive: boolean
       createdAt: Date
       updatedAt: Date
@@ -19463,6 +19492,7 @@ export namespace Prisma {
     readonly dayOfWeek: FieldRef<"NurseSchedule", 'Int'>
     readonly startTime: FieldRef<"NurseSchedule", 'String'>
     readonly endTime: FieldRef<"NurseSchedule", 'String'>
+    readonly quota: FieldRef<"NurseSchedule", 'Int'>
     readonly isActive: FieldRef<"NurseSchedule", 'Boolean'>
     readonly createdAt: FieldRef<"NurseSchedule", 'DateTime'>
     readonly updatedAt: FieldRef<"NurseSchedule", 'DateTime'>
@@ -21052,10 +21082,11 @@ export namespace Prisma {
 
 
   export const AmbulanceStaffScalarFieldEnum: {
-    id: 'id',
+    identity: 'identity',
     name: 'name',
     phone: 'phone',
     email: 'email',
+    photo: 'photo',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -21227,6 +21258,7 @@ export namespace Prisma {
     dayOfWeek: 'dayOfWeek',
     startTime: 'startTime',
     endTime: 'endTime',
+    quota: 'quota',
     isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -21495,43 +21527,47 @@ export namespace Prisma {
     AND?: AmbulanceStaffWhereInput | AmbulanceStaffWhereInput[]
     OR?: AmbulanceStaffWhereInput[]
     NOT?: AmbulanceStaffWhereInput | AmbulanceStaffWhereInput[]
-    id?: StringFilter<"AmbulanceStaff"> | string
+    identity?: StringFilter<"AmbulanceStaff"> | string
     name?: StringFilter<"AmbulanceStaff"> | string
     phone?: StringFilter<"AmbulanceStaff"> | string
     email?: StringFilter<"AmbulanceStaff"> | string
+    photo?: StringNullableFilter<"AmbulanceStaff"> | string | null
     createdAt?: DateTimeFilter<"AmbulanceStaff"> | Date | string
     updatedAt?: DateTimeFilter<"AmbulanceStaff"> | Date | string
     EmergencyRequest?: EmergencyRequestListRelationFilter
   }
 
   export type AmbulanceStaffOrderByWithRelationInput = {
-    id?: SortOrder
+    identity?: SortOrder
     name?: SortOrder
     phone?: SortOrder
     email?: SortOrder
+    photo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     EmergencyRequest?: EmergencyRequestOrderByRelationAggregateInput
   }
 
   export type AmbulanceStaffWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    identity?: string
     AND?: AmbulanceStaffWhereInput | AmbulanceStaffWhereInput[]
     OR?: AmbulanceStaffWhereInput[]
     NOT?: AmbulanceStaffWhereInput | AmbulanceStaffWhereInput[]
     name?: StringFilter<"AmbulanceStaff"> | string
     phone?: StringFilter<"AmbulanceStaff"> | string
     email?: StringFilter<"AmbulanceStaff"> | string
+    photo?: StringNullableFilter<"AmbulanceStaff"> | string | null
     createdAt?: DateTimeFilter<"AmbulanceStaff"> | Date | string
     updatedAt?: DateTimeFilter<"AmbulanceStaff"> | Date | string
     EmergencyRequest?: EmergencyRequestListRelationFilter
-  }, "id">
+  }, "identity" | "identity">
 
   export type AmbulanceStaffOrderByWithAggregationInput = {
-    id?: SortOrder
+    identity?: SortOrder
     name?: SortOrder
     phone?: SortOrder
     email?: SortOrder
+    photo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AmbulanceStaffCountOrderByAggregateInput
@@ -21543,10 +21579,11 @@ export namespace Prisma {
     AND?: AmbulanceStaffScalarWhereWithAggregatesInput | AmbulanceStaffScalarWhereWithAggregatesInput[]
     OR?: AmbulanceStaffScalarWhereWithAggregatesInput[]
     NOT?: AmbulanceStaffScalarWhereWithAggregatesInput | AmbulanceStaffScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"AmbulanceStaff"> | string
+    identity?: StringWithAggregatesFilter<"AmbulanceStaff"> | string
     name?: StringWithAggregatesFilter<"AmbulanceStaff"> | string
     phone?: StringWithAggregatesFilter<"AmbulanceStaff"> | string
     email?: StringWithAggregatesFilter<"AmbulanceStaff"> | string
+    photo?: StringNullableWithAggregatesFilter<"AmbulanceStaff"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AmbulanceStaff"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AmbulanceStaff"> | Date | string
   }
@@ -22349,6 +22386,7 @@ export namespace Prisma {
     dayOfWeek?: IntFilter<"NurseSchedule"> | number
     startTime?: StringFilter<"NurseSchedule"> | string
     endTime?: StringFilter<"NurseSchedule"> | string
+    quota?: IntFilter<"NurseSchedule"> | number
     isActive?: BoolFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
@@ -22361,6 +22399,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22376,6 +22415,7 @@ export namespace Prisma {
     dayOfWeek?: IntFilter<"NurseSchedule"> | number
     startTime?: StringFilter<"NurseSchedule"> | string
     endTime?: StringFilter<"NurseSchedule"> | string
+    quota?: IntFilter<"NurseSchedule"> | number
     isActive?: BoolFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
@@ -22388,6 +22428,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22407,6 +22448,7 @@ export namespace Prisma {
     dayOfWeek?: IntWithAggregatesFilter<"NurseSchedule"> | number
     startTime?: StringWithAggregatesFilter<"NurseSchedule"> | string
     endTime?: StringWithAggregatesFilter<"NurseSchedule"> | string
+    quota?: IntWithAggregatesFilter<"NurseSchedule"> | number
     isActive?: BoolWithAggregatesFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"NurseSchedule"> | Date | string
@@ -22628,68 +22670,75 @@ export namespace Prisma {
   }
 
   export type AmbulanceStaffCreateInput = {
-    id?: string
+    identity: string
     name: string
     phone: string
     email: string
+    photo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     EmergencyRequest?: EmergencyRequestCreateNestedManyWithoutAssignedToInput
   }
 
   export type AmbulanceStaffUncheckedCreateInput = {
-    id?: string
+    identity: string
     name: string
     phone: string
     email: string
+    photo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     EmergencyRequest?: EmergencyRequestUncheckedCreateNestedManyWithoutAssignedToInput
   }
 
   export type AmbulanceStaffUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    identity?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     EmergencyRequest?: EmergencyRequestUpdateManyWithoutAssignedToNestedInput
   }
 
   export type AmbulanceStaffUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    identity?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     EmergencyRequest?: EmergencyRequestUncheckedUpdateManyWithoutAssignedToNestedInput
   }
 
   export type AmbulanceStaffCreateManyInput = {
-    id?: string
+    identity: string
     name: string
     phone: string
     email: string
+    photo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type AmbulanceStaffUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    identity?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AmbulanceStaffUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    identity?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23570,6 +23619,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
+    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23582,6 +23632,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
+    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23592,6 +23643,7 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
+    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23604,6 +23656,7 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
+    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23615,6 +23668,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
+    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23625,6 +23679,7 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
+    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23636,6 +23691,7 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
+    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23921,28 +23977,31 @@ export namespace Prisma {
   }
 
   export type AmbulanceStaffCountOrderByAggregateInput = {
-    id?: SortOrder
+    identity?: SortOrder
     name?: SortOrder
     phone?: SortOrder
     email?: SortOrder
+    photo?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AmbulanceStaffMaxOrderByAggregateInput = {
-    id?: SortOrder
+    identity?: SortOrder
     name?: SortOrder
     phone?: SortOrder
     email?: SortOrder
+    photo?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AmbulanceStaffMinOrderByAggregateInput = {
-    id?: SortOrder
+    identity?: SortOrder
     name?: SortOrder
     phone?: SortOrder
     email?: SortOrder
+    photo?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -24502,6 +24561,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24509,6 +24569,7 @@ export namespace Prisma {
 
   export type NurseScheduleAvgOrderByAggregateInput = {
     dayOfWeek?: SortOrder
+    quota?: SortOrder
   }
 
   export type NurseScheduleMaxOrderByAggregateInput = {
@@ -24517,6 +24578,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24528,6 +24590,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24535,6 +24598,7 @@ export namespace Prisma {
 
   export type NurseScheduleSumOrderByAggregateInput = {
     dayOfWeek?: SortOrder
+    quota?: SortOrder
   }
 
   export type NurseRatingReservationIdNurseIdCompoundUniqueInput = {
@@ -25196,19 +25260,21 @@ export namespace Prisma {
   }
 
   export type AmbulanceStaffCreateWithoutEmergencyRequestInput = {
-    id?: string
+    identity: string
     name: string
     phone: string
     email: string
+    photo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type AmbulanceStaffUncheckedCreateWithoutEmergencyRequestInput = {
-    id?: string
+    identity: string
     name: string
     phone: string
     email: string
+    photo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25256,19 +25322,21 @@ export namespace Prisma {
   }
 
   export type AmbulanceStaffUpdateWithoutEmergencyRequestInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    identity?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AmbulanceStaffUncheckedUpdateWithoutEmergencyRequestInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    identity?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25754,6 +25822,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
+    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25764,6 +25833,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
+    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25834,6 +25904,7 @@ export namespace Prisma {
     dayOfWeek?: IntFilter<"NurseSchedule"> | number
     startTime?: StringFilter<"NurseSchedule"> | string
     endTime?: StringFilter<"NurseSchedule"> | string
+    quota?: IntFilter<"NurseSchedule"> | number
     isActive?: BoolFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
@@ -26172,6 +26243,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
+    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26192,6 +26264,7 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
+    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26202,6 +26275,7 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
+    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26212,6 +26286,7 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
+    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

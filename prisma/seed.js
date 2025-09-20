@@ -1,20 +1,10 @@
-import { PrismaClient } from "@prisma/client";
-import medicalCategorySeeder from "./seeders/medicalCategorySeeder.js";
-import doctorSeeder from "./seeders/doctorSeeder.js";
-import patientSeeder from "./seeders/patientSeeder.js";
-import reservationSeeder from "./seeders/reservationSeeder.js";
-import paymentMethodSeeder from "./seeders/paymentMethodSeeder.js";
-
-const prisma = new PrismaClient();
+import { seedAmbulanceStaff } from "./seeders/ambulanceStaff.seeder.js";
+import { simkesPrisma } from "../src/config/db.js";
 
 async function main() {
-  console.log("🌱 Running seeders...");
+  console.log("🌱 Running all seeders...");
 
-  // await medicalCategorySeeder(prisma);
-  // await doctorSeeder(prisma);
-  // await patientSeeder(prisma);
-  // await reservationSeeder(prisma);
-  await paymentMethodSeeder(prisma);
+  await seedAmbulanceStaff(simkesPrisma);
 
   console.log("✅ All seeders executed successfully");
 }
@@ -25,5 +15,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect();
+    await simkesPrisma.$disconnect();
   });

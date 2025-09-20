@@ -2,6 +2,7 @@ import { emergencyResource } from "../resources/emergency.resource.js";
 import {
   emergencySchema,
   updateStatusEmergencySchema,
+  getEmergencyStatsSchema,
 } from "../schemas/emergency.schema.js";
 import * as emergencyService from "../services/emergency.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
@@ -57,7 +58,7 @@ export const assignEmergency = catchAsync(async (req, res) => {
   const parsedBody = emergencySchema.parse(req.body);
   const payload = {
     emergencyId: req.params.id,
-    staffId: req.user?.id,
+    staffIdentity: req.user?.identity,
     ...parsedBody,
   };
 
@@ -84,5 +85,24 @@ export const updateEmergencyStatus = catchAsync(async (req, res) => {
     200,
     "Emergency request status updated successfully",
     emergencyResource(result)
+  );
+});
+
+export const getEmergencyStats = catchAsync(async (req, res) => {
+  const { startDate, endDate, groupBy } = getEmergencyStatsSchema.parse(
+    req.query
+  );
+
+  const stats = await emergencyService.getEmergencyStats({
+    startDate,
+    endDate,
+    groupBy,
+  });
+
+  return apiSuccess(
+    res,
+    200,
+    "Emergency statistics retrieved successfully",
+    stats
   );
 });

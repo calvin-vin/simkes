@@ -141,10 +141,11 @@ exports.Prisma.EmergencyHistoryScalarFieldEnum = {
 };
 
 exports.Prisma.AmbulanceStaffScalarFieldEnum = {
-  id: 'id',
+  identity: 'identity',
   name: 'name',
   phone: 'phone',
   email: 'email',
+  photo: 'photo',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -277,6 +278,7 @@ exports.Prisma.NurseScheduleScalarFieldEnum = {
   dayOfWeek: 'dayOfWeek',
   startTime: 'startTime',
   endTime: 'endTime',
+  quota: 'quota',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

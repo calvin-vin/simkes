@@ -3,10 +3,11 @@ import dayjs from "dayjs";
 
 export const ambulanceStaffResource = (ambulanceStaff) => {
   return {
-    id: ambulanceStaff.id,
+    identity: ambulanceStaff.identity,
     name: ambulanceStaff.name,
     email: ambulanceStaff.email,
     phone: ambulanceStaff.phone,
+    photo: ambulanceStaff.photo,
     createdAt: dayjs(ambulanceStaff.createdAt)
       .tz(TIMEZONE)
       .format("YYYY-MM-DD HH:mm:ss"),

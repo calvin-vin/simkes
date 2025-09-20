@@ -1,5 +1,22 @@
 import { z } from "zod";
 
+export const getEmergencyStatsSchema = z.object({
+  startDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in format yyyy-mm-dd")
+    .optional(),
+  endDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in format yyyy-mm-dd")
+    .optional(),
+  groupBy: z
+    .enum(["day", "week", "month"], {
+      errorMap: () => ({ message: "groupBy must be one of: day, week, month" }),
+    })
+    .optional()
+    .default("day"),
+});
+
 const locationSchema = z
   .array(z.number())
   .min(2, { message: "Must be an array of latitude and longitude" })
