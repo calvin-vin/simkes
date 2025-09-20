@@ -8,6 +8,7 @@ import catchAsync from "../utils/catchAsync.js";
 import {
   patientFilterSchema,
   updatePatientSchema,
+  patientStatsSchema,
 } from "../schemas/patient.schema.js";
 
 export const getAllPatients = catchAsync(async (req, res) => {
@@ -18,6 +19,17 @@ export const getAllPatients = catchAsync(async (req, res) => {
     200,
     "Berhasil mendapatkan data pasien",
     patientsResource(patients)
+  );
+});
+
+export const getPatientStats = catchAsync(async (req, res) => {
+  const parsedQuery = patientStatsSchema.parse(req.query);
+  const stats = await patientService.getPatientStats(parsedQuery);
+  return apiSuccess(
+    res,
+    200,
+    "Berhasil mendapatkan statistik pasien",
+    stats
   );
 });
 

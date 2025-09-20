@@ -4,6 +4,7 @@ import {
   getAllPatients,
   getPatient,
   getPatientByIdentity,
+  getPatientStats,
   updatePatient,
 } from "../controllers/patient.controller.js";
 import { protect, restrictToRoleSubrole } from "../middlewares/auth.js";
@@ -38,6 +39,16 @@ router.get(
     { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
   ]),
   getAllPatients
+);
+
+router.get(
+  "/stats",
+  protect,
+  restrictToRoleSubrole([
+    { role: "OPERATOR", subrole: "OPERATOR" },
+    { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
+  ]),
+  getPatientStats
 );
 
 router.get(

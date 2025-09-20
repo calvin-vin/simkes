@@ -1,5 +1,26 @@
 import { z } from "zod";
 
+export const patientStatsSchema = z.object({
+  startDate: z
+    .string()
+    .regex(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, {
+      message: "Format tanggal harus YYYY-MM-DD",
+    })
+    .optional()
+    .refine((date) => !date || !isNaN(new Date(date).getTime()), {
+      message: "Tanggal tidak valid",
+    }),
+  endDate: z
+    .string()
+    .regex(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, {
+      message: "Format tanggal harus YYYY-MM-DD",
+    })
+    .optional()
+    .refine((date) => !date || !isNaN(new Date(date).getTime()), {
+      message: "Tanggal tidak valid",
+    }),
+});
+
 export const patientFilterSchema = z.object({
   page: z.coerce.number().min(1).default(1),
   limit: z.coerce.number().min(1).max(100).default(10),
