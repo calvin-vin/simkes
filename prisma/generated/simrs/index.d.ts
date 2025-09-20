@@ -17566,6 +17566,7 @@ export namespace Prisma {
     phoneNumber: string | null
     registeredAt: Date | null
     homeAddress: string | null
+    isSimkes: boolean | null
   }
 
   export type PatientMaxAggregateOutputType = {
@@ -17584,6 +17585,7 @@ export namespace Prisma {
     phoneNumber: string | null
     registeredAt: Date | null
     homeAddress: string | null
+    isSimkes: boolean | null
   }
 
   export type PatientCountAggregateOutputType = {
@@ -17602,6 +17604,7 @@ export namespace Prisma {
     phoneNumber: number
     registeredAt: number
     homeAddress: number
+    isSimkes: number
     _all: number
   }
 
@@ -17632,6 +17635,7 @@ export namespace Prisma {
     phoneNumber?: true
     registeredAt?: true
     homeAddress?: true
+    isSimkes?: true
   }
 
   export type PatientMaxAggregateInputType = {
@@ -17650,6 +17654,7 @@ export namespace Prisma {
     phoneNumber?: true
     registeredAt?: true
     homeAddress?: true
+    isSimkes?: true
   }
 
   export type PatientCountAggregateInputType = {
@@ -17668,6 +17673,7 @@ export namespace Prisma {
     phoneNumber?: true
     registeredAt?: true
     homeAddress?: true
+    isSimkes?: true
     _all?: true
   }
 
@@ -17773,6 +17779,7 @@ export namespace Prisma {
     phoneNumber: string | null
     registeredAt: Date | null
     homeAddress: string | null
+    isSimkes: boolean
     _count: PatientCountAggregateOutputType | null
     _avg: PatientAvgAggregateOutputType | null
     _sum: PatientSumAggregateOutputType | null
@@ -17810,6 +17817,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     registeredAt?: boolean
     homeAddress?: boolean
+    isSimkes?: boolean
     gender?: boolean | Patient$genderArgs<ExtArgs>
     reservations?: boolean | Patient$reservationsArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
@@ -17831,6 +17839,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     registeredAt?: boolean
     homeAddress?: boolean
+    isSimkes?: boolean
     gender?: boolean | Patient$genderArgs<ExtArgs>
   }, ExtArgs["result"]["patient"]>
 
@@ -17850,6 +17859,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     registeredAt?: boolean
     homeAddress?: boolean
+    isSimkes?: boolean
     gender?: boolean | Patient$genderArgs<ExtArgs>
   }, ExtArgs["result"]["patient"]>
 
@@ -17869,9 +17879,10 @@ export namespace Prisma {
     phoneNumber?: boolean
     registeredAt?: boolean
     homeAddress?: boolean
+    isSimkes?: boolean
   }
 
-  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isEnabled" | "name" | "identity" | "genderId" | "birthPlace" | "birthDate" | "motherName" | "fatherName" | "spouseName" | "bpjsNumber" | "otherInsuranceNumber" | "phoneNumber" | "registeredAt" | "homeAddress", ExtArgs["result"]["patient"]>
+  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isEnabled" | "name" | "identity" | "genderId" | "birthPlace" | "birthDate" | "motherName" | "fatherName" | "spouseName" | "bpjsNumber" | "otherInsuranceNumber" | "phoneNumber" | "registeredAt" | "homeAddress" | "isSimkes", ExtArgs["result"]["patient"]>
   export type PatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gender?: boolean | Patient$genderArgs<ExtArgs>
     reservations?: boolean | Patient$reservationsArgs<ExtArgs>
@@ -17906,6 +17917,7 @@ export namespace Prisma {
       phoneNumber: string | null
       registeredAt: Date | null
       homeAddress: string | null
+      isSimkes: boolean
     }, ExtArgs["result"]["patient"]>
     composites: {}
   }
@@ -18346,6 +18358,7 @@ export namespace Prisma {
     readonly phoneNumber: FieldRef<"Patient", 'String'>
     readonly registeredAt: FieldRef<"Patient", 'DateTime'>
     readonly homeAddress: FieldRef<"Patient", 'String'>
+    readonly isSimkes: FieldRef<"Patient", 'Boolean'>
   }
     
 
@@ -21144,7 +21157,8 @@ export namespace Prisma {
     otherInsuranceNumber: 'otherInsuranceNumber',
     phoneNumber: 'phoneNumber',
     registeredAt: 'registeredAt',
-    homeAddress: 'homeAddress'
+    homeAddress: 'homeAddress',
+    isSimkes: 'isSimkes'
   };
 
   export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
@@ -22131,6 +22145,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableFilter<"Patient"> | string | null
+    isSimkes?: BoolFilter<"Patient"> | boolean
     gender?: XOR<GenderNullableScalarRelationFilter, GenderWhereInput> | null
     reservations?: ReservationListRelationFilter
   }
@@ -22151,6 +22166,7 @@ export namespace Prisma {
     phoneNumber?: SortOrderInput | SortOrder
     registeredAt?: SortOrderInput | SortOrder
     homeAddress?: SortOrderInput | SortOrder
+    isSimkes?: SortOrder
     gender?: GenderOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
   }
@@ -22174,6 +22190,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableFilter<"Patient"> | string | null
+    isSimkes?: BoolFilter<"Patient"> | boolean
     gender?: XOR<GenderNullableScalarRelationFilter, GenderWhereInput> | null
     reservations?: ReservationListRelationFilter
   }, "id" | "identity">
@@ -22194,6 +22211,7 @@ export namespace Prisma {
     phoneNumber?: SortOrderInput | SortOrder
     registeredAt?: SortOrderInput | SortOrder
     homeAddress?: SortOrderInput | SortOrder
+    isSimkes?: SortOrder
     _count?: PatientCountOrderByAggregateInput
     _avg?: PatientAvgOrderByAggregateInput
     _max?: PatientMaxOrderByAggregateInput
@@ -22220,6 +22238,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableWithAggregatesFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableWithAggregatesFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableWithAggregatesFilter<"Patient"> | string | null
+    isSimkes?: BoolWithAggregatesFilter<"Patient"> | boolean
   }
 
   export type GenderWhereInput = {
@@ -23187,6 +23206,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
     gender?: GenderCreateNestedOneWithoutPatientsInput
     reservations?: ReservationCreateNestedManyWithoutPatientInput
   }
@@ -23207,6 +23227,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
     reservations?: ReservationUncheckedCreateNestedManyWithoutPatientInput
   }
 
@@ -23225,6 +23246,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
     gender?: GenderUpdateOneWithoutPatientsNestedInput
     reservations?: ReservationUpdateManyWithoutPatientNestedInput
   }
@@ -23245,6 +23267,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
     reservations?: ReservationUncheckedUpdateManyWithoutPatientNestedInput
   }
 
@@ -23264,6 +23287,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
   }
 
   export type PatientUpdateManyMutationInput = {
@@ -23281,6 +23305,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PatientUncheckedUpdateManyInput = {
@@ -23299,6 +23324,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type GenderCreateInput = {
@@ -24266,6 +24292,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     registeredAt?: SortOrder
     homeAddress?: SortOrder
+    isSimkes?: SortOrder
   }
 
   export type PatientAvgOrderByAggregateInput = {
@@ -24289,6 +24316,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     registeredAt?: SortOrder
     homeAddress?: SortOrder
+    isSimkes?: SortOrder
   }
 
   export type PatientMinOrderByAggregateInput = {
@@ -24307,6 +24335,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     registeredAt?: SortOrder
     homeAddress?: SortOrder
+    isSimkes?: SortOrder
   }
 
   export type PatientSumOrderByAggregateInput = {
@@ -26856,6 +26885,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
     gender?: GenderCreateNestedOneWithoutPatientsInput
   }
 
@@ -26875,6 +26905,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
   }
 
   export type PatientCreateOrConnectWithoutReservationsInput = {
@@ -26994,6 +27025,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
     gender?: GenderUpdateOneWithoutPatientsNestedInput
   }
 
@@ -27013,6 +27045,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PaymentMethodUpsertWithoutReservationsInput = {
@@ -27219,6 +27252,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
     reservations?: ReservationCreateNestedManyWithoutPatientInput
   }
 
@@ -27237,6 +27271,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
     reservations?: ReservationUncheckedCreateNestedManyWithoutPatientInput
   }
 
@@ -27285,6 +27320,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableFilter<"Patient"> | string | null
+    isSimkes?: BoolFilter<"Patient"> | boolean
   }
 
   export type ReservationCreateWithoutReferralSourceInput = {
@@ -28166,6 +28202,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
+    isSimkes?: boolean
   }
 
   export type PatientUpdateWithoutGenderInput = {
@@ -28183,6 +28220,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
     reservations?: ReservationUpdateManyWithoutPatientNestedInput
   }
 
@@ -28201,6 +28239,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
     reservations?: ReservationUncheckedUpdateManyWithoutPatientNestedInput
   }
 
@@ -28219,6 +28258,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    isSimkes?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ReservationCreateManyReferralSourceInput = {

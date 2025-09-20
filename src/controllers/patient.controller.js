@@ -1,12 +1,37 @@
 import {
-  ensurePatientResource,
   patientResource,
+  patientsResource,
 } from "../resources/patient.resource.js";
 import * as patientService from "../services/patient.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
 import catchAsync from "../utils/catchAsync.js";
+import {
+  patientFilterSchema,
+  updatePatientSchema,
+} from "../schemas/patient.schema.js";
 
-import { updatePatientSchema } from "../schemas/patient.schema.js";
+export const getAllPatients = catchAsync(async (req, res) => {
+  const parsedQuery = patientFilterSchema.parse(req.query);
+  const patients = await patientService.getAllPatients(parsedQuery);
+  return apiSuccess(
+    res,
+    200,
+    "Berhasil mendapatkan data pasien",
+    patientsResource(patients)
+  );
+});
+
+export const getPatientByIdentity = catchAsync(async (req, res) => {
+  const patient = await patientService.getPatientByIdentity(
+    req.params.identity
+  );
+  return apiSuccess(
+    res,
+    200,
+    "Berhasil mendapatkan data pasien",
+    patientResource(patient)
+  );
+});
 
 export const ensurePatient = catchAsync(async (req, res) => {
   const user = req.user;
@@ -16,7 +41,7 @@ export const ensurePatient = catchAsync(async (req, res) => {
     res,
     200,
     "Data pasien berhasil sinkronisasi",
-    ensurePatientResource(result)
+    patientResource(result)
   );
 });
 

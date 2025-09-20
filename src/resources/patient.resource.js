@@ -1,15 +1,10 @@
 import { TIMEZONE } from "../constants/dayTime.js";
 import dayjs from "dayjs";
 
-export const ensurePatientResource = (patient) => {
+export const patientsResource = (data) => {
   return {
-    id: patient.id,
-    name: patient.patientName,
-    identity: patient.identity,
-    phoneNumber: patient.phoneNumber,
-    registeredAt: patient.registeredAt
-      ? dayjs(patient.registeredAt).tz(TIMEZONE).format("YYYY-MM-DD HH:mm:ss")
-      : null,
+    results: data.results.map((patient) => patientResource(patient)),
+    pagination: data.pagination,
   };
 };
 

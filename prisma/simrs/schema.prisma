@@ -211,6 +211,7 @@ model Patient {
     phoneNumber          String?   @map("nohp")
     registeredAt         DateTime? @map("tgldaftar")
     homeAddress          String?   @map("alamatrmh")
+    isSimkes             Boolean?  @default(true) @map("issimkes")
     // religionId           Int?      @map("objectagamafk")
     // bloodTypeId          Int?      @map("objectgolongandarahfk")
     // occupationId         Int?      @map("objectpekerjaanfk")

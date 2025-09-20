@@ -252,7 +252,8 @@ exports.Prisma.PatientScalarFieldEnum = {
   otherInsuranceNumber: 'otherInsuranceNumber',
   phoneNumber: 'phoneNumber',
   registeredAt: 'registeredAt',
-  homeAddress: 'homeAddress'
+  homeAddress: 'homeAddress',
+  isSimkes: 'isSimkes'
 };
 
 exports.Prisma.GenderScalarFieldEnum = {
