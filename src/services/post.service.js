@@ -5,6 +5,43 @@ import { saveFile } from "../utils/saveFile.js";
 import fs from "fs/promises";
 
 /**
+ * Get post statistics for dashboard
+ * @returns {Promise<Object>} Post statistics
+ */
+export const getPostStats = async () => {
+  // Get total posts
+  const totalPosts = await simkesPrisma.post.count();
+
+  // Get active posts
+  const activePosts = await simkesPrisma.post.count({
+    where: {
+      isActive: true,
+    },
+  });
+
+  // Get inactive posts
+  const inactivePosts = await simkesPrisma.post.count({
+    where: {
+      isActive: false,
+    },
+  });
+
+  // Get posts created in the last 30 days
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  return {
+    totalPosts,
+    activePosts,
+    inactivePosts,
+    activePostsPercentage:
+      totalPosts > 0 ? Math.round((activePosts / totalPosts) * 100) : 0,
+    inactivePostsPercentage:
+      totalPosts > 0 ? Math.round((inactivePosts / totalPosts) * 100) : 0,
+  };
+};
+
+/**
  * Get all posts with pagination and filtering
  * @param {Object} query - Query parameters
  * @returns {Promise<Object>} Posts with pagination
@@ -286,4 +323,5 @@ export const postService = {
   deletePost,
   getAllPublicPosts,
   getPublicPostById,
+  getPostStats,
 };

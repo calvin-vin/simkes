@@ -28,6 +28,17 @@ export const getPublicPostByIdController = catchAsync(async (req, res) => {
   );
 });
 
+export const getPostStatsController = catchAsync(async (req, res) => {
+  const stats = await postService.getPostStats();
+  
+  return apiSuccess(
+    res,
+    200,
+    "Statistik postingan berhasil didapatkan",
+    stats
+  );
+});
+
 export const getAllPostsController = catchAsync(async (req, res) => {
   const parsedQuery = postFilterSchema.parse(req.query);
   const posts = await postService.getAllPosts(parsedQuery);

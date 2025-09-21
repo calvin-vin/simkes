@@ -7,6 +7,7 @@ import {
   deletePostController,
   getAllPublicPostsController,
   getPublicPostByIdController,
+  getPostStatsController,
 } from "../controllers/post.controller.js";
 import { protect, restrictToRoleSubrole } from "../middlewares/auth.js";
 import { uploadPostPhoto } from "../middlewares/uploadPost.js";
@@ -26,6 +27,7 @@ router.use(
   ])
 );
 
+router.get("/stats", getPostStatsController);
 router.get("/", getAllPostsController);
 router.get("/:id", getPostByIdController);
 router.post("/", uploadPostPhoto.single("photo"), createPostController);
