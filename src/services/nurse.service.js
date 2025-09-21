@@ -5,6 +5,61 @@ import { saveFile } from "../utils/saveFile.js";
 import fs from "fs/promises";
 import { getAverageRatingByNurseId } from "./nurseRating.service.js";
 
+/**
+ * Get nurse statistics for dashboard
+ * @returns {Promise<Object>} Nurse statistics
+ */
+export const getNurseStats = async () => {
+  // Get total nurses
+  const totalNurses = await simkesPrisma.nurse.count();
+
+  // Get active nurses
+  const activeNurses = await simkesPrisma.nurse.count({
+    where: {
+      isActive: true,
+    },
+  });
+
+  // Get inactive nurses
+  const inactiveNurses = await simkesPrisma.nurse.count({
+    where: {
+      isActive: false,
+    },
+  });
+
+  // Get nurses by speciality
+  const nursesBySpeciality = await simkesPrisma.nurse.groupBy({
+    by: ["speciality"],
+    _count: {
+      id: true,
+    },
+    where: {
+      isActive: true,
+      speciality: {
+        not: null,
+      },
+    },
+  });
+
+  // Calculate percentages
+  const percentageActive =
+    totalNurses > 0 ? (activeNurses / totalNurses) * 100 : 0;
+  const percentageInactive =
+    totalNurses > 0 ? (inactiveNurses / totalNurses) * 100 : 0;
+
+  return {
+    totalNurses,
+    activeNurses,
+    inactiveNurses,
+    nursesBySpeciality: nursesBySpeciality.map((item) => ({
+      speciality: item.speciality || "Tidak ada spesialisasi",
+      count: item._count.id,
+    })),
+    percentageActive,
+    percentageInactive,
+  };
+};
+
 async function getAllActiveNurses(query) {
   const {
     page = 1,
@@ -425,6 +480,7 @@ const nurseService = {
   createNurse,
   updateNurse,
   deleteNurse,
+  getNurseStats,
 };
 
 export default nurseService;

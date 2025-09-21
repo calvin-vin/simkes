@@ -18,6 +18,7 @@ router.use(
 );
 
 // Nurse routes
+router.get("/stats", nurseController.getNurseStatsController);
 router.get("/", nurseController.getAllNursesController);
 router.get("/:id", nurseController.getNurseByIdController);
 router.post(

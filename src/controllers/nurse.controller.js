@@ -8,6 +8,12 @@ import {
   updateNurseSchema,
 } from "../schemas/nurse.schema.js";
 
+export const getNurseStatsController = catchAsync(async (req, res) => {
+  const stats = await nurseService.getNurseStats();
+
+  return apiSuccess(res, 200, "Statistik perawat berhasil didapatkan", stats);
+});
+
 export const getAllActiveNursesController = catchAsync(async (req, res) => {
   const parsedQuery = getAllNurseSchema.parse(req.query);
   const nurses = await nurseService.getAllActiveNurses(parsedQuery);
