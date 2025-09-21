@@ -9,6 +9,7 @@ import {
   deleteFacilityPhotoController,
   getAllPublicFacilitiesController,
   getPublicFacilityByIdController,
+  getFacilityStatsController,
 } from "../controllers/facility.controller.js";
 import { protect, restrictToRoleSubrole } from "../middlewares/auth.js";
 import { uploadFacilityPhoto } from "../middlewares/uploadFacility.js";
@@ -28,6 +29,7 @@ router.use(
 );
 
 // Admin routes - restricted to super admin
+router.get("/stats", getFacilityStatsController);
 router.get("/", getAllFacilitiesController);
 router.get("/:id", getFacilityByIdController);
 router.post("/", createFacilityController);

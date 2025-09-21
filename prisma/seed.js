@@ -5,6 +5,7 @@ import { seedEmergency } from "./seeders/emergency.seeder.js";
 import { seedPosts } from "./seeders/post.seeder.js";
 import { seedGalleries } from "./seeders/gallery.seeder.js";
 import { seedNurses } from "./seeders/nurse.seeder.js";
+import { seedFacilities } from "./seeders/facility.seeder.js";
 
 async function main() {
   console.log("🌱 Running all seeders...");
@@ -15,6 +16,7 @@ async function main() {
   await seedPosts(simkesPrisma);
   await seedGalleries(simkesPrisma);
   await seedNurses(simkesPrisma);
+  await seedFacilities(simkesPrisma);
 
   console.log("✅ All seeders executed successfully");
 }

@@ -6,6 +6,35 @@ import fs from "fs/promises";
 import { getAverageRatingByFacilityId } from "./facilityRating.service.js";
 
 /**
+ * Get facility statistics
+ * @returns {Promise<Object>} Facility statistics
+ */
+export const getFacilityStatistics = async () => {
+  const [totalFacilities, activeFacilities, inactiveFacilities, totalPhotos] =
+    await Promise.all([
+      simkesPrisma.facility.count(),
+      simkesPrisma.facility.count({ where: { isActive: true } }),
+      simkesPrisma.facility.count({ where: { isActive: false } }),
+      simkesPrisma.facilityPhoto.count(),
+    ]);
+
+  return {
+    totalFacilities,
+    activeFacilities,
+    inactiveFacilities,
+    totalPhotos,
+    activeFacilitiesPercentage:
+      totalFacilities > 0
+        ? Math.round((activeFacilities / totalFacilities) * 100)
+        : 0,
+    inactiveFacilitiesPercentage:
+      totalFacilities > 0
+        ? Math.round((inactiveFacilities / totalFacilities) * 100)
+        : 0,
+  };
+};
+
+/**
  * Get all facilities with pagination and filtering
  * @param {Object} query - Query parameters
  * @returns {Promise<Object>} Facilities with pagination
@@ -18,7 +47,7 @@ export const getAllPublicFacilities = async (query) => {
     sortBy = "createdAt",
     sortOrder = "desc",
     minRating,
-    maxRating
+    maxRating,
   } = query;
 
   // Build filters
@@ -40,7 +69,7 @@ export const getAllPublicFacilities = async (query) => {
 
   // Jika ada filter rating, kita perlu mengambil semua data terlebih dahulu
   const hasRatingFilter = minRating !== undefined || maxRating !== undefined;
-  
+
   if (!hasRatingFilter) {
     // Jika tidak ada filter rating, gunakan paginasi database normal
     const [facilities, total] = await Promise.all([
@@ -55,19 +84,20 @@ export const getAllPublicFacilities = async (query) => {
       }),
       simkesPrisma.facility.count({ where: filters }),
     ]);
-    
+
     // Ambil rating untuk setiap fasilitas
     const facilitiesWithRating = await Promise.all(
       facilities.map(async (facility) => {
-        const { averageRating, totalRatings } = await getAverageRatingByFacilityId(facility.id);
+        const { averageRating, totalRatings } =
+          await getAverageRatingByFacilityId(facility.id);
         return {
           ...facility,
           averageRating,
-          totalRatings
+          totalRatings,
         };
       })
     );
-    
+
     return {
       results: facilitiesWithRating,
       pagination: {
@@ -86,40 +116,41 @@ export const getAllPublicFacilities = async (query) => {
       },
       orderBy,
     });
-    
+
     // Ambil rating untuk semua fasilitas
     const allFacilitiesWithRating = await Promise.all(
       allFacilities.map(async (facility) => {
-        const { averageRating, totalRatings } = await getAverageRatingByFacilityId(facility.id);
+        const { averageRating, totalRatings } =
+          await getAverageRatingByFacilityId(facility.id);
         return {
           ...facility,
           averageRating,
-          totalRatings
+          totalRatings,
         };
       })
     );
-    
+
     // Filter berdasarkan rating
     let filteredFacilities = allFacilitiesWithRating;
     if (minRating !== undefined) {
       filteredFacilities = filteredFacilities.filter(
-        facility => facility.averageRating >= Number(minRating)
+        (facility) => facility.averageRating >= Number(minRating)
       );
     }
     if (maxRating !== undefined) {
       filteredFacilities = filteredFacilities.filter(
-        facility => facility.averageRating <= Number(maxRating)
+        (facility) => facility.averageRating <= Number(maxRating)
       );
     }
-    
+
     // Hitung total setelah filter
     const filteredTotal = filteredFacilities.length;
-    
+
     // Terapkan paginasi secara manual
     const startIndex = (page - 1) * Number(limit);
     const endIndex = startIndex + Number(limit);
     const paginatedFacilities = filteredFacilities.slice(startIndex, endIndex);
-    
+
     return {
       results: paginatedFacilities,
       pagination: {
@@ -151,12 +182,14 @@ export const getPublicFacilityById = async (id) => {
   }
 
   // Ambil rating untuk fasilitas
-  const { averageRating, totalRatings } = await getAverageRatingByFacilityId(facility.id);
-  
+  const { averageRating, totalRatings } = await getAverageRatingByFacilityId(
+    facility.id
+  );
+
   return {
     ...facility,
     averageRating,
-    totalRatings
+    totalRatings,
   };
 };
 

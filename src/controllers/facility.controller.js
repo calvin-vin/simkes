@@ -6,7 +6,7 @@ import {
   facilityFilterSchema,
   facilitySchema,
 } from "../schemas/facility.schema.js";
-import { facilityService } from "../services/facility.service.js";
+import * as facilityService from "../services/facility.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
 import catchAsync from "../utils/catchAsync.js";
 
@@ -108,4 +108,10 @@ export const deleteFacilityPhotoController = catchAsync(async (req, res) => {
   await facilityService.deleteFacilityPhoto(photoId);
 
   return apiSuccess(res, 200, "Foto fasilitas berhasil dihapus", null);
+});
+
+export const getFacilityStatsController = catchAsync(async (req, res) => {
+  const stats = await facilityService.getFacilityStatistics();
+
+  return apiSuccess(res, 200, "Statistik fasilitas berhasil diambil", stats);
 });
