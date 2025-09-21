@@ -14019,7 +14019,7 @@ export namespace Prisma {
     endTime: Date
     note: string | null
     days: string
-    quota: number
+    quota: number | null
     isEnabled: boolean
     _count: DoctorScheduleCountAggregateOutputType | null
     _avg: DoctorScheduleAvgAggregateOutputType | null
@@ -14124,7 +14124,7 @@ export namespace Prisma {
       endTime: Date
       note: string | null
       days: string
-      quota: number
+      quota: number | null
       isEnabled: boolean
     }, ExtArgs["result"]["doctorSchedule"]>
     composites: {}
@@ -17779,7 +17779,7 @@ export namespace Prisma {
     phoneNumber: string | null
     registeredAt: Date | null
     homeAddress: string | null
-    isSimkes: boolean
+    isSimkes: boolean | null
     _count: PatientCountAggregateOutputType | null
     _avg: PatientAvgAggregateOutputType | null
     _sum: PatientSumAggregateOutputType | null
@@ -17917,7 +17917,7 @@ export namespace Prisma {
       phoneNumber: string | null
       registeredAt: Date | null
       homeAddress: string | null
-      isSimkes: boolean
+      isSimkes: boolean | null
     }, ExtArgs["result"]["patient"]>
     composites: {}
   }
@@ -21843,7 +21843,7 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableFilter<"DoctorSchedule"> | string | null
     days?: StringFilter<"DoctorSchedule"> | string
-    quota?: IntFilter<"DoctorSchedule"> | number
+    quota?: IntNullableFilter<"DoctorSchedule"> | number | null
     isEnabled?: BoolFilter<"DoctorSchedule"> | boolean
     unit?: XOR<UnitScalarRelationFilter, UnitWhereInput>
     doctor?: XOR<EmployeeScalarRelationFilter, EmployeeWhereInput>
@@ -21857,7 +21857,7 @@ export namespace Prisma {
     endTime?: SortOrder
     note?: SortOrderInput | SortOrder
     days?: SortOrder
-    quota?: SortOrder
+    quota?: SortOrderInput | SortOrder
     isEnabled?: SortOrder
     unit?: UnitOrderByWithRelationInput
     doctor?: EmployeeOrderByWithRelationInput
@@ -21874,7 +21874,7 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableFilter<"DoctorSchedule"> | string | null
     days?: StringFilter<"DoctorSchedule"> | string
-    quota?: IntFilter<"DoctorSchedule"> | number
+    quota?: IntNullableFilter<"DoctorSchedule"> | number | null
     isEnabled?: BoolFilter<"DoctorSchedule"> | boolean
     unit?: XOR<UnitScalarRelationFilter, UnitWhereInput>
     doctor?: XOR<EmployeeScalarRelationFilter, EmployeeWhereInput>
@@ -21888,7 +21888,7 @@ export namespace Prisma {
     endTime?: SortOrder
     note?: SortOrderInput | SortOrder
     days?: SortOrder
-    quota?: SortOrder
+    quota?: SortOrderInput | SortOrder
     isEnabled?: SortOrder
     _count?: DoctorScheduleCountOrderByAggregateInput
     _avg?: DoctorScheduleAvgOrderByAggregateInput
@@ -21908,7 +21908,7 @@ export namespace Prisma {
     endTime?: DateTimeWithAggregatesFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableWithAggregatesFilter<"DoctorSchedule"> | string | null
     days?: StringWithAggregatesFilter<"DoctorSchedule"> | string
-    quota?: IntWithAggregatesFilter<"DoctorSchedule"> | number
+    quota?: IntNullableWithAggregatesFilter<"DoctorSchedule"> | number | null
     isEnabled?: BoolWithAggregatesFilter<"DoctorSchedule"> | boolean
   }
 
@@ -22145,7 +22145,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableFilter<"Patient"> | string | null
-    isSimkes?: BoolFilter<"Patient"> | boolean
+    isSimkes?: BoolNullableFilter<"Patient"> | boolean | null
     gender?: XOR<GenderNullableScalarRelationFilter, GenderWhereInput> | null
     reservations?: ReservationListRelationFilter
   }
@@ -22166,7 +22166,7 @@ export namespace Prisma {
     phoneNumber?: SortOrderInput | SortOrder
     registeredAt?: SortOrderInput | SortOrder
     homeAddress?: SortOrderInput | SortOrder
-    isSimkes?: SortOrder
+    isSimkes?: SortOrderInput | SortOrder
     gender?: GenderOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
   }
@@ -22190,7 +22190,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableFilter<"Patient"> | string | null
-    isSimkes?: BoolFilter<"Patient"> | boolean
+    isSimkes?: BoolNullableFilter<"Patient"> | boolean | null
     gender?: XOR<GenderNullableScalarRelationFilter, GenderWhereInput> | null
     reservations?: ReservationListRelationFilter
   }, "id" | "identity">
@@ -22211,7 +22211,7 @@ export namespace Prisma {
     phoneNumber?: SortOrderInput | SortOrder
     registeredAt?: SortOrderInput | SortOrder
     homeAddress?: SortOrderInput | SortOrder
-    isSimkes?: SortOrder
+    isSimkes?: SortOrderInput | SortOrder
     _count?: PatientCountOrderByAggregateInput
     _avg?: PatientAvgOrderByAggregateInput
     _max?: PatientMaxOrderByAggregateInput
@@ -22238,7 +22238,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableWithAggregatesFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableWithAggregatesFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableWithAggregatesFilter<"Patient"> | string | null
-    isSimkes?: BoolWithAggregatesFilter<"Patient"> | boolean
+    isSimkes?: BoolNullableWithAggregatesFilter<"Patient"> | boolean | null
   }
 
   export type GenderWhereInput = {
@@ -22881,7 +22881,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
     unit: UnitCreateNestedOneWithoutDoctorSchedulesInput
     doctor: EmployeeCreateNestedOneWithoutDoctorSchedulesInput
@@ -22895,7 +22895,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
   }
 
@@ -22905,7 +22905,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
     unit?: UnitUpdateOneRequiredWithoutDoctorSchedulesNestedInput
     doctor?: EmployeeUpdateOneRequiredWithoutDoctorSchedulesNestedInput
@@ -22919,7 +22919,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -22931,7 +22931,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
   }
 
@@ -22941,7 +22941,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -22953,7 +22953,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -23206,7 +23206,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
     gender?: GenderCreateNestedOneWithoutPatientsInput
     reservations?: ReservationCreateNestedManyWithoutPatientInput
   }
@@ -23227,7 +23227,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
     reservations?: ReservationUncheckedCreateNestedManyWithoutPatientInput
   }
 
@@ -23246,7 +23246,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
     gender?: GenderUpdateOneWithoutPatientsNestedInput
     reservations?: ReservationUpdateManyWithoutPatientNestedInput
   }
@@ -23267,7 +23267,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUncheckedUpdateManyWithoutPatientNestedInput
   }
 
@@ -23287,7 +23287,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
   }
 
   export type PatientUpdateManyMutationInput = {
@@ -23305,7 +23305,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type PatientUncheckedUpdateManyInput = {
@@ -23324,7 +23324,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type GenderCreateInput = {
@@ -24271,6 +24271,11 @@ export namespace Prisma {
     educationId?: SortOrder
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type GenderNullableScalarRelationFilter = {
     is?: GenderWhereInput | null
     isNot?: GenderWhereInput | null
@@ -24341,6 +24346,14 @@ export namespace Prisma {
   export type PatientSumOrderByAggregateInput = {
     id?: SortOrder
     genderId?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type PatientListRelationFilter = {
@@ -25249,6 +25262,10 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type GenderUpdateOneWithoutPatientsNestedInput = {
     create?: XOR<GenderCreateWithoutPatientsInput, GenderUncheckedCreateWithoutPatientsInput>
     connectOrCreate?: GenderCreateOrConnectWithoutPatientsInput
@@ -25602,6 +25619,19 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type ReservationCreateWithoutPaymentMethodInput = {
@@ -26030,7 +26060,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
     doctor: EmployeeCreateNestedOneWithoutDoctorSchedulesInput
   }
@@ -26042,7 +26072,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
   }
 
@@ -26225,7 +26255,7 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"DoctorSchedule"> | Date | string
     note?: StringNullableFilter<"DoctorSchedule"> | string | null
     days?: StringFilter<"DoctorSchedule"> | string
-    quota?: IntFilter<"DoctorSchedule"> | number
+    quota?: IntNullableFilter<"DoctorSchedule"> | number | null
     isEnabled?: BoolFilter<"DoctorSchedule"> | boolean
   }
 
@@ -26727,7 +26757,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
     unit: UnitCreateNestedOneWithoutDoctorSchedulesInput
   }
@@ -26739,7 +26769,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
   }
 
@@ -26885,7 +26915,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
     gender?: GenderCreateNestedOneWithoutPatientsInput
   }
 
@@ -26905,7 +26935,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
   }
 
   export type PatientCreateOrConnectWithoutReservationsInput = {
@@ -27025,7 +27055,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
     gender?: GenderUpdateOneWithoutPatientsNestedInput
   }
 
@@ -27045,7 +27075,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type PaymentMethodUpsertWithoutReservationsInput = {
@@ -27252,7 +27282,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
     reservations?: ReservationCreateNestedManyWithoutPatientInput
   }
 
@@ -27271,7 +27301,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
     reservations?: ReservationUncheckedCreateNestedManyWithoutPatientInput
   }
 
@@ -27320,7 +27350,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"Patient"> | string | null
     registeredAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     homeAddress?: StringNullableFilter<"Patient"> | string | null
-    isSimkes?: BoolFilter<"Patient"> | boolean
+    isSimkes?: BoolNullableFilter<"Patient"> | boolean | null
   }
 
   export type ReservationCreateWithoutReferralSourceInput = {
@@ -27557,7 +27587,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
   }
 
@@ -27651,7 +27681,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
     doctor?: EmployeeUpdateOneRequiredWithoutDoctorSchedulesNestedInput
   }
@@ -27663,7 +27693,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -27674,7 +27704,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -27950,7 +27980,7 @@ export namespace Prisma {
     endTime: Date | string
     note?: string | null
     days: string
-    quota: number
+    quota?: number | null
     isEnabled: boolean
   }
 
@@ -27985,7 +28015,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
     unit?: UnitUpdateOneRequiredWithoutDoctorSchedulesNestedInput
   }
@@ -27997,7 +28027,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -28008,7 +28038,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     days?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
+    quota?: NullableIntFieldUpdateOperationsInput | number | null
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -28202,7 +28232,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     registeredAt?: Date | string | null
     homeAddress?: string | null
-    isSimkes?: boolean
+    isSimkes?: boolean | null
   }
 
   export type PatientUpdateWithoutGenderInput = {
@@ -28220,7 +28250,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUpdateManyWithoutPatientNestedInput
   }
 
@@ -28239,7 +28269,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUncheckedUpdateManyWithoutPatientNestedInput
   }
 
@@ -28258,7 +28288,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     registeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     homeAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    isSimkes?: BoolFieldUpdateOperationsInput | boolean
+    isSimkes?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type ReservationCreateManyReferralSourceInput = {

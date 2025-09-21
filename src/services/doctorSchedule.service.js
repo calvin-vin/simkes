@@ -3,42 +3,6 @@ import dayjs from "dayjs";
 import { getAverageRatingByDoctorId } from "./doctorRating.service.js";
 import ApiError from "../utils/apiError.js";
 
-export const getDoctorScheduleById = async (id) => {
-  const schedule = await simrsPrisma.doctorSchedule.findUnique({
-    where: {
-      id: Number(id),
-      isEnabled: true,
-    },
-    include: {
-      unit: { select: { id: true, unitName: true } },
-      doctor: {
-        select: {
-          id: true,
-          fullName: true,
-        },
-      },
-    },
-  });
-
-  if (!schedule) {
-    throw new ApiError("Jadwal dokter tidak ditemukan", 404);
-  }
-
-  // Ambil rating dokter
-  const { averageRating, totalRatings } = await getAverageRatingByDoctorId(
-    schedule.doctor.id
-  );
-
-  return {
-    ...schedule,
-    doctor: {
-      ...schedule.doctor,
-      averageRating,
-      totalRatings,
-    },
-  };
-};
-
 export const getDoctorSchedules = async (query) => {
   const {
     page = 1,
@@ -98,21 +62,29 @@ export const getDoctorSchedules = async (query) => {
   if (!hasRatingFilter) {
     // Jika tidak ada filter rating, gunakan paginasi database normal
     const [schedules, total] = await Promise.all([
-      simrsPrisma.doctorSchedule.findMany({
-        where: filters,
-        include: {
-          unit: { select: { id: true, unitName: true } },
-          doctor: {
-            select: {
-              id: true,
-              fullName: true,
+      simrsPrisma.doctorSchedule
+        .findMany({
+          where: filters,
+          include: {
+            unit: { select: { id: true, unitName: true } },
+            doctor: {
+              select: {
+                id: true,
+                fullName: true,
+              },
             },
           },
-        },
-        skip: (page - 1) * Number(limit),
-        take: Number(limit),
-        orderBy,
-      }),
+          skip: (page - 1) * Number(limit),
+          take: Number(limit),
+          orderBy,
+        })
+        .then((results) =>
+          results.map((schedule) => ({
+            ...schedule,
+            // Pastikan quota selalu berupa angka (tidak null)
+            quota: schedule.quota ?? 0,
+          }))
+        ),
       simrsPrisma.doctorSchedule.count({ where: filters }),
     ]);
 
@@ -143,19 +115,27 @@ export const getDoctorSchedules = async (query) => {
     };
   } else {
     // Jika ada filter rating, ambil semua data terlebih dahulu
-    const allSchedules = await simrsPrisma.doctorSchedule.findMany({
-      where: filters,
-      include: {
-        unit: { select: { id: true, unitName: true } },
-        doctor: {
-          select: {
-            id: true,
-            fullName: true,
+    const allSchedules = await simrsPrisma.doctorSchedule
+      .findMany({
+        where: filters,
+        include: {
+          unit: { select: { id: true, unitName: true } },
+          doctor: {
+            select: {
+              id: true,
+              fullName: true,
+            },
           },
         },
-      },
-      orderBy,
-    });
+        orderBy,
+      })
+      .then((results) =>
+        results.map((schedule) => ({
+          ...schedule,
+          // Pastikan quota selalu berupa angka (tidak null)
+          quota: schedule.quota ?? 0,
+        }))
+      );
 
     // Ambil rating untuk semua dokter
     const allSchedulesWithRating = await Promise.all(
@@ -204,4 +184,43 @@ export const getDoctorSchedules = async (query) => {
       },
     };
   }
+};
+
+export const getDoctorScheduleById = async (id) => {
+  const schedule = await simrsPrisma.doctorSchedule.findUnique({
+    where: {
+      id: Number(id),
+      isEnabled: true,
+    },
+    include: {
+      unit: { select: { id: true, unitName: true } },
+      doctor: {
+        select: {
+          id: true,
+          fullName: true,
+        },
+      },
+    },
+  });
+
+  if (!schedule) {
+    throw new ApiError("Jadwal dokter tidak ditemukan", 404);
+  }
+
+  // Pastikan quota selalu berupa angka (tidak null)
+  schedule.quota = schedule.quota ?? 0;
+
+  // Ambil rating dokter
+  const { averageRating, totalRatings } = await getAverageRatingByDoctorId(
+    schedule.doctor.id
+  );
+
+  return {
+    ...schedule,
+    doctor: {
+      ...schedule.doctor,
+      averageRating,
+      totalRatings,
+    },
+  };
 };
