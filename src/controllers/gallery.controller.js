@@ -11,6 +11,45 @@ import apiSuccess from "../utils/apiSuccess.js";
 import catchAsync from "../utils/catchAsync.js";
 
 /**
+ * Controller untuk mendapatkan statistik gallery untuk dashboard
+ */
+export const getGalleryStatsController = catchAsync(async (req, res) => {
+  const stats = await galleryService.getGalleryStats();
+
+  return apiSuccess(res, 200, "Statistik gallery berhasil diambil", stats);
+});
+
+/**
+ * Controller untuk mendapatkan semua aktif gallery
+ */
+export const getAllActiveGalleriesController = catchAsync(async (req, res) => {
+  const query = galleryFilterSchema.parse(req.query);
+  const galleries = await galleryService.getAllActiveGalleries(query);
+
+  return apiSuccess(
+    res,
+    200,
+    "Daftar gallery berhasil diambil",
+    galleriesResource(galleries)
+  );
+});
+
+/**
+ * Controller untuk mendapatkan gallery aktif berdasarkan ID
+ */
+export const getActiveGalleryByIdController = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const gallery = await galleryService.getActiveGalleryById(id);
+
+  return apiSuccess(
+    res,
+    200,
+    "Detail gallery berhasil diambil",
+    galleryResource(gallery)
+  );
+});
+
+/**
  * Controller untuk mendapatkan semua gallery
  */
 export const getAllGalleriesController = catchAsync(async (req, res) => {

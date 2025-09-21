@@ -3,6 +3,7 @@ import { simkesPrisma, simrsPrisma } from "../src/config/db.js";
 import { seedPatients } from "./seeders/patient.seeder.js";
 import { seedEmergency } from "./seeders/emergency.seeder.js";
 import { seedPosts } from "./seeders/post.seeder.js";
+import { seedGalleries } from "./seeders/gallery.seeder.js";
 
 async function main() {
   console.log("🌱 Running all seeders...");
@@ -11,6 +12,7 @@ async function main() {
   await seedPatients(simrsPrisma);
   await seedEmergency(simkesPrisma, simrsPrisma);
   await seedPosts(simkesPrisma);
+  await seedGalleries(simkesPrisma);
 
   console.log("✅ All seeders executed successfully");
 }

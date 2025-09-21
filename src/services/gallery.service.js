@@ -5,6 +5,124 @@ import { saveFile } from "../utils/saveFile.js";
 import fs from "fs/promises";
 
 /**
+ * Get gallery statistics for dashboard
+ * @returns {Promise<Object>} Gallery statistics
+ */
+export const getGalleryStats = async () => {
+  // Get total galleries
+  const totalGalleries = await simkesPrisma.gallery.count();
+
+  // Get active galleries
+  const activeGalleries = await simkesPrisma.gallery.count({
+    where: {
+      isActive: true,
+    },
+  });
+
+  // Get inactive galleries
+  const inactiveGalleries = await simkesPrisma.gallery.count({
+    where: {
+      isActive: false,
+    },
+  });
+
+  // Get total photos
+  const totalPhotos = await simkesPrisma.galleryPhoto.count();
+
+  return {
+    totalGalleries,
+    activeGalleries,
+    inactiveGalleries,
+    totalPhotos,
+    activeGalleriesPercentage:
+      totalGalleries > 0
+        ? Math.round((activeGalleries / totalGalleries) * 100)
+        : 0,
+    inactiveGalleriesPercentage:
+      totalGalleries > 0
+        ? Math.round((inactiveGalleries / totalGalleries) * 100)
+        : 0,
+  };
+};
+
+/**
+ * Get all active galleries with pagination and filtering
+ * @param {Object} query - Query parameters
+ * @returns {Promise<Object>} Galleries with pagination
+ */
+export const getAllActiveGalleries = async (query) => {
+  const {
+    page = 1,
+    limit = 10,
+    search,
+    sortBy = "createdAt",
+    sortOrder = "desc",
+  } = query;
+
+  // Build filters
+  const filters = {
+    isActive: true,
+  };
+
+  if (search) {
+    filters.title = {
+      contains: search,
+      mode: "insensitive",
+    };
+  }
+
+  // Build sort
+  const orderBy = {
+    [sortBy]: sortOrder,
+  };
+
+  // Get galleries with pagination
+  const [galleries, total] = await Promise.all([
+    simkesPrisma.gallery.findMany({
+      where: filters,
+      include: {
+        photos: true,
+      },
+      skip: (page - 1) * limit,
+      take: Number(limit),
+      orderBy,
+    }),
+    simkesPrisma.gallery.count({ where: filters }),
+  ]);
+
+  return {
+    results: galleries,
+    pagination: {
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+};
+
+/**
+ * Get active gallery by ID
+ * @param {string} id - Gallery ID
+ * @returns {Promise<Object>} Gallery
+ * @throws {ApiError} If gallery not found
+ */
+export const getActiveGalleryById = async (id) => {
+  const gallery = await simkesPrisma.gallery.findUnique({
+    where: { id, isActive: true },
+    include: {
+      photos: true,
+    },
+  });
+
+  if (!gallery) {
+    throw new ApiError("Gallery tidak ditemukan", 404);
+  }
+
+  return gallery;
+};
+
+/**
  * Get all galleries with pagination and filtering
  * @param {Object} query - Query parameters
  * @returns {Promise<Object>} Galleries with pagination
@@ -229,8 +347,11 @@ export const deleteGalleryPhoto = async (photoId) => {
 };
 
 export const galleryService = {
+  getAllActiveGalleries,
+  getActiveGalleryById,
   getAllGalleries,
   getGalleryById,
+  getGalleryStats,
   createGallery,
   updateGallery,
   deleteGallery,

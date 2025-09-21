@@ -6,7 +6,10 @@ import {
   deleteGalleryPhotoController,
   getAllGalleriesController,
   getGalleryByIdController,
+  getGalleryStatsController,
   updateGalleryController,
+  getAllActiveGalleriesController,
+  getActiveGalleryByIdController,
 } from "../controllers/gallery.controller.js";
 import { protect, restrictToRoleSubrole } from "../middlewares/auth.js";
 import { uploadGalleryPhoto } from "../middlewares/uploadGallery.js";
@@ -14,8 +17,8 @@ import { uploadGalleryPhoto } from "../middlewares/uploadGallery.js";
 const router = express.Router();
 
 // Public routes
-router.get("/", getAllGalleriesController);
-router.get("/:id", getGalleryByIdController);
+router.get("/public/", getAllActiveGalleriesController);
+router.get("/public/:id", getActiveGalleryByIdController);
 
 // Admin routes
 router.use(
@@ -26,6 +29,9 @@ router.use(
   ])
 );
 
+router.get("/stats", getGalleryStatsController);
+router.get("/", getAllGalleriesController);
+router.get("/:id", getGalleryByIdController);
 router.post("/", createGalleryController);
 router.patch("/:id", updateGalleryController);
 router.delete("/:id", deleteGalleryController);
