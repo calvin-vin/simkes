@@ -7,6 +7,7 @@ import {
   reservationFilterSchema,
   reservationSchema,
   checkinSchema,
+  reservationStatsSchema,
 } from "../schemas/reservation.schema.js";
 import * as reservationService from "../services/reservation.service.js";
 import apiSuccess from "../utils/apiSuccess.js";
@@ -31,11 +32,11 @@ export const createReservation = catchAsync(async (req, res) => {
 export const getAllReservations = catchAsync(async (req, res) => {
   const query = reservationFilterSchema.parse(req.query);
   const user = req.user;
-  const role = req.userRole;
+  const userRole = req.userRole;
   const reservations = await reservationService.getAllReservations(
     query,
     user,
-    role
+    userRole
   );
 
   return apiSuccess(res, 200, "Daftar reservasi berhasil diambil", {
@@ -49,9 +50,11 @@ export const getAllReservations = catchAsync(async (req, res) => {
 export const getReservationById = catchAsync(async (req, res) => {
   const { id } = req.params;
   const userIdentity = req.user.identity;
+  const userRole = req.userRole;
   const reservation = await reservationService.getReservationById(
     id,
-    userIdentity
+    userIdentity,
+    userRole
   );
 
   return apiSuccess(
@@ -91,7 +94,7 @@ export const deleteReservation = catchAsync(async (req, res) => {
   return apiSuccess(res, 200, "Reservasi berhasil dihapus", deletedReservation);
 });
 
-export const checkinReservationController = catchAsync(async (req, res) => {
+export const checkinReservation = catchAsync(async (req, res) => {
   const { id } = req.params;
   const parsedBody = checkinSchema.parse(req.body);
   const { latitude, longitude } = parsedBody;
@@ -108,7 +111,13 @@ export const checkinReservationController = catchAsync(async (req, res) => {
     res,
     200,
     "Check-in berhasil dilakukan",
-    // reservationResource(reservation)
-    reservation
+    reservationResource(reservation)
   );
+});
+
+export const getReservationStats = catchAsync(async (req, res) => {
+  const parsedQuery = reservationStatsSchema.parse(req.query);
+  const stats = await reservationService.getReservationStats(parsedQuery);
+
+  return apiSuccess(res, 200, "Statistik reservasi berhasil didapatkan", stats);
 });

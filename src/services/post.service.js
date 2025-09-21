@@ -26,10 +26,6 @@ export const getPostStats = async () => {
     },
   });
 
-  // Get posts created in the last 30 days
-  const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
   return {
     totalPosts,
     activePosts,

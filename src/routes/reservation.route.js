@@ -5,7 +5,8 @@ import {
   getReservationById,
   deleteReservation,
   cancelReservation,
-  checkinReservationController,
+  checkinReservation,
+  getReservationStats,
 } from "../controllers/reservation.controller.js";
 import { updateCallStatusController } from "../controllers/updateCallStatus.controller.js";
 import { protect, restrictToRoleSubrole } from "../middlewares/auth.js";
@@ -14,7 +15,15 @@ const router = express.Router();
 
 router.use(protect);
 
-// Reservation routes
+router.get(
+  "/stats",
+  restrictToRoleSubrole([
+    { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
+    { role: "OPERATOR", subrole: "OPERATOR" },
+  ]),
+  getReservationStats
+);
+
 router.get(
   "/",
   restrictToRoleSubrole([
@@ -24,14 +33,20 @@ router.get(
   ]),
   getAllReservations
 );
+
 router.post(
   "/",
   restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
   createReservation
 );
+
 router.get(
   "/:id",
-  restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
+  restrictToRoleSubrole([
+    { role: "PATIENT", subrole: "PATIENT" },
+    { role: "SUPER ADMIN", subrole: "SUPER ADMIN" },
+    { role: "OPERATOR", subrole: "OPERATOR" },
+  ]),
   getReservationById
 );
 router.patch(
@@ -47,7 +62,7 @@ router.delete(
 router.post(
   "/:id/checkin",
   restrictToRoleSubrole([{ role: "PATIENT", subrole: "PATIENT" }]),
-  checkinReservationController
+  checkinReservation
 );
 
 // Route untuk update callStatus reservasi

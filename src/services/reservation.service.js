@@ -13,193 +13,171 @@ import {
 } from "./qrcode.service.js";
 
 /**
- * Get the day name in Indonesian
- * @param {string} date - Date string
- * @returns {string} Day name in Indonesian
+ * Get reservation statistics for dashboard
+ * @param {Object} query - Filter query
+ * @param {string} query.startDate - Start date for statistics (YYYY-MM-DD)
+ * @param {string} query.endDate - End date for statistics (YYYY-MM-DD)
+ * @param {number} query.unitId - Unit ID for filtering
+ * @returns {Object} Reservation statistics
  */
-const getDayName = (date) => {
-  const dayNames = {
-    0: "MINGGU",
-    1: "SENIN",
-    2: "SELASA",
-    3: "RABU",
-    4: "KAMIS",
-    5: "JUMAT",
-    6: "SABTU",
-  };
-  const dayIndex = dayjs(date).day();
-  return dayNames[dayIndex];
-};
+export const getReservationStats = async (query = {}) => {
+  const { startDate, endDate, unitId } = query;
 
-/**
- * Generate a unique reservation ID compatible with simrsPrisma model
- * @returns {string} Unique reservation ID for 'norec' field
- */
-const generateReservationId = () => {
-  // Generate UUID v4 for the norec field
-  return uuidv4();
-};
+  // Set default date range to last 30 days if not provided
+  const currentDate = dayjs();
+  const defaultStartDate = currentDate.subtract(29, "day").format("YYYY-MM-DD");
+  const defaultEndDate = currentDate.format("YYYY-MM-DD");
 
-/**
- * Get queue number for online reservation
- * @param {number} doctorId - Doctor ID
- * @param {string} date - Reservation date
- * @returns {Object} Queue numbers for morning and afternoon sessions
- */
-/**
- * Check-in a reservation
- * @param {string} id - Reservation ID
- * @param {number} latitude - Patient's current latitude
- * @param {number} longitude - Patient's current longitude
- * @returns {Object} Updated reservation
- */
-export const checkinReservation = async (id, latitude, longitude, identity) => {
-  // Find the reservation
-  const reservation = await simrsPrisma.reservation.findFirst({
-    where: {
-      id,
-      isEnabled: true,
-      identity: identity,
-      notes: "SIMKES",
+  // Build where clause for queries
+  const whereClause = {
+    reservationDate: {
+      gte: startDate ? new Date(startDate) : new Date(defaultStartDate),
+      lte: endDate ? new Date(endDate) : new Date(defaultEndDate),
     },
+    isEnabled: true,
+    notes: "SIMKES",
+  };
+
+  // Add unitId filter if provided
+  if (unitId) {
+    whereClause.unitId = Number(unitId);
+  }
+
+  // Get total reservations
+  const totalReservations = await simrsPrisma.reservation.count({
+    where: whereClause,
   });
 
-  if (!reservation) {
-    throw new ApiError("Reservasi tidak ditemukan", 404);
-  }
-
-  // Check if reservation is already confirmed
-  if (reservation.isConfirmed) {
-    throw new ApiError("Reservasi sudah dikonfirmasi sebelumnya", 400);
-  }
-
-  // Check if reservation is cancelled
-  if (reservation.isCancelled) {
-    throw new ApiError("Reservasi sudah dibatalkan", 400);
-  }
-
-  // Check if patient is within hospital range (1 km)
-  const isWithinRange = await isPatientWithinHospitalRange(
-    latitude,
-    longitude,
-    1
-  );
-
-  if (!isWithinRange) {
-    throw new ApiError(
-      "Anda berada di luar jangkauan rumah sakit. Silakan datang ke lokasi rumah sakit untuk check-in",
-      400
-    );
-  }
-
-  // Check if it's within valid check-in time (from 06:00 on reservation day until reservation time)
-  const reservationTime = dayjs(reservation.reservationDate);
-  const currentTime = dayjs();
-  const reservationDate = reservationTime.format("YYYY-MM-DD");
-  const checkInStartTime = dayjs(`${reservationDate} 06:00:00`);
-
-  // Check if current time is before 06:00 on reservation day
-  // if (currentTime.isBefore(checkInStartTime)) {
-  //   throw new ApiError(
-  //     `Anda hanya dapat check-in mulai pukul 06:00 pada tanggal reservasi. Jadwal reservasi Anda pada ${reservationTime.format(
-  //       "DD/MM/YYYY HH:mm"
-  //     )}`,
-  //     400
-  //   );
-  // }
-
-  // // Check if current time is after reservation time
-  // if (currentTime.isAfter(reservationTime)) {
-  //   throw new ApiError(
-  //     `Waktu check-in telah berakhir. Jadwal reservasi Anda pada ${reservationTime.format(
-  //       "DD/MM/YYYY HH:mm"
-  //     )}`,
-  //     400
-  //   );
-  // }
-
-  // Update reservation to confirmed
-  const updatedReservation = await simrsPrisma.reservation.update({
+  // Get confirmed reservations
+  const confirmedReservations = await simrsPrisma.reservation.count({
     where: {
-      id,
-    },
-    data: {
+      ...whereClause,
       isConfirmed: true,
     },
   });
 
-  return updatedReservation;
-};
-
-export const getQueueNumberOnline = async (doctorId, date) => {
-  const reservationDate = dayjs(date).format("YYYY-MM-DD");
-
-  // Get morning reservations
-  const morningReservations = await simrsPrisma.reservation.count({
+  // Get cancelled reservations
+  const cancelledReservations = await simrsPrisma.reservation.count({
     where: {
-      doctorId: doctorId,
-      reservationDate: {
-        gte: new Date(`${reservationDate} 00:00:00`),
-        lt: new Date(`${reservationDate} 12:00:00`),
-      },
-      queueType: {
-        startsWith: "EA",
-      },
-      isEnabled: true,
-      notes: "SIMKES", // Filter reservations from SIMKES application
+      ...whereClause,
+      isCancelled: true,
     },
   });
 
-  // Get afternoon reservations
-  const afternoonReservations = await simrsPrisma.reservation.count({
+  // Get reservations by status
+  const pendingReservations = await simrsPrisma.reservation.count({
     where: {
-      doctorId: doctorId,
-      reservationDate: {
-        gte: new Date(`${reservationDate} 12:00:00`),
-        lt: new Date(`${reservationDate} 23:59:59`),
-      },
-      queueType: {
-        startsWith: "EB",
-      },
-      isEnabled: true,
-      notes: "SIMKES", // Filter reservations from SIMKES application
+      ...whereClause,
+      isConfirmed: false,
+      isCancelled: false,
     },
   });
 
-  return {
-    pagi: morningReservations,
-    siang: afternoonReservations,
-  };
-};
-
-/**
- * Get next queue number
- * @param {number} doctorId - Doctor ID
- * @param {string} date - Reservation date
- * @returns {number} Next queue number
- */
-export const getNextQueueNumber = async (doctorId, date) => {
-  const reservationDate = dayjs(date).format("YYYY-MM-DD");
-
-  const reservation = await simrsPrisma.reservation.findFirst({
+  // Get reservations by call status
+  const notCalledReservations = await simrsPrisma.reservation.count({
     where: {
-      doctorId: doctorId,
-      reservationDate: {
-        gte: new Date(`${reservationDate} 00:00:00`),
-        lt: new Date(`${reservationDate} 23:59:59`),
-      },
-      isEnabled: true,
-      notes: "SIMKES", // Filter reservations from SIMKES application
+      ...whereClause,
+      callStatus: "0", // belum dipanggil
     },
-    orderBy: {
-      queueNumber: "desc",
+  });
+
+  const calledReservations = await simrsPrisma.reservation.count({
+    where: {
+      ...whereClause,
+      callStatus: "1", // sedang dipanggil
+    },
+  });
+
+  const servedReservations = await simrsPrisma.reservation.count({
+    where: {
+      ...whereClause,
+      callStatus: "2", // sudah dilayani
+    },
+  });
+
+  // Get reservations grouped by unit
+  const reservationsByUnit = await simrsPrisma.reservation.groupBy({
+    by: ["unitId"],
+    where: whereClause,
+    _count: true,
+  });
+
+  // Get unit details for each unitId
+  const unitDetails = await simrsPrisma.unit.findMany({
+    where: {
+      id: {
+        in: reservationsByUnit.map((item) => item.unitId),
+      },
     },
     select: {
-      queueNumber: true,
+      id: true,
+      unitName: true,
     },
   });
 
-  return (reservation?.queueNumber || 0) + 1;
+  // Map unit names to reservation counts
+  const unitStats = reservationsByUnit.map((item) => {
+    const unit = unitDetails.find((u) => u.id === item.unitId);
+    return {
+      unitId: item.unitId,
+      unitName: unit?.unitName || "Unknown Unit",
+      count: item._count,
+    };
+  });
+
+  // Get reservations grouped by day
+  const startDateObj = startDate
+    ? new Date(startDate)
+    : new Date(defaultStartDate);
+  const endDateObj = endDate ? new Date(endDate) : new Date(defaultEndDate);
+
+  // Generate all dates in the range
+  const dateRange = [];
+  let currentDateObj = new Date(startDateObj);
+
+  while (currentDateObj <= endDateObj) {
+    dateRange.push(dayjs(currentDateObj).format("YYYY-MM-DD"));
+    currentDateObj.setDate(currentDateObj.getDate() + 1);
+  }
+
+  // Get daily reservation counts
+  const dailyReservations = await Promise.all(
+    dateRange.map(async (date) => {
+      const count = await simrsPrisma.reservation.count({
+        where: {
+          ...whereClause,
+          reservationDate: {
+            gte: new Date(`${date}T00:00:00.000Z`),
+            lt: new Date(`${date}T23:59:59.999Z`),
+          },
+        },
+      });
+
+      return {
+        date,
+        count,
+        dayName: getDayName(date),
+      };
+    })
+  );
+
+  return {
+    totalReservations,
+    confirmedReservations,
+    cancelledReservations,
+    pendingReservations,
+    callStatus: {
+      notCalled: notCalledReservations,
+      called: calledReservations,
+      served: servedReservations,
+    },
+    unitStats,
+    dailyReservations,
+    dateRange: {
+      startDate: startDate || defaultStartDate,
+      endDate: endDate || defaultEndDate,
+    },
+  };
 };
 
 /**
@@ -211,7 +189,8 @@ export const getAllReservations = async (query, user, role) => {
   const {
     doctorId,
     unitId,
-    date,
+    startDate,
+    endDate,
     isCancelled,
     isConfirmed,
     callStatus,
@@ -239,13 +218,19 @@ export const getAllReservations = async (query, user, role) => {
     ...(callStatus !== undefined ? { callStatus } : {}),
   };
 
-  // Add date filter if provided
-  if (date) {
-    const filterDate = dayjs(date).format("YYYY-MM-DD");
-    filters.reservationDate = {
-      gte: new Date(`${filterDate} 00:00:00`),
-      lt: new Date(`${filterDate} 23:59:59`),
-    };
+  // Add date range filter if provided
+  if (startDate || endDate) {
+    filters.reservationDate = {};
+    
+    if (startDate) {
+      const formattedStartDate = dayjs(startDate).format("YYYY-MM-DD");
+      filters.reservationDate.gte = new Date(`${formattedStartDate} 00:00:00`);
+    }
+    
+    if (endDate) {
+      const formattedEndDate = dayjs(endDate).format("YYYY-MM-DD");
+      filters.reservationDate.lte = new Date(`${formattedEndDate} 23:59:59`);
+    }
   }
 
   // Default sorting: reservationDate desc, callStatus asc, queueNumber asc
@@ -304,15 +289,17 @@ export const getAllReservations = async (query, user, role) => {
  * @returns {Promise<Object>} Reservation details
  * @throws {ApiError} If reservation not found
  */
-export const getReservationById = async (id, identity) => {
+export const getReservationById = async (id, identity, role) => {
   const where = {
     id,
     notes: "SIMKES", // Filter reservations from SIMKES application
   };
 
   // Add identity filter if provided
-  if (identity) {
-    where.identity = identity;
+  if (role === "PATIENT") {
+    if (identity) {
+      where.identity = identity;
+    }
   }
 
   const reservation = await simrsPrisma.reservation.findFirst({
@@ -555,14 +542,16 @@ export const createReservation = async (data, userIdentity) => {
   // Check quota
   const reservationDate = dayjs(data.reservationDate).toDate();
   const dayName = getDayName(data.reservationDate);
-  
+
   // Determine if morning or afternoon based on reservation time (06:00-12:00 = morning)
   const reservationHour = dayjs(data.reservationDate).hour();
   const reservationMinute = dayjs(data.reservationDate).minute();
-  const reservationTimeInMinutes = (reservationHour * 60) + reservationMinute;
+  const reservationTimeInMinutes = reservationHour * 60 + reservationMinute;
   const morningStartInMinutes = 6 * 60; // 06:00
   const morningEndInMinutes = 12 * 60; // 12:00
-  const isMorningSession = reservationTimeInMinutes >= morningStartInMinutes && reservationTimeInMinutes < morningEndInMinutes;
+  const isMorningSession =
+    reservationTimeInMinutes >= morningStartInMinutes &&
+    reservationTimeInMinutes < morningEndInMinutes;
 
   // Get doctor schedule to check quota
   const doctorSchedule = await simrsPrisma.doctorSchedule.findFirst({
@@ -585,8 +574,8 @@ export const createReservation = async (data, userIdentity) => {
     where: {
       doctorId: data.doctorId,
       reservationDate: {
-        gte: dayjs(reservationDate).startOf('day').toDate(),
-        lt: dayjs(reservationDate).endOf('day').toDate(),
+        gte: dayjs(reservationDate).startOf("day").toDate(),
+        lt: dayjs(reservationDate).endOf("day").toDate(),
       },
       isEnabled: true,
       isCancelled: false,
@@ -724,4 +713,194 @@ export const createReservation = async (data, userIdentity) => {
   // });
 
   return createdReservation;
+};
+
+/**
+ * Get the day name in Indonesian
+ * @param {string} date - Date string
+ * @returns {string} Day name in Indonesian
+ */
+const getDayName = (date) => {
+  const dayNames = {
+    0: "MINGGU",
+    1: "SENIN",
+    2: "SELASA",
+    3: "RABU",
+    4: "KAMIS",
+    5: "JUMAT",
+    6: "SABTU",
+  };
+  const dayIndex = dayjs(date).day();
+  return dayNames[dayIndex];
+};
+
+/**
+ * Generate a unique reservation ID compatible with simrsPrisma model
+ * @returns {string} Unique reservation ID for 'norec' field
+ */
+const generateReservationId = () => {
+  // Generate UUID v4 for the norec field
+  return uuidv4();
+};
+
+/**
+ * Get queue number for online reservation
+ * @param {number} doctorId - Doctor ID
+ * @param {string} date - Reservation date
+ * @returns {Object} Queue numbers for morning and afternoon sessions
+ */
+/**
+ * Check-in a reservation
+ * @param {string} id - Reservation ID
+ * @param {number} latitude - Patient's current latitude
+ * @param {number} longitude - Patient's current longitude
+ * @returns {Object} Updated reservation
+ */
+export const checkinReservation = async (id, latitude, longitude, identity) => {
+  // Find the reservation
+  const reservation = await simrsPrisma.reservation.findFirst({
+    where: {
+      id,
+      isEnabled: true,
+      identity: identity,
+      notes: "SIMKES",
+    },
+  });
+
+  if (!reservation) {
+    throw new ApiError("Reservasi tidak ditemukan", 404);
+  }
+
+  // Check if reservation is already confirmed
+  if (reservation.isConfirmed) {
+    throw new ApiError("Reservasi sudah dikonfirmasi sebelumnya", 400);
+  }
+
+  // Check if reservation is cancelled
+  if (reservation.isCancelled) {
+    throw new ApiError("Reservasi sudah dibatalkan", 400);
+  }
+
+  // Check if patient is within hospital range (1 km)
+  const isWithinRange = await isPatientWithinHospitalRange(
+    latitude,
+    longitude,
+    1
+  );
+
+  if (!isWithinRange) {
+    throw new ApiError(
+      "Anda berada di luar jangkauan rumah sakit. Silakan datang ke lokasi rumah sakit untuk check-in",
+      400
+    );
+  }
+
+  // Check if it's within valid check-in time (from 06:00 on reservation day until reservation time)
+  const reservationTime = dayjs(reservation.reservationDate);
+  const currentTime = dayjs();
+  const reservationDate = reservationTime.format("YYYY-MM-DD");
+  const checkInStartTime = dayjs(`${reservationDate} 06:00:00`);
+
+  // Check if current time is before 06:00 on reservation day
+  // if (currentTime.isBefore(checkInStartTime)) {
+  //   throw new ApiError(
+  //     `Anda hanya dapat check-in mulai pukul 06:00 pada tanggal reservasi. Jadwal reservasi Anda pada ${reservationTime.format(
+  //       "DD/MM/YYYY HH:mm"
+  //     )}`,
+  //     400
+  //   );
+  // }
+
+  // // Check if current time is after reservation time
+  // if (currentTime.isAfter(reservationTime)) {
+  //   throw new ApiError(
+  //     `Waktu check-in telah berakhir. Jadwal reservasi Anda pada ${reservationTime.format(
+  //       "DD/MM/YYYY HH:mm"
+  //     )}`,
+  //     400
+  //   );
+  // }
+
+  // Update reservation to confirmed
+  const updatedReservation = await simrsPrisma.reservation.update({
+    where: {
+      id,
+    },
+    data: {
+      isConfirmed: true,
+    },
+  });
+
+  return updatedReservation;
+};
+
+export const getQueueNumberOnline = async (doctorId, date) => {
+  const reservationDate = dayjs(date).format("YYYY-MM-DD");
+
+  // Get morning reservations
+  const morningReservations = await simrsPrisma.reservation.count({
+    where: {
+      doctorId: doctorId,
+      reservationDate: {
+        gte: new Date(`${reservationDate} 00:00:00`),
+        lt: new Date(`${reservationDate} 12:00:00`),
+      },
+      queueType: {
+        startsWith: "EA",
+      },
+      isEnabled: true,
+      notes: "SIMKES", // Filter reservations from SIMKES application
+    },
+  });
+
+  // Get afternoon reservations
+  const afternoonReservations = await simrsPrisma.reservation.count({
+    where: {
+      doctorId: doctorId,
+      reservationDate: {
+        gte: new Date(`${reservationDate} 12:00:00`),
+        lt: new Date(`${reservationDate} 23:59:59`),
+      },
+      queueType: {
+        startsWith: "EB",
+      },
+      isEnabled: true,
+      notes: "SIMKES", // Filter reservations from SIMKES application
+    },
+  });
+
+  return {
+    pagi: morningReservations,
+    siang: afternoonReservations,
+  };
+};
+
+/**
+ * Get next queue number
+ * @param {number} doctorId - Doctor ID
+ * @param {string} date - Reservation date
+ * @returns {number} Next queue number
+ */
+export const getNextQueueNumber = async (doctorId, date) => {
+  const reservationDate = dayjs(date).format("YYYY-MM-DD");
+
+  const reservation = await simrsPrisma.reservation.findFirst({
+    where: {
+      doctorId: doctorId,
+      reservationDate: {
+        gte: new Date(`${reservationDate} 00:00:00`),
+        lt: new Date(`${reservationDate} 23:59:59`),
+      },
+      isEnabled: true,
+      notes: "SIMKES", // Filter reservations from SIMKES application
+    },
+    orderBy: {
+      queueNumber: "desc",
+    },
+    select: {
+      queueNumber: true,
+    },
+  });
+
+  return (reservation?.queueNumber || 0) + 1;
 };
