@@ -210,7 +210,6 @@ model NurseSchedule {
   dayOfWeek Int      @db.SmallInt // 0 = Minggu, 1 = Senin, dst
   startTime String // Format: HH:mm
   endTime   String // Format: HH:mm
-  quota     Int      @default(10)
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

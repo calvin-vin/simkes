@@ -278,7 +278,6 @@ exports.Prisma.NurseScheduleScalarFieldEnum = {
   dayOfWeek: 'dayOfWeek',
   startTime: 'startTime',
   endTime: 'endTime',
-  quota: 'quota',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

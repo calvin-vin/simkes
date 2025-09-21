@@ -18776,12 +18776,10 @@ export namespace Prisma {
 
   export type NurseScheduleAvgAggregateOutputType = {
     dayOfWeek: number | null
-    quota: number | null
   }
 
   export type NurseScheduleSumAggregateOutputType = {
     dayOfWeek: number | null
-    quota: number | null
   }
 
   export type NurseScheduleMinAggregateOutputType = {
@@ -18790,7 +18788,6 @@ export namespace Prisma {
     dayOfWeek: number | null
     startTime: string | null
     endTime: string | null
-    quota: number | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -18802,7 +18799,6 @@ export namespace Prisma {
     dayOfWeek: number | null
     startTime: string | null
     endTime: string | null
-    quota: number | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -18814,7 +18810,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: number
     endTime: number
-    quota: number
     isActive: number
     createdAt: number
     updatedAt: number
@@ -18824,12 +18819,10 @@ export namespace Prisma {
 
   export type NurseScheduleAvgAggregateInputType = {
     dayOfWeek?: true
-    quota?: true
   }
 
   export type NurseScheduleSumAggregateInputType = {
     dayOfWeek?: true
-    quota?: true
   }
 
   export type NurseScheduleMinAggregateInputType = {
@@ -18838,7 +18831,6 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
-    quota?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -18850,7 +18842,6 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
-    quota?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -18862,7 +18853,6 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
-    quota?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -18961,7 +18951,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
-    quota: number
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -18992,7 +18981,6 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
-    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -19005,7 +18993,6 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
-    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -19018,7 +19005,6 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
-    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -19031,13 +19017,12 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
-    quota?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type NurseScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nurseId" | "dayOfWeek" | "startTime" | "endTime" | "quota" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["nurseSchedule"]>
+  export type NurseScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nurseId" | "dayOfWeek" | "startTime" | "endTime" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["nurseSchedule"]>
   export type NurseScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     nurse?: boolean | NurseDefaultArgs<ExtArgs>
   }
@@ -19059,7 +19044,6 @@ export namespace Prisma {
       dayOfWeek: number
       startTime: string
       endTime: string
-      quota: number
       isActive: boolean
       createdAt: Date
       updatedAt: Date
@@ -19492,7 +19476,6 @@ export namespace Prisma {
     readonly dayOfWeek: FieldRef<"NurseSchedule", 'Int'>
     readonly startTime: FieldRef<"NurseSchedule", 'String'>
     readonly endTime: FieldRef<"NurseSchedule", 'String'>
-    readonly quota: FieldRef<"NurseSchedule", 'Int'>
     readonly isActive: FieldRef<"NurseSchedule", 'Boolean'>
     readonly createdAt: FieldRef<"NurseSchedule", 'DateTime'>
     readonly updatedAt: FieldRef<"NurseSchedule", 'DateTime'>
@@ -21258,7 +21241,6 @@ export namespace Prisma {
     dayOfWeek: 'dayOfWeek',
     startTime: 'startTime',
     endTime: 'endTime',
-    quota: 'quota',
     isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -22386,7 +22368,6 @@ export namespace Prisma {
     dayOfWeek?: IntFilter<"NurseSchedule"> | number
     startTime?: StringFilter<"NurseSchedule"> | string
     endTime?: StringFilter<"NurseSchedule"> | string
-    quota?: IntFilter<"NurseSchedule"> | number
     isActive?: BoolFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
@@ -22399,7 +22380,6 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
-    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22415,7 +22395,6 @@ export namespace Prisma {
     dayOfWeek?: IntFilter<"NurseSchedule"> | number
     startTime?: StringFilter<"NurseSchedule"> | string
     endTime?: StringFilter<"NurseSchedule"> | string
-    quota?: IntFilter<"NurseSchedule"> | number
     isActive?: BoolFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
@@ -22428,7 +22407,6 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
-    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22448,7 +22426,6 @@ export namespace Prisma {
     dayOfWeek?: IntWithAggregatesFilter<"NurseSchedule"> | number
     startTime?: StringWithAggregatesFilter<"NurseSchedule"> | string
     endTime?: StringWithAggregatesFilter<"NurseSchedule"> | string
-    quota?: IntWithAggregatesFilter<"NurseSchedule"> | number
     isActive?: BoolWithAggregatesFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"NurseSchedule"> | Date | string
@@ -23619,7 +23596,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
-    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23632,7 +23608,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
-    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23643,7 +23618,6 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23656,7 +23630,6 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23668,7 +23641,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
-    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23679,7 +23651,6 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23691,7 +23662,6 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24561,7 +24531,6 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
-    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24569,7 +24538,6 @@ export namespace Prisma {
 
   export type NurseScheduleAvgOrderByAggregateInput = {
     dayOfWeek?: SortOrder
-    quota?: SortOrder
   }
 
   export type NurseScheduleMaxOrderByAggregateInput = {
@@ -24578,7 +24546,6 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
-    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24590,7 +24557,6 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
-    quota?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24598,7 +24564,6 @@ export namespace Prisma {
 
   export type NurseScheduleSumOrderByAggregateInput = {
     dayOfWeek?: SortOrder
-    quota?: SortOrder
   }
 
   export type NurseRatingReservationIdNurseIdCompoundUniqueInput = {
@@ -25822,7 +25787,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
-    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25833,7 +25797,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
-    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25904,7 +25867,6 @@ export namespace Prisma {
     dayOfWeek?: IntFilter<"NurseSchedule"> | number
     startTime?: StringFilter<"NurseSchedule"> | string
     endTime?: StringFilter<"NurseSchedule"> | string
-    quota?: IntFilter<"NurseSchedule"> | number
     isActive?: BoolFilter<"NurseSchedule"> | boolean
     createdAt?: DateTimeFilter<"NurseSchedule"> | Date | string
     updatedAt?: DateTimeFilter<"NurseSchedule"> | Date | string
@@ -26243,7 +26205,6 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: string
     endTime: string
-    quota?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26264,7 +26225,6 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26275,7 +26235,6 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26286,7 +26245,6 @@ export namespace Prisma {
     dayOfWeek?: IntFieldUpdateOperationsInput | number
     startTime?: StringFieldUpdateOperationsInput | string
     endTime?: StringFieldUpdateOperationsInput | string
-    quota?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
